@@ -64,7 +64,7 @@
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; }
-        .logo-img { height: 50px; width: 50px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 15px rgba(200,142,147,0.3); }
+        .logo-img { height: 55px; width: auto; object-fit: contain; }
         nav ul { display: flex; gap: 25px; align-items: center; }
         nav a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; color: var(--text-dark); }
         nav a:hover { color: var(--accent-rose); }
@@ -110,7 +110,7 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            object-position: center 70%; /* Puxa a foto para cima, escondendo o teto */
+            object-position: center 70%;
             transition: transform 0.1s linear; 
             will-change: transform; 
             filter: contrast(1.05) brightness(1.02);
@@ -258,7 +258,7 @@
     <header>
         <div class="container nav-container">
             <a href="#" class="logo-wrap">
-                <img src="https://i.imgur.com/8KbcpAp.jpeg" alt="Logo" class="logo-img">
+                <img src="https://i.imgur.com/CQpHs8c.png" alt="Logo" class="logo-img">
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--text-dark); font-weight: 600;">
                     Beauty by <span class="text-gradient">Cris</span>
                 </div>
@@ -286,7 +286,7 @@
         </div>
     </header>
 
-    <section class="hero" style="background-image: linear-gradient(rgba(250, 245, 240, 0.85), rgba(250, 245, 240, 0.85)), url('https://i.imgur.com/PmbdnAx.jpeg'); background-size: cover; background-position: center;">
+    <section class="hero" style="background-image: linear-gradient(rgba(250, 245, 240, 0.85), rgba(250, 245, 240, 0.85)), url('https://i.imgur.com/zqGcbLv.png'); background-size: cover; background-position: center;">
         <div class="container hero-grid">
             <div class="hero-content animate-on-scroll">
                 <h1 data-i18n="hero_title">Ihre natürliche Schönheit im <span class="text-gradient">Fokus</span></h1>
@@ -296,7 +296,7 @@
                 </div>
             </div>
             <div class="hero-photo-wrap animate-on-scroll delay-1">
-                <img src="https://i.imgur.com/vaMisVE.jpeg" alt="Cristina Reisch" id="parallax-img">
+                <img src="https://i.imgur.com/uEvaDBI.png" alt="Cristina Reisch" id="parallax-img">
             </div>
         </div>
     </section>
