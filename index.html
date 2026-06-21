@@ -76,19 +76,27 @@
         }
         .media-placeholder span { font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--accent-gold); font-size: 1rem; opacity: 0.7; text-align: center; padding: 10px; }
 
-        /* Language Switcher Top Bar */
+        /* Elegant Dropdown Language Switcher */
         .top-bar {
-            background-color: var(--text-dark); color: var(--bg-white); padding: 8px 0;
-            display: flex; justify-content: center; align-items: center; gap: 15px; z-index: 1001; position: relative;
+            background-color: var(--text-dark); color: var(--bg-white); padding: 8px 40px;
+            display: flex; justify-content: flex-end; align-items: center; z-index: 1001; position: relative;
         }
-        .lang-flag { cursor: pointer; font-size: 1.2rem; transition: transform 0.2s; opacity: 0.7; }
-        .lang-flag:hover, .lang-flag.active { transform: scale(1.2); opacity: 1; }
+        .lang-dropdown { position: relative; cursor: pointer; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; user-select: none; }
+        .current-lang { display: flex; align-items: center; gap: 8px; padding: 5px 10px; transition: var(--transition-smooth); }
+        .current-lang:hover { color: var(--accent-gold); }
+        .lang-options {
+            position: absolute; top: 100%; right: 0; background-color: var(--text-dark); min-width: 140px;
+            display: none; flex-direction: column; box-shadow: 0 10px 20px rgba(0,0,0,0.3); border-top: 2px solid var(--accent-gold);
+        }
+        .lang-options.show { display: flex; }
+        .lang-option { padding: 12px 15px; display: flex; align-items: center; gap: 10px; transition: var(--transition-smooth); color: rgba(255,255,255,0.8); }
+        .lang-option:hover { background-color: rgba(255,255,255,0.1); color: var(--accent-gold); }
 
         /* Header */
-        header { position: fixed; top: 38px; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); }
+        header { position: fixed; top: 40px; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         
-        .header-logo { height: 45px; width: auto; object-fit: contain; } /* Preparado para a Logo */
+        .header-logo { height: 45px; width: auto; object-fit: contain; }
         
         nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }
         nav a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; color: var(--text-dark); }
@@ -98,6 +106,7 @@
         .burger div { width: 25px; height: 2px; background-color: var(--text-dark); transition: var(--transition-smooth); }
 
         @media (max-width: 992px) {
+            .top-bar { padding: 8px 20px; }
             nav { position: fixed; top: 90px; left: 0; right: 0; background-color: var(--bg-champagne); height: 0; overflow: hidden; transition: var(--transition-smooth); }
             nav.active { height: 100vh; border-bottom: 1px solid var(--border-light); }
             nav ul { flex-direction: column; align-items: center; padding: 40px 0; gap: 25px; }
@@ -109,13 +118,12 @@
             position: relative;
             min-height: 100vh;
             display: flex; align-items: center;
-            background-image: url('caminho/para/fundo-tela-cheia.jpg'); /* Substituto 1: Fundo Hero */
-            background-size: cover; background-position: center; background-attachment: fixed;
-            margin-top: 38px;
+            background-color: var(--bg-white); /* Placeholder para imagem de fundo */
+            margin-top: 40px;
         }
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(90deg, rgba(42,36,37,0.8) 0%, rgba(42,36,37,0.4) 100%);
+            background: linear-gradient(90deg, rgba(42,36,37,0.9) 0%, rgba(42,36,37,0.6) 100%);
             z-index: 1;
         }
         .hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding-top: 80px; }
@@ -126,8 +134,8 @@
         .hero-buttons { display: flex; gap: 20px; }
         
         .hero-owner-photo {
-            width: 100%; max-width: 450px; height: 600px; object-fit: cover;
-            border-radius: 200px 200px 0 0; margin-left: auto; display: block;
+            width: 100%; max-width: 450px; height: 600px;
+            border-radius: 200px 200px 0 0; margin-left: auto; display: flex;
             border: 4px solid rgba(255,255,255,0.1);
         }
 
@@ -244,18 +252,23 @@
 <body>
 
     <div class="top-bar">
-        <span class="lang-flag active" onclick="setLanguage('de')">🇩🇪</span>
-        <span class="lang-flag" onclick="setLanguage('en')">🇬🇧</span>
-        <span class="lang-flag" onclick="setLanguage('es')">🇪🇸</span>
-        <span class="lang-flag" onclick="setLanguage('fr')">🇫🇷</span>
-        <span class="lang-flag" onclick="setLanguage('ru')">🇷🇺</span>
-        <span class="lang-flag" onclick="setLanguage('pt')">🇵🇹</span>
+        <div class="lang-dropdown" id="langDropdown">
+            <div class="current-lang" id="currentLang">🇩🇪 Deutsch ▾</div>
+            <div class="lang-options" id="langOptions">
+                <div class="lang-option" onclick="selectLang('de', '🇩🇪 Deutsch')">🇩🇪 Deutsch</div>
+                <div class="lang-option" onclick="selectLang('en', '🇬🇧 English')">🇬🇧 English</div>
+                <div class="lang-option" onclick="selectLang('es', '🇪🇸 Español')">🇪🇸 Español</div>
+                <div class="lang-option" onclick="selectLang('fr', '🇫🇷 Français')">🇫🇷 Français</div>
+                <div class="lang-option" onclick="selectLang('ru', '🇷🇺 Русский')">🇷🇺 Русский</div>
+                <div class="lang-option" onclick="selectLang('pt', '🇵🇹 Português')">🇵🇹 Português</div>
+            </div>
+        </div>
     </div>
 
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="placeholder-logo.png" alt="Beauty by Cris" class="header-logo" style="display:none;" id="real-logo">
+                <img src="[COLOQUE O LINK DA LOGO AQUI]" alt="Beauty by Cris" class="header-logo" style="display:none;" id="real-logo">
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: var(--text-dark);">Beauty by <span style="color: var(--accent-gold);">Cris</span></div>
             </a>
             
@@ -272,7 +285,7 @@
         </div>
     </header>
 
-    <section class="hero" id="hero-bg">
+    <section class="hero" style="background-image: url('[COLOQUE O LINK DA IMAGEM DE FUNDO AQUI]'); background-size: cover; background-position: center;">
         <div class="hero-overlay"></div>
         <div class="container hero-grid">
             <div class="hero-content">
@@ -284,7 +297,9 @@
                 </div>
             </div>
             <div class="hero-image-wrapper">
-                <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cris" class="hero-owner-photo">
+                <div class="media-placeholder hero-owner-photo">
+                    <span>[ Foto Profissional da Proprietária ]</span>
+                </div>
             </div>
         </div>
     </section>
@@ -552,7 +567,22 @@
     </div>
 
     <script>
-        // 1. Language Dictionary (Extremely lightweight & maintainable)
+        // 1. Language Dropdown Logic
+        const langDropdown = document.getElementById('langDropdown');
+        const langOptions = document.getElementById('langOptions');
+        const currentLang = document.getElementById('currentLang');
+
+        langDropdown.addEventListener('click', () => {
+            langOptions.classList.toggle('show');
+        });
+
+        document.addEventListener('click', (e) => {
+            if(!langDropdown.contains(e.target)) {
+                langOptions.classList.remove('show');
+            }
+        });
+
+        // Language Dictionary
         const translations = {
             de: {
                 nav_about: "Über Uns", nav_services: "Services", nav_gallery: "Galerie", nav_reviews: "Bewertungen", nav_book: "Termin buchen",
@@ -599,24 +629,22 @@
                 footer_rights: "Todos os direitos reservados.",
                 ph_name: "Seu Nome", ph_email: "Seu E-mail", ph_phone: "Telefone", ph_msg: "Sua Mensagem...", ph_name_full: "Nome Completo", ph_exp: "Experiência (Anos)", ph_cover: "Breve carta de apresentação..."
             },
-            es: { /* Copie a estrutura acima e traduza para Espanhol */ },
-            fr: { /* Copie a estrutura acima e traduza para Francês */ },
-            ru: { /* Copie a estrutura acima e traduza para Russo */ }
+            es: { /* Copie a estrutura e traduza para Espanhol */ },
+            fr: { /* Copie a estrutura e traduza para Francês */ },
+            ru: { /* Copie a estrutura e traduza para Russo */ }
         };
 
-        function setLanguage(lang) {
-            // Update active flag
-            document.querySelectorAll('.lang-flag').forEach(el => el.classList.remove('active'));
-            event.target.classList.add('active');
+        function selectLang(langCode, langText) {
+            currentLang.innerHTML = langText + ' ▾';
+            setLanguage(langCode);
+        }
 
-            // Apply translations if they exist in dictionary
+        function setLanguage(lang) {
             if(translations[lang]) {
-                // Text elements
                 document.querySelectorAll('[data-i18n]').forEach(el => {
                     const key = el.getAttribute('data-i18n');
                     if(translations[lang][key]) el.innerHTML = translations[lang][key];
                 });
-                // Placeholders
                 document.querySelectorAll('[data-i18n-ph]').forEach(el => {
                     const key = el.getAttribute('data-i18n-ph');
                     if(translations[lang][key]) el.setAttribute('placeholder', translations[lang][key]);
@@ -630,12 +658,12 @@
         burgerBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); });
         document.querySelectorAll('#nav-menu a').forEach(link => { link.addEventListener('click', () => navMenu.classList.remove('active')); });
 
-        // 3. Lazy Video Loader
+        // 3. Lazy Video Loader (Apenas com placeholder, sem links de mídias)
         document.getElementById('play-btn-trigger').addEventListener('click', function() {
             document.getElementById('video-player-container').innerHTML = `
-                <video width="100%" height="100%" autoplay controls style="object-fit: cover; outline: none;">
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-mending-her-face-with-a-cosmetic-roller-40033-large.mp4" type="video/mp4">
-                </video>`;
+                <div class="media-placeholder" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #000;">
+                    <span style="color: var(--accent-gold);">[ Insira o código/link do seu Vídeo MP4 aqui ]</span>
+                </div>`;
         });
 
         // 4. Back to Top Button Logic
