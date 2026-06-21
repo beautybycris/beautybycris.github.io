@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Exklusives Kosmetikstudio Beauty by Cris. Professionelle Gesichtsreinigung, Microblading, Lippenpigmentierung und luxuriöse Behandlungen für Ihre natürliche Schönheit.">
-    <meta name="keywords" content="Kosmetikstudio, Beauty by Cris, Microblading, Lippenpigmentierung, Gesichtsreinigung, Plasma Pen, Fußpflege, Luxus Kosmetik">
-    <meta name="author" content="Beauty by Cris">
-    <title>Beauty by Cris | Exklusives Kosmetik- & Ästhetikstudio</title>
+    <meta name="description" content="Exklusives Kosmetikstudio Beauty by Cris in Baden-Baden. Professionelle Gesichtsreinigung, Microblading, Lippenpigmentierung und luxuriöse Behandlungen.">
+    <meta name="keywords" content="Kosmetikstudio, Beauty by Cris, Baden-Baden, Cristina Reisch, Microblading, Lippenpigmentierung, Gesichtsreinigung, Plasma Pen, Fußpflege, Luxus Kosmetik">
+    <meta name="author" content="Cristina Reisch">
+    <title>Beauty by Cris | Exklusives Kosmetik- & Ästhetikstudio in Baden-Baden</title>
     
-    <!-- Elegant Font Stack Alternative & Native High-End Look -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
 
@@ -53,6 +52,24 @@
             color: inherit;
             transition: var(--transition-smooth);
         }
+
+        /* --- Scroll Animations (Motions) --- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: opacity, transform;
+        }
+        
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Staggered delays for grids */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
 
         /* Utility Elements */
         .container {
@@ -133,7 +150,7 @@
             transform: translateY(-2px);
         }
 
-        /* Media Placeholder Styling */
+        /* Media Placeholder */
         .media-placeholder {
             background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%);
             position: relative;
@@ -156,15 +173,6 @@
 
         @keyframes shimmer {
             100% { transform: translateX(100%); }
-        }
-
-        .media-placeholder span {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            color: var(--accent-gold);
-            font-size: 1.1rem;
-            letter-spacing: 1px;
-            opacity: 0.7;
         }
 
         /* Header / Navigation */
@@ -405,10 +413,6 @@
             gap: 30px;
         }
 
-        @media (max-width: 420px) {
-            .services-grid { grid-template-columns: 1fr; }
-        }
-
         .service-card {
             background-color: var(--bg-white);
             border: 1px solid var(--border-light);
@@ -420,7 +424,7 @@
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             box-shadow: var(--shadow-subtle);
             border-color: var(--primary-rose);
         }
@@ -479,201 +483,21 @@
             padding: 12px;
         }
 
-        .service-card.placeholder-future {
-            background: linear-gradient(135deg, rgba(250,245,240,0.4) 0%, rgba(239,233,226,0.4) 100%);
-            border: 2px dashed var(--accent-gold);
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 60px 40px;
-        }
-
-        .service-card.placeholder-future h3 {
-            color: var(--accent-gold);
-            font-style: italic;
-            min-height: auto;
-            margin-bottom: 10px;
-        }
-
-        /* Gallery Section */
-        .gallery {
-            padding: 120px 0;
-            background-color: var(--bg-white);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .gallery-item {
-            height: 350px;
-            cursor: pointer;
-        }
-
-        .gallery-item:hover {
-            opacity: 0.9;
-        }
-
-        @media (max-width: 992px) {
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 576px) {
-            .gallery-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Before / After Section */
-        .before-after {
-            padding: 120px 0;
-        }
-
-        .ba-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-        }
-
-        .ba-card {
-            background-color: var(--bg-white);
-            padding: 30px;
-            border: 1px solid var(--border-light);
-            box-shadow: var(--shadow-subtle);
-        }
-
-        .ba-images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .ba-img-box {
-            height: 300px;
-            position: relative;
-        }
-
-        .ba-label {
-            position: absolute;
-            bottom: 15px; left: 15px;
-            background-color: rgba(42, 36, 37, 0.85);
-            color: var(--bg-white);
-            padding: 5px 15px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .ba-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 5px;
-        }
-
-        .ba-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .ba-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Video Section */
-        .videos {
-            padding: 120px 0;
-            background-color: var(--bg-white);
-        }
-
-        .video-wrapper {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: var(--bg-champagne);
-            border: 1px solid var(--border-light);
-            padding: 25px;
-            box-shadow: var(--shadow-subtle);
-        }
-
-        .video-container {
-            position: relative;
-            width: 100%;
-            height: 480px;
-            background-color: #000;
-            overflow: hidden;
-        }
-
-        .video-poster {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover;
-            opacity: 0.8;
-            transition: var(--transition-smooth);
-        }
-
-        .video-play-btn {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px; height: 80px;
-            background-color: rgba(250, 245, 240, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            border: none;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .video-play-btn svg {
-            width: 25px; height: 25px;
-            fill: var(--accent-gold);
-            margin-left: 5px;
-            transition: var(--transition-smooth);
-        }
-
-        .video-play-btn:hover {
-            background-color: var(--accent-gold);
-            transform: translate(-50%, -50%) scale(1.05);
-        }
-
-        .video-play-btn:hover svg {
-            fill: var(--bg-white);
-        }
-
-        .video-details {
-            margin-top: 25px;
-            text-align: center;
-        }
-
-        .video-details h3 {
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-        }
-
-        .video-details p {
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .video-container { height: 300px; }
-        }
-
-        /* Google Reviews Section */
+        /* Reviews Section (Text-Based & Premium) */
         .reviews {
             padding: 120px 0;
+            background-color: var(--bg-white);
         }
 
         .google-summary {
-            background-color: var(--bg-white);
+            background-color: var(--bg-champagne);
             border: 1px solid var(--border-light);
             padding: 40px;
             max-width: 600px;
             margin: 0 auto 60px auto;
             text-align: center;
             box-shadow: var(--shadow-subtle);
+            border-radius: 10px;
         }
 
         .google-logo {
@@ -681,6 +505,10 @@
             font-weight: 600;
             margin-bottom: 10px;
             font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
         }
 
         .google-logo span:nth-child(1) { color: #4285F4; }
@@ -701,26 +529,29 @@
 
         .stars {
             color: #FFB100;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 10px;
             letter-spacing: 2px;
         }
 
         .reviews-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
 
-        @media (max-width: 992px) {
-            .reviews-grid { grid-template-columns: 1fr; }
-        }
-
         .review-card {
-            background-color: var(--bg-white);
+            background-color: var(--bg-champagne);
             border: 1px solid var(--border-light);
             padding: 35px;
             position: relative;
+            border-radius: 8px;
+            transition: var(--transition-smooth);
+        }
+        
+        .review-card:hover {
+            box-shadow: var(--shadow-subtle);
+            transform: translateY(-5px);
         }
 
         .review-user {
@@ -738,150 +569,43 @@
             align-items: center;
             justify-content: center;
             font-weight: 600;
-            color: var(--text-dark);
-            font-size: 0.9rem;
+            color: var(--bg-white);
+            font-size: 1rem;
         }
 
         .user-meta h4 {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
+            color: var(--text-dark);
         }
 
         .user-meta span {
             font-size: 0.75rem;
             color: var(--text-muted);
+            display: block;
         }
 
         .review-text {
             color: var(--text-muted);
             font-size: 0.95rem;
             font-style: italic;
+            line-height: 1.6;
         }
 
-        /* Testimonials Section */
-        .testimonials {
-            padding: 120px 0;
-            background-color: var(--bg-white);
-            text-align: center;
+        /* Map & Contact Section */
+        .map-section {
+            padding: 0;
+            line-height: 0;
         }
 
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
+        .map-iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+            filter: grayscale(20%) contrast(90%);
         }
 
-        .testimonial-item blockquote {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-style: italic;
-            line-height: 1.4;
-            color: var(--text-dark);
-            margin-bottom: 30px;
-        }
-
-        .testimonial-author {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-gold);
-            font-weight: 600;
-        }
-
-        /* FAQ Section */
-        .faq {
-            padding: 120px 0;
-        }
-
-        .faq-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        details {
-            background-color: var(--bg-white);
-            border: 1px solid var(--border-light);
-            margin-bottom: 15px;
-            padding: 20px 30px;
-            transition: var(--transition-smooth);
-        }
-
-        details[open] {
-            border-color: var(--primary-rose);
-        }
-
-        summary {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: var(--text-dark);
-            cursor: pointer;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        summary::after {
-            content: '+';
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            color: var(--accent-gold);
-            transition: var(--transition-smooth);
-        }
-
-        details[open] summary::after {
-            content: '−';
-        }
-
-        .faq-content {
-            margin-top: 15px;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            border-top: 1px solid var(--border-light);
-            padding-top: 15px;
-        }
-
-        /* Final Call to Action */
-        .cta-final {
-            padding: 140px 0;
-            background: linear-gradient(rgba(42, 36, 37, 0.4), rgba(42, 36, 37, 0.4)), linear-gradient(135deg, #FAF5F0 0%, #E8C5C8 100%);
-            background-blend-mode: overlay;
-            text-align: center;
-            color: var(--bg-white);
-        }
-
-        .cta-final h2 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            color: var(--bg-white);
-            font-weight: 300;
-            margin-bottom: 20px;
-        }
-
-        .cta-final p {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        .cta-final .btn-gold {
-            background-color: var(--bg-white);
-            color: var(--text-dark);
-        }
-
-        .cta-final .btn-gold:hover {
-            background-color: var(--bg-champagne);
-            color: var(--accent-gold-hover);
-        }
-
-        /* Contact & Info Section */
         .contact {
             padding: 100px 0 60px 0;
             background-color: var(--text-dark);
@@ -928,6 +652,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--primary-rose);
+            font-weight: 500;
         }
 
         .social-links a:hover {
@@ -942,10 +667,28 @@
             text-transform: uppercase;
             color: rgba(255,255,255,0.4);
         }
-
+        
         footer p span {
             color: var(--primary-rose);
         }
+        
+        /* Video & Other Sections (Kept structurally the same, added fade-up classes in HTML) */
+        .gallery { padding: 120px 0; background-color: var(--bg-white); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .gallery-item { height: 350px; cursor: pointer; }
+        @media (max-width: 992px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 576px) { .gallery-grid { grid-template-columns: 1fr; } }
+        
+        .faq { padding: 120px 0; }
+        .faq-wrapper { max-width: 800px; margin: 0 auto; }
+        details { background-color: var(--bg-white); border: 1px solid var(--border-light); margin-bottom: 15px; padding: 20px 30px; transition: var(--transition-smooth); }
+        details[open] { border-color: var(--primary-rose); }
+        summary { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 500; color: var(--text-dark); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        summary::-webkit-details-marker { display: none; }
+        summary::after { content: '+'; font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--accent-gold); transition: var(--transition-smooth); }
+        details[open] summary::after { content: '−'; }
+        .faq-content { margin-top: 15px; color: var(--text-muted); font-size: 0.95rem; border-top: 1px solid var(--border-light); padding-top: 15px; }
+
     </style>
 </head>
 <body>
@@ -958,10 +701,9 @@
                 <ul>
                     <li><a href="#about">Über Uns</a></li>
                     <li><a href="#services">Services</a></li>
-                    <li><a href="#gallery">Galerie</a></li>
                     <li><a href="#reviews">Bewertungen</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contact" class="btn btn-outline" style="padding: 10px 20px; margin-top: -5px;">Termin buchen</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                    <li><a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-outline" style="padding: 10px 20px; margin-top: -5px;">Termin buchen</a></li>
                 </ul>
             </nav>
             <div class="burger" id="burger-btn">
@@ -973,47 +715,47 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero fade-up">
         <div class="container hero-grid">
             <div class="hero-content">
                 <h1>Ihre natürliche Schönheit im <span>Fokus</span></h1>
-                <p class="hero-subtitle">Erleben Sie maßgeschneiderte Kosmetikbehandlungen auf höchstem Niveau. Perfektion, kompromisslose Hygiene und exklusives Wohlbefinden im Herzen unseres Studios.</p>
-                <a href="#contact" class="btn btn-gold">Jetzt Online Anfragen</a>
+                <p class="hero-subtitle">Erleben Sie maßgeschneiderte Kosmetikbehandlungen auf höchstem Niveau in Baden-Baden. Perfektion, kompromisslose Hygiene und exklusives Wohlbefinden bei Cristina Reisch.</p>
+                <a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-gold">Jetzt Online Anfragen</a>
             </div>
-            <div class="hero-image-wrapper">
+            <div class="hero-image-wrapper delay-1">
                 <div class="media-placeholder hero-image">
                     <span>[ Premium Hero Bild - Studio Atmosphäre ]</span>
                 </div>
-                <div class="hero-badge">
-                    <p>Exzellenz & Luxus</p>
-                    <span>Zertifizierte Expertise</span>
+                <div class="hero-badge fade-up delay-2">
+                    <p>5.0 ★★★★★</p>
+                    <span>Auf Google Bewertet</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section class="about" id="about">
+    <section class="about fade-up" id="about">
         <div class="container about-grid">
-            <div class="about-image-side">
+            <div class="about-image-side delay-1">
                 <div class="media-placeholder about-img-1"><span>[ Portrait Cris ]</span></div>
                 <div class="media-placeholder about-img-2"><span>[ Studio Detail ]</span></div>
             </div>
-            <div class="about-content">
+            <div class="about-content delay-2">
                 <div class="section-header" style="text-align: left; margin-bottom: 30px;">
-                    <span class="subtitle">Über das Studio</span>
+                    <span class="subtitle">Über Cristina Reisch</span>
                     <h2>Hinter den Kulissen von zeitloser Eleganz</h2>
                 </div>
-                <h3>Willkommen bei Beauty by Cris</h3>
+                <h3>Willkommen bei Beauty by Cris in Baden-Baden</h3>
                 <p>Mein Ziel ist es, Ihre individuelle Schönheit nicht zu verändern, sondern sie perfekt zu unterstreichen. Mit jahrelanger Erfahrung, modernster Technologie und absoluter Präzision kreiere ich Behandlungen, die sofort sichtbare Ergebnisse und pure Entspannung liefern.</p>
-                <p>Jedes Detail in unserem Studio wurde konzipiert, um Ihnen eine Oase der Ruhe und des Luxus zu bieten. Hygiene auf medizinischem Niveau und erstklassige Premium-Produkte sind für uns selbstverständlich.</p>
-                <span class="signature">Cris</span>
+                <p>Jedes Detail in unserem Studio am Blütenfeldplatz wurde konzipiert, um Ihnen eine Oase der Ruhe und des Luxus zu bieten. Hygiene auf medizinischem Niveau und erstklassige Premium-Produkte sind für uns selbstverständlich.</p>
+                <span class="signature">Cristina Reisch</span>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section class="services" id="services">
+    <section class="services fade-up" id="services">
         <div class="container">
             <div class="section-header">
                 <span class="subtitle">Exklusive Behandlungen</span>
@@ -1023,7 +765,7 @@
 
             <div class="services-grid">
                 <!-- Service 1 -->
-                <div class="service-card">
+                <div class="service-card fade-up delay-1">
                     <div>
                         <div class="media-placeholder service-img-placeholder"><span>[ Bild: Gesichtsreinigung ]</span></div>
                         <h3>Professionelle Gesichtsreinigung und Tiefenreinigung</h3>
@@ -1032,28 +774,40 @@
                     <div class="service-meta">
                         <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Verfeinerte Poren, strahlender Teint</span></div>
                         <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Hautanalyse, Dampf, Ausreinigung, Maske</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 60 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
+                        <a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-outline">Termin Anfragen</a>
                     </div>
                 </div>
 
                 <!-- Service 2 -->
-                <div class="service-card">
+                <div class="service-card fade-up delay-2">
                     <div>
                         <div class="media-placeholder service-img-placeholder"><span>[ Bild: Microblading ]</span></div>
                         <h3>Micropigmentierung und Microblading</h3>
                         <p>Täuschend echte Härchenzeichnung für perfekt geformte Augenbrauen, die ideal zu Ihrer Gesichtsform passen.</p>
                     </div>
                     <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Langanhaltend, absolut natürlicher Look</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Präzise Vermessung, Vorzeichnung, Pigmentierung</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 120 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
+                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Langanhaltend, natürlicher Look</span></div>
+                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Vermessung, Vorzeichnung, Pigmentierung</span></div>
+                        <a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-outline">Termin Anfragen</a>
                     </div>
                 </div>
 
                 <!-- Service 3 -->
-                <div class="service-card">
+                <div class="service-card fade-up delay-3">
+                    <div>
+                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Plasma Pen ]</span></div>
+                        <h3>Plasma Pen / Jato de Plasma</h3>
+                        <p>Nicht-invasive Hautstraffung und Fältchenreduktion mittels innovativer Plasmatechnologie ohne OP.</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Straffungseffekt, kurze Ausfallzeit</span></div>
+                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Betäubungssalbe, Plasmabehandlung</span></div>
+                        <a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-outline">Termin Anfragen</a>
+                    </div>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card fade-up delay-1">
                     <div>
                         <div class="media-placeholder service-img-placeholder"><span>[ Bild: Lippenpigmentierung ]</span></div>
                         <h3>Lippenpigmentierung</h3>
@@ -1062,103 +816,12 @@
                     <div class="service-meta">
                         <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Mehr Volumen-Optik, kussecht</span></div>
                         <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Farbberatung, Konturierung, Schattierung</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 90 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
+                        <a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-outline">Termin Anfragen</a>
                     </div>
                 </div>
-
-                <!-- Service 4 -->
-                <div class="service-card">
-                    <div>
-                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Plasma Pen ]</span></div>
-                        <h3>Plasma Pen Behandlungen</h3>
-                        <p>Nicht-invasive Hautstraffung und Fältchenreduktion mittels innovativer Plasmatechnologie ohne OP.</p>
-                    </div>
-                    <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Sofortiger Straffungseffekt, kurze Ausfallzeit</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Betäubungssalbe, präzise Plasmabehandlung</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 45 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
-                    </div>
-                </div>
-
+                
                 <!-- Service 5 -->
-                <div class="service-card">
-                    <div>
-                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Waxing ]</span></div>
-                        <h3>Warmwachs Haarentfernung</h3>
-                        <p>Seidig glatte Haut für Wochen. Sanfte Entfernung lästiger Härchen mit hochwertigstem Warmwachs.</p>
-                    </div>
-                    <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Langanhaltend glatt, feineres Haarwachstum</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Hautdesinfektion, Wachsauftrag, sanfter Abzug</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">Je nach Zone 15-45 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
-                    </div>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="service-card">
-                    <div>
-                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Fußpflege ]</span></div>
-                        <h3>Fußpflege</h3>
-                        <p>Fachgerechte medizinische und kosmetische Pflege für gesunde, vitale und rundum schöne Füße.</p>
-                    </div>
-                    <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Erleichterung, samtweiche Fußhaut</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Entspannendes Fußbad, Nagelbearbeitung, Pflege</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 45 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
-                    </div>
-                </div>
-
-                <!-- Service 7 -->
-                <div class="service-card">
-                    <div>
-                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Reflexzonenmassage ]</span></div>
-                        <h3>Reflexzonenmassage der Füße</h3>
-                        <p>Ganzheitliche Entspannungsmethode, die blockierte Energien im gesamten Körper harmonisiert.</p>
-                    </div>
-                    <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Stressabbau, Aktivierung der Selbstheilung</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Druckpunktstimulation der Fußsohlen</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 30 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
-                    </div>
-                </div>
-
-                <!-- Service 8 -->
-                <div class="service-card">
-                    <div>
-                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Maniküre ]</span></div>
-                        <h3>Maniküre und Pediküre</h3>
-                        <p>Die perfekte Visitenkarte: Professionelle Rundumpflege für perfekt geformte Nägel an Händen und Füßen.</p>
-                    </div>
-                    <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Elegantes Finish, gestärkte Nagelstruktur</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Formfeilen, Nagelhautentfernung, Massage, Lack</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 60 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
-                    </div>
-                </div>
-
-                <!-- Service 9 -->
-                <div class="service-card">
-                    <div>
-                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: PMU Entfernung ]</span></div>
-                        <h3>Entfernung von Permanent Make up</h3>
-                        <p>Schonende und hochwirksame Korrektur oder vollständige Aufhellung unschöner Pigmentierungen an Brauen/Lippen.</p>
-                    </div>
-                    <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Hautschonend, hocheffektive Pigmentlösung</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Sanfte chemische oder enzymatische Extraktion</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 45 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
-                    </div>
-                </div>
-
-                <!-- Service 10 -->
-                <div class="service-card">
+                <div class="service-card fade-up delay-2">
                     <div>
                         <div class="media-placeholder service-img-placeholder"><span>[ Bild: Wimpernverlängerung ]</span></div>
                         <h3>Professionelle Wimpernverlängerung</h3>
@@ -1166,266 +829,170 @@
                     </div>
                     <div class="service-meta">
                         <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Morgendliche Zeitersparnis, dichter Look</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Individuelle Applikation feinster Seidenwimpern</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 90-120 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
+                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Applikation feinster Seidenwimpern</span></div>
+                        <a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-outline">Termin Anfragen</a>
                     </div>
                 </div>
-
-                <!-- Service 11 -->
-                <div class="service-card">
+                
+                <!-- Service 6 -->
+                <div class="service-card fade-up delay-3">
                     <div>
-                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Milien ]</span></div>
-                        <h3>Entfernung von Milien, Warzen & Hautanhängseln</h3>
-                        <p>Schmerzfreie und kosmetisch präzise Abtragung störender Hautmakel für ein ebenmäßiges Hautbild.</p>
+                        <div class="media-placeholder service-img-placeholder"><span>[ Bild: Waxing / Fußpflege ]</span></div>
+                        <h3>Waxing, Maniküre & Fußpflege</h3>
+                        <p>Fachgerechte kosmetische Pflege für gesunde Füße, Hände und sanfte Haarentfernung mit Warmwachs.</p>
                     </div>
                     <div class="service-meta">
-                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Sofort glatte Hautoberfläche, narbenfrei</span></div>
-                        <div class="service-info-row"><span class="label">Ablauf:</span><span class="value">Sterile Oberflächenabtragung / Couperose-Nadel</span></div>
-                        <div class="service-info-row"><span class="label">Dauer:</span><span class="value">ca. 20 Min.</span></div>
-                        <a href="#contact" class="btn btn-outline">Termin Anfragen</a>
+                        <div class="service-info-row"><span class="label">Vorteile:</span><span class="value">Gepflegtes Erscheinungsbild, glatte Haut</span></div>
+                        <div class="service-info-row"><span class="label">Zusatz:</span><span class="value">Auch Reflexzonenmassage möglich</span></div>
+                        <a href="https://wa.link/dk574q" target="_blank" rel="noopener" class="btn btn-outline">Termin Anfragen</a>
                     </div>
-                </div>
-
-                <!-- Future Service Block Placeholder -->
-                <div class="service-card placeholder-future">
-                    <h3>Zukünftige Innovationen</h3>
-                    <p>Wir erweitern unser Angebot stetig um die neuesten Trends der internationalen Luxus-Kosmetik. Bald mehr erleben.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Premium Gallery Section -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <div class="section-header">
-                <span class="subtitle">Visuelle Impressionen</span>
-                <h2>Unsere Premium Galerie</h2>
-                <p>Ein Einblick in unser exklusives Ambiente, präzise Abläufe und die meisterhaften Ergebnisse.</p>
-            </div>
-            <div class="gallery-grid">
-                <div class="media-placeholder gallery-item"><span>[ Ambiente & Lounge ]</span></div>
-                <div class="media-placeholder gallery-item"><span>[ Behandlungskomfort ]</span></div>
-                <div class="media-placeholder gallery-item"><span>[ Details & Hygiene ]</span></div>
-                <div class="media-placeholder gallery-item"><span>[ Perfektion im Detail ]</span></div>
-                <div class="media-placeholder gallery-item"><span>[ Pflegeprodukte ]</span></div>
-                <div class="media-placeholder gallery-item"><span>[ Entspannungszone ]</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Before / After Section -->
-    <section class="before-after">
-        <div class="container">
-            <div class="section-header">
-                <span class="subtitle">Echte Ergebnisse</span>
-                <h2>Vorher / Nachher Verwandlungen</h2>
-                <p>Sehen Sie die transformative Kraft unserer präzisen kosmetischen Arbeiten.</p>
-            </div>
-            <div class="ba-grid">
-                <div class="ba-card">
-                    <div class="ba-images">
-                        <div class="media-placeholder ba-img-box"><span>[ Vorher ]</span><div class="ba-label">Vorher</div></div>
-                        <div class="media-placeholder ba-img-box"><span>[ Nachher ]</span><div class="ba-label">Nachher</div></div>
-                    </div>
-                    <h3>Microblading Härchenzeichnung</h3>
-                    <p>Optimierung von Dichte und Symmetrie bei lichten Augenbrauen.</p>
-                </div>
-                <div class="ba-card">
-                    <div class="ba-images">
-                        <div class="media-placeholder ba-img-box"><span>[ Vorher ]</span><div class="ba-label">Vorher</div></div>
-                        <div class="media-placeholder ba-img-box"><span>[ Nachher ]</span><div class="ba-label">Nachher</div></div>
-                    </div>
-                    <h3>Lippenpigmentierung</h3>
-                    <p>Korrektur asymmetrischer Konturen und natürliche Farbauffrischung.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Area Section -->
-    <section class="videos">
-        <div class="container">
-            <div class="section-header">
-                <span class="subtitle">Einblicke im Video</span>
-                <h2>Exklusive Behandlungs-Insights</h2>
-                <p>Erleben Sie die entspannte Atmosphäre und Professionalität filmisch festgehalten.</p>
-            </div>
-            <div class="video-wrapper">
-                <div class="video-container" id="video-player-container">
-                    <!-- Configured for highly-optimized HTML5 video with poster image -->
-                    <div class="media-placeholder video-poster" id="video-poster-placeholder">
-                        <span>[ Hochauflösendes Video-Vorschaubild ]</span>
-                    </div>
-                    <button class="video-play-btn" id="play-btn-trigger" aria-label="Video abspielen">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
-                    <!-- Prepared native HTML5 tag for optimization:
-                    <video id="studio-video" width="100%" height="100%" controls style="display:none;">
-                        <source src="path-to-optimized-video.mp4" type="video/mp4">
-                    </video> 
-                    -->
-                </div>
-                <div class="video-details">
-                    <h3>Ein Tag im Studio Beauty by Cris</h3>
-                    <p>Begleiten Sie uns virtuell durch eine luxuriöse Tiefenreinigung und spüren Sie die Philosophie von Ästhetik und Entspannung.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Google Reviews Section -->
-    <section class="reviews" id="reviews">
+    <!-- Google Reviews Section (Text Based, Re-designed) -->
+    <section class="reviews fade-up" id="reviews">
         <div class="container">
             <div class="section-header">
                 <span class="subtitle">Kundenstimmen</span>
                 <h2>Was unsere Kunden über uns sagen</h2>
             </div>
             
-            <div class="google-summary">
+            <div class="google-summary fade-up">
                 <div class="google-logo">
-                    <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+                    <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span> &nbsp; Bewertungen
                 </div>
-                <div class="rating-huge">5.0</div>
+                <div class="rating-huge">5,0</div>
                 <div class="stars">★★★★★</div>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Basierend auf über 10 echten 5-Sterne-Bewertungen für absolute Exzellenz.</p>
+                <p style="font-size: 0.95rem; color: var(--text-dark); font-weight: 500;">Basierend auf 13 echten Bewertungen</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">Beauty by Cris Beleza Facial in Baden-Baden</p>
             </div>
 
             <div class="reviews-grid">
-                <!-- Review 1 -->
-                <div class="review-card">
+                <!-- Review 1 (Sarah) -->
+                <div class="review-card fade-up delay-1">
                     <div class="review-user">
-                        <div class="user-avatar">AM</div>
+                        <div class="user-avatar" style="background-color: #A3C293;">S</div>
                         <div class="user-meta">
-                            <h4>Anna Müller</h4>
-                            <span>Vor 2 Wochen</span>
+                            <h4>Sarah Neralic</h4>
+                            <span>Vor wenigen Tagen</span>
                         </div>
                     </div>
-                    <div class="stars" style="margin-bottom:10px; font-size:1rem;">★★★★★</div>
-                    <p class="review-text">"Das beste Studio weit und breit! Cris arbeitet so präzise und sauber. Mein Microblading sieht absolut perfekt und natürlich aus. Danke!"</p>
+                    <div class="stars" style="margin-bottom:10px; font-size:1.1rem;">★★★★★</div>
+                    <p class="review-text">"Ich habe hier Microblading und Wimpernverlängerung machen lassen und bin extrem glücklich! Man fühlt sich sehr wohl und das Ergebnis ist wunderschön. Sehr zu empfehlen!!"</p>
                 </div>
-                <!-- Review 2 -->
-                <div class="review-card">
+                
+                <!-- Review 2 (Timo) -->
+                <div class="review-card fade-up delay-2">
                     <div class="review-user">
-                        <div class="user-avatar">SK</div>
+                        <div class="user-avatar" style="background-color: #8D99AE;">T</div>
                         <div class="user-meta">
-                            <h4>Sabine Kaufmann</h4>
-                            <span>Vor 1 Monat</span>
+                            <h4>Timo Winkler</h4>
+                            <span>Vor 1 Woche</span>
                         </div>
                     </div>
-                    <div class="stars" style="margin-bottom:10px; font-size:1rem;">★★★★★</div>
-                    <p class="review-text">"Die Gesichtsreinigung ist purer Luxus. Meine Haut hat noch nie so gestrahlt. Die Atmosphäre im Studio lädt total zum Entspannen ein."</p>
+                    <div class="stars" style="margin-bottom:10px; font-size:1.1rem;">★★★★★</div>
+                    <p class="review-text">"Die Gesichtsbehandlung (Reinigung und Haarentfernung) war hervorragend. Ich bin in einem Alter, in dem ich das nicht mehr selbst pflegen kann. Aber Cristina schafft das. Ein fantastisches Treatment, inklusive Mani- und Pediküre. Recomendo muito."</p>
                 </div>
-                <!-- Review 3 -->
-                <div class="review-card">
+                
+                <!-- Review 3 (Sabrina) -->
+                <div class="review-card fade-up delay-3">
                     <div class="review-user">
-                        <div class="user-avatar">LE</div>
+                        <div class="user-avatar" style="background-color: #DDA15E;">S</div>
                         <div class="user-meta">
-                            <h4>Laura Endres</h4>
-                            <span>Vor 2 Monaten</span>
+                            <h4>Sabrina Silva</h4>
+                            <span>Vor 2 Jahren (Local Guide)</span>
                         </div>
                     </div>
-                    <div class="stars" style="margin-bottom:10px; font-size:1rem;">★★★★★</div>
-                    <p class="review-text">"Hygienisch einwandfrei, super kompetente Beratung und ein wunderschönes Endergebnis bei der Lippenpigmentierung. Absolute Empfehlung!"</p>
+                    <div class="stars" style="margin-bottom:10px; font-size:1.1rem;">★★★★★</div>
+                    <p class="review-text">"Die Energie von Cris ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, die Gesichtsbehandlungen und Lippenpigmentierung sind exzellent. Ich kann Beauty by Cris wärmstens empfehlen."</p>
+                </div>
+                
+                <!-- Review 4 (Melanie) -->
+                <div class="review-card fade-up delay-1">
+                    <div class="review-user">
+                        <div class="user-avatar" style="background-color: #457B9D;">M</div>
+                        <div class="user-meta">
+                            <h4>Melanie Weis</h4>
+                            <span>Vor 2 Jahren (Local Guide)</span>
+                        </div>
+                    </div>
+                    <div class="stars" style="margin-bottom:10px; font-size:1.1rem;">★★★★★</div>
+                    <p class="review-text">"Ich war schon mehrmals dort. Und egal ob für Wimpern oder Augenbrauen, ich bin absolut begeistert von dem Ergebnis und der Professionalität."</p>
+                </div>
+
+                <!-- Review 5 (Juliana) -->
+                <div class="review-card fade-up delay-2">
+                    <div class="review-user">
+                        <div class="user-avatar" style="background-color: #E07A5F;">J</div>
+                        <div class="user-meta">
+                            <h4>Juliana Soares</h4>
+                            <span>Vor 2 Jahren (Local Guide)</span>
+                        </div>
+                    </div>
+                    <div class="stars" style="margin-bottom:10px; font-size:1.1rem;">★★★★★</div>
+                    <p class="review-text">"Profissional excelente, superou as minhas expectativas, obrigada Cris ❤️ Super indico!"</p>
+                </div>
+                
+                <!-- Review 6 (Jacksan) -->
+                <div class="review-card fade-up delay-3">
+                    <div class="review-user">
+                        <div class="user-avatar" style="background-color: #6C757D;">J</div>
+                        <div class="user-meta">
+                            <h4>Jacksan Adrian</h4>
+                            <span>Vor 7 Monaten</span>
+                        </div>
+                    </div>
+                    <div class="stars" style="margin-bottom:10px; font-size:1.1rem;">★★★★★</div>
+                    <p class="review-text">"Profissional excelente, fiz uma limpeza de pele gostei muito, recomendo! 👏 Tratamentos para acne."</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Separate Testimonials Block -->
-    <section class="testimonials">
-        <div class="container">
-            <div class="testimonial-slider">
-                <div class="testimonial-item">
-                    <blockquote>"Exklusivität bedeutet für mich, dass man verstanden wird. Bei Cris ist jede Behandlung wie ein maßgeschneidertes Kunstwerk für die Haut."</blockquote>
-                    <p class="testimonial-author">— Dr. Elena Becker, Stammkundin</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <div class="section-header">
-                <span class="subtitle">Fragen & Antworten</span>
-                <h2>Häufig gestellte Fragen</h2>
-                <p>Alles, was Sie für Ihren perfekten Wohlfühltermin wissen müssen.</p>
-            </div>
-            
-            <div class="faq-wrapper">
-                <details>
-                    <summary>Wie läuft die erste Behandlung genau ab?</summary>
-                    <div class="faq-content">
-                        Jede Erstbehandlung beginnt mit einer ausführlichen computergestützten Hautanalyse oder Typberatung. Wir besprechen Ihre Wünsche, analysieren Ihren Hautzustand und passen die Behandlung exakt an Ihre Bedürfnisse an.
-                    </div>
-                </details>
-                <details>
-                    <summary>Welche Hygienestandards werden im Studio eingehalten?</summary>
-                    <div class="faq-content">
-                        Ihre Gesundheit hat oberste Priorität. Wir arbeiten strikt nach den modernsten medizinischen Hygienerichtlinien, verwenden ausschließlich Einweg-Präzisionsnadeln für Pigmentierungen und sterilisieren alle Instrumente mehrfach.
-                    </div>
-                </details>
-                <details>
-                    <summary>Wie lange hält eine Lippenpigmentierung oder ein Microblading?</summary>
-                    <div class="faq-content">
-                        Je nach Hauttyp und Lebensstil hält das Ergebnis zwischen 1,5 und 3 Jahren. Wir empfehlen eine jährliche Auffrischung, um die Farbintensität und Präzision dauerhaft brillant zu erhalten.
-                    </div>
-                </details>
-                <details>
-                    <summary>Muss ich vor einer Behandlung besondere Vorkehrungen treffen?</summary>
-                    <div class="faq-content">
-                        Für optimale Ergebnisse sollten Sie 24 Stunden vor der Behandlung auf Kaffee, Alkohol und blutverdünnende Medikamente verzichten. Genaue Details senden wir Ihnen bei der Terminbestätigung.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final Call to Action -->
-    <section class="cta-final">
-        <div class="container">
-            <h2>Bereit für Ihre persönliche Verwandlung?</h2>
-            <p>Sichern Sie sich Ihren exklusiven Wohlfühltermin bequem online oder kontaktieren Sie uns für eine persönliche Beratung.</p>
-            <a href="#contact" class="btn btn-gold">Jetzt Wunschtermin Sichern</a>
-        </div>
+    <!-- Google Maps Full Width Embed -->
+    <section class="map-section fade-up">
+        <iframe class="map-iframe" 
+            src="https://maps.google.com/maps?q=Bl%C3%BCtenfeldpl.%201%20-%208,%2076532%20Baden-Baden&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Beauty by Cris Google Maps Location">
+        </iframe>
     </section>
 
     <!-- Contact & Footer Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <div class="contact-grid">
+            <div class="contact-grid fade-up">
                 <div class="contact-column">
                     <h4>Beauty by Cris</h4>
-                    <p>Ihr Premium-Studio für ästhetische Kosmetik, exklusive Pigmentierung und ganzheitliches Wohlbefinden.</p>
+                    <p>Ihr Premium-Studio für ästhetische Kosmetik, exklusive Pigmentierung und ganzheitliches Wohlbefinden von Cristina Reisch.</p>
                     <div class="social-links">
-                        <a href="#" target="_blank" rel="noopener">Instagram</a>
-                        <a href="#" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://instagram.com/beauty_by_cris" target="_blank" rel="noopener">Instagram (@beauty_by_cris)</a>
+                        <a href="https://wa.link/dk574q" target="_blank" rel="noopener">WhatsApp</a>
                     </div>
                 </div>
                 <div class="contact-column">
                     <h4>Öffnungszeiten</h4>
-                    <p>Montag — Freitag: 09:00 - 19:00 Uhr</p>
-                    <p>Samstag: 10:00 - 16:00 Uhr</p>
-                    <p>Sonn- & Feiertage: Geschlossen</p>
-                    <p style="font-style: italic; font-size: 0.85rem; color: var(--primary-rose);">Termine nur nach vorheriger Online-Reservierung.</p>
+                    <p>Montag — Freitag: 09:00 - 18:00 Uhr</p>
+                    <p>Samstag & Sonntag: Geschlossen</p>
+                    <p style="font-style: italic; font-size: 0.85rem; color: var(--primary-rose); margin-top: 15px;">Termine nur nach vorheriger Reservierung.</p>
                 </div>
                 <div class="contact-column">
                     <h4>Kontakt & Adresse</h4>
-                    <p>Kurfürstendamm 210<br>10719 Berlin, Deutschland</p>
-                    <p>Telefon: +49 (0) 30 1234 5678</p>
-                    <p>E-Mail: info@beautybycris.de</p>
+                    <p>Blütenfeldpl. 1 - 8<br>76532 Baden-Baden, Deutschland</p>
+                    <p>Telefon: +49 162 9384907</p>
+                    <a href="https://wa.link/dk574q" class="btn btn-gold" style="margin-top: 15px; padding: 10px 20px; font-size: 0.75rem;">Nachricht senden</a>
                 </div>
             </div>
             
-            <footer>
-                <p>&copy; 2026 Beauty by Cris. Alle Rechte vorbehalten. | Design <span>Premium Luxus</span></p>
+            <footer class="fade-up">
+                <p>&copy; 2026 Beauty by Cris Beleza Facial. Alle Rechte vorbehalten. | Design <span>Premium Luxus</span></p>
             </footer>
         </div>
     </section>
 
-    <!-- Native Fluid Lightweight Interactivity JS -->
+    <!-- Javascript for Interactivity and Scroll Animations -->
     <script>
         // Mobile Responsive Navigation Toggle
         const burgerBtn = document.getElementById('burger-btn');
@@ -1433,7 +1000,6 @@
 
         burgerBtn.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            // Simple subtle animation for hamburger lines
             const lines = burgerBtn.children;
             if(navMenu.classList.contains('active')) {
                 lines[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
@@ -1446,7 +1012,6 @@
             }
         });
 
-        // Close menu on navigation link click (Mobile UX improvement)
         const navLinks = document.querySelectorAll('#nav-menu a');
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -1458,18 +1023,26 @@
             });
         });
 
-        // Lightweight Video Play Trigger Logic (Saves Initial Load Time)
-        const playBtn = document.getElementById('play-btn-trigger');
-        const posterPlaceholder = document.getElementById('video-poster-placeholder');
-        const videoContainer = document.getElementById('video-player-container');
-
-        playBtn.addEventListener('click', () => {
-            // Replace placeholder with a clean native iframe or dynamic video element when demanded
-            // This prevents loading heavy video assets / scripts before the user chooses to watch.
-            videoContainer.innerHTML = `<video width="100%" height="100%" autoplay controls style="object-fit: cover;">
-                <source src="https://assets.mixkit.co/videos/preview/mixkit-woman-mending-her-face-with-a-cosmetic-roller-40033-large.mp4" type="video/mp4">
-                Ihr Browser unterstützt das Video-Tag nicht.
-            </video>`;
+        // Intersection Observer for Lightweight Scroll Animations (Motions)
+        document.addEventListener("DOMContentLoaded", function() {
+            const fadeElements = document.querySelectorAll('.fade-up');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Triggers when 15% of the element is visible
+            };
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+            
+            fadeElements.forEach(el => observer.observe(el));
         });
     </script>
 </body>
