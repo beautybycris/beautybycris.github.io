@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Exklusive Ästhetik- & Kosmetikklinik Beauty by Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
+    <link rel="icon" href="https://i.imgur.com/CQpHs8c.png" type="image/png">
     <title>Beauty by Cris | Exklusive Kosmetik- & Ästhetikklinik</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
@@ -19,61 +20,50 @@
             --text-muted: #6B6263;
             --border-light: #EFE9E2;
             --shadow-subtle: 0 15px 35px rgba(42, 36, 37, 0.05);
-            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-champagne); color: var(--text-dark); line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-champagne); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
         ul { list-style: none; }
+        
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
         @media (max-width: 768px) { .container { padding: 0 20px; } }
 
-        .text-gradient {
-            background: linear-gradient(135deg, var(--accent-rose), var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 600;
-        }
+        .text-gradient { background: linear-gradient(135deg, var(--accent-rose), var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
+        .stars-gradient { background: linear-gradient(45deg, var(--accent-rose), var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.2rem; letter-spacing: 2px; margin-bottom: 5px; }
 
-        .stars-gradient {
-            background: linear-gradient(45deg, var(--accent-rose), var(--accent-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-size: 1.4rem;
-            letter-spacing: 2px;
-            margin-bottom: 5px;
-        }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 50px auto; }
+        .section-header .subtitle { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-rose); margin-bottom: 10px; display: block; font-weight: 500; }
+        .section-header h2 { font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 400; margin-bottom: 20px; }
 
-        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px auto; }
-        .section-header .subtitle { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-rose); margin-bottom: 10px; display: block; font-weight: 500; }
-        .section-header h2 { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 400; margin-bottom: 20px; }
-        .section-header p { color: var(--text-muted); font-size: 1.05rem; }
-
-        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; transition: var(--transition-smooth); cursor: pointer; border: 1px solid transparent; text-align: center; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 16px 40px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; transition: var(--transition-smooth); cursor: pointer; border: 1px solid transparent; border-radius: 4px; text-align: center; }
         .btn-rose { background-color: var(--accent-rose); color: var(--bg-white); }
         .btn-rose:hover { background-color: var(--accent-rose-hover); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(200, 142, 147, 0.25); }
         .btn-outline { border: 1px solid var(--accent-rose); color: var(--text-dark); background: transparent; }
         .btn-outline:hover { background-color: var(--accent-rose); color: var(--bg-white); transform: translateY(-3px); }
-        .btn-large { padding: 20px 60px; font-size: 1rem; width: fit-content; margin: 0 auto; display: flex; border-radius: 4px; }
+        .btn-large { padding: 20px 60px; font-size: 1rem; width: fit-content; margin: 40px auto 0 auto; display: flex; }
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-        /* Header & Lang */
+        /* Header */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
-        .logo-wrap { display: flex; align-items: center; gap: 15px; }
+        .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .logo-img { height: 55px; width: auto; object-fit: contain; }
         nav ul { display: flex; gap: 25px; align-items: center; }
         nav a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; color: var(--text-dark); }
         nav a:hover { color: var(--accent-rose); }
         
-        .lang-dropdown { position: relative; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--text-dark); margin-left: 20px; }
-        .current-lang { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border-light); background-color: var(--bg-white); border-radius: 4px; }
-        .lang-options { position: absolute; top: 100%; right: 0; background-color: var(--bg-white); min-width: 160px; display: none; flex-direction: column; box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); border-top: 2px solid var(--accent-rose); }
+        /* Lang Dropdown */
+        .lang-dropdown { position: relative; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--text-dark); margin-left: 20px; user-select: none; }
+        .current-lang { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border-light); background-color: var(--bg-white); border-radius: 4px; transition: var(--transition-smooth); }
+        .current-lang:hover { border-color: var(--accent-rose); color: var(--accent-rose); }
+        .lang-options { position: absolute; top: 100%; right: 0; background-color: var(--bg-white); min-width: 160px; display: none; flex-direction: column; box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); border-top: 2px solid var(--accent-rose); border-radius: 0 0 4px 4px; }
         .lang-options.show { display: flex; }
-        .lang-option { padding: 12px 15px; display: flex; align-items: center; gap: 10px; color: var(--text-dark); }
+        .lang-option { padding: 12px 15px; display: flex; align-items: center; gap: 10px; color: var(--text-dark); transition: var(--transition-smooth); }
         .lang-option:hover { background-color: var(--bg-champagne); color: var(--accent-rose); }
         
         .burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; margin-left: 20px; }
@@ -88,40 +78,14 @@
 
         /* Hero */
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: var(--bg-champagne); padding-top: 90px; }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
         .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; margin-bottom: 25px; }
-        .hero-subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px; max-width: 550px; }
-        .hero-buttons { display: flex; gap: 20px; }
+        .hero-subtitle { color: var(--text-dark); font-weight: 500; font-size: 1.1rem; margin-bottom: 40px; max-width: 550px; }
         
-        /* Premium Minimalist Photo Shape */
-        .hero-photo-wrap { 
-            width: 100%; 
-            max-width: 420px; 
-            aspect-ratio: 4/5; 
-            border-radius: 12px; 
-            margin-left: auto; 
-            overflow: hidden; 
-            border: 1px solid rgba(212, 175, 55, 0.3); 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.1); 
-            position: relative; 
-            background: var(--bg-white);
-        }
-        .hero-photo-wrap img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            object-position: center 70%;
-            transition: transform 0.1s linear; 
-            will-change: transform; 
-            filter: contrast(1.05) brightness(1.02);
-        }
+        .hero-photo-wrap { width: 100%; max-width: 420px; aspect-ratio: 4/5; border-radius: 12px; margin-left: auto; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.1); position: relative; background: var(--bg-white); }
+        .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 70%; transition: transform 0.1s linear; will-change: transform; filter: contrast(1.05) brightness(1.02); }
         
-        @media (max-width: 992px) { 
-            .hero-grid { grid-template-columns: 1fr; text-align: center; } 
-            .hero-subtitle, .hero-photo-wrap { margin: 0 auto 40px auto; } 
-            .hero-buttons { justify-content: center; flex-direction: column; } 
-            .hero-photo-wrap{ max-width: 350px; } 
-        }
+        @media (max-width: 992px) { .hero-grid { grid-template-columns: 1fr; text-align: center; } .hero-subtitle, .hero-photo-wrap { margin: 0 auto 40px auto; } .hero-photo-wrap{ max-width: 350px; } }
 
         /* About */
         .about { padding: 120px 0; background-color: var(--bg-white); }
@@ -133,33 +97,42 @@
         .about-content p { color: var(--text-muted); margin-bottom: 20px; }
         @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; gap: 50px; } }
 
-        /* Why Us */
-        .why-us { padding: 100px 0; background-color: var(--bg-champagne); }
-        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        .why-card { background: var(--bg-white); padding: 40px 30px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px;}
-        .why-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-subtle); border-color: var(--accent-rose); }
-        .why-card svg { width: 40px; height: 40px; fill: var(--accent-rose); margin-bottom: 20px; }
-        .why-card h4 { font-size: 1.2rem; margin-bottom: 15px; }
-        .why-card p { font-size: 0.9rem; color: var(--text-muted); }
+        /* Why Us - Neon Hover & Reduced Height */
+        .why-us { padding: 80px 0; background-color: var(--bg-champagne); }
+        .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .why-card { background: var(--bg-white); padding: 25px 20px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px; }
+        /* Neon Efeito */
+        .why-card:hover { transform: translateY(-5px); box-shadow: 0 0 20px rgba(200, 142, 147, 0.4); border-color: var(--accent-rose); }
+        .why-card svg { width: 35px; height: 35px; fill: var(--accent-rose); margin-bottom: 15px; }
+        .why-card h4 { font-size: 1.1rem; margin-bottom: 10px; }
+        .why-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
-        /* Services */
-        .services { padding: 120px 0; background-color: var(--bg-white); }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; margin-bottom: 60px; }
-        .service-card { background-color: var(--bg-champagne); border: 1px solid var(--border-light); padding: 30px; display: flex; flex-direction: column; border-radius: 8px;}
-        .service-img-wrap { width: 100%; aspect-ratio: 16/9; margin-bottom: 25px; border-radius: 4px; overflow: hidden; }
-        .service-img-wrap .media-placeholder { width: 100%; height: 100%; }
-        .service-card h3 { font-size: 1.3rem; margin-bottom: 15px; }
-        .service-card p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+        /* Services - Borda Infinita e Carrossel 4 por fileira */
+        .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
+        .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
+        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; }
+        .services-carousel::-webkit-scrollbar { display: none; }
+        .services-carousel:active { cursor: grabbing; }
+        
+        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); scroll-snap-align: start; user-select: none; }
+        .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translateY(-3px); }
+        
+        .service-img-wrap { width: 100%; aspect-ratio: 4/3; margin-bottom: 20px; border-radius: 6px; overflow: hidden; }
+        .service-img-wrap .media-placeholder { width: 100%; height: 100%; border-radius: 6px; }
+        .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; line-height: 1.3;}
+        .service-card p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4; }
         .service-meta { border-top: 1px solid var(--border-light); padding-top: 15px; margin-top: auto; }
-        .s-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; }
-        .s-row .lbl { font-weight: 600; color: var(--accent-rose); text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px; }
-        .s-row .val { color: var(--text-dark); text-align: right; max-width: 65%; }
-        @media (max-width: 420px) { .services-grid { grid-template-columns: 1fr; } }
+        .s-row { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px; }
+        .s-row .lbl { font-weight: 600; color: var(--accent-rose); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
+        .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
+        
+        @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
+        @media (max-width: 768px) { .services-carousel { padding: 20px; } .service-card { min-width: 85vw; max-width: 85vw; } }
 
         /* Before/After Slider */
-        .before-after { padding: 120px 0; background-color: var(--bg-champagne); }
+        .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; touch-action: pan-y; border-radius: 8px;}
         .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
@@ -174,7 +147,7 @@
         @media (max-width: 992px) { .ba-grid { grid-template-columns: 1fr; } .ba-slider-container { height: 300px; } }
 
         /* Videos */
-        .videos { padding: 120px 0; background-color: var(--bg-white); }
+        .videos { padding: 100px 0; background-color: var(--bg-white); }
         .video-wrapper { max-width: 900px; margin: 0 auto; position: relative; }
         .video-container { width: 100%; aspect-ratio: 16/9; background-color: #000; position: relative; overflow: hidden; box-shadow: var(--shadow-subtle); border-radius: 8px;}
         .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: var(--transition-smooth); }
@@ -183,51 +156,49 @@
         .video-play-btn:hover { background-color: var(--accent-rose); transform: translate(-50%, -50%) scale(1.1); }
         .video-play-btn:hover svg { fill: var(--bg-white); }
 
-        /* Google Reviews Carousel */
-        .reviews { padding: 120px 0; background-color: var(--bg-champagne); overflow: hidden;}
-        .google-summary { background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 40px; max-width: 600px; margin: 0 auto 50px auto; text-align: center; box-shadow: var(--shadow-subtle); border-radius: 8px; }
-        .google-logo { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; font-family: 'Montserrat', sans-serif; }
-        .g-blue { color: #4285F4; } .g-red { color: #EA4335; } .g-yellow { color: #FBBC05; } .g-green { color: #34A853; }
-        .rating-huge { font-size: 4rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; color: var(--text-dark); line-height: 1; margin-bottom: 5px;}
-        .btn-google { display: inline-block; margin-top: 20px; padding: 10px 25px; border: 1px solid var(--border-light); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: var(--text-dark); transition: var(--transition-smooth); border-radius: 4px;}
-        .btn-google:hover { border-color: #4285F4; color: #4285F4; }
+        /* Google Reviews Carousel - Custom & Neon */
+        .reviews { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden;}
+        .google-summary { background-color: transparent; max-width: 600px; margin: 0 auto 40px auto; text-align: center; }
+        .rating-huge { font-size: 4rem; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 5px; letter-spacing: -2px; }
+        .google-summary p { font-size: 0.9rem; margin-top: 5px;}
+        .btn-google { display: inline-block; margin-top: 15px; padding: 10px 25px; border: 1px solid var(--accent-rose); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: var(--accent-rose); transition: var(--transition-smooth); border-radius: 4px;}
+        .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); box-shadow: 0 0 15px rgba(200, 142, 147, 0.4); }
         
-        .carousel-wrapper { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 25px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; cursor: grab; }
-        @media (max-width: 1380px) { .reviews-carousel { padding: 20px 40px; } }
-        @media (max-width: 768px) { .reviews-carousel { padding: 20px; } }
+        .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; }
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel:active { cursor: grabbing; }
         
-        .review-card { min-width: 350px; max-width: 350px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 35px; border-radius: 8px; box-shadow: var(--shadow-subtle); scroll-snap-align: start; user-select: none; }
+        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); scroll-snap-align: start; user-select: none; transition: var(--transition-smooth); }
+        .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translateY(-3px);}
         @media (max-width: 500px) { .review-card { min-width: 85vw; max-width: 85vw; } }
-        .review-user { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .user-avatar { width: 45px; height: 45px; border-radius: 50%; border: 1px solid var(--accent-rose); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.2rem; background: var(--bg-champagne); }
+        
+        .review-user { margin-bottom: 10px; }
         .user-meta h4 { font-size: 1rem; font-family: 'Montserrat', sans-serif; margin-bottom: 2px;}
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
-        .review-text { color: var(--text-muted); font-size: 0.95rem; font-style: italic; line-height: 1.6; }
+        .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
         /* Forms */
-        .forms-section { padding: 120px 0; background-color: var(--bg-white); }
-        .forms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .forms-section { padding: 100px 0; background-color: var(--bg-white); }
+        .forms-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         @media (max-width: 992px) { .forms-grid { grid-template-columns: 1fr; } }
-        .form-box { background-color: var(--bg-champagne); padding: 50px; border: 1px solid var(--border-light); border-radius: 8px;}
-        .form-box h3 { font-size: 1.8rem; margin-bottom: 10px; }
-        .form-box p { color: var(--text-muted); margin-bottom: 30px; font-size: 0.95rem; }
-        .form-group { margin-bottom: 20px; }
-        .form-control { width: 100%; padding: 15px; border: 1px solid var(--border-light); background-color: var(--bg-white); font-family: 'Montserrat', sans-serif; outline: none; transition: var(--transition-smooth); border-radius: 4px;}
+        .form-box { background-color: var(--bg-champagne); padding: 40px; border: 1px solid var(--border-light); border-radius: 8px;}
+        .form-box h3 { font-size: 1.6rem; margin-bottom: 10px; }
+        .form-box p { color: var(--text-muted); margin-bottom: 25px; font-size: 0.9rem; }
+        .form-group { margin-bottom: 15px; }
+        .form-control { width: 100%; padding: 14px; border: 1px solid var(--border-light); background-color: var(--bg-white); font-family: 'Montserrat', sans-serif; font-size: 0.9rem; outline: none; transition: var(--transition-smooth); border-radius: 4px;}
         .form-control:focus { border-color: var(--accent-rose); }
-        textarea.form-control { height: 120px; resize: vertical; }
+        textarea.form-control { height: 100px; resize: vertical; }
 
         /* Map & Footer */
-        .map-section { width: 100%; height: 450px; background: #eee; position: relative; border-top: 1px solid var(--border-light);}
+        .map-section { width: 100%; height: 350px; background: #eee; position: relative; border-top: 1px solid var(--border-light);}
         .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); }
         
-        .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); border-top: 1px solid var(--border-light); }
+        .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .info-card { text-align: center; }
-        .info-card svg { width: 35px; height: 35px; fill: var(--accent-rose); margin-bottom: 15px; }
-        .info-card h3 { font-size: 1.3rem; margin-bottom: 10px; }
+        .info-card svg { width: 30px; height: 30px; fill: var(--accent-rose); margin-bottom: 15px; }
+        .info-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
         .info-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
         .info-card .hl { color: var(--accent-rose); font-weight: 600; }
         @media (max-width: 768px) { .clinic-info-grid { grid-template-columns: 1fr; gap: 40px;} }
@@ -237,18 +208,19 @@
         .social-links a { color: var(--primary-rose); text-transform: uppercase; transition: var(--transition-smooth);}
         .social-links a:hover { color: var(--bg-white); }
 
-        /* Floating Buttons */
+        /* Floating WhatsApp (Icon Only) */
         .float-btn { position: fixed; right: 30px; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 100; cursor: pointer; transition: var(--transition-smooth); }
         .float-whatsapp { bottom: 30px; background-color: #25D366; color: white; }
         .float-whatsapp:hover { transform: scale(1.1); background-color: #1EBE5D; }
-        .float-whatsapp svg { width: 30px; height: 30px; fill: currentColor; }
+        .float-whatsapp svg { width: 35px; height: 35px; fill: currentColor; }
+        
         .float-top { bottom: 100px; background-color: var(--text-dark); border: 1px solid var(--accent-rose); opacity: 0; pointer-events: none; }
         .float-top.visible { opacity: 1; pointer-events: auto; }
         .float-top:hover { background-color: var(--accent-rose); }
         .float-top svg { width: 24px; height: 24px; fill: var(--bg-white); }
 
         /* Motion */
-        .animate-on-scroll { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); will-change: opacity, transform; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); will-change: opacity, transform; }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.15s; } .delay-2 { transition-delay: 0.3s; }
     </style>
@@ -257,7 +229,7 @@
 
     <header>
         <div class="container nav-container">
-            <a href="#" class="logo-wrap">
+            <a href="#" class="logo-wrap" onclick="smoothScrollToTop(event)">
                 <img src="https://i.imgur.com/CQpHs8c.png" alt="Logo" class="logo-img">
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--text-dark); font-weight: 600;">
                     Beauty by <span class="text-gradient">Cris</span>
@@ -355,31 +327,34 @@
                 <span class="subtitle" data-i18n="services_sub">Exklusive Behandlungen</span>
                 <h2 data-i18n="services_title">Unsere Services & Rituale</h2>
             </div>
-            
-            <div class="services-grid">
-                <div class="service-card animate-on-scroll">
+        </div>
+        
+        <div class="services-carousel-wrap">
+            <div class="services-carousel" id="servicesCarousel">
+                
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s1_title">Professionelle Gesichtsreinigung</h3>
                     <p data-i18n="s1_desc">Professionelle Tiefenreinigung für ein klares Hautbild.</p>
                     <div class="service-meta">
-                        <div class="s-row"><span class="lbl" data-i18n="lbl_benefits">Vorteile:</span><span class="val" data-i18n="s1_ben">Porenverfeinerung, Minderung von Unreinheiten</span></div>
+                        <div class="s-row"><span class="lbl" data-i18n="lbl_benefits">Vorteile:</span><span class="val" data-i18n="s1_ben">Porenverfeinerung</span></div>
                         <div class="s-row"><span class="lbl" data-i18n="lbl_process">Ablauf:</span><span class="val" data-i18n="s1_abl">Abreinigung, Dampf, Maske</span></div>
                         <div class="s-row"><span class="lbl" data-i18n="lbl_duration">Dauer:</span><span class="val" data-i18n="s1_dur">ca. 60 Min.</span></div>
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s2_title">Micropigmentierung & Microblading</h3>
                     <p data-i18n="s2_desc">Perfekt geformte Augenbrauen mit natürlicher Zeichnung.</p>
                     <div class="service-meta">
                         <div class="s-row"><span class="lbl" data-i18n="lbl_benefits">Vorteile:</span><span class="val" data-i18n="s2_ben">Dauerhaft dichte Brauen</span></div>
-                        <div class="s-row"><span class="lbl" data-i18n="lbl_process">Ablauf:</span><span class="val" data-i18n="s2_abl">Vorzeichnung, präzise Pigmentierung</span></div>
+                        <div class="s-row"><span class="lbl" data-i18n="lbl_process">Ablauf:</span><span class="val" data-i18n="s2_abl">Vorzeichnung, Pigmentierung</span></div>
                         <div class="s-row"><span class="lbl" data-i18n="lbl_duration">Dauer:</span><span class="val" data-i18n="s2_dur">ca. 120 Min.</span></div>
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s3_title">Lippenpigmentierung</h3>
                     <p data-i18n="s3_desc">Formschöne Lippen mit optischer Volumensteigerung.</p>
@@ -390,18 +365,18 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s4_title">Plasma Pen Behandlungen</h3>
                     <p data-i18n="s4_desc">Nicht-invasive Hautstraffung und Fältchenminderung.</p>
                     <div class="service-meta">
-                        <div class="s-row"><span class="lbl" data-i18n="lbl_benefits">Vorteile:</span><span class="val" data-i18n="s4_ben">Sofortige Straffung, keine Narben</span></div>
+                        <div class="s-row"><span class="lbl" data-i18n="lbl_benefits">Vorteile:</span><span class="val" data-i18n="s4_ben">Sofortige Straffung</span></div>
                         <div class="s-row"><span class="lbl" data-i18n="lbl_process">Ablauf:</span><span class="val" data-i18n="s4_abl">Präzise Plasma-Punkte</span></div>
                         <div class="s-row"><span class="lbl" data-i18n="lbl_duration">Dauer:</span><span class="val" data-i18n="s4_dur">ca. 45 Min.</span></div>
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s5_title">Warmwachs Haarentfernung</h3>
                     <p data-i18n="s5_desc">Schonende Haarentfernung mit Warmwachs.</p>
@@ -412,7 +387,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s6_title">Fußpflege</h3>
                     <p data-i18n="s6_desc">Fachgerechte Pflege für gesunde, schöne Füße.</p>
@@ -423,7 +398,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s7_title">Reflexzonenmassage</h3>
                     <p data-i18n="s7_desc">Entspannende Druckpunktmassage zur Stimulierung.</p>
@@ -434,7 +409,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s8_title">Maniküre & Pediküre</h3>
                     <p data-i18n="s8_desc">Kombinierte Pflege für perfekte Hände und Füße.</p>
@@ -445,7 +420,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s9_title">PMU Entfernung</h3>
                     <p data-i18n="s9_desc">Sanfte Aufhellung oder Entfernung von verblasstem PMU.</p>
@@ -456,7 +431,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s10_title">Wimpernverlängerung</h3>
                     <p data-i18n="s10_desc">Traumhaft lange Wimpern für einen starken Blick.</p>
@@ -467,7 +442,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s11_title">Entfernung von Milien</h3>
                     <p data-i18n="s11_desc">Schonende Entfernung von Hautgrießkörnchen.</p>
@@ -478,7 +453,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s12_title">Gesichts-Microneedling</h3>
                     <p data-i18n="s12_desc">Anti-Aging zur Hautverjüngung durch Kollagen.</p>
@@ -489,7 +464,7 @@
                     </div>
                 </div>
 
-                <div class="service-card animate-on-scroll">
+                <div class="service-card">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s13_title">Körper-Microneedling</h3>
                     <p data-i18n="s13_desc">Spezialbehandlung zur Reduzierung von Dehnungsstreifen.</p>
@@ -499,8 +474,11 @@
                         <div class="s-row"><span class="lbl" data-i18n="lbl_duration">Dauer:</span><span class="val" data-i18n="s13_dur">60 - 90 Min.</span></div>
                     </div>
                 </div>
-            </div>
 
+            </div>
+        </div>
+
+        <div class="container" style="text-align: center;">
             <a href="#kontakt" class="btn btn-rose btn-large animate-on-scroll" data-i18n="btn_book_large">Jetzt Termin vereinbaren</a>
         </div>
     </section>
@@ -549,27 +527,28 @@
 
     <section class="reviews" id="reviews">
         <div class="container">
-            <div class="section-header animate-on-scroll">
+            <div class="section-header animate-on-scroll" style="margin-bottom: 20px;">
                 <span class="subtitle" data-i18n="reviews_sub">Kundenmeinungen</span>
                 <h2 data-i18n="reviews_title">Google Bewertungen</h2>
             </div>
 
             <div class="google-summary animate-on-scroll">
-                <div class="google-logo"><span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span></div>
-                <div class="rating-huge">5,0</div>
+                <div class="rating-huge text-gradient">5,0</div>
                 <div class="stars-gradient">★★★★★</div>
-                <p><span data-i18n="google_reviews_count">Basierend auf 13 Google-Rezensionen</span></p>
+                <p data-i18n="google_reviews_count" style="color: var(--text-muted);">Basierend auf 13 Google-Rezensionen</p>
                 <a href="https://www.google.com/search?q=Beauty+by+Cris+Beleza+Facial+Baden-Baden" target="_blank" class="btn-google" data-i18n="btn_google_page">Auf Google ansehen</a>
             </div>
         </div>
 
-        <div class="carousel-wrapper">
+        <div class="reviews-carousel-wrap">
             <div class="reviews-carousel" id="reviewsCarousel">
                 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">J</div>
-                        <div class="user-meta"><h4 class="text-gradient">Jacksan Adrian</h4><span data-i18n="r1_date">vor 7 Monaten</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Jacksan Adrian</h4>
+                            <span data-i18n="r1_date">vor 7 Monaten</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r1_text">"Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏"</p>
@@ -577,8 +556,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">E</div>
-                        <div class="user-meta"><h4 class="text-gradient">Elo Seitz</h4><span data-i18n="r2_date">vor 1 Jahr</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Elo Seitz</h4>
+                            <span data-i18n="r2_date">vor 1 Jahr</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r2_text">"Ich liebe die Maniküre und Pediküre von Cris, ich bin sehr zufrieden.. Sie ist sehr freundlich und geduldig 🫶🥰"</p>
@@ -586,8 +567,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">J</div>
-                        <div class="user-meta"><h4 class="text-gradient">Juliana Soares</h4><span data-i18n="r3_date">vor 2 Jahren</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Juliana Soares</h4>
+                            <span data-i18n="r3_date">vor 2 Jahren</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r3_text">"Ausgezeichnete Fachkraft, hat meine Erwartungen übertroffen, danke Cris ❤️ Sehr zu empfehlen!"</p>
@@ -595,8 +578,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">M</div>
-                        <div class="user-meta"><h4 class="text-gradient">Melanie Weis</h4><span data-i18n="r4_date">vor 2 Jahren</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Melanie Weis</h4>
+                            <span data-i18n="r4_date">vor 2 Jahren</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r4_text">"Ich war schon oft dort. Ob für Wimpern oder Augenbrauen, ich bin absolut begeistert."</p>
@@ -604,8 +589,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">J</div>
-                        <div class="user-meta"><h4 class="text-gradient">Jeffinho LK</h4><span data-i18n="r5_date">vor 2 Jahren</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Jeffinho LK</h4>
+                            <span data-i18n="r5_date">vor 2 Jahren</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r5_text">"Habe meine Augenbrauen micropigmentieren lassen und bin begeistert vom Ergebnis. Ich empfehle es vorbehaltlos."</p>
@@ -613,8 +600,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">S</div>
-                        <div class="user-meta"><h4 class="text-gradient">Sabrina Silva</h4><span data-i18n="r6_date">vor 2 Jahren</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Sabrina Silva</h4>
+                            <span data-i18n="r6_date">vor 2 Jahren</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r6_text">"Cris' Energie ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet."</p>
@@ -622,8 +611,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">E</div>
-                        <div class="user-meta"><h4 class="text-gradient">Eleusa Cristiane</h4><span data-i18n="r7_date">vor 1 Jahr</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Eleusa Cristiane</h4>
+                            <span data-i18n="r7_date">vor 1 Jahr</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r7_text">"Ein tolles kleines Studio... Ich hatte dort eine Gesichtsbehandlung mit Plasma Pen und Microblading."</p>
@@ -631,8 +622,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">M</div>
-                        <div class="user-meta"><h4 class="text-gradient">Maria da Silva</h4><span data-i18n="r8_date">vor 2 Jahren</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Maria da Silva</h4>
+                            <span data-i18n="r8_date">vor 2 Jahren</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r8_text">"Ich kann es sehr empfehlen; exzellenter Service und gemütliche Atmosphäre. Ich bin sehr zufrieden! 👍👏"</p>
@@ -640,8 +633,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">S</div>
-                        <div class="user-meta"><h4 class="text-gradient">Sanja Cvjak</h4><span data-i18n="r9_date">vor 2 Jahren</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Sanja Cvjak</h4>
+                            <span data-i18n="r9_date">vor 2 Jahren</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r9_text">"Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis sehr zufrieden."</p>
@@ -649,8 +644,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">R</div>
-                        <div class="user-meta"><h4 class="text-gradient">Roman Vilner</h4><span data-i18n="r10_date">vor 1 Jahr</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Roman Vilner</h4>
+                            <span data-i18n="r10_date">vor 1 Jahr</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r10_text">"Ich war mit der Arbeit sehr zufrieden."</p>
@@ -658,8 +655,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">V</div>
-                        <div class="user-meta"><h4 class="text-gradient">Valdir Martinez</h4><span data-i18n="r11_date">vor 2 Jahren</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Valdir Martinez</h4>
+                            <span data-i18n="r11_date">vor 2 Jahren</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r11_text">"Cool"</p>
@@ -667,8 +666,10 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">S</div>
-                        <div class="user-meta"><h4 class="text-gradient">Sarah Neralic</h4><span data-i18n="r12_date">vor 5 Tagen</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Sarah Neralic</h4>
+                            <span data-i18n="r12_date">vor 5 Tagen</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r12_text">"Ich habe hier Microblading und Wimpernverlängerung machen lassen und bin extrem glücklich! Das Ergebnis ist wunderschön."</p>
@@ -676,12 +677,15 @@
 
                 <div class="review-card">
                     <div class="review-user">
-                        <div class="user-avatar text-gradient">T</div>
-                        <div class="user-meta"><h4 class="text-gradient">Timo Winkler</h4><span data-i18n="r13_date">vor 2 Wochen</span></div>
+                        <div class="user-meta">
+                            <h4 class="text-gradient">Timo Winkler</h4>
+                            <span data-i18n="r13_date">vor 2 Wochen</span>
+                        </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
                     <p class="review-text" data-i18n="r13_text">"Die Gesichtsbehandlung war hervorragend. Cristina kann es. Eine fantastische Behandlung. Sehr zu empfehlen."</p>
                 </div>
+
             </div>
         </div>
     </section>
@@ -690,7 +694,6 @@
         <div class="container">
             <div class="forms-grid">
                 
-                <!-- Lead Form -->
                 <div class="form-box animate-on-scroll">
                     <h3 data-i18n="form_lead_title">Kontakt aufnehmen</h3>
                     <p data-i18n="form_lead_desc">Senden Sie uns eine Nachricht für Terminfragen.</p>
@@ -704,7 +707,6 @@
                     </form>
                 </div>
 
-                <!-- Career Form -->
                 <div class="form-box animate-on-scroll delay-1">
                     <h3 data-i18n="form_car_title">Karriere bei uns</h3>
                     <p data-i18n="form_car_desc">Werden Sie Teil unseres exzellenten Teams.</p>
@@ -727,7 +729,7 @@
     </section>
 
     <div class="map-section">
-        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.6575742111166!2d8.196962315672803!3d48.82657787928399!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797171d37b62901%3A0x6730a9e99a8ea0e1!2sBl%C3%BCtenfeldpl.%201-8%2C%2076532%20Baden-Baden%2C%20Germany!5e0!3m2!1sen!2sbr!4v1700000000000!5m2!1sen!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.568285514661!2d8.214436576839358!3d48.78453471018588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797171e27a6d899%3A0x6b2e1bf77b4946ec!2sBl%C3%BCtenfeldpl.%201-8%2C%2076532%20Baden-Baden%2C%20Germany!5e0!3m2!1sen!2sbr!4v1700000000000!5m2!1sen!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <section class="clinic-info">
@@ -758,12 +760,13 @@
                 <a href="https://instagram.com/beauty_by_cris" target="_blank">Instagram</a>
                 <a href="https://wa.me/491629384907" target="_blank" class="wa-link">WhatsApp</a>
             </div>
-            <div>&copy; 2026 Beauty by Cris. <span data-i18n="footer_rights">Alle Rechte vorbehalten.</span> | <span data-i18n="footer_dev">Entwickelt von:</span> <a href="https://instagram.com/insideprojectco" target="_blank" rel="noopener" style="color:var(--accent-rose); font-weight:600;">Inside Project Co.</a></div>
+            <div>© 2026 Beauty by Cris. <span data-i18n="footer_rights">Alle Rechte vorbehalten.</span> | <span data-i18n="footer_dev">Entwickelt von:</span> <a href="https://instagram.com/insideprojectco" target="_blank" rel="noopener" style="color:var(--accent-rose); font-weight:600;">Inside Project Co.</a></div>
         </div>
     </footer>
 
     <a href="https://wa.me/491629384907" class="float-btn float-whatsapp wa-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg></a>
-    <div class="float-btn float-top" id="backToTop" onclick="window.scrollTo(0,0)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
+    
+    <div class="float-btn float-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
     <script>
         const waMessages = {
@@ -776,12 +779,252 @@
         };
 
         const t = {
-            de: { nav_about:"Über Uns", nav_services:"Services", nav_reviews:"Bewertungen", nav_book:"Termin buchen", hero_title:"Ihre natürliche Schönheit im <span class='text-gradient'>Fokus</span>", hero_subtitle:"Erleben Sie maßgeschneiderte Kosmetikbehandlungen auf höchstem Niveau. Perfektion, kompromisslose Hygiene und exklusives Wohlbefinden.", btn_book_now:"Jetzt Termin Buchen", about_sub:"Die Klinik", about_title:"Exzellenz in Ästhetik und Pflege", about_p1:"Unsere Klinik wurde mit dem Ziel gegründet, Ihre natürliche Schönheit hervorzuheben, mit fortschrittlichen Techniken und einer Umgebung für Ihren totalen Komfort.", about_p2:"Mit hochqualifizierten Fachleuten und modernster Ausstattung garantieren wir unglaubliche und sichere Ergebnisse bei all unseren Behandlungen.", why_sub:"Vorteile", why_title:"Warum Beauty by Cris?", w1_title:"Absolute Hygiene", w1_desc:"Höchste klinische Standards für Ihre Sicherheit.", w2_title:"Premium Qualität", w2_desc:"Ausschließlich erstklassige Materialien & Geräte.", w3_title:"Persönliche Betreuung", w3_desc:"Maßgeschneiderte Behandlungen nur für Sie.", w4_title:"Entspannendes Ambiente", w4_desc:"Eine Oase der Ruhe für Körper und Geist.", services_sub:"Exklusive Behandlungen", services_title:"Unsere Services & Rituale", lbl_duration:"Dauer:", lbl_benefits:"Vorteile:", lbl_process:"Ablauf:", btn_book_large:"Jetzt Termin vereinbaren", s1_title:"Gesichtsreinigung", s1_desc:"Tiefenreinigung für ein klares Hautbild.", s1_ben:"Porenverfeinerung", s1_abl:"Abreinigung, Dampf, Maske", s1_dur:"60 Min.", s2_title:"Micropigmentierung & Microblading", s2_desc:"Perfekt geformte Augenbrauen.", s2_ben:"Dauerhaft dichte Brauen", s2_abl:"Präzise Pigmentierung", s2_dur:"120 Min.", s3_title:"Lippenpigmentierung", s3_desc:"Formschöne Lippen.", s3_ben:"Frische Lippenfarbe 24/7", s3_abl:"Sanfte Pigmentierung", s3_dur:"90 Min.", s4_title:"Plasma Pen", s4_desc:"Nicht-invasive Hautstraffung.", s4_ben:"Sofortige Straffung", s4_abl:"Präzise Plasma-Punkte", s4_dur:"45 Min.", s5_title:"Warmwachs Haarentfernung", s5_desc:"Schonende Haarentfernung.", s5_ben:"Glatte Haut", s5_abl:"Sanftes Abziehen", s5_dur:"15-45 Min.", s6_title:"Fußpflege", s6_desc:"Pflege für gesunde Füße.", s6_ben:"Linderung", s6_abl:"Fußbad, Kürzen, Massage", s6_dur:"45 Min.", s7_title:"Reflexzonenmassage", s7_desc:"Druckpunktmassage.", s7_ben:"Stressabbau", s7_abl:"Gezielte Massage", s7_dur:"30 Min.", s8_title:"Maniküre & Pediküre", s8_desc:"Perfekte Hände und Füße.", s8_ben:"Gepflegtes Aussehen", s8_abl:"Nagelhautpflege, Lack", s8_dur:"60 Min.", s9_title:"PMU Entfernung", s9_desc:"Sanfte Aufhellung.", s9_ben:"Keine Narben", s9_abl:"Remover, Nachpflege", s9_dur:"45 Min.", s10_title:"Wimpernverlängerung", s10_desc:"Traumhaft lange Wimpern.", s10_ben:"Wasserfest", s10_abl:"Einzelwimpern", s10_dur:"90-120 Min.", s11_title:"Entfernung von Milien", s11_desc:"Entfernung von Hautgrieß.", s11_ben:"Glattes Hautbild", s11_abl:"Präzises Öffnen", s11_dur:"20 Min.", s12_title:"Gesichts-Microneedling", s12_desc:"Anti-Aging zur Hautverjüngung.", s12_ben:"Festere Haut", s12_abl:"Needling mit Serum", s12_dur:"60 Min.", s13_title:"Körper-Microneedling", s13_desc:"Reduzierung von Dehnungsstreifen.", s13_ben:"Gewebestraffung", s13_abl:"Intensives Needling", s13_dur:"60-90 Min.", ba_sub:"Echte Ergebnisse", ba_title:"Vorher & Nachher", lbl_before:"Vorher", lbl_after:"Nachher", video_sub:"Einblicke im Video", video_title:"Exklusive Insights", reviews_sub:"Kundenmeinungen", reviews_title:"Google Bewertungen", google_reviews_count:"Basierend auf 13 Google-Rezensionen", btn_google_page:"Auf Google ansehen", r1_date:"vor 7 Monaten", r1_text:"Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏", r2_date:"vor 1 Jahr", r2_text:"Ich liebe die Maniküre und Pediküre von Cris, ich bin sehr zufrieden.. Sie ist sehr freundlich und geduldig 🫶🥰", r3_date:"vor 2 Jahren", r3_text:"Ausgezeichnete Fachkraft, hat meine Erwartungen übertroffen, danke Cris ❤️ Sehr zu empfehlen!", r4_date:"vor 2 Jahren", r4_text:"Ich war schon oft dort. Ob für Wimpern oder Augenbrauen, ich bin absolut begeistert.", r5_date:"vor 2 Jahren", r5_text:"Habe meine Augenbrauen micropigmentieren lassen und bin begeistert vom Ergebnis. Ich empfehle es vorbehaltlos.", r6_date:"vor 2 Jahren", r6_text:"Cris' Energie ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet.", r7_date:"vor 1 Jahr", r7_text:"Ein tolles kleines Studio... Ich hatte dort eine Gesichtsbehandlung mit Plasma Pen und Microblading.", r8_date:"vor 2 Jahren", r8_text:"Ich kann es sehr empfehlen; exzellenter Service und gemütliche Atmosphäre. Ich bin sehr zufrieden! 👍👏", r9_date:"vor 2 Jahren", r9_text:"Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis sehr zufrieden.", r10_date:"vor 1 Jahr", r10_text:"Ich war mit der Arbeit sehr zufrieden.", r11_date:"vor 2 Jahren", r11_text:"Cool", r12_date:"vor 5 Tagen", r12_text:"Ich habe hier Microblading und Wimpernverlängerung machen lassen und bin extrem glücklich! Das Ergebnis ist wunderschön.", r13_date:"vor 2 Wochen", r13_text:"Die Gesichtsbehandlung war hervorragend. Cristina kann es. Eine fantastische Behandlung. Sehr zu empfehlen.", form_lead_title:"Kontakt aufnehmen", form_lead_desc:"Senden Sie uns eine Nachricht.", ph_name:"Ihr Name", ph_phone:"Telefon", ph_email:"E-Mail", ph_proc:"Interesse an Behandlung", ph_msg:"Nachricht...", btn_send:"Senden", form_car_title:"Karriere bei uns", form_car_desc:"Werden Sie Teil unseres Teams.", ph_exp:"Erfahrung / Position", ph_file:"Lebenslauf hochladen", info_address:"Standort", info_contact:"Kontakt", info_hours:"Öffnungszeiten", hours_week:"Mo. - Fr.: 09:00 - 18:00", hours_weekend:"Sa. & So.: Geschlossen", footer_rights:"Alle Rechte vorbehalten.", footer_dev:"Entwickelt von:" },
-            pt: { nav_about:"Sobre Nós", nav_services:"Serviços", nav_reviews:"Avaliações", nav_book:"Agendar", hero_title:"Sua beleza natural em <span class='text-gradient'>Foco</span>", hero_subtitle:"Experimente tratamentos cosméticos sob medida no mais alto nível. Perfeição, higiene absoluta e bem-estar exclusivo.", btn_book_now:"Agendar Agora", about_sub:"A Clínica", about_title:"Excelência em Estética e Cuidado", about_p1:"Nossa clínica foi fundada com o propósito de realçar a beleza natural que existe em você, com técnicas avançadas e ambiente de total conforto.", about_p2:"Com profissionais altamente qualificados e equipamentos modernos, garantimos resultados incríveis e seguros.", why_sub:"Vantagens", why_title:"Por que a Beauty by Cris?", w1_title:"Higiene Absoluta", w1_desc:"Mais altos padrões para sua segurança.", w2_title:"Qualidade Premium", w2_desc:"Apenas os melhores materiais e equipamentos.", w3_title:"Atendimento Personalizado", w3_desc:"Tratamentos sob medida apenas para você.", w4_title:"Ambiente Relaxante", w4_desc:"Um oásis de tranquilidade para corpo e mente.", services_sub:"Tratamentos Exclusivos", services_title:"Nossos Serviços & Rituais", lbl_duration:"Duração:", lbl_benefits:"Benefícios:", lbl_process:"Procedimento:", btn_book_large:"Agendar Avaliação", s1_title:"Limpeza de Pele", s1_desc:"Limpeza profunda para um aspecto radiante.", s1_ben:"Refina poros", s1_abl:"Higienização, extração", s1_dur:"60 min", s2_title:"Micropigmentação", s2_desc:"Sobrancelhas desenhadas com ultra-realismo.", s2_ben:"Sobrancelhas cheias", s2_abl:"Pigmentação de precisão", s2_dur:"120 min", s3_title:"Pigmentação Labial", s3_desc:"Lábios com cor e efeito de volume.", s3_ben:"Cor 24/7", s3_abl:"Pigmentação suave", s3_dur:"90 min", s4_title:"Jato de Plasma", s4_desc:"Flacidez reduzida sem cirurgia.", s4_ben:"Lifting imediato", s4_abl:"Pontos de plasma", s4_dur:"45 min", s5_title:"Depilação com Cera", s5_desc:"Remoção suave dos pelos.", s5_ben:"Pele lisa", s5_abl:"Remoção suave", s5_dur:"15-45 min", s6_title:"Podologia", s6_desc:"Cuidado especializado para pés.", s6_ben:"Remoção de calos", s6_abl:"Escalda-pés, massagem", s6_dur:"45 min", s7_title:"Reflexologia", s7_desc:"Massagem terapêutica nos pés.", s7_ben:"Alívio do estresse", s7_abl:"Massagem focada", s7_dur:"30 min", s8_title:"Manicure e Pedicura", s8_desc:"Cuidado completo.", s8_ben:"Unhas fortes", s8_abl:"Corte, hidratação", s8_dur:"60 min", s9_title:"Remoção de PMU", s9_desc:"Despigmentação segura.", s9_ben:"Sem cicatrizes", s9_abl:"Removedor químico", s9_dur:"45 min", s10_title:"Extensão de Cílios", s10_desc:"Cílios alongados e volumosos.", s10_ben:"À prova d'água", s10_abl:"Acoplagem fio a fio", s10_dur:"90-120 min", s11_title:"Remoção de Milium", s11_desc:"Extração higiênica e indolor.", s11_ben:"Pele lisa", s11_abl:"Micro-extração", s11_dur:"20 min", s12_title:"Microagulhamento Facial", s12_desc:"Indução de colágeno.", s12_ben:"Pele firme", s12_abl:"Needling com sérum", s12_dur:"60 min", s13_title:"Microagulhamento Corporal", s13_desc:"Regeneração de estrias.", s13_ben:"Estrias suavizadas", s13_abl:"Needling profundo", s13_dur:"60-90 min", ba_sub:"Resultados Reais", ba_title:"Antes & Depois", lbl_before:"Antes", lbl_after:"Depois", video_sub:"Vídeos", video_title:"Insights Exclusivos", reviews_sub:"Avaliações dos Clientes", reviews_title:"Google Avaliações", google_reviews_count:"Resumo de 13 avaliações no Google", btn_google_page:"Ver no Google", r1_date:"7 meses atrás", r1_text:"Profissional excelente, fiz uma limpeza de pele gostei muito, recomendo! 👏", r2_date:"1 ano atrás", r2_text:"Amooo a manicure e pedicure da Cris estou muito satisfeita.. Eka é muito simpática e paciente 🫶🥰", r3_date:"2 anos atrás", r3_text:"Profissional excelente, superou as minhas expectativas, obrigada Cris ❤️ Super indico!", r4_date:"2 anos atrás", r4_text:"Já fui lá várias vezes. E seja para cílios ou sobrancelhas, estou absolutamente encantada. ...", r5_date:"2 anos atrás", r5_text:"Fiz micropigmentação nas sobrancelhas e estou encantada com o resultado. Recomendo sem reservas; merecemos essa sensação de felicidade.", r6_date:"2 anos atrás", r6_text:"A energia da Cris é a melhor que você pode encontrar por lá; o trabalho que ela faz é de primeira qualidade, os tratamentos faciais e a micropigmentação labial são excelentes. Recomendo muito o Beauty by Cris.", r7_date:"1 ano atrás", r7_text:"Um estúdio pequeno e ótimo... Fiz um tratamento facial com plasma pen e microblading lá. ...", r8_date:"2 anos atrás", r8_text:"Recomendo muito; atendimento excelente e ambiente aconchegante. Estou muito satisfeita! Venha conferir. 👍👏🤩❤️", r9_date:"2 anos atrás", r9_text:"Fiz extensão de cílios e estou muito satisfeita com o resultado.", r10_date:"1 ano atrás", r10_text:"Fiquei muito satisfeito com o trabalho.", r11_date:"2 anos atrás", r11_text:"Legal", r12_date:"5 dias atrás", r12_text:"Fiz microblading e extensão de cílios aqui e estou extremamente feliz! Você se sente muito confortável e o resultado é lindo. Recomendo muito!!", r13_date:"2 semanas atrás", r13_text:"O tratamento facial (limpeza e depilação) foi excelente. Cheguei a uma idade em que já não consigo cuidar dos pelos do nariz e das orelhas sozinha. Mas a Cristina consegue. Um tratamento fantástico, incluindo as unhas das mãos e dos pés. Recomendo muito.", form_lead_title:"Fale Conosco", form_lead_desc:"Envie-nos uma mensagem.", ph_name:"Seu Nome", ph_phone:"Telefone", ph_email:"E-mail", ph_proc:"Procedimento de interesse", ph_msg:"Mensagem...", btn_send:"Enviar", form_car_title:"Trabalhe Conosco", form_car_desc:"Faça parte da nossa equipe.", ph_exp:"Experiência / Cargo", ph_file:"Enviar Currículo", info_address:"Endereço", info_contact:"Contato", info_hours:"Horários", hours_week:"Seg. - Sex.: 09:00 - 18:00", hours_weekend:"Sáb. & Dom.: Fechado", footer_rights:"Todos os direitos reservados.", footer_dev:"Desenvolvido por:" },
-            en: { nav_about:"About Us", nav_services:"Services", nav_reviews:"Reviews", nav_book:"Book", hero_title:"Your natural beauty in <span class='text-gradient'>Focus</span>", hero_subtitle:"Experience custom cosmetic treatments at the highest level. Perfection, absolute hygiene, and exclusive wellbeing.", btn_book_now:"Book Now", about_sub:"The Clinic", about_title:"Excellence in Aesthetics and Care", about_p1:"Our clinic was founded to highlight your natural beauty, with advanced techniques and total comfort.", about_p2:"With highly qualified professionals and modern equipment, we guarantee incredible results.", why_sub:"Advantages", why_title:"Why Beauty by Cris?", w1_title:"Absolute Hygiene", w1_desc:"Highest clinical standards.", w2_title:"Premium Quality", w2_desc:"Only first-class materials.", w3_title:"Personalized Care", w3_desc:"Tailored just for you.", w4_title:"Relaxing Environment", w4_desc:"An oasis for body and mind.", services_sub:"Exclusive Treatments", services_title:"Services & Rituals", lbl_duration:"Duration:", lbl_benefits:"Benefits:", lbl_process:"Process:", btn_book_large:"Book an Appointment", s1_title:"Facial Cleansing", s1_desc:"Deep cleansing for a clear complexion.", s1_ben:"Refines pores", s1_abl:"Cleansing, extraction", s1_dur:"60 min", s2_title:"Micropigmentation", s2_desc:"Perfectly shaped eyebrows.", s2_ben:"Long-lasting fullness", s2_abl:"Precise pigmentation", s2_dur:"120 min", s3_title:"Lip Pigmentation", s3_desc:"Beautifully shaped lips.", s3_ben:"Fresh color 24/7", s3_abl:"Gentle pigmentation", s3_dur:"90 min", s4_title:"Plasma Pen", s4_desc:"Non-invasive skin tightening.", s4_ben:"Instant contraction", s4_abl:"Precise plasma mapping", s4_dur:"45 min", s5_title:"Waxing", s5_desc:"Gentle hair removal.", s5_ben:"Smooth skin", s5_abl:"Gentle removal", s5_dur:"15-45 min", s6_title:"Pedicure", s6_desc:"Care for beautiful feet.", s6_ben:"Callus removal", s6_abl:"Foot bath, massage", s6_dur:"45 min", s7_title:"Reflexology", s7_desc:"Relaxing pressure point massage.", s7_ben:"Stress reduction", s7_abl:"Targeted stimulation", s7_dur:"30 min", s8_title:"Mani & Pedi", s8_desc:"Perfectly groomed hands and feet.", s8_ben:"Stronger nails", s8_abl:"Shaping, cream", s8_dur:"60 min", s9_title:"PMU Removal", s9_desc:"Gentle lightening of old PMU.", s9_ben:"No scarring", s9_abl:"Remover application", s9_dur:"45 min", s10_title:"Eyelash Extensions", s10_desc:"Stunningly long eyelashes.", s10_ben:"Waterproof", s10_abl:"Single-lash application", s10_dur:"90-120 min", s11_title:"Milia Removal", s11_desc:"Gentle extraction of milia.", s11_ben:"Smooth skin", s11_abl:"Precise extraction", s11_dur:"20 min", s12_title:"Facial Microneedling", s12_desc:"Collagen stimulation.", s12_ben:"Firmer skin", s12_abl:"Needling with serum", s12_dur:"60 min", s13_title:"Body Microneedling", s13_desc:"Reduce stretch marks.", s13_ben:"Tissue firming", s13_abl:"Deep needling", s13_dur:"60-90 min", ba_sub:"Real Results", ba_title:"Before & After", lbl_before:"Before", lbl_after:"After", video_sub:"Video Insights", video_title:"Treatment Insights", reviews_sub:"Customer Reviews", reviews_title:"Google Reviews", google_reviews_count:"Based on 13 Google reviews", btn_google_page:"View on Google", r1_date:"7 months ago", r1_text:"Excellent professional, I had a facial cleansing and liked it a lot, recommend! 👏", r2_date:"1 year ago", r2_text:"Love the manicure and pedicure, very satisfied.. She is very friendly and patient 🫶🥰", r3_date:"2 years ago", r3_text:"Excellent professional, exceeded expectations, thanks Cris ❤️ Highly recommend!", r4_date:"2 years ago", r4_text:"I've been there many times. For lashes or brows, I am absolutely delighted.", r5_date:"2 years ago", r5_text:"Did brow micropigmentation and love the result. Highly recommended.", r6_date:"2 years ago", r6_text:"Cris' energy is the best; her work is top quality, facials and lips are excellent. Highly recommend.", r7_date:"1 year ago", r7_text:"Great small studio... Had a facial with plasma pen and microblading.", r8_date:"2 years ago", r8_text:"Highly recommend; excellent service and cozy environment. Come and check! 👍👏", r9_date:"2 years ago", r9_text:"Did lash extensions and very satisfied with the result.", r10_date:"1 year ago", r10_text:"Very satisfied with the work.", r11_date:"2 years ago", r11_text:"Cool", r12_date:"5 days ago", r12_text:"Did microblading and lashes here and extremely happy! Result is beautiful. Highly recommend!!", r13_date:"2 weeks ago", r13_text:"Facial treatment was excellent. Cristina can do it. Fantastic treatment. Highly recommend.", form_lead_title:"Contact Us", form_lead_desc:"Send us a message.", ph_name:"Your Name", ph_phone:"Phone", ph_email:"Email", ph_proc:"Procedure of interest", ph_msg:"Message...", btn_send:"Send", form_car_title:"Careers", form_car_desc:"Join our team.", ph_exp:"Experience / Role", ph_file:"Upload CV", info_address:"Location", info_contact:"Contact", info_hours:"Opening Hours", hours_week:"Mon - Fri: 09:00 - 18:00", hours_weekend:"Sat & Sun: Closed", footer_rights:"All rights reserved.", footer_dev:"Developed by:" },
-            es: { nav_about:"Nosotros", nav_services:"Servicios", nav_reviews:"Reseñas", nav_book:"Reservar", hero_title:"Su belleza natural en <span class='text-gradient'>Foco</span>", hero_subtitle:"Experimente tratamientos cosméticos al más alto nivel. Perfección, higiene absoluta y bienestar.", btn_book_now:"Reservar Ahora", about_sub:"La Clínica", about_title:"Excelencia en Estética", about_p1:"Nuestra clínica fue fundada para resaltar su belleza natural con total comodidad.", about_p2:"Con profesionales calificados garantizamos resultados increíbles y seguros.", why_sub:"Ventajas", why_title:"¿Por qué Beauty by Cris?", w1_title:"Higiene Absoluta", w1_desc:"Altos estándares para su seguridad.", w2_title:"Calidad Premium", w2_desc:"Los mejores materiales.", w3_title:"Atención Personalizada", w3_desc:"Tratamientos a su medida.", w4_title:"Ambiente Relajante", w4_desc:"Un oasis de tranquilidad.", services_sub:"Tratamientos", services_title:"Servicios & Rituales", lbl_duration:"Duración:", lbl_benefits:"Beneficios:", lbl_process:"Proceso:", btn_book_large:"Agendar Evaluación", s1_title:"Limpieza Facial", s1_desc:"Limpieza profunda.", s1_ben:"Refina poros", s1_abl:"Limpieza, extracción", s1_dur:"60 min", s2_title:"Micropigmentación", s2_desc:"Cejas ultra-realistas.", s2_ben:"Cejas pobladas", s2_abl:"Pigmentación precisa", s2_dur:"120 min", s3_title:"Pigmentación Labial", s3_desc:"Labios con color 24/7.", s3_ben:"Color 24/7", s3_abl:"Pigmentación suave", s3_dur:"90 min", s4_title:"Plasma Pen", s4_desc:"Estiramiento sin cirugía.", s4_ben:"Lifting inmediato", s4_abl:"Puntos de plasma", s4_dur:"45 min", s5_title:"Depilación", s5_desc:"Eliminación suave del vello.", s5_ben:"Piel lisa", s5_abl:"Eliminación suave", s5_dur:"15-45 min", s6_title:"Pedicura", s6_desc:"Cuidado para pies sanos.", s6_ben:"Alivio de durezas", s6_abl:"Baño, masaje", s6_dur:"45 min", s7_title:"Reflexología", s7_desc:"Masaje terapéutico.", s7_ben:"Alivio del estrés", s7_abl:"Masaje focalizado", s7_dur:"30 min", s8_title:"Manicura y Pedicura", s8_desc:"Cuidado completo.", s8_ben:"Uñas fuertes", s8_abl:"Corte, hidratación", s8_dur:"60 min", s9_title:"Eliminación PMU", s9_desc:"Despigmentación segura.", s9_ben:"Sin cicatrices", s9_abl:"Removedor", s9_dur:"45 min", s10_title:"Extensión de Pestañas", s10_desc:"Pestañas voluminosas.", s10_ben:"Resistente al agua", s10_abl:"Aplicación una a una", s10_dur:"90-120 min", s11_title:"Eliminación de Millium", s11_desc:"Extracción higiénica.", s11_ben:"Piel lisa", s11_abl:"Micro-extracción", s11_dur:"20 min", s12_title:"Microneedling Facial", s12_desc:"Inducción de colágeno.", s12_ben:"Piel firme", s12_abl:"Punción con suero", s12_dur:"60 min", s13_title:"Microneedling Corporal", s13_desc:"Reduce estrías.", s13_ben:"Firmeza", s13_abl:"Punción profunda", s13_dur:"60-90 min", ba_sub:"Resultados Reales", ba_title:"Antes & Después", lbl_before:"Antes", lbl_after:"Después", video_sub:"Videos", video_title:"Insights Exclusivos", reviews_sub:"Opiniones", reviews_title:"Reseñas de Google", google_reviews_count:"Basado en 13 reseñas en Google", btn_google_page:"Ver en Google", r1_date:"hace 7 meses", r1_text:"Excelente profesional, limpieza de cutis muy buena, recomiendo! 👏", r2_date:"hace 1 año", r2_text:"Amo la manicura y pedicura, muy simpática y paciente 🫶🥰", r3_date:"hace 2 años", r3_text:"Profesional excelente, superó expectativas, gracias Cris ❤️", r4_date:"hace 2 años", r4_text:"Fui varias veces. Pestañas o cejas, encantada.", r5_date:"hace 2 años", r5_text:"Me hice cejas y estoy encantada. Recomiendo sin reservas.", r6_date:"hace 2 años", r6_text:"La energía de Cris es la mejor, trabajo de primera. Recomiendo mucho.", r7_date:"hace 1 año", r7_text:"Gran estudio... Hice plasma pen y microblading.", r8_date:"hace 2 años", r8_text:"Recomiendo mucho, excelente atención. ¡Ven a ver! 👍👏", r9_date:"hace 2 años", r9_text:"Extensión de pestañas y muy satisfecha.", r10_date:"hace 1 año", r10_text:"Muy satisfecho con el trabajo.", r11_date:"hace 2 años", r11_text:"Genial", r12_date:"hace 5 días", r12_text:"Hice microblading y pestañas, ¡feliz! Resultado hermoso.", r13_date:"hace 2 semanas", r13_text:"Tratamiento facial excelente. Tratamiento fantástico. Recomiendo.", form_lead_title:"Contáctenos", form_lead_desc:"Envíenos un mensaje.", ph_name:"Su Nombre", ph_phone:"Teléfono", ph_email:"Correo", ph_proc:"Procedimiento", ph_msg:"Mensaje...", btn_send:"Enviar", form_car_title:"Carreras", form_car_desc:"Únete al equipo.", ph_exp:"Experiencia", ph_file:"Subir CV", info_address:"Ubicación", info_contact:"Contacto", info_hours:"Horarios", hours_week:"Lun - Vie: 09:00 - 18:00", hours_weekend:"Sáb & Dom: Cerrado", footer_rights:"Todos los derechos reservados.", footer_dev:"Desarrollado por:" },
-            fr: { nav_about:"À Propos", nav_services:"Services", nav_reviews:"Avis", nav_book:"Réserver", hero_title:"Votre beauté au <span class='text-gradient'>Focus</span>", hero_subtitle:"Des soins cosmétiques au plus haut niveau. Perfection et hygiène absolue.", btn_book_now:"Prendre RDV", about_sub:"La Clinique", about_title:"Excellence en Esthétique", about_p1:"Notre clinique a été fondée pour mettre en valeur votre beauté naturelle.", about_p2:"Des professionnels qualifiés pour des résultats incroyables.", why_sub:"Avantages", why_title:"Pourquoi Beauty by Cris?", w1_title:"Hygiène Absoluta", w1_desc:"Hauts standards.", w2_title:"Qualité Premium", w2_desc:"Matériaux de premier choix.", w3_title:"Soins Personnalisés", w3_desc:"Sur mesure pour vous.", w4_title:"Ambiance Relaxante", w4_desc:"Oasis de tranquillité.", services_sub:"Soins", services_title:"Nos Services", lbl_duration:"Durée:", lbl_benefits:"Bénéfices:", lbl_process:"Procédure:", btn_book_large:"Prendre Rendez-vous", s1_title:"Nettoyage du Visage", s1_desc:"Nettoyage en profondeur.", s1_ben:"Resserre les pores", s1_abl:"Extraction", s1_dur:"60 min", s2_title:"Micropigmentation", s2_desc:"Sourcils ultra-réalistes.", s2_ben:"Sourcils parfaits", s2_abl:"Pigmentation précise", s2_dur:"120 min", s3_title:"Pigmentation Lèvres", s3_desc:"Couleur 24/7.", s3_ben:"Couleur fraîche", s3_abl:"Pigmentation douce", s3_dur:"90 min", s4_title:"Plasma Pen", s4_desc:"Lifting sans chirurgie.", s4_ben:"Tension immédiate", s4_abl:"Points de plasma", s4_dur:"45 min", s5_title:"Épilation", s5_desc:"Douceur durable.", s5_ben:"Peau lisse", s5_abl:"Épilation cire", s5_dur:"15-45 min", s6_title:"Pédicurie", s6_desc:"Soin des pieds.", s6_ben:"Soulagement", s6_abl:"Bain, massage", s6_dur:"45 min", s7_title:"Réflexologie", s7_desc:"Massage relaxant.", s7_ben:"Anti-stress", s7_abl:"Massage ciblé", s7_dur:"30 min", s8_title:"Manucure & Pédicure", s8_desc:"Soin complet.", s8_ben:"Ongles forts", s8_abl:"Soin, hydratation", s8_dur:"60 min", s9_title:"Détatouage PMU", s9_desc:"Retrait sécurisé.", s9_ben:"Sans cicatrices", s9_abl:"Remover", s9_dur:"45 min", s10_title:"Extensions de Cils", s10_desc:"Cils longs.", s10_ben:"Résistant à l'eau", s10_abl:"Application", s10_dur:"90-120 min", s11_title:"Retrait de Milium", s11_desc:"Extraction hygiénique.", s11_ben:"Peau lisse", s11_abl:"Extraction", s11_dur:"20 min", s12_title:"Microneedling Visage", s12_desc:"Stimulation collagène.", s12_ben:"Peau ferme", s12_abl:"Sérum", s12_dur:"60 min", s13_title:"Microneedling Corps", s13_desc:"Réduit vergetures.", s13_ben:"Fermeté", s13_abl:"Needling", s13_dur:"60-90 min", ba_sub:"Résultats", ba_title:"Avant & Après", lbl_before:"Avant", lbl_after:"Après", video_sub:"Vidéos", video_title:"Aperçu des Soins", reviews_sub:"Avis Clients", reviews_title:"Avis Google", google_reviews_count:"Basé sur 13 avis Google", btn_google_page:"Voir sur Google", r1_date:"il y a 7 mois", r1_text:"Excellente professionnelle, nettoyage de peau parfait ! 👏", r2_date:"il y a 1 an", r2_text:"J'adore la manucure, très patiente 🫶🥰", r3_date:"il y a 2 ans", r3_text:"Excellente, a dépassé mes attentes ❤️", r4_date:"il y a 2 ans", r4_text:"Toujours ravie du résultat.", r5_date:"il y a 2 ans", r5_text:"Micropigmentation parfaite. Je recommande.", r6_date:"il y a 2 ans", r6_text:"L'énergie de Cris est super, travail de qualité.", r7_date:"il y a 1 an", r7_text:"Super studio... Plasma pen et microblading.", r8_date:"il y a 2 ans", r8_text:"Je recommande, super ambiance. 👍👏", r9_date:"il y a 2 ans", r9_text:"Extensions de cils, très satisfaite.", r10_date:"il y a 1 an", r10_text:"Très satisfait du travail.", r11_date:"il y a 2 ans", r11_text:"Cool", r12_date:"il y a 5 jours", r12_text:"Microblading et cils, très heureuse ! Résultat magnifique.", r13_date:"il y a 2 semaines", r13_text:"Soin du visage excellent. Fantastique.", form_lead_title:"Nous Contacter", form_lead_desc:"Envoyez un message.", ph_name:"Votre Nom", ph_phone:"Téléphone", ph_email:"E-mail", ph_proc:"Soin souhaité", ph_msg:"Message...", btn_send:"Envoyer", form_car_title:"Carrières", form_car_desc:"Rejoignez-nous.", ph_exp:"Expérience", ph_file:"Télécharger CV", info_address:"Adresse", info_contact:"Contact", info_hours:"Horaires", hours_week:"Lun - Ven: 09:00 - 18:00", hours_weekend:"Sam & Dim: Fermé", footer_rights:"Tous droits réservés.", footer_dev:"Développé par:" },
-            ru: { nav_about:"О Нас", nav_services:"Услуги", nav_reviews:"Отзывы", nav_book:"Запись", hero_title:"Естественная красота в <span class='text-gradient'>Фокусе</span>", hero_subtitle:"Индивидуальные косметические процедуры на высшем уровне. Перфекционизм и гигиена.", btn_book_now:"Записаться", about_sub:"Клиника", about_title:"Превосходство в эстетике", about_p1:"Наша клиника создана, чтобы подчеркнуть вашу красоту.", about_p2:"Мы гарантируем невероятные и безопасные результаты.", why_sub:"Преимущества", why_title:"Почему Beauty by Cris?", w1_title:"Абсолютная Гигиена", w1_desc:"Высокие стандарты.", w2_title:"Премиум Качество", w2_desc:"Лучшие материалы.", w3_title:"Индивидуальный Уход", w3_desc:"Специально для вас.", w4_title:"Расслабление", w4_desc:"Оазис спокойствия.", services_sub:"Услуги", services_title:"Наши Процедуры", lbl_duration:"Время:", lbl_benefits:"Результат:", lbl_process:"Этапы:", btn_book_large:"Записаться на прием", s1_title:"Чистка Лица", s1_desc:"Глубокое очищение.", s1_ben:"Сужение пор", s1_abl:"Очищение", s1_dur:"60 мин", s2_title:"Микропигментация", s2_desc:"Идеальные брови.", s2_ben:"Густые брови", s2_abl:"Пигментация", s2_dur:"120 мин", s3_title:"Пигментация Губ", s3_desc:"Цвет 24/7.", s3_ben:"Сочный цвет", s3_abl:"Нежная пигментация", s3_dur:"90 мин", s4_title:"Plasma Pen", s4_desc:"Лифтинг без операций.", s4_ben:"Подтяжка", s4_abl:"Точечная плазма", s4_dur:"45 мин", s5_title:"Депиляция", s5_desc:"Гладкая кожа.", s5_ben:"Удаление волос", s5_abl:"Воск", s5_dur:"15-45 мин", s6_title:"Педикюр", s6_desc:"Уход за стопами.", s6_ben:"Мягкость", s6_abl:"Ванночка, массаж", s6_dur:"45 мин", s7_title:"Рефлексотерапия", s7_desc:"Массаж стоп.", s7_ben:"Снятие стресса", s7_abl:"Массаж", s7_dur:"30 мин", s8_title:"Маникюр и Педикюр", s8_desc:"Идеальные руки и ноги.", s8_ben:"Крепкие ногти", s8_abl:"Уход", s8_dur:"60 мин", s9_title:"Удаление Татуажа", s9_desc:"Безопасное удаление.", s9_ben:"Без рубцов", s9_abl:"Ремувер", s9_dur:"45 мин", s10_title:"Наращивание Ресниц", s10_desc:"Густые ресницы.", s10_ben:"Стойкость", s10_abl:"Наращивание", s10_dur:"90-120 мин", s11_title:"Удаление Милиумов", s11_desc:"Гладкая кожа.", s11_ben:"Без следов", s11_abl:"Удаление", s11_dur:"20 мин", s12_title:"Микронидлинг Лица", s12_desc:"Омоложение.", s12_ben:"Упругая кожа", s12_abl:"Сыворотка", s12_dur:"60 мин", s13_title:"Микронидлинг Тела", s13_desc:"Уменьшение растяжек.", s13_ben:"Гладкость", s13_abl:"Уход", s13_dur:"60-90 мин", ba_sub:"Результаты", ba_title:"До & После", lbl_before:"До", lbl_after:"После", video_sub:"Видео", video_title:"Обзор Процедур", reviews_sub:"Отзывы", reviews_title:"Google Отзывы", google_reviews_count:"13 отзывов в Google", btn_google_page:"Смотреть в Google", r1_date:"7 месяцев назад", r1_text:"Отличный специалист, чистка супер! 👏", r2_date:"1 год назад", r2_text:"Обожаю маникюр, очень терпеливая 🫶🥰", r3_date:"2 года назад", r3_text:"Отлично, превзошла ожидания ❤️", r4_date:"2 года назад", r4_text:"Была много раз. В восторге.", r5_date:"2 года назад", r5_text:"Делала брови, результат супер.", r6_date:"2 года назад", r6_text:"Лучшая энергия, работа высшего качества.", r7_date:"1 год назад", r7_text:"Отличная студия... Plasma pen супер.", r8_date:"2 года назад", r8_text:"Рекомендую, отличная атмосфера. 👍👏", r9_date:"2 года назад", r9_text:"Наращивание ресниц, очень довольна.", r10_date:"1 год назад", r10_text:"Очень доволен работой.", r11_date:"2 года назад", r11_text:"Круто", r12_date:"5 дней назад", r12_text:"Микроблейдинг и ресницы, счастлива! Результат прекрасен.", r13_date:"2 недели назад", r13_text:"Процедура для лица превосходна. Рекомендую.", form_lead_title:"Связаться", form_lead_desc:"Отправьте сообщение.", ph_name:"Ваше Имя", ph_phone:"Телефон", ph_email:"Email", ph_proc:"Процедура", ph_msg:"Сообщение...", btn_send:"Отправить", form_car_title:"Карьера", form_car_desc:"Присоединяйтесь к нам.", ph_exp:"Опыт", ph_file:"Загрузить резюме", info_address:"Адрес", info_contact:"Контакты", info_hours:"Часы работы", hours_week:"Пн - Пт: 09:00 - 18:00", hours_weekend:"Сб & Вс: Выходной", footer_rights:"Все права защищены.", footer_dev:"Разработка:" }
+            de: {
+                nav_about: "Über Uns", nav_services: "Services", nav_reviews: "Bewertungen", nav_book: "Termin buchen",
+                hero_title: "Ihre natürliche Schönheit im <span class='text-gradient'>Fokus</span>", hero_subtitle: "Erleben Sie maßgeschneiderte Kosmetikbehandlungen auf höchstem Niveau. Perfektion, kompromisslose Hygiene und exklusives Wohlbefinden.",
+                btn_book_now: "Jetzt Termin Buchen",
+                about_sub: "Die Klinik", about_title: "Exzellenz in Ästhetik und Pflege", about_p1: "Unsere Klinik wurde mit dem Ziel gegründet, Ihre natürliche Schönheit hervorzuheben, mit fortschrittlichen Techniken und einer Umgebung für Ihren totalen Komfort.", about_p2: "Mit hochqualifizierten Fachleuten und modernster Ausstattung garantieren wir unglaubliche und sichere Ergebnisse bei all unseren Behandlungen.",
+                why_sub: "Vorteile", why_title: "Warum Beauty by Cris?", w1_title: "Absolute Hygiene", w1_desc: "Höchste klinische Standards für Ihre Sicherheit.", w2_title: "Premium Qualität", w2_desc: "Ausschließlich erstklassige Materialien & Geräte.", w3_title: "Persönliche Betreuung", w3_desc: "Maßgeschneiderte Behandlungen nur für Sie.", w4_title: "Entspannendes Ambiente", w4_desc: "Eine Oase der Ruhe für Körper und Geist.",
+                services_sub: "Exklusive Behandlungen", services_title: "Unsere Services & Rituale", lbl_duration: "Dauer:", lbl_benefits: "Vorteile:", lbl_process: "Ablauf:", btn_book_large: "Jetzt Termin vereinbaren",
+                s1_title: "Gesichtsreinigung", s1_desc: "Tiefenreinigung für ein klares Hautbild.", s1_ben: "Porenverfeinerung", s1_abl: "Abreinigung, Dampf, Maske", s1_dur: "60 Min.",
+                s2_title: "Micropigmentierung & Microblading", s2_desc: "Perfekt geformte Augenbrauen.", s2_ben: "Dauerhaft dichte Brauen", s2_abl: "Präzise Pigmentierung", s2_dur: "120 Min.",
+                s3_title: "Lippenpigmentierung", s3_desc: "Formschöne Lippen.", s3_ben: "Frische Lippenfarbe 24/7", s3_abl: "Sanfte Pigmentierung", s3_dur: "90 Min.",
+                s4_title: "Plasma Pen", s4_desc: "Nicht-invasive Hautstraffung.", s4_ben: "Sofortige Straffung", s4_abl: "Präzise Plasma-Punkte", s4_dur: "45 Min.",
+                s5_title: "Warmwachs Haarentfernung", s5_desc: "Schonende Haarentfernung.", s5_ben: "Glatte Haut", s5_abl: "Sanftes Abziehen", s5_dur: "15-45 Min.",
+                s6_title: "Fußpflege", s6_desc: "Pflege für gesunde Füße.", s6_ben: "Linderung", s6_abl: "Fußbad, Kürzen, Massage", s6_dur: "45 Min.",
+                s7_title: "Reflexzonenmassage", s7_desc: "Druckpunktmassage.", s7_ben: "Stressabbau", s7_abl: "Gezielte Massage", s7_dur: "30 Min.",
+                s8_title: "Maniküre & Pediküre", s8_desc: "Perfekte Hände und Füße.", s8_ben: "Gepflegtes Aussehen", s8_abl: "Nagelhautpflege, Lack", s8_dur: "60 Min.",
+                s9_title: "PMU Entfernung", s9_desc: "Sanfte Aufhellung.", s9_ben: "Keine Narben", s9_abl: "Remover, Nachpflege", s9_dur: "45 Min.",
+                s10_title: "Wimpernverlängerung", s10_desc: "Traumhaft lange Wimpern.", s10_ben: "Wasserfest", s10_abl: "Einzelwimpern", s10_dur: "90-120 Min.",
+                s11_title: "Entfernung von Milien", s11_desc: "Entfernung von Hautgrieß.", s11_ben: "Glattes Hautbild", s11_abl: "Präzises Öffnen", s11_dur: "20 Min.",
+                s12_title: "Gesichts-Microneedling", s12_desc: "Anti-Aging zur Hautverjüngung.", s12_ben: "Festere Haut", s12_abl: "Needling mit Serum", s12_dur: "60 Min.",
+                s13_title: "Körper-Microneedling", s13_desc: "Reduzierung von Dehnungsstreifen.", s13_ben: "Gewebestraffung", s13_abl: "Intensives Needling", s13_dur: "60-90 Min.",
+                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", lbl_before: "Vorher", lbl_after: "Nachher",
+                video_sub: "Einblicke im Video", video_title: "Exklusive Insights",
+                reviews_sub: "Kundenmeinungen", reviews_title: "Google Bewertungen", google_reviews_count: "Basierend auf 13 Google-Rezensionen", btn_google_page: "Auf Google ansehen",
+                r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏",
+                r2_date: "vor 1 Jahr", r2_text: "Ich liebe die Maniküre und Pediküre von Cris, ich bin sehr zufrieden.. Sie ist sehr freundlich und geduldig 🫶🥰",
+                r3_date: "vor 2 Jahren", r3_text: "Ausgezeichnete Fachkraft, hat meine Erwartungen übertroffen, danke Cris ❤️ Sehr zu empfehlen!",
+                r4_date: "vor 2 Jahren", r4_text: "Ich war schon oft dort. Ob für Wimpern oder Augenbrauen, ich bin absolut begeistert.",
+                r5_date: "vor 2 Jahren", r5_text: "Habe meine Augenbrauen micropigmentieren lassen und bin begeistert vom Ergebnis. Ich empfehle es vorbehaltlos.",
+                r6_date: "vor 2 Jahren", r6_text: "Cris' Energie ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet.",
+                r7_date: "vor 1 Jahr", r7_text: "Ein tolles kleines Studio... Ich hatte dort eine Gesichtsbehandlung mit Plasma Pen und Microblading.",
+                r8_date: "vor 2 Jahren", r8_text: "Ich kann es sehr empfehlen; exzellenter Service und gemütliche Atmosphäre. Ich bin sehr zufrieden! 👍👏",
+                r9_date: "vor 2 Jahren", r9_text: "Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis sehr zufrieden.",
+                r10_date: "vor 1 Jahr", r10_text: "Ich war mit der Arbeit sehr zufrieden.",
+                r11_date: "vor 2 Jahren", r11_text: "Cool",
+                r12_date: "vor 5 Tagen", r12_text: "Ich habe hier Microblading und Wimpernverlängerung machen lassen und bin extrem glücklich! Das Ergebnis ist wunderschön.",
+                r13_date: "vor 2 Wochen", r13_text: "Die Gesichtsbehandlung war hervorragend. Cristina kann es. Eine fantastische Behandlung. Sehr zu empfehlen.",
+                form_lead_title: "Kontakt aufnehmen", form_lead_desc: "Senden Sie uns eine Nachricht.", ph_name: "Ihr Name", ph_phone: "Telefon", ph_email: "E-Mail", ph_proc: "Interesse an Behandlung", ph_msg: "Nachricht...", btn_send: "Senden",
+                form_car_title: "Karriere bei uns", form_car_desc: "Werden Sie Teil unseres Teams.", ph_exp: "Erfahrung / Position", ph_file: "Lebenslauf hochladen",
+                info_address: "Standort", info_contact: "Kontakt", info_hours: "Öffnungszeiten", hours_week: "Mo. - Fr.: 09:00 - 18:00", hours_weekend: "Sa. & So.: Geschlossen",
+                footer_rights: "Alle Rechte vorbehalten.", footer_dev: "Entwickelt von:"
+            },
+            en: {
+                nav_about: "About Us", nav_services: "Services", nav_reviews: "Reviews", nav_book: "Book",
+                hero_title: "Your natural beauty in <span class='text-gradient'>Focus</span>", hero_subtitle: "Experience custom cosmetic treatments at the highest level. Perfection, absolute hygiene, and exclusive wellbeing.",
+                btn_book_now: "Book Now",
+                about_sub: "The Clinic", about_title: "Excellence in Aesthetics and Care", about_p1: "Our clinic was founded to highlight your natural beauty, with advanced techniques and total comfort.", about_p2: "With highly qualified professionals and modern equipment, we guarantee incredible results.",
+                why_sub: "Advantages", why_title: "Why Beauty by Cris?", w1_title: "Absolute Hygiene", w1_desc: "Highest clinical standards.", w2_title: "Premium Quality", w2_desc: "Only first-class materials.", w3_title: "Personalized Care", w3_desc: "Tailored just for you.", w4_title: "Relaxing Environment", w4_desc: "An oasis for body and mind.",
+                services_sub: "Exclusive Treatments", services_title: "Services & Rituals", lbl_duration: "Duration:", lbl_benefits: "Benefits:", lbl_process: "Process:", btn_book_large: "Book an Appointment",
+                s1_title: "Facial Cleansing", s1_desc: "Deep cleansing for a clear complexion.", s1_ben: "Refines pores", s1_abl: "Cleansing, extraction", s1_dur: "60 min",
+                s2_title: "Micropigmentation", s2_desc: "Perfectly shaped eyebrows.", s2_ben: "Long-lasting fullness", s2_abl: "Precise pigmentation", s2_dur: "120 min",
+                s3_title: "Lip Pigmentation", s3_desc: "Beautifully shaped lips.", s3_ben: "Fresh color 24/7", s3_abl: "Gentle pigmentation", s3_dur: "90 min",
+                s4_title: "Plasma Pen", s4_desc: "Non-invasive skin tightening.", s4_ben: "Instant contraction", s4_abl: "Precise plasma mapping", s4_dur: "45 min",
+                s5_title: "Waxing", s5_desc: "Gentle hair removal.", s5_ben: "Smooth skin", s5_abl: "Gentle removal", s5_dur: "15-45 min",
+                s6_title: "Pedicure", s6_desc: "Care for beautiful feet.", s6_ben: "Callus removal", s6_abl: "Foot bath, massage", s6_dur: "45 min",
+                s7_title: "Reflexology", s7_desc: "Relaxing pressure point massage.", s7_ben: "Stress reduction", s7_abl: "Targeted stimulation", s7_dur: "30 min",
+                s8_title: "Mani & Pedi", s8_desc: "Perfectly groomed hands and feet.", s8_ben: "Stronger nails", s8_abl: "Shaping, cream", s8_dur: "60 min",
+                s9_title: "PMU Removal", s9_desc: "Gentle lightening of old PMU.", s9_ben: "No scarring", s9_abl: "Remover application", s9_dur: "45 min",
+                s10_title: "Eyelash Extensions", s10_desc: "Stunningly long eyelashes.", s10_ben: "Waterproof", s10_abl: "Single-lash application", s10_dur: "90-120 min",
+                s11_title: "Milia Removal", s11_desc: "Gentle extraction of milia.", s11_ben: "Smooth skin", s11_abl: "Precise extraction", s11_dur: "20 min",
+                s12_title: "Facial Microneedling", s12_desc: "Collagen stimulation.", s12_ben: "Firmer skin", s12_abl: "Needling with serum", s12_dur: "60 min",
+                s13_title: "Body Microneedling", s13_desc: "Reduce stretch marks.", s13_ben: "Tissue firming", s13_abl: "Deep needling", s13_dur: "60-90 min",
+                ba_sub: "Real Results", ba_title: "Before & After", lbl_before: "Before", lbl_after: "After",
+                video_sub: "Video Insights", video_title: "Treatment Insights",
+                reviews_sub: "Customer Reviews", reviews_title: "Google Reviews", google_reviews_count: "Based on 13 Google reviews", btn_google_page: "View on Google",
+                r1_date: "7 months ago", r1_text: "Excellent professional, I had a facial cleansing and liked it a lot, recommend! 👏",
+                r2_date: "1 year ago", r2_text: "Love the manicure and pedicure, very satisfied.. She is very friendly and patient 🫶🥰",
+                r3_date: "2 years ago", r3_text: "Excellent professional, exceeded expectations, thanks Cris ❤️ Highly recommend!",
+                r4_date: "2 years ago", r4_text: "I've been there many times. For lashes or brows, I am absolutely delighted.",
+                r5_date: "2 years ago", r5_text: "Did brow micropigmentation and love the result. Highly recommended.",
+                r6_date: "2 years ago", r6_text: "Cris' energy is the best; her work is top quality, facials and lips are excellent. Highly recommend.",
+                r7_date: "1 year ago", r7_text: "Great small studio... Had a facial with plasma pen and microblading.",
+                r8_date: "2 years ago", r8_text: "Highly recommend; excellent service and cozy environment. Come and check! 👍👏",
+                r9_date: "2 years ago", r9_text: "Did lash extensions and very satisfied with the result.",
+                r10_date: "1 year ago", r10_text: "Very satisfied with the work.",
+                r11_date: "2 years ago", r11_text: "Cool",
+                r12_date: "5 days ago", r12_text: "Did microblading and lashes here and extremely happy! Result is beautiful. Highly recommend!!",
+                r13_date: "2 weeks ago", r13_text: "Facial treatment was excellent. Cristina can do it. Fantastic treatment. Highly recommend.",
+                form_lead_title: "Contact Us", form_lead_desc: "Send us a message.", ph_name: "Your Name", ph_phone: "Phone", ph_email: "Email", ph_proc: "Procedure of interest", ph_msg: "Message...", btn_send: "Send",
+                form_car_title: "Careers", form_car_desc: "Join our team.", ph_exp: "Experience / Role", ph_file: "Upload CV",
+                info_address: "Location", info_contact: "Contact", info_hours: "Opening Hours", hours_week: "Mon - Fri: 09:00 - 18:00", hours_weekend: "Sat & Sun: Closed",
+                footer_rights: "All rights reserved.", footer_dev: "Developed by:"
+            },
+            pt: {
+                nav_about: "Sobre Nós", nav_services: "Serviços", nav_reviews: "Avaliações", nav_book: "Agendar",
+                hero_title: "Sua beleza natural em <span class='text-gradient'>Foco</span>", hero_subtitle: "Experimente tratamentos cosméticos sob medida no mais alto nível. Perfeição, higiene absoluta e bem-estar exclusivo.",
+                btn_book_now: "Agendar Agora",
+                about_sub: "A Clínica", about_title: "Excelência em Estética e Cuidado", about_p1: "Nossa clínica foi fundada com o propósito de realçar a beleza natural que existe em você, com técnicas avançadas e ambiente de total conforto.", about_p2: "Com profissionais altamente qualificados e equipamentos modernos, garantimos resultados incríveis e seguros.",
+                why_sub: "Vantagens", why_title: "Por que a Beauty by Cris?", w1_title: "Higiene Absoluta", w1_desc: "Mais altos padrões para sua segurança.", w2_title: "Qualidade Premium", w2_desc: "Apenas os melhores materiais e equipamentos.", w3_title: "Atendimento Personalizado", w3_desc: "Tratamentos sob medida apenas para você.", w4_title: "Ambiente Relaxante", w4_desc: "Um oásis de tranquilidade para corpo e mente.",
+                services_sub: "Tratamentos Exclusivos", services_title: "Nossos Serviços & Rituais", lbl_duration: "Duração:", lbl_benefits: "Benefícios:", lbl_process: "Procedimento:", btn_book_large: "Agendar Avaliação",
+                s1_title: "Limpeza de Pele", s1_desc: "Limpeza profunda para um aspecto radiante.", s1_ben: "Refina poros", s1_abl: "Higienização, extração", s1_dur: "60 min",
+                s2_title: "Micropigmentação", s2_desc: "Sobrancelhas desenhadas com ultra-realismo.", s2_ben: "Sobrancelhas cheias", s2_abl: "Pigmentação de precisão", s2_dur: "120 min",
+                s3_title: "Pigmentação Labial", s3_desc: "Lábios com cor e efeito de volume.", s3_ben: "Cor 24/7", s3_abl: "Pigmentação suave", s3_dur: "90 min",
+                s4_title: "Jato de Plasma", s4_desc: "Flacidez reduzida sem cirurgia.", s4_ben: "Lifting imediato", s4_abl: "Pontos de plasma", s4_dur: "45 min",
+                s5_title: "Depilação com Cera", s5_desc: "Remoção suave dos pelos.", s5_ben: "Pele lisa", s5_abl: "Remoção suave", s5_dur: "15-45 min",
+                s6_title: "Podologia", s6_desc: "Cuidado especializado para pés.", s6_ben: "Remoção de calos", s6_abl: "Escalda-pés, massagem", s6_dur: "45 min",
+                s7_title: "Reflexologia", s7_desc: "Massagem terapêutica nos pés.", s7_ben: "Alívio do estresse", s7_abl: "Massagem focada", s7_dur: "30 min",
+                s8_title: "Manicure e Pedicura", s8_desc: "Cuidado completo.", s8_ben: "Unhas fortes", s8_abl: "Corte, hidratação", s8_dur: "60 min",
+                s9_title: "Remoção de PMU", s9_desc: "Despigmentação segura.", s9_ben: "Sem cicatrizes", s9_abl: "Removedor químico", s9_dur: "45 min",
+                s10_title: "Extensão de Cílios", s10_desc: "Cílios alongados e volumosos.", s10_ben: "À prova d'água", s10_abl: "Acoplagem fio a fio", s10_dur: "90-120 min",
+                s11_title: "Remoção de Milium", s11_desc: "Extração higiênica e indolor.", s11_ben: "Pele lisa", s11_abl: "Micro-extração", s11_dur: "20 min",
+                s12_title: "Microagulhamento Facial", s12_desc: "Indução de colágeno.", s12_ben: "Pele firme", s12_abl: "Needling com sérum", s12_dur: "60 min",
+                s13_title: "Microagulhamento Corporal", s13_desc: "Regeneração de estrias.", s13_ben: "Estrias suavizadas", s13_abl: "Needling profundo", s13_dur: "60-90 min",
+                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", lbl_before: "Antes", lbl_after: "Depois",
+                video_sub: "Vídeos", video_title: "Insights Exclusivos",
+                reviews_sub: "Avaliações dos Clientes", reviews_title: "Google Avaliações", google_reviews_count: "Resumo de 13 avaliações no Google", btn_google_page: "Ver no Google",
+                r1_date: "7 meses atrás", r1_text: "Profissional excelente, fiz uma limpeza de pele gostei muito, recomendo! 👏",
+                r2_date: "1 ano atrás", r2_text: "Amooo a manicure e pedicure da Cris estou muito satisfeita.. Eka é muito simpática e paciente 🫶🥰",
+                r3_date: "2 anos atrás", r3_text: "Profissional excelente, superou as minhas expectativas, obrigada Cris ❤️ Super indico!",
+                r4_date: "2 anos atrás", r4_text: "Já fui lá várias vezes. E seja para cílios ou sobrancelhas, estou absolutamente encantada. ...",
+                r5_date: "2 anos atrás", r5_text: "Fiz micropigmentação nas sobrancelhas e estou encantada com o resultado. Recomendo sem reservas; merecemos essa sensação de felicidade.",
+                r6_date: "2 anos atrás", r6_text: "A energia da Cris é a melhor que você pode encontrar por lá; o trabalho que ela faz é de primeira qualidade, os tratamentos faciais e a micropigmentação labial são excelentes. Recomendo muito o Beauty by Cris.",
+                r7_date: "1 ano atrás", r7_text: "Um estúdio pequeno e ótimo... Fiz um tratamento facial com plasma pen e microblading lá. ...",
+                r8_date: "2 anos atrás", r8_text: "Recomendo muito; atendimento excelente e ambiente aconchegante. Estou muito satisfeita! Venha conferir. 👍👏🤩❤️",
+                r9_date: "2 anos atrás", r9_text: "Fiz extensão de cílios e estou muito satisfeita com o resultado.",
+                r10_date: "1 ano atrás", r10_text: "Fiquei muito satisfeito com o trabalho.",
+                r11_date: "2 anos atrás", r11_text: "Legal",
+                r12_date: "5 dias atrás", r12_text: "Fiz microblading e extensão de cílios aqui e estou extremamente feliz! Você se sente muito confortável e o resultado é lindo. Recomendo muito!!",
+                r13_date: "2 semanas atrás", r13_text: "O tratamento facial (limpeza e depilação) foi excelente. Cheguei a uma idade em que já não consigo cuidar dos pelos do nariz e das orelhas sozinha. Mas a Cristina consegue. Um tratamento fantástico, incluindo as unhas das mãos e dos pés. Recomendo muito.",
+                form_lead_title: "Fale Conosco", form_lead_desc: "Envie-nos uma mensagem.", ph_name: "Seu Nome", ph_phone: "Telefone", ph_email: "E-mail", ph_proc: "Procedimento de interesse", ph_msg: "Mensagem...", btn_send: "Enviar",
+                form_car_title: "Trabalhe Conosco", form_car_desc: "Faça parte da nossa equipe.", ph_exp: "Experiência / Cargo", ph_file: "Enviar Currículo",
+                info_address: "Endereço", info_contact: "Contato", info_hours: "Horários", hours_week: "Seg. - Sex.: 09:00 - 18:00", hours_weekend: "Sáb. & Dom.: Fechado",
+                footer_rights: "Todos os direitos reservados.", footer_dev: "Desenvolvido por:"
+            },
+            es: {
+                nav_about: "Nosotros", nav_services: "Servicios", nav_reviews: "Reseñas", nav_book: "Reservar",
+                hero_title: "Su belleza natural en <span class='text-gradient'>Foco</span>", hero_subtitle: "Experimente tratamientos cosméticos al más alto nivel. Perfección, higiene absoluta y bienestar.",
+                btn_book_now: "Reservar Ahora",
+                about_sub: "La Clínica", about_title: "Excelencia en Estética", about_p1: "Nuestra clínica fue fundada para resaltar su belleza natural con total comodidad.", about_p2: "Con profesionales calificados garantizamos resultados increíbles y seguros.",
+                why_sub: "Ventajas", why_title: "¿Por qué Beauty by Cris?", w1_title: "Higiene Absoluta", w1_desc: "Altos estándares para su seguridad.", w2_title: "Calidad Premium", w2_desc: "Los mejores materiales.", w3_title: "Atención Personalizada", w3_desc: "Tratamientos a su medida.", w4_title: "Ambiente Relajante", w4_desc: "Un oasis de tranquilidad.",
+                services_sub: "Tratamientos", services_title: "Servicios & Rituales", lbl_duration: "Duración:", lbl_benefits: "Beneficios:", lbl_process: "Proceso:", btn_book_large: "Agendar Evaluación",
+                s1_title: "Limpieza Facial", s1_desc: "Limpieza profunda.", s1_ben: "Refina poros", s1_abl: "Limpieza, extracción", s1_dur: "60 min",
+                s2_title: "Micropigmentación", s2_desc: "Cejas ultra-realistas.", s2_ben: "Cejas pobladas", s2_abl: "Pigmentación precisa", s2_dur: "120 min",
+                s3_title: "Pigmentación Labial", s3_desc: "Labios con color 24/7.", s3_ben: "Color 24/7", s3_abl: "Pigmentación suave", s3_dur: "90 min",
+                s4_title: "Plasma Pen", s4_desc: "Estiramiento sin cirugía.", s4_ben: "Lifting inmediato", s4_abl: "Puntos de plasma", s4_dur: "45 min",
+                s5_title: "Depilación", s5_desc: "Eliminación suave del vello.", s5_ben: "Piel lisa", s5_abl: "Eliminación suave", s5_dur: "15-45 min",
+                s6_title: "Pedicura", s6_desc: "Cuidado para pies sanos.", s6_ben: "Alivio de durezas", s6_abl: "Baño, masaje", s6_dur: "45 min",
+                s7_title: "Reflexología", s7_desc: "Masaje terapéutico.", s7_ben: "Alivio del estrés", s7_abl: "Masaje focalizado", s7_dur: "30 min",
+                s8_title: "Manicura y Pedicura", s8_desc: "Cuidado completo.", s8_ben: "Uñas fuertes", s8_abl: "Corte, hidratación", s8_dur: "60 min",
+                s9_title: "Eliminación PMU", s9_desc: "Despigmentación segura.", s9_ben: "Sin cicatrices", s9_abl: "Removedor", s9_dur: "45 min",
+                s10_title: "Extensión de Pestañas", s10_desc: "Pestañas voluminosas.", s10_ben: "Resistente al agua", s10_abl: "Aplicación una a una", s10_dur: "90-120 min",
+                s11_title: "Eliminación de Millium", s11_desc: "Extracción higiénica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
+                s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
+                s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
+                ba_sub: "Resultados Reales", ba_title: "Antes & Después", lbl_before: "Antes", lbl_after: "Después",
+                video_sub: "Videos", video_title: "Insights Exclusivos",
+                reviews_sub: "Opiniones", reviews_title: "Reseñas de Google", google_reviews_count: "Basado en 13 reseñas en Google", btn_google_page: "Ver en Google",
+                r1_date: "hace 7 meses", r1_text: "Excelente profesional, limpieza de cutis muy buena, recomiendo! 👏",
+                r2_date: "hace 1 año", r2_text: "Amo la manicura y pedicura, muy simpática y paciente 🫶🥰",
+                r3_date: "hace 2 años", r3_text: "Profesional excelente, superó expectativas, gracias Cris ❤️",
+                r4_date: "hace 2 años", r4_text: "Fui varias veces. Pestañas o cejas, encantada.",
+                r5_date: "hace 2 años", r5_text: "Me hice cejas y estoy encantada. Recomiendo sin reservas.",
+                r6_date: "hace 2 años", r6_text: "La energía de Cris es la mejor, trabajo de primera. Recomiendo mucho.",
+                r7_date: "hace 1 año", r7_text: "Gran estudio... Hice plasma pen y microblading.",
+                r8_date: "hace 2 años", r8_text: "Recomiendo mucho, excelente atención. ¡Ven a ver! 👍👏",
+                r9_date: "hace 2 años", r9_text: "Extensión de pestañas y muy satisfecha.",
+                r10_date: "hace 1 año", r10_text: "Muy satisfecho con el trabajo.",
+                r11_date: "hace 2 años", r11_text: "Genial",
+                r12_date: "hace 5 días", r12_text: "Hice microblading y pestañas, ¡feliz! Resultado hermoso.",
+                r13_date: "hace 2 semanas", r13_text: "Tratamiento facial excelente. Tratamiento fantástico. Recomiendo.",
+                form_lead_title: "Contáctenos", form_lead_desc: "Envíenos un mensaje.", ph_name: "Su Nombre", ph_phone: "Teléfono", ph_email: "Correo", ph_proc: "Procedimiento", ph_msg: "Mensaje...", btn_send: "Enviar",
+                form_car_title: "Carreras", form_car_desc: "Únete al equipo.", ph_exp: "Experiencia", ph_file: "Subir CV",
+                info_address: "Ubicación", info_contact: "Contacto", info_hours: "Horarios", hours_week: "Lun - Vie: 09:00 - 18:00", hours_weekend: "Sáb & Dom: Cerrado",
+                footer_rights: "Todos los derechos reservados.", footer_dev: "Desarrollado por:"
+            },
+            fr: {
+                nav_about: "À Propos", nav_services: "Services", nav_reviews: "Avis", nav_book: "Réserver",
+                hero_title: "Votre beauté au <span class='text-gradient'>Focus</span>", hero_subtitle: "Des soins cosmétiques au plus haut niveau. Perfection et hygiène absolue.",
+                btn_book_now: "Prendre RDV",
+                about_sub: "La Clinique", about_title: "Excellence en Esthétique", about_p1: "Notre clinique a été fondée pour mettre en valeur votre beauté naturelle.", about_p2: "Des professionnels qualifiés pour des résultats incroyables.",
+                why_sub: "Avantages", why_title: "Pourquoi Beauty by Cris?", w1_title: "Hygiène Absoluta", w1_desc: "Hauts standards.", w2_title: "Qualité Premium", w2_desc: "Matériaux de premier choix.", w3_title: "Soins Personnalisés", w3_desc: "Sur mesure pour vous.", w4_title: "Ambiance Relaxante", w4_desc: "Oasis de tranquillité.",
+                services_sub: "Soins", services_title: "Nos Services", lbl_duration: "Durée:", lbl_benefits: "Bénéfices:", lbl_process: "Procédure:", btn_book_large: "Prendre Rendez-vous",
+                s1_title: "Nettoyage du Visage", s1_desc: "Nettoyage en profondeur.", s1_ben: "Resserre les pores", s1_abl: "Extraction", s1_dur: "60 min",
+                s2_title: "Micropigmentation", s2_desc: "Sourcils ultra-réalistes.", s2_ben: "Sourcils parfaits", s2_abl: "Pigmentation précise", s2_dur: "120 min",
+                s3_title: "Pigmentation Lèvres", s3_desc: "Couleur 24/7.", s3_ben: "Couleur fraîche", s3_abl: "Pigmentation douce", s3_dur: "90 min",
+                s4_title: "Plasma Pen", s4_desc: "Lifting sans chirurgie.", s4_ben: "Tension immédiate", s4_abl: "Points de plasma", s4_dur: "45 min",
+                s5_title: "Épilation", s5_desc: "Douceur durable.", s5_ben: "Peau lisse", s5_abl: "Épilation cire", s5_dur: "15-45 min",
+                s6_title: "Pédicurie", s6_desc: "Soin des pieds.", s6_ben: "Soulagement", s6_abl: "Bain, massage", s6_dur: "45 min",
+                s7_title: "Réflexologie", s7_desc: "Massage relaxant.", s7_ben: "Anti-stress", s7_abl: "Massage ciblé", s7_dur: "30 min",
+                s8_title: "Manucure & Pédicure", s8_desc: "Soin complet.", s8_ben: "Ongles forts", s8_abl: "Soin, hydratation", s8_dur: "60 min",
+                s9_title: "Détatouage PMU", s9_desc: "Retrait sécurisé.", s9_ben: "Sans cicatrices", s9_abl: "Remover", s9_dur: "45 min",
+                s10_title: "Extensions de Cils", s10_desc: "Cils longs.", s10_ben: "Résistant à l'eau", s10_abl: "Application", s10_dur: "90-120 min",
+                s11_title: "Retrait de Milium", s11_desc: "Extraction hygiénique.", s11_ben: "Peau lisse", s11_abl: "Extraction", s11_dur: "20 min",
+                s12_title: "Microneedling Visage", s12_desc: "Stimulation collagène.", s12_ben: "Peau ferme", s12_abl: "Sérum", s12_dur: "60 min",
+                s13_title: "Microneedling Corps", s13_desc: "Réduit vergetures.", s13_ben: "Fermeté", s13_abl: "Needling", s13_dur: "60-90 min",
+                ba_sub: "Résultats", ba_title: "Avant & Après", lbl_before: "Avant", lbl_after: "Après",
+                video_sub: "Vidéos", video_title: "Aperçu des Soins",
+                reviews_sub: "Avis Clients", reviews_title: "Avis Google", google_reviews_count: "Basé sur 13 avis Google", btn_google_page: "Voir sur Google",
+                r1_date: "il y a 7 mois", r1_text: "Excellente professionnelle, nettoyage de peau parfait ! 👏",
+                r2_date: "il y a 1 an", r2_text: "J'adore la manucure, très patiente 🫶🥰",
+                r3_date: "il y a 2 ans", r3_text: "Excellente, a dépassé mes attentes ❤️",
+                r4_date: "il y a 2 ans", r4_text: "Toujours ravie du résultat.",
+                r5_date: "il y a 2 ans", r5_text: "Micropigmentation parfaite. Je recommande.",
+                r6_date: "il y a 2 ans", r6_text: "L'énergie de Cris est super, travail de qualité.",
+                r7_date: "il y a 1 an", r7_text: "Super studio... Plasma pen et microblading.",
+                r8_date: "il y a 2 ans", r8_text: "Je recommande, super ambiance. 👍👏",
+                r9_date: "il y a 2 ans", r9_text: "Extensions de cils, très satisfaite.",
+                r10_date: "il y a 1 an", r10_text: "Très satisfait du travail.",
+                r11_date: "il y a 2 ans", r11_text: "Cool",
+                r12_date: "il y a 5 jours", r12_text: "Microblading et cils, très heureuse ! Résultat magnifique.",
+                r13_date: "il y a 2 semaines", r13_text: "Soin du visage excellent. Fantastique.",
+                form_lead_title: "Nous Contacter", form_lead_desc: "Envoyez un message.", ph_name: "Votre Nom", ph_phone: "Téléphone", ph_email: "E-mail", ph_proc: "Soin souhaité", ph_msg: "Message...", btn_send: "Envoyer",
+                form_car_title: "Carrières", form_car_desc: "Rejoignez-nous.", ph_exp: "Expérience", ph_file: "Télécharger CV",
+                info_address: "Adresse", info_contact: "Contact", info_hours: "Horaires", hours_week: "Lun - Ven: 09:00 - 18:00", hours_weekend: "Sam & Dim: Fermé",
+                footer_rights: "Tous droits réservés.", footer_dev: "Développé par:"
+            },
+            ru: {
+                nav_about: "О Нас", nav_services: "Услуги", nav_reviews: "Отзывы", nav_book: "Запись",
+                hero_title: "Естественная красота в <span class='text-gradient'>Фокусе</span>", hero_subtitle: "Индивидуальные косметические процедуры на высшем уровне. Перфекционизм и гигиена.",
+                btn_book_now: "Записаться",
+                about_sub: "Клиника", about_title: "Превосходство в эстетике", about_p1: "Наша клиника создана, чтобы подчеркнуть вашу красоту.", about_p2: "Мы гарантируем невероятные и безопасные результаты.",
+                why_sub: "Преимущества", why_title: "Почему Beauty by Cris?", w1_title: "Абсолютная Гигиена", w1_desc: "Высокие стандарты.", w2_title: "Премиум Качество", w2_desc: "Лучшие материалы.", w3_title: "Индивидуальный Уход", w3_desc: "Специально для вас.", w4_title: "Расслабление", w4_desc: "Оазис спокойствия.",
+                services_sub: "Услуги", services_title: "Наши Процедуры", lbl_duration: "Время:", lbl_benefits: "Результат:", lbl_process: "Этапы:", btn_book_large: "Записаться на прием",
+                s1_title: "Чистка Лица", s1_desc: "Глубокое очищение.", s1_ben: "Сужение пор", s1_abl: "Очищение", s1_dur: "60 мин",
+                s2_title: "Микропигментация", s2_desc: "Идеальные брови.", s2_ben: "Густые брови", s2_abl: "Пигментация", s2_dur: "120 мин",
+                s3_title: "Пигментация Губ", s3_desc: "Цвет 24/7.", s3_ben: "Сочный цвет", s3_abl: "Нежная пигментация", s3_dur: "90 мин",
+                s4_title: "Plasma Pen", s4_desc: "Лифтинг без операций.", s4_ben: "Подтяжка", s4_abl: "Точечная плазма", s4_dur: "45 мин",
+                s5_title: "Депиляция", s5_desc: "Гладкая кожа.", s5_ben: "Удаление волос", s5_abl: "Воск", s5_dur: "15-45 мин",
+                s6_title: "Педикюр", s6_desc: "Уход за стопами.", s6_ben: "Мягкость", s6_abl: "Ванночка, массаж", s6_dur: "45 мин",
+                s7_title: "Рефлексотерапия", s7_desc: "Массаж стоп.", s7_ben: "Снятие стресса", s7_abl: "Массаж", s7_dur: "30 мин",
+                s8_title: "Маникюр и Педикюр", s8_desc: "Идеальные руки и ноги.", s8_ben: "Крепкие ногти", s8_abl: "Уход", s8_dur: "60 мин",
+                s9_title: "Удаление Татуажа", s9_desc: "Безопасное удаление.", s9_ben: "Без рубцов", s9_abl: "Ремувер", s9_dur: "45 мин",
+                s10_title: "Наращивание Ресниц", s10_desc: "Густые ресницы.", s10_ben: "Стойкость", s10_abl: "Наращивание", s10_dur: "90-120 мин",
+                s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
+                s12_title: "Микронидлинг Лица", s12_desc: "Омоложение.", s12_ben: "Упругая кожа", s12_abl: "Сыворотка", s12_dur: "60 мин",
+                s13_title: "Микронидлинг Тела", s13_desc: "Уменьшение растяжек.", s13_ben: "Гладкость", s13_abl: "Уход", s13_dur: "60-90 мин",
+                ba_sub: "Результаты", ba_title: "До & После", lbl_before: "До", lbl_after: "После",
+                video_sub: "Видео", video_title: "Обзор Процедур",
+                reviews_sub: "Отзывы", reviews_title: "Google Отзывы", google_reviews_count: "13 отзывов в Google", btn_google_page: "Смотреть в Google",
+                r1_date: "7 месяцев назад", r1_text: "Отличный специалист, чистка супер! 👏",
+                r2_date: "1 год назад", r2_text: "Обожаю маникюр, очень терпеливая 🫶🥰",
+                r3_date: "2 года назад", r3_text: "Отлично, превзошла ожидания ❤️",
+                r4_date: "2 года назад", r4_text: "Была много раз. В восторге.",
+                r5_date: "2 года назад", r5_text: "Делала брови, результат супер.",
+                r6_date: "2 года назад", r6_text: "Лучшая энергия, работа высшего качества.",
+                r7_date: "1 год назад", r7_text: "Отличная студия... Plasma pen супер.",
+                r8_date: "2 года назад", r8_text: "Рекомендую, отличная атмосфера. 👍👏",
+                r9_date: "2 года назад", r9_text: "Наращивание ресниц, очень довольна.",
+                r10_date: "1 год назад", r10_text: "Очень доволен работой.",
+                r11_date: "2 года назад", r11_text: "Круто",
+                r12_date: "5 дней назад", r12_text: "Микроблейдинг и ресницы, счастлива! Результат прекрасен.",
+                r13_date: "2 недели назад", r13_text: "Процедура для лица превосходна. Рекомендую.",
+                form_lead_title: "Связаться", form_lead_desc: "Отправьте сообщение.", ph_name: "Ваше Имя", ph_phone: "Телефон", ph_email: "Email", ph_proc: "Процедура", ph_msg: "Сообщение...", btn_send: "Отправить",
+                form_car_title: "Карьера", form_car_desc: "Присоединяйтесь к нам.", ph_exp: "Опыт", ph_file: "Загрузить резюме",
+                info_address: "Адрес", info_contact: "Контакты", info_hours: "Часы работы", hours_week: "Пн - Пт: 09:00 - 18:00", hours_weekend: "Сб & Вс: Выходной",
+                footer_rights: "Все права защищены.", footer_dev: "Разработка:"
+            }
         };
 
         function updateWaLinks(lang) {
@@ -803,6 +1046,8 @@
                     if (t[langCode][key]) el.setAttribute('placeholder', t[langCode][key]);
                 });
             }
+            // Smooth Scroll to Top on Language Change
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         document.getElementById('langDropdown').addEventListener('click', () => { document.getElementById('langOptions').classList.toggle('show'); });
@@ -833,17 +1078,20 @@
             document.getElementById('video-player-container').innerHTML = '<video src="Midias/video.mp4" controls autoplay style="width:100%; height:100%; object-fit:cover;"></video>';
         });
 
-        // Reviews Carousel Drag
-        const carousel = document.getElementById('reviewsCarousel');
-        let isDown = false; let startX; let scrollLeft;
-        carousel.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - carousel.offsetLeft; scrollLeft = carousel.scrollLeft; });
-        carousel.addEventListener('mouseleave', () => { isDown = false; });
-        carousel.addEventListener('mouseup', () => { isDown = false; });
-        carousel.addEventListener('mousemove', (e) => {
-            if(!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - carousel.offsetLeft;
-            carousel.scrollLeft = scrollLeft - ((x - startX) * 2);
+        // Draggable Carousels Logic (Services & Reviews)
+        const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel')];
+        carousels.forEach(carousel => {
+            if(!carousel) return;
+            let isDown = false; let startX; let scrollLeft;
+            carousel.addEventListener('mousedown', (e) => { isDown = true; startX = e.pageX - carousel.offsetLeft; scrollLeft = carousel.scrollLeft; });
+            carousel.addEventListener('mouseleave', () => { isDown = false; });
+            carousel.addEventListener('mouseup', () => { isDown = false; });
+            carousel.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - carousel.offsetLeft;
+                carousel.scrollLeft = scrollLeft - ((x - startX) * 2);
+            });
         });
 
         // Before & After Sliders
