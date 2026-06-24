@@ -668,7 +668,7 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r9_text">"Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis sehr zufrieden."</p>
+                    <p class="review-text" data-i18n="r9_text">"Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis очень zufrieden."</p>
                 </div>
 
                 <div class="review-card">
@@ -1088,17 +1088,10 @@
         document.querySelectorAll('#nav-menu a').forEach(link => { link.addEventListener('click', () => navMenu.classList.remove('active')); });
 
         const backToTopBtn = document.getElementById('backToTop');
-        const heroImg = document.getElementById('parallax-img');
+        // FOTO HERO FIX: Removido o código de parallax. A imagem agora é estática.
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             if (scrolled > 400) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); }
-            
-            // Correção da barra branca: Parallax apenas em telas grandes
-            if(heroImg && window.innerWidth > 992 && scrolled < 1000) {
-                heroImg.style.transform = `translateY(${scrolled * 0.15}px)`;
-            } else if (heroImg) {
-                 heroImg.style.transform = 'translateY(0)'; // Reseta no mobile
-            }
         });
 
         const observer = new IntersectionObserver((entries, obs) => {
@@ -1113,7 +1106,7 @@
             document.getElementById('video-player-container').innerHTML = '<video src="Midias/video.mp4" controls autoplay style="width:100%; height:100%; object-fit:cover;"></video>';
         });
 
-        // Lógica de Carrossel Suave com Inércia (Momento) para Desktop
+        // Lógica de Carrossel Suave com Inércia (Momento) para Desktop - CORRIGIDA
         const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel')];
         carousels.forEach(carousel => {
             if(!carousel) return;
@@ -1121,6 +1114,7 @@
             let startX;
             let scrollLeft;
             let velX = 0; // Velocidade horizontal
+            let lastX = 0;
             let momentumID;
 
             carousel.addEventListener('mousedown', (e) => {
@@ -1128,16 +1122,20 @@
                 carousel.classList.add('active');
                 startX = e.pageX - carousel.offsetLeft;
                 scrollLeft = carousel.scrollLeft;
+                lastX = e.pageX; // Reseta posição anterior
+                velX = 0; // Reseta velocidade
                 cancelAnimationFrame(momentumID); // Para qualquer inércia anterior
             });
 
             carousel.addEventListener('mouseleave', () => {
+                if (!isDown) return;
                 isDown = false;
                 carousel.classList.remove('active');
                 beginMomentumTracking();
             });
 
             carousel.addEventListener('mouseup', () => {
+                if (!isDown) return;
                 isDown = false;
                 carousel.classList.remove('active');
                 beginMomentumTracking();
@@ -1147,10 +1145,13 @@
                 if(!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - carousel.offsetLeft;
-                const walk = (x - startX) * 2; // Ajuste a velocidade do arrasto aqui
-                // Calcula a velocidade atual
-                velX = carousel.scrollLeft - (scrollLeft - walk);
+                // FIX SENSIBILIDADE: Reduzido de *2 para *1.1 para um arrasto mais natural
+                const walk = (x - startX) * 1.1; 
                 carousel.scrollLeft = scrollLeft - walk;
+
+                // Calcula a velocidade instantânea baseada na diferença entre frames
+                velX = e.pageX - lastX;
+                lastX = e.pageX;
             });
 
             // Função para iniciar o rastreamento de inércia
@@ -1161,13 +1162,22 @@
 
             // Loop de animação para inércia
             function momentumLoop(){
-                // Aplica atrito para desacelerar (0.95 = 5% de atrito por frame)
+                // Aplica atrito
                 velX *= 0.95; 
-                carousel.scrollLeft += velX;
+                carousel.scrollLeft -= velX; // Subtrai a velocidade pois arrastar para a esquerda é negativo, mas a rolagem é positiva
+
+                // FIX PULO/RETORNO: Verifica se atingiu as bordas e para a inércia imediatamente
+                if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
+                     velX = 0;
+                     cancelAnimationFrame(momentumID);
+                     return;
+                }
 
                 // Se a velocidade ainda for significativa, continua o loop
                 if (Math.abs(velX) > 0.5) {
                     momentumID = requestAnimationFrame(momentumLoop);
+                } else {
+                     cancelAnimationFrame(momentumID); // Para se estiver muito lento
                 }
             }
         });
