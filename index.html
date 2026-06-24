@@ -51,7 +51,7 @@
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-        /* Header */
+        /* Header - Otimizado para performance */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -75,8 +75,8 @@
         .burger div { width: 25px; height: 2px; background-color: var(--text-dark); transition: var(--transition-smooth); }
         
         @media (max-width: 992px) {
-            /* Header mais transparente no mobile */
-            header { background-color: rgba(250, 245, 240, 0.85); backdrop-filter: blur(8px); }
+            /* Header OTIMIZADO para mobile: removido blur pesado para 60fps */
+            header { background-color: var(--bg-champagne); backdrop-filter: none; border-bottom: 1px solid var(--border-light); }
             nav { position: fixed; top: 90px; left: 0; right: 0; background-color: var(--bg-champagne); height: 0; overflow: hidden; transition: var(--transition-smooth); }
             nav.active { height: 100vh; border-bottom: 1px solid var(--border-light); }
             nav ul { flex-direction: column; padding: 40px 0; }
@@ -221,7 +221,9 @@
 
         /* Map & Footer */
         .map-section { width: 100%; height: 350px; background: #eee; position: relative; border-top: 1px solid var(--border-light);}
-        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); }
+        /* FIX MAPA: Adicionado estilo para evitar que o iframe capture o scroll da página */
+        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; }
+        .map-section:hover .map-iframe { pointer-events: auto; }
         
         .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -679,7 +681,7 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r10_text">"Ich war mit der Arbeit sehr zufrieden."</p>
+                    <p class="review-text" data-i18n="r10_text">"Ich war mit der Arbeit очень zufrieden."</p>
                 </div>
 
                 <div class="review-card">
@@ -758,7 +760,8 @@
     </section>
 
     <div class="map-section">
-        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.568285514661!2d8.214436576839358!3d48.78453471018588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797171e27a6d899%3A0x6b2e1bf77b4946ec!2sBl%C3%BCtenfeldpl.%201-8%2C%2076532%20Baden-Baden%2C%20Germany!5e0!3m2!1sen!2sbr!4v1700000000000!5m2!1sen!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- Mapa atualizado para "Beauty by Cris Beleza Facial" em Baden-Baden -->
+        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2625.874495888243!2d8.1869818!3d48.7857078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20by%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323456789!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <section class="clinic-info">
