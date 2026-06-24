@@ -64,12 +64,15 @@
         
         /* Lang Dropdown */
         .lang-dropdown { position: relative; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--text-dark); margin-left: 20px; user-select: none; }
-        .current-lang { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid var(--border-light); background-color: var(--bg-white); border-radius: 4px; transition: var(--transition-smooth); }
-        .current-lang:hover { border-color: var(--accent-rose); color: var(--accent-rose); }
-        .lang-options { position: absolute; top: 100%; right: 0; background-color: var(--bg-white); min-width: 160px; display: none; flex-direction: column; box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); border-top: 2px solid var(--accent-rose); border-radius: 0 0 4px 4px; }
+        /* MODIFICADO: Removido texto, centralizado e ajustado padding para ficar apenas a bandeira */
+        .current-lang { display: flex; align-items: center; justify-content: center; padding: 8px; border: 1px solid var(--border-light); background-color: var(--bg-white); border-radius: 4px; transition: var(--transition-smooth); font-size: 1.4rem; /* Aumentado um pouco o tamanho da bandeira */ line-height: 1; }
+        .current-lang:hover { border-color: var(--accent-rose); }
+        /* MODIFICADO: Ajustado a largura do dropdown para caber apenas as bandeiras */
+        .lang-options { position: absolute; top: 100%; right: 0; background-color: var(--bg-white); min-width: 60px; /* Largura reduzida */ display: none; flex-direction: column; box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); border-top: 2px solid var(--accent-rose); border-radius: 0 0 4px 4px; z-index: 1010; /* Z-index aumentado para ficar sobre outros elementos se necessário */ }
         .lang-options.show { display: flex; }
-        .lang-option { padding: 12px 15px; display: flex; align-items: center; gap: 10px; color: var(--text-dark); transition: var(--transition-smooth); }
-        .lang-option:hover { background-color: var(--bg-champagne); color: var(--accent-rose); }
+        /* MODIFICADO: Centralizado e ajustado padding para as opções de bandeira */
+        .lang-option { padding: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; /* Tamanho da bandeira */ color: var(--text-dark); transition: var(--transition-smooth); cursor: pointer; }
+        .lang-option:hover { background-color: var(--bg-champagne); }
         
         .burger { display: none; cursor: pointer; flex-direction: column; gap: 6px; margin-left: 20px; }
         .burger div { width: 25px; height: 2px; background-color: var(--text-dark); transition: var(--transition-smooth); }
@@ -85,8 +88,9 @@
             /* Ajustes de tamanho para mobile */
             .logo-img { height: 45px; }
             .logo-wrap div { font-size: 1.3rem !important; }
-            .lang-dropdown { margin-left: 10px; font-size: 0.75rem; }
-            .current-lang { padding: 6px 10px; gap: 5px; }
+            .lang-dropdown { margin-left: 10px; }
+            /* MODIFICADO: Ajuste do padding para mobile */
+            .current-lang { padding: 6px; font-size: 1.3rem; }
         }
 
         /* Hero */
@@ -274,15 +278,17 @@
                     <li><a href="#kontakt" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_book">Termin buchen</a></li>
                 </ul>
             </nav>
+            <!-- MODIFICADO: Removido o texto "Deutsch" e a seta "▾", mantendo apenas a bandeira -->
             <div class="lang-dropdown" id="langDropdown">
-                <div class="current-lang" id="currentLang">🇩🇪 Deutsch ▾</div>
+                <div class="current-lang" id="currentLang">🇩🇪</div>
                 <div class="lang-options" id="langOptions">
-                    <div class="lang-option" onclick="selectLang('de', '🇩🇪 Deutsch')">🇩🇪 Deutsch</div>
-                    <div class="lang-option" onclick="selectLang('en', '🇬🇧 English')">🇬🇧 English</div>
-                    <div class="lang-option" onclick="selectLang('es', '🇪🇸 Español')">🇪🇸 Español</div>
-                    <div class="lang-option" onclick="selectLang('fr', '🇫🇷 Français')">🇫🇷 Français</div>
-                    <div class="lang-option" onclick="selectLang('ru', '🇷🇺 Русский')">🇷🇺 Русский</div>
-                    <div class="lang-option" onclick="selectLang('pt', '🇵🇹 Português')">🇵🇹 Português</div>
+                    <!-- MODIFICADO: Removido o texto dos nomes dos idiomas -->
+                    <div class="lang-option" onclick="selectLang('de', '🇩🇪')">🇩🇪</div>
+                    <div class="lang-option" onclick="selectLang('en', '🇬🇧')">🇬🇧</div>
+                    <div class="lang-option" onclick="selectLang('es', '🇪🇸')">🇪🇸</div>
+                    <div class="lang-option" onclick="selectLang('fr', '🇫🇷')">🇫🇷</div>
+                    <div class="lang-option" onclick="selectLang('ru', '🇷🇺')">🇷🇺</div>
+                    <div class="lang-option" onclick="selectLang('pt', '🇵🇹')">🇵🇹</div>
                 </div>
             </div>
             <div class="burger" id="burger-btn"><div></div><div></div><div></div></div>
@@ -1064,8 +1070,9 @@
             document.querySelectorAll('.wa-link').forEach(link => { link.href = `https://wa.me/491629384907?text=${msg}`; });
         }
 
-        function selectLang(langCode, langText) {
-            document.getElementById('currentLang').innerHTML = langText + ' ▾';
+        // MODIFICADO: A função agora recebe apenas o código e a bandeira
+        function selectLang(langCode, langFlag) {
+            document.getElementById('currentLang').innerHTML = langFlag; // Atualiza apenas com a bandeira
             document.getElementById('langOptions').classList.remove('show');
             updateWaLinks(langCode);
             if (t[langCode]) {
