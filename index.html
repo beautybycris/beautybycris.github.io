@@ -25,7 +25,7 @@
 
         /* Fix global para evitar rolagem horizontal indesejada */
         html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
-        * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-champagne); color: var(--text-dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
@@ -291,7 +291,7 @@
 
     <header>
         <div class="container nav-container">
-            <a href="#" class="logo-wrap" onclick="smoothScrollToTop(event)">
+            <a href="#main-body" class="logo-wrap">
                 <img src="https://i.imgur.com/CQpHs8c.png" alt="Logo" class="logo-img">
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--text-dark); font-weight: 600;">
                     Beauty by <span class="text-gradient">Cris</span>
@@ -1214,6 +1214,34 @@
         window.addEventListener('scroll', () => {
             const scrolled = window.scrollY;
             if (scrolled > 400) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); }
+        });
+
+        // NOVO: Navegação Suave Premium (Smooth Scroll) para todos os botões e links do menu
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                
+                // Ignora se for apenas um "#" solto para não interferir em outros scripts
+                if (targetId === '#' || targetId === '') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    
+                    // Garante que o menu do celular feche ao clicar em um link
+                    navMenu.classList.remove('active');
+                    
+                    // Calcula a posição exata da seção, descontando os 90px do cabeçalho fixo
+                    const headerOffset = 90;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.scrollY - headerOffset;
+      
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
 
         const observer = new IntersectionObserver((entries, obs) => {
