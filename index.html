@@ -65,7 +65,7 @@
             user-select: text;
         }
 
-        /* Removido scroll-behavior: smooth para usar o Lenis */
+        /* REMOVIDO scroll-behavior: smooth pois ele CAUSA A QUEDA DE FRAMES ao brigar com o Lenis */
         html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
@@ -95,7 +95,7 @@
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
         /* Aceleração de GPU no header para não travar o scroll devido ao blur */
-        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); will-change: transform, backdrop-filter; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .logo-img { height: 55px; width: auto; object-fit: contain; }
@@ -861,17 +861,13 @@
             }
         });
 
-        // --- INICIALIZAÇÃO DO LENIS (SCROLL SUAVE PREMIUM) ---
+        // --- INICIALIZAÇÃO DO LENIS (SCROLL SUAVE PREMIUM - ESTILO APPLE) ---
         const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Curva de aceleração física aveludada
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false, // Mantém o scroll nativo impecável no celular
-            touchMultiplier: 2,
-            infinite: false,
+            lerp: 0.06, // Substitui o "duration". Quanto menor (ex: 0.05 a 0.08), mais inércia e "peso"
+            wheelMultiplier: 0.8, // Suaviza a velocidade da roda do mouse
+            smoothWheel: true, // Força a suavização de hardware
+            smoothTouch: false, // Touch já é perfeito nos celulares nativamente
+            syncTouch: true
         });
 
         // O requestAnimationFrame mantém a animação sincronizada a 60/120Hz com a tela do usuário
@@ -887,15 +883,15 @@
                 const targetId = this.getAttribute('href');
                 if (targetId.startsWith('#') && targetId !== '#') {
                     e.preventDefault();
-                    // lenis.scrollTo possui uma transição matematicamente mais polida que window.scrollTo
-                    lenis.scrollTo(targetId, { offset: -90, duration: 1.5 });
+                    // lenis.scrollTo usando lerp para manter a mesma inércia física ao clicar
+                    lenis.scrollTo(targetId, { offset: -90, lerp: 0.06 });
                 }
             });
         });
 
         function smoothScrollToTop(e) {
             e.preventDefault();
-            lenis.scrollTo(0, { duration: 1.5 });
+            lenis.scrollTo(0, { lerp: 0.06 });
         }
 
         let selectedServiceKey = '';
