@@ -309,12 +309,9 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-images animate-on-scroll">
-                    <!-- Imagem 1 -->
                     <img src="https://i.imgur.com/X3CYQCt.jpeg" alt="Ambiente do Studio Beauty by Cris" class="about-img-1">
                     
-                    <!-- Container de Vídeo e Imagem (Apresentação Suave controlada por JS) -->
                     <div class="about-img-2-slider">
-                        <!-- Removido o atributo 'autoplay'. O JS dará o play na hora exata -->
                         <video src="https://i.imgur.com/DiFnIe4.mp4" muted playsinline class="slider-media active" id="intro-video"></video>
                         <img src="https://i.imgur.com/CaIjzRk.jpeg" alt="Detalhe do Studio" class="slider-media" id="static-after-video">
                     </div>
@@ -674,7 +671,7 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r9_text">"Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis очень zufrieden."</p>
+                    <p class="review-text" data-i18n="r9_text">"Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis sehr zufrieden."</p>
                 </div>
 
                 <div class="review-card">
@@ -685,7 +682,7 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r10_text">"Ich war mit der Arbeit очень zufrieden."</p>
+                    <p class="review-text" data-i18n="r10_text">"Ich war mit der Arbeit sehr zufrieden."</p>
                 </div>
 
                 <div class="review-card">
@@ -819,6 +816,7 @@
 
         let selectedServiceKey = '';
         let currentLang = 'de'; 
+        let isDraggingCarousel = false; // Flag global adicionada aqui para impedir o clique fantasma
 
         const waMessages = {
             de: "Hallo! Ich möchte einen Termin vereinbaren...",
@@ -965,7 +963,7 @@
             es: {
                 nav_about: "Nosotros", nav_services: "Servicios", nav_reviews: "Reseñas", nav_contact: "Contacto",
                 hero_title: "Su belleza natural en <span class='text-gradient'>Foco</span>", hero_subtitle: "Experimente tratamientos cosméticos al más alto nivel. Perfección, higiene absoluta y bienestar.",
-                btn_explore_services: "Explorar Tratamientos",
+                btn_explore_services: "Explorar Tratamentos",
                 about_sub: "El Studio", about_title: "Excelencia en Estética", about_p1: "Nuestro studio fue fundado para resaltar su belleza natural con total comodidad.", about_p2: "Con profesionales calificados garantizamos resultados increíbles y seguros.",
                 why_sub: "Ventajas", why_title: "¿Por qué Beauty by Cris?", w1_title: "Higiene Absoluta", w1_desc: "Altos estándares para su seguridad.", w2_title: "Calidad Premium", w2_desc: "Los mejores materiales.", w3_title: "Atención Personalizada", w3_desc: "Tratamientos a su medida.", w4_title: "Ambiente Relajante", w4_desc: "Un oasis de tranquilidad.",
                 services_sub: "Tratamientos", services_title: "Servicios & Rituales", lbl_duration: "Duración:", lbl_benefits: "Beneficios:", lbl_process: "Proceso:",
@@ -1118,6 +1116,9 @@
 
         // Modal de Serviço
         function openServiceModal(cardElement, serviceKey) {
+            // Trava de segurança: se o usuário estava apenas arrastando o carrossel, ignora o clique
+            if (isDraggingCarousel) return;
+
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             cardElement.classList.add('selected');
 
@@ -1195,6 +1196,7 @@
 
             carousel.addEventListener('mousedown', (e) => {
                 isDown = true;
+                isDraggingCarousel = false; // Reseta a flag sempre que clicar
                 carousel.classList.add('active');
                 startX = e.pageX - carousel.offsetLeft;
                 scrollLeft = carousel.scrollLeft;
@@ -1222,6 +1224,12 @@
                 e.preventDefault();
                 const x = e.pageX - carousel.offsetLeft;
                 const walk = (x - startX) * 1.1; 
+                
+                // Se o mouse moveu mais de 5 pixels, considera como arraste e não clique
+                if (Math.abs(walk) > 5) {
+                    isDraggingCarousel = true; 
+                }
+
                 carousel.scrollLeft = scrollLeft - walk;
                 velX = e.pageX - lastX;
                 lastX = e.pageX;
@@ -1270,25 +1278,22 @@
             window.addEventListener('touchmove', move);
         });
 
-        // LÓGICA DO VÍDEO INTRODUTÓRIO (Só liga quando entra na tela e transita pra foto)
+        // LÓGICA DO VÍDEO INTRODUTÓRIO
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
 
         if (introVideo && staticAfterVideo) {
-            // Cria um "Radar" para o vídeo
             const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
-                    // Quando pelo menos 30% do vídeo aparecer na tela da pessoa
                     if (entry.isIntersecting) {
                         introVideo.play().catch(e => console.log("Autoplay prevenido pelo navegador:", e));
-                        observer.unobserve(entry.target); // Para de observar para não rodar de novo
+                        observer.unobserve(entry.target); 
                     }
                 });
             }, { threshold: 0.3 });
 
             videoObserver.observe(introVideo);
 
-            // Quando o vídeo acabar, tira o active do vídeo e põe na foto
             introVideo.addEventListener('ended', () => {
                 introVideo.classList.remove('active');
                 staticAfterVideo.classList.add('active');
