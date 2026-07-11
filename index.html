@@ -32,7 +32,7 @@
             height: auto;
         }
         .lenis.lenis-smooth {
-            scroll-behavior: auto !important; /* Desativa o nativo para não conflitar */
+            scroll-behavior: auto !important;
         }
         .lenis.lenis-smooth [data-lenis-prevent] {
             overscroll-behavior: contain;
@@ -41,10 +41,10 @@
             overflow: hidden;
         }
         .lenis.lenis-smooth iframe {
-            pointer-events: none; /* Previne que iframes engulam o scroll */
+            pointer-events: none; 
         }
 
-        /* --- PROTEÇÃO CSS: IMPEDE SELEÇÃO DE TEXTO E TOQUES INDESEJADOS --- */
+        /* --- PROTEÇÃO CSS --- */
         body { 
             font-family: 'Montserrat', sans-serif; 
             background-color: var(--bg-champagne); 
@@ -57,7 +57,6 @@
             user-select: none; /* Standard */
         }
         
-        /* Libera digitação apenas dentro do formulário/modal */
         textarea, input {
             -webkit-user-select: text;
             -moz-user-select: text;
@@ -65,7 +64,7 @@
             user-select: text;
         }
 
-        /* Removido scroll-behavior: smooth para usar o Lenis. Overflow-x clip acelera o scroll nativo mobile */
+        /* OTIMIZAÇÃO DE SCROLL MOBILE: overflow-x: clip; garante melhor performance */
         html, body { width: 100%; max-width: 100%; overflow-x: clip; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
@@ -94,7 +93,6 @@
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-        /* Aceleração de GPU no header para não travar o scroll devido ao blur */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); will-change: transform, backdrop-filter; }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -169,7 +167,13 @@
 
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+        
+        /* CSS TOUCH-ACTION: PAN-X OBRIGA O MOBILE A TRAVAR O SCROLL VERTICAL AQUI */
+        .services-carousel { 
+            display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); 
+            scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; 
+            touch-action: pan-x; 
+        }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
@@ -187,9 +191,10 @@
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
         @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
+        /* REMOVIDO SCROLL-SNAP PARA MAIOR FLUIDEZ NO MOBILE */
         @media (max-width: 768px) { 
-            .services-carousel { padding: 20px 30px; scroll-snap-type: x mandatory; } 
-            .service-card { min-width: 80vw; max-width: 80vw; scroll-snap-align: center; } 
+            .services-carousel { padding: 20px 30px; } 
+            .service-card { min-width: 80vw; max-width: 80vw; } 
         }
 
         .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(42, 36, 37, 0.6); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); padding: 20px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
@@ -201,9 +206,9 @@
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
         
-        .modal-gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); overscroll-behavior-x: contain; }
+        .modal-gallery { display: flex; overflow-x: auto; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); touch-action: pan-x; }
         .modal-gallery::-webkit-scrollbar { display: none; }
-        .modal-gallery-item { flex: 0 0 80%; scroll-snap-align: center; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); }
+        .modal-gallery-item { flex: 0 0 80%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); }
         .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
         .modal-body { padding: 25px; overflow-y: auto; }
@@ -223,6 +228,7 @@
         .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
         .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background-color: var(--bg-white); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
+        /* O touch-action: none na bolinha informa o celular para ignorar scroll nativo ali */
         .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); touch-action: none; }
         .ba-handle::before, .ba-handle::after { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
         .ba-handle::before { border-width: 5px 6px 5px 0; border-color: transparent var(--accent-rose) transparent transparent; left: 6px; }
@@ -248,15 +254,15 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); box-shadow: 0 0 15px rgba(200, 142, 147, 0.4); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; touch-action: pan-x; }
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
         .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); }
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
         @media (max-width: 768px) { 
-            .reviews-carousel { padding: 20px 30px; scroll-snap-type: x mandatory; }
-            .review-card { min-width: 80vw; max-width: 80vw; scroll-snap-align: center; } 
+            .reviews-carousel { padding: 20px 30px; }
+            .review-card { min-width: 80vw; max-width: 80vw; } 
         }
         
         .review-user { margin-bottom: 10px; }
@@ -293,7 +299,6 @@
         .float-top:hover { background-color: var(--accent-rose); }
         .float-top svg { width: 24px; height: 24px; fill: var(--bg-white); }
 
-        /* --- OTIMIZAÇÃO DE PERFORMANCE NAS ANIMAÇÕES --- */
         .animate-on-scroll { opacity: 0; transform: translate3d(0, 30px, 0); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); }
         .animate-on-scroll.visible { opacity: 1; transform: translate3d(0, 0, 0); }
         .delay-1 { transition-delay: 0.15s; } .delay-2 { transition-delay: 0.3s; }
@@ -353,7 +358,7 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-images animate-on-scroll">
-                    <img src="https://i.imgur.com/X3CYQCt.jpeg" alt="Ambiente do Studio Beauty by Cris" class="about-img-1">
+                    <img src="https://i.imgur.com/X3CYQCt.jpeg" alt="Ambiente do Studio Beauty By Cris" class="about-img-1">
                     
                     <div class="about-img-2-slider">
                         <video src="https://i.imgur.com/DiFnIe4.mp4" muted playsinline class="slider-media active" id="intro-video"></video>
@@ -374,7 +379,7 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="subtitle" data-i18n="why_sub">Vorteile</span>
-                <h2 data-i18n="why_title">Warum Beauty by Cris?</h2>
+                <h2 data-i18n="why_title">Warum Beauty By Cris?</h2>
             </div>
             <div class="why-grid">
                 <div class="why-card animate-on-scroll">
@@ -621,7 +626,7 @@
                 <div class="rating-huge text-gradient">5,0</div>
                 <div class="stars-gradient">★★★★★</div>
                 <p data-i18n="google_reviews_count" style="color: var(--text-muted);">Basierend auf 13 Google-Rezensionen</p>
-                <a href="https://www.google.com/search?q=Beauty+by+Cris+Beleza+Facial+Baden-Baden" target="_blank" class="btn-google" data-i18n="btn_google_page">Auf Google ansehen</a>
+                <a href="https://www.google.com/search?q=Beauty+By+Cris+Beleza+Facial+Baden-Baden" target="_blank" class="btn-google" data-i18n="btn_google_page">Auf Google ansehen</a>
             </div>
         </div>
 
@@ -776,7 +781,7 @@
     </section>
 
     <div class="map-section">
-        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20by%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
     <section class="clinic-info" id="footer-contacts">
@@ -844,6 +849,7 @@
     <script>
         // --- PROTEÇÃO ANTI-CÓPIA ---
         document.addEventListener('contextmenu', e => e.preventDefault());
+
         document.addEventListener('keydown', function(e) {
             if (e.key === 'F12' || 
                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
@@ -855,43 +861,46 @@
                 e.preventDefault();
             }
         });
+
         document.addEventListener('dragstart', e => {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
             }
         });
 
-        // --- INICIALIZAÇÃO DO LENIS (SCROLL SUAVE PREMIUM - ESTILO APPLE) ---
+        // --- INICIALIZAÇÃO DO LENIS (SCROLL SUAVE PREMIUM) ---
+        // syncTouch desabilitado para não corromper o Swipe nativo do celular
         const lenis = new Lenis({
-            lerp: 0.06, // Substitui o "duration". Quanto menor (ex: 0.05 a 0.08), mais inércia e "peso"
-            wheelMultiplier: 0.8, // Suaviza a velocidade da roda do mouse
-            smoothWheel: true, // Força a suavização de hardware
-            smoothTouch: false, // Touch já é perfeito nos celulares nativamente
-            syncTouch: true
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            direction: 'vertical',
+            gestureDirection: 'vertical',
+            smooth: true,
+            mouseMultiplier: 1,
+            smoothTouch: false, 
+            touchMultiplier: 2,
+            infinite: false,
         });
 
-        // O requestAnimationFrame mantém a animação sincronizada a 60/120Hz com a tela do usuário
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
         }
         requestAnimationFrame(raf);
 
-        // Lógica de Scroll dos Links do Menu agora usando a engine do Lenis
         document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
                 if (targetId.startsWith('#') && targetId !== '#') {
                     e.preventDefault();
-                    // lenis.scrollTo usando lerp para manter a mesma inércia física ao clicar
-                    lenis.scrollTo(targetId, { offset: -90, lerp: 0.06 });
+                    lenis.scrollTo(targetId, { offset: -90, duration: 1.5 });
                 }
             });
         });
 
         function smoothScrollToTop(e) {
             e.preventDefault();
-            lenis.scrollTo(0, { lerp: 0.06 });
+            lenis.scrollTo(0, { duration: 1.5 });
         }
 
         let selectedServiceKey = '';
@@ -1194,7 +1203,6 @@
             }, 300);
         }
 
-        // Modal de Serviço
         function openServiceModal(cardElement, serviceKey) {
             if (isDraggingCarousel) return;
 
@@ -1277,7 +1285,7 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        // Lógica de Carrossel Suave com Inércia
+        // Lógica de Carrossel Suave apenas para MOUSE no desktop. No mobile, é 100% nativo.
         const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel')];
         carousels.forEach(carousel => {
             if(!carousel) return;
@@ -1350,7 +1358,7 @@
             }
         });
 
-        // BEFORE & AFTER (Otimizado para mover apenas pelo Handle e travar o scroll mobile)
+        // BEFORE & AFTER: OTIMIZADO PARA TRAVAR A TELA E MOVER APENAS PELO HANDLE NO CELULAR
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
@@ -1359,6 +1367,12 @@
             
             const move = (e) => {
                 if(!isSliding) return;
+                
+                // TRAVA A ROLAGEM VERTICAL: se for um toque na tela (celular), cancela o scroll da página enquanto mexe.
+                if (e.cancelable && e.type.includes('touch')) {
+                    e.preventDefault(); 
+                }
+
                 let rect = slider.getBoundingClientRect();
                 let x = (e.type.includes('touch') ? e.touches[0].clientX : e.clientX) - rect.left;
                 let percent = Math.max(0, Math.min(x / rect.width * 100, 100));
@@ -1369,16 +1383,15 @@
                 if(line) line.style.left = percent + '%';
             }
             
-            // O Evento agora está ATRELADO APENAS AO HANDLE, impedindo arraste pelo resto da imagem
             handle.addEventListener('mousedown', () => isSliding = true);
             handle.addEventListener('touchstart', () => isSliding = true, {passive: true});
             window.addEventListener('mouseup', () => isSliding = false);
             window.addEventListener('touchend', () => isSliding = false);
             window.addEventListener('mousemove', move);
-            window.addEventListener('touchmove', move);
+            // Passive: false é OBRIGATÓRIO aqui para permitir que o e.preventDefault() funcione e trave a tela.
+            window.addEventListener('touchmove', move, { passive: false }); 
         });
 
-        // LÓGICA DO VÍDEO INTRODUTÓRIO
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
 
@@ -1400,7 +1413,6 @@
             });
         }
 
-        // Script Extra de Vídeo da seção exclusiva
         document.getElementById('play-btn-trigger').addEventListener('click', () => {
             document.getElementById('video-player-container').innerHTML = '<video src="Midias/video.mp4" controls autoplay style="width:100%; height:100%; object-fit:cover;"></video>';
         });
