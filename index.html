@@ -172,12 +172,13 @@
         .services-carousel { 
             display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); 
             scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; 
-            touch-action: pan-x; 
+            scroll-snap-type: x mandatory;
+            scroll-padding-left: calc(50vw - 650px + 40px);
         }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
-        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; }
+        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; scroll-snap-align: start; }
         .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
         .service-card.selected { border-color: var(--accent-rose); background-color: var(--bg-champagne); box-shadow: 0 0 15px rgba(200, 142, 147, 0.3); }
 
@@ -190,10 +191,10 @@
         .s-row .lbl { font-weight: 600; color: var(--accent-rose); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
-        @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
+        @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; scroll-padding-left: 40px; } }
         /* REMOVIDO SCROLL-SNAP PARA MAIOR FLUIDEZ NO MOBILE */
         @media (max-width: 768px) { 
-            .services-carousel { padding: 20px 30px; } 
+            .services-carousel { padding: 20px 30px; scroll-padding-left: 30px; } 
             .service-card { min-width: 80vw; max-width: 80vw; } 
         }
 
@@ -206,9 +207,9 @@
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
         
-        .modal-gallery { display: flex; overflow-x: auto; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); touch-action: pan-x; }
+        .modal-gallery { display: flex; overflow-x: auto; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); scroll-snap-type: x mandatory; scroll-padding-left: 20px; }
         .modal-gallery::-webkit-scrollbar { display: none; }
-        .modal-gallery-item { flex: 0 0 80%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); }
+        .modal-gallery-item { flex: 0 0 80%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); scroll-snap-align: start; }
         .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
         .modal-body { padding: 25px; overflow-y: auto; }
@@ -254,14 +255,15 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); box-shadow: 0 0 15px rgba(200, 142, 147, 0.4); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; touch-action: pan-x; }
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; scroll-padding-left: calc(50vw - 650px + 40px); }
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
-        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); }
+        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); scroll-snap-align: start; }
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
+        @media (max-width: 1380px) { .reviews-carousel { padding: 20px 40px; scroll-padding-left: 40px; } }
         @media (max-width: 768px) { 
-            .reviews-carousel { padding: 20px 30px; }
+            .reviews-carousel { padding: 20px 30px; scroll-padding-left: 30px; }
             .review-card { min-width: 80vw; max-width: 80vw; } 
         }
         
@@ -1300,6 +1302,7 @@
                 isDown = true;
                 isDraggingCarousel = false; 
                 carousel.classList.add('active');
+                carousel.style.scrollSnapType = 'none'; // Desabilita snap ao arrastar com o mouse para não dar conflito
                 startX = e.pageX - carousel.offsetLeft;
                 scrollLeft = carousel.scrollLeft;
                 lastX = e.pageX; 
@@ -1348,12 +1351,14 @@
                 if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
                      velX = 0;
                      cancelAnimationFrame(momentumID);
+                     carousel.style.scrollSnapType = ''; // Reativa o snap Premium
                      return;
                 }
                 if (Math.abs(velX) > 0.5) {
                     momentumID = requestAnimationFrame(momentumLoop);
                 } else {
                      cancelAnimationFrame(momentumID); 
+                     carousel.style.scrollSnapType = ''; // Reativa o snap Premium
                 }
             }
         });
