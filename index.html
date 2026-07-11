@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty by Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
+    <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty By Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
     <link rel="icon" href="https://i.imgur.com/CQpHs8c.png" type="image/png">
-    <title>Beauty by Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
+    <title>Beauty By Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
     
     <!-- Importação do Lenis para Scroll Suave Premium -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -65,8 +65,8 @@
             user-select: text;
         }
 
-        /* REMOVIDO scroll-behavior: smooth pois ele CAUSA A QUEDA DE FRAMES ao brigar com o Lenis */
-        html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+        /* Removido scroll-behavior: smooth para usar o Lenis. Overflow-x clip acelera o scroll nativo mobile */
+        html, body { width: 100%; max-width: 100%; overflow-x: clip; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
@@ -169,7 +169,7 @@
 
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
@@ -188,8 +188,8 @@
         
         @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
         @media (max-width: 768px) { 
-            .services-carousel { padding: 20px 30px; } 
-            .service-card { min-width: 80vw; max-width: 80vw; } 
+            .services-carousel { padding: 20px 30px; scroll-snap-type: x mandatory; } 
+            .service-card { min-width: 80vw; max-width: 80vw; scroll-snap-align: center; } 
         }
 
         .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(42, 36, 37, 0.6); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); padding: 20px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
@@ -201,7 +201,7 @@
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
         
-        .modal-gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne);}
+        .modal-gallery { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); overscroll-behavior-x: contain; }
         .modal-gallery::-webkit-scrollbar { display: none; }
         .modal-gallery-item { flex: 0 0 80%; scroll-snap-align: center; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); }
         .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; }
@@ -216,14 +216,14 @@
 
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; touch-action: pan-y; border-radius: 8px; transform: translateZ(0);}
+        .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; border-radius: 8px; transform: translateZ(0);}
         .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
         
         .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
         .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
         .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background-color: var(--bg-white); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
-        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); touch-action: none; }
         .ba-handle::before, .ba-handle::after { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
         .ba-handle::before { border-width: 5px 6px 5px 0; border-color: transparent var(--accent-rose) transparent transparent; left: 6px; }
         .ba-handle::after { border-width: 5px 0 5px 6px; border-color: transparent transparent transparent var(--accent-rose); right: 6px; }
@@ -248,15 +248,15 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); box-shadow: 0 0 15px rgba(200, 142, 147, 0.4); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
         .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); }
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
         @media (max-width: 768px) { 
-            .reviews-carousel { padding: 20px 30px; }
-            .review-card { min-width: 80vw; max-width: 80vw; } 
+            .reviews-carousel { padding: 20px 30px; scroll-snap-type: x mandatory; }
+            .review-card { min-width: 80vw; max-width: 80vw; scroll-snap-align: center; } 
         }
         
         .review-user { margin-bottom: 10px; }
@@ -308,7 +308,7 @@
             <a href="#main-body" class="logo-wrap">
                 <img src="https://i.imgur.com/CQpHs8c.png" alt="Logo" class="logo-img">
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--text-dark); font-weight: 600;">
-                    Beauty by <span class="text-gradient">Cris</span>
+                    Beauty By <span class="text-gradient">Cris</span>
                 </div>
             </a>
             <nav id="nav-menu">
@@ -811,7 +811,7 @@
                 <a href="https://instagram.com/beauty_by_cris" target="_blank">Instagram</a>
                 <a href="https://wa.me/491629384907" target="_blank" class="wa-link">WhatsApp</a>
             </div>
-            <div>© 2026 Beauty by Cris. <span data-i18n="footer_rights">Alle Rechte vorbehalten.</span> | <span data-i18n="footer_dev">Entwickelt von:</span> <a href="https://instagram.com/insideprojectco" target="_blank" rel="noopener" style="color:var(--accent-rose); font-weight:600;">Inside Project Co.</a></div>
+            <div>© 2026 Beauty By Cris. <span data-i18n="footer_rights">Alle Rechte vorbehalten.</span> | <span data-i18n="footer_dev">Entwickelt von:</span> <a href="https://instagram.com/insideprojectco" target="_blank" rel="noopener" style="color:var(--accent-rose); font-weight:600;">Inside Project Co.</a></div>
         </div>
     </footer>
 
@@ -922,7 +922,7 @@
                 hero_title: "Ihre natürliche Schönheit im <span class='text-gradient'>Fokus</span>", hero_subtitle: "Erleben Sie maßgeschneiderte Kosmetikbehandlungen auf höchstem Niveau. Perfektion, kompromisslose Hygiene und exklusives Wohlbefinden.",
                 btn_explore_services: "Behandlungen entdecken",
                 about_sub: "Das Studio", about_title: "Exzellenz in Ästhetik und Pflege", about_p1: "Unser Studio wurde mit dem Ziel gegründet, Ihre natürliche Schönheit hervorzuheben, mit fortschrittlichen Techniken und einer Umgebung für Ihren totalen Komfort.", about_p2: "Mit hochqualifizierten Fachleuten und modernster Ausstattung garantieren wir unglaubliche und sichere Ergebnisse bei all unseren Behandlungen.",
-                why_sub: "Vorteile", why_title: "Warum Beauty by Cris?", w1_title: "Absolute Hygiene", w1_desc: "Höchste klinische Standards für Ihre Sicherheit.", w2_title: "Premium Qualität", w2_desc: "Ausschließlich erstklassige Materialien & Geräte.", w3_title: "Persönliche Betreuung", w3_desc: "Maßgeschneiderte Behandlungen nur für Sie.", w4_title: "Entspannendes Ambiente", w4_desc: "Eine Oase der Ruhe für Körper und Geist.",
+                why_sub: "Vorteile", why_title: "Warum Beauty By Cris?", w1_title: "Absolute Hygiene", w1_desc: "Höchste klinische Standards für Ihre Sicherheit.", w2_title: "Premium Qualität", w2_desc: "Ausschließlich erstklassige Materialien & Geräte.", w3_title: "Persönliche Betreuung", w3_desc: "Maßgeschneiderte Behandlungen nur für Sie.", w4_title: "Entspannendes Ambiente", w4_desc: "Eine Oase der Ruhe für Körper und Geist.",
                 services_sub: "Exklusive Behandlungen", services_title: "Unsere Services & Rituale", lbl_duration: "Dauer:", lbl_benefits: "Vorteile:", lbl_process: "Ablauf:",
                 s1_title: "Gesichtsreinigung", s1_desc: "Tiefenreinigung für ein klares Hautbild.", s1_ben: "Porenverfeinerung", s1_abl: "Abreinigung, Dampf, Maske", s1_dur: "60 Min.",
                 s2_title: "Micropigmentierung & Microblading", s2_desc: "Perfekt geformte Augenbrauen.", s2_ben: "Dauerhaft dichte Brauen", s2_abl: "Präzise Pigmentierung", s2_dur: "120 Min.",
@@ -963,7 +963,7 @@
                 hero_title: "Your natural beauty in <span class='text-gradient'>Focus</span>", hero_subtitle: "Experience custom cosmetic treatments at the highest level. Perfection, absolute hygiene, and exclusive wellbeing.",
                 btn_explore_services: "Explore Treatments",
                 about_sub: "The Studio", about_title: "Excellence in Aesthetics and Care", about_p1: "Our studio was founded to highlight your natural beauty, with advanced techniques and total comfort.", about_p2: "With highly qualified professionals and modern equipment, we guarantee incredible results.",
-                why_sub: "Advantages", why_title: "Why Beauty by Cris?", w1_title: "Absolute Hygiene", w1_desc: "Highest clinical standards.", w2_title: "Premium Quality", w2_desc: "Only first-class materials.", w3_title: "Personalized Care", w3_desc: "Tailored just for you.", w4_title: "Relaxing Environment", w4_desc: "An oasis for body and mind.",
+                why_sub: "Advantages", why_title: "Why Beauty By Cris?", w1_title: "Absolute Hygiene", w1_desc: "Highest clinical standards.", w2_title: "Premium Quality", w2_desc: "Only first-class materials.", w3_title: "Personalized Care", w3_desc: "Tailored just for you.", w4_title: "Relaxing Environment", w4_desc: "An oasis for body and mind.",
                 services_sub: "Exclusive Treatments", services_title: "Services & Rituals", lbl_duration: "Duration:", lbl_benefits: "Benefits:", lbl_process: "Process:",
                 s1_title: "Facial Cleansing", s1_desc: "Deep cleansing for a clear complexion.", s1_ben: "Refines pores", s1_abl: "Cleansing, extraction", s1_dur: "60 min",
                 s2_title: "Micropigmentation", s2_desc: "Perfectly shaped eyebrows.", s2_ben: "Long-lasting fullness", s2_abl: "Precise pigmentation", s2_dur: "120 min",
@@ -1004,7 +1004,7 @@
                 hero_title: "Sua beleza natural em <span class='text-gradient'>Foco</span>", hero_subtitle: "Experimente tratamentos cosméticos sob medida no mais alto nível. Perfeição, higiene absoluta e bem-estar exclusivo.",
                 btn_explore_services: "Explorar Tratamentos",
                 about_sub: "O Studio", about_title: "Excelência em Estética e Cuidado", about_p1: "Nosso studio foi fundado com o propósito de realçar a beleza natural que existe em você, com técnicas avançadas e ambiente de total conforto.", about_p2: "Com profissionais altamente qualificados e equipamentos modernos, garantimos resultados incríveis e seguros.",
-                why_sub: "Vantagens", why_title: "Por que a Beauty by Cris?", w1_title: "Higiene Absoluta", w1_desc: "Mais altos padrões para sua segurança.", w2_title: "Qualidade Premium", w2_desc: "Apenas os melhores materiais e equipamentos.", w3_title: "Atendimento Personalizado", w3_desc: "Tratamentos sob medida apenas para você.", w4_title: "Ambiente Relaxante", w4_desc: "Um oásis de tranquilidade para corpo e mente.",
+                why_sub: "Vantagens", why_title: "Por que a Beauty By Cris?", w1_title: "Higiene Absoluta", w1_desc: "Mais altos padrões para sua segurança.", w2_title: "Qualidade Premium", w2_desc: "Apenas os melhores materiais e equipamentos.", w3_title: "Atendimento Personalizado", w3_desc: "Tratamentos sob medida apenas para você.", w4_title: "Ambiente Relaxante", w4_desc: "Um oásis de tranquilidade para corpo e mente.",
                 services_sub: "Tratamentos Exclusivos", services_title: "Nossos Serviços & Rituais", lbl_duration: "Duração:", lbl_benefits: "Benefícios:", lbl_process: "Procedimento:",
                 s1_title: "Limpeza de Pele", s1_desc: "Limpeza profunda para um aspecto radiante.", s1_ben: "Refina poros", s1_abl: "Higienização, extração", s1_dur: "60 min",
                 s2_title: "Micropigmentação", s2_desc: "Sobrancelhas desenhadas com ultra-realismo.", s2_ben: "Sobrancelhas cheias", s2_abl: "Pigmentação de precisão", s2_dur: "120 min",
@@ -1027,7 +1027,7 @@
                 r3_date: "2 anos atrás", r3_text: "Profissional excelente, superou as minhas expectativas, obrigada Cris ❤️ Super indico!",
                 r4_date: "2 anos atrás", r4_text: "Já fui lá várias vezes. E seja para cílios ou sobrancelhas, estou absolutamente encantada.",
                 r5_date: "2 anos atrás", r5_text: "Fiz micropigmentação nas sobrancelhas e estou encantada com o resultado. Recomendo sem reservas; merecemos essa sensação de felicidade.",
-                r6_date: "2 anos atrás", r6_text: "A energia da Cris é a melhor que você pode encontrar por lá; o trabalho que ela faz é de primeira qualidade, os tratamentos faciais e a micropigmentação labial são excelentes. Recomendo muito o Beauty by Cris.",
+                r6_date: "2 anos atrás", r6_text: "A energia da Cris é a melhor que você pode encontrar por lá; o trabalho que ela faz é de primeira qualidade, os tratamentos faciais e a micropigmentação labial são excelentes. Recomendo muito o Beauty By Cris.",
                 r7_date: "1 ano atrás", r7_text: "Um estúdio pequeno e ótimo... Fiz um tratamento facial com plasma pen e microblading lá.",
                 r8_date: "2 anos atrás", r8_text: "Recomendo muito; atendimento excelente e ambiente aconchegante. Estou muito satisfeita! Venha conferir. 👍👏🤩❤️",
                 r9_date: "2 anos atrás", r9_text: "Fiz extensão de cílios e estou muito satisfeita com o resultado.",
@@ -1045,7 +1045,7 @@
                 hero_title: "Su belleza natural en <span class='text-gradient'>Foco</span>", hero_subtitle: "Experimente tratamientos cosméticos al más alto nivel. Perfección, higiene absoluta y bienestar.",
                 btn_explore_services: "Explorar Tratamentos",
                 about_sub: "El Studio", about_title: "Excelencia en Estética", about_p1: "Nuestro studio fue fundado para resaltar su belleza natural con total comodidad.", about_p2: "Con profesionales calificados garantizamos resultados increíbles y seguros.",
-                why_sub: "Ventajas", why_title: "¿Por qué Beauty by Cris?", w1_title: "Higiene Absoluta", w1_desc: "Altos estándares para su seguridad.", w2_title: "Calidad Premium", w2_desc: "Los mejores materiales.", w3_title: "Atención Personalizada", w3_desc: "Tratamientos a su medida.", w4_title: "Ambiente Relajante", w4_desc: "Un oasis de tranquilidad.",
+                why_sub: "Ventajas", why_title: "¿Por qué Beauty By Cris?", w1_title: "Higiene Absoluta", w1_desc: "Altos estándares para su seguridad.", w2_title: "Calidad Premium", w2_desc: "Los mejores materiales.", w3_title: "Atención Personalizada", w3_desc: "Tratamientos a su medida.", w4_title: "Ambiente Relajante", w4_desc: "Un oasis de tranquilidad.",
                 services_sub: "Tratamientos", services_title: "Servicios & Rituales", lbl_duration: "Duración:", lbl_benefits: "Beneficios:", lbl_process: "Proceso:",
                 s1_title: "Limpieza Facial", s1_desc: "Limpieza profunda.", s1_ben: "Refina poros", s1_abl: "Limpieza, extracción", s1_dur: "60 min",
                 s2_title: "Micropigmentación", s2_desc: "Cejas ultra-realistas.", s2_ben: "Cejas pobladas", s2_abl: "Pigmentación precisa", s2_dur: "120 min",
@@ -1075,7 +1075,7 @@
                 r10_date: "hace 1 año", r10_text: "Muy satisfecho con el trabajo.",
                 r11_date: "hace 2 años", r11_text: "Genial",
                 r12_date: "hace 5 días", r12_text: "Hice microblading y pestañas, ¡feliz! Resultado hermoso.",
-                r13_date: "hace 2 semanas", r13_text: "Tratamiento facial excelente. Tratamiento fantástico. Recomiendo.",
+                r13_date: "hace 2 weeks", r13_text: "Tratamiento facial excelente. Tratamiento fantástico. Recomiendo.",
                 info_address: "Ubicación", info_contact: "Contacto", info_hours: "Horarios", hours_week: "Lun - Vie: 09:00 - 18:00", hours_weekend: "Sáb & Dom: Cerrado",
                 footer_rights: "Todos los derechos reservados.", footer_dev: "Desarrollado por:",
                 btn_contact_us: "Contáctenos", btn_work_with_us: "Trabaja con Nosotros",
@@ -1086,7 +1086,7 @@
                 hero_title: "Votre beauté au <span class='text-gradient'>Focus</span>", hero_subtitle: "Des soins cosmétiques au plus haut niveau. Perfection et hygiène absolue.",
                 btn_explore_services: "Découvrir les Soins",
                 about_sub: "Le Studio", about_title: "Excellence en Esthétique", about_p1: "Notre studio a été fondé pour mettre en valeur votre beauté naturelle.", about_p2: "Des professionnels qualifiés pour des résultats incroyables.",
-                why_sub: "Avantages", why_title: "Pourquoi Beauty by Cris?", w1_title: "Hygiène Absoluta", w1_desc: "Hauts standards.", w2_title: "Qualité Premium", w2_desc: "Matériaux de premier choix.", w3_title: "Soins Personnalisés", w3_desc: "Sur mesure pour vous.", w4_title: "Ambiance Relaxante", w4_desc: "Oasis de tranquillité.",
+                why_sub: "Avantages", why_title: "Pourquoi Beauty By Cris?", w1_title: "Hygiène Absoluta", w1_desc: "Hauts standards.", w2_title: "Qualité Premium", w2_desc: "Matériaux de premier choix.", w3_title: "Soins Personnalisés", w3_desc: "Sur mesure pour vous.", w4_title: "Ambiance Relaxante", w4_desc: "Oasis de tranquillité.",
                 services_sub: "Soins", services_title: "Nos Services", lbl_duration: "Durée:", lbl_benefits: "Bénéfices:", lbl_process: "Procédure:",
                 s1_title: "Nettoyage du Visage", s1_desc: "Nettoyage en profondeur.", s1_ben: "Resserre les pores", s1_abl: "Extraction", s1_dur: "60 min",
                 s2_title: "Micropigmentation", s2_desc: "Sourcils ultra-réalistes.", s2_ben: "Sourcils parfaits", s2_abl: "Pigmentación précise", s2_dur: "120 min",
@@ -1127,7 +1127,7 @@
                 hero_title: "Естественная красота в <span class='text-gradient'>Фокусе</span>", hero_subtitle: "Индивидуальные косметические процедуры на высшем уровне. Перфекционизм и гигиена.",
                 btn_explore_services: "Изучить процедуры",
                 about_sub: "Студия", about_title: "Превосходство в эстетике", about_p1: "Наша студия создана, чтобы подчеркнуть вашу красоту.", about_p2: "Мы гарантируем невероятные и безопасные результаты.",
-                why_sub: "Преимущества", why_title: "Почему Beauty by Cris?", w1_title: "Абсолютная Гигиена", w1_desc: "Высокие стандарты.", w2_title: "Премиум Качество", w2_desc: "Лучшие материалы.", w3_title: "Индивидуальный Уход", w3_desc: "Специально для вас.", w4_title: "Расслабление", w4_desc: "Оазис спокойствия.",
+                why_sub: "Преимущества", why_title: "Почему Beauty By Cris?", w1_title: "Абсолютная Гигиена", w1_desc: "Высокие стандарты.", w2_title: "Премиум Качество", w2_desc: "Лучшие материалы.", w3_title: "Индивидуальный Уход", w3_desc: "Специально для вас.", w4_title: "Расслабление", w4_desc: "Оазис спокойствия.",
                 services_sub: "Услуги", services_title: "Наши Процедуры", lbl_duration: "Время:", lbl_benefits: "Результат:", lbl_process: "Этапы:",
                 s1_title: "Чистка Лица", s1_desc: "Глубокое очищение.", s1_ben: "Сужение пор", s1_abl: "Очищение", s1_dur: "60 мин",
                 s2_title: "Микропигментация", s2_desc: "Идеальные брови.", s2_ben: "Густые брови", s2_abl: "Пигментация", s2_dur: "120 мин",
@@ -1350,7 +1350,7 @@
             }
         });
 
-        // BEFORE & AFTER
+        // BEFORE & AFTER (Otimizado para mover apenas pelo Handle e travar o scroll mobile)
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
@@ -1369,8 +1369,9 @@
                 if(line) line.style.left = percent + '%';
             }
             
-            slider.addEventListener('mousedown', () => isSliding = true);
-            slider.addEventListener('touchstart', () => isSliding = true, {passive: true});
+            // O Evento agora está ATRELADO APENAS AO HANDLE, impedindo arraste pelo resto da imagem
+            handle.addEventListener('mousedown', () => isSliding = true);
+            handle.addEventListener('touchstart', () => isSliding = true, {passive: true});
             window.addEventListener('mouseup', () => isSliding = false);
             window.addEventListener('touchend', () => isSliding = false);
             window.addEventListener('mousemove', move);
