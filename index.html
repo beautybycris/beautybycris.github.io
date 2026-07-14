@@ -885,7 +885,7 @@
                 <h3 id="modalServiceName">Nome do Serviço</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
             </div>
-            <div class="modal-gallery">
+            <div class="modal-gallery" id="modalGallery" data-lenis-prevent>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 1 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 2 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 3 ]</span></div></div>
@@ -1386,7 +1386,7 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        // --- STREAMING_CHUNK:Configuring horizontal drag with inertia... ---
+        // Lógica de Carrossel Suave com Inércia
         const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel'), document.getElementById('modalGallery')];
         carousels.forEach(carousel => {
             if(!carousel) return;
@@ -1481,10 +1481,10 @@
                 if(line) line.style.left = percent + '%';
 
                 if(label) {
-                    if(percent < 50) {
-                        label.innerText = t[currentLang]['lbl_after'];
+                    if(percent > 50) {
+                        label.innerText = t[currentLang]['lbl_before']; // Revela lado esquerdo (Antes)
                     } else {
-                        label.innerText = t[currentLang]['lbl_before'];
+                        label.innerText = t[currentLang]['lbl_after']; // Revela lado direito (Depois)
                     }
                 }
             }
