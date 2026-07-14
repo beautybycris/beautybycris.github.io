@@ -39,7 +39,7 @@
             box-sizing: border-box; 
             margin: 0; 
             padding: 0; 
-            -webkit-tap-highlight-color: transparent; /* Remove flash azul no toque */
+            -webkit-tap-highlight-color: transparent; /* Remove flash azul no toque do celular */
             outline: none;
         }
 
@@ -49,7 +49,7 @@
             color: var(--text-dark); 
             line-height: 1.6; 
             -webkit-font-smoothing: antialiased;
-            /* Proteção brutal contra seleção acidental */
+            /* Proteção brutal contra seleção acidental e menu nativo */
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
@@ -59,6 +59,7 @@
             overflow-x: clip; /* Solução moderna anti-lag mobile */
         }
         
+        /* Libera a seleção de texto APENAS nos formulários, para o cliente poder digitar */
         textarea, input {
             -webkit-user-select: text;
             -moz-user-select: text;
@@ -86,8 +87,8 @@
         .btn-rose:hover { background-color: var(--accent-rose-hover); transform: translate3d(0, -3px, 0); box-shadow: 0 10px 20px rgba(200, 142, 147, 0.25); }
         .btn-outline { border: 1px solid var(--accent-rose); color: var(--text-dark); background: transparent; }
         .btn-outline:hover { background-color: var(--accent-rose); color: var(--bg-white); transform: translate3d(0, -3px, 0); }
-        .btn-small-footer { padding: 8px 15px; font-size: 0.7rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); border-radius: 4px; margin: 0 5px;}
-        .btn-small-footer:hover { background: var(--accent-rose); border-color: var(--accent-rose); color: white;}
+        .btn-small-footer { padding: 10px 20px; font-size: 0.75rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); border-radius: 4px; margin: 0 5px; transition: var(--transition-smooth); background: transparent; cursor: pointer; text-transform: uppercase; font-family: inherit; }
+        .btn-small-footer:hover { background: var(--accent-rose); border-color: var(--accent-rose); color: white; transform: translate3d(0, -2px, 0); box-shadow: 0 5px 15px rgba(200, 142, 147, 0.3);}
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
@@ -163,35 +164,41 @@
 
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .services-carousel { 
-            display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); 
+        .services-carousel, .reviews-carousel, .reels-desktop, .modal-gallery { 
+            display: flex; gap: 20px; overflow-x: auto; 
+            padding: 20px calc(50vw - 650px + 40px); 
             scrollbar-width: none; cursor: grab; transform: translateZ(0); 
-            /* Deslize perfeito no celular */
+            /* Deslize perfeito no celular + Alinhamento Ímã */
             -webkit-overflow-scrolling: touch; 
             scroll-snap-type: x mandatory;
         }
-        .services-carousel::-webkit-scrollbar { display: none; }
-        .services-carousel.active { cursor: grabbing; }
+        .modal-gallery { padding: 20px; gap: 15px; background-color: var(--bg-champagne); }
+        
+        .services-carousel::-webkit-scrollbar, .reviews-carousel::-webkit-scrollbar, .reels-desktop::-webkit-scrollbar, .modal-gallery::-webkit-scrollbar { display: none; }
+        .services-carousel.active, .reviews-carousel.active, .reels-desktop.active, .modal-gallery.active { cursor: grabbing; }
         
         .service-card { 
             min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; 
             padding: 15px; display: flex; flex-direction: column; border-radius: 8px; 
-            transition: var(--transition-smooth); user-select: none; scroll-snap-align: center;
+            transition: var(--transition-smooth); scroll-snap-align: center;
         }
         .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
 
-        .service-img-wrap { width: 100%; aspect-ratio: 4/3; margin-bottom: 20px; border-radius: 6px; overflow: hidden; pointer-events: none; }
+        /* Protege imagens e textos internos para não conflitar com o arrastar do mouse */
+        .service-img-wrap, .service-card h3, .service-card p, .service-meta { pointer-events: none; user-select: none; }
+        
+        .service-img-wrap { width: 100%; aspect-ratio: 4/3; margin-bottom: 20px; border-radius: 6px; overflow: hidden; }
         .service-img-wrap .media-placeholder { width: 100%; height: 100%; border-radius: 6px; }
-        .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; line-height: 1.3; pointer-events: none;}
-        .service-card p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4; pointer-events: none;}
-        .service-meta { border-top: 1px solid var(--border-light); padding-top: 15px; margin-top: auto; pointer-events: none;}
+        .service-card h3 { font-size: 1.2rem; margin-bottom: 10px; line-height: 1.3; }
+        .service-card p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 15px; line-height: 1.4; }
+        .service-meta { border-top: 1px solid var(--border-light); padding-top: 15px; margin-top: auto; }
         .s-row { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 5px; }
         .s-row .lbl { font-weight: 600; color: var(--accent-rose); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
-        @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
+        @media (max-width: 1380px) { .services-carousel, .reviews-carousel, .reels-desktop { padding: 20px 40px; } }
         @media (max-width: 768px) { 
-            .services-carousel { padding: 20px 30px; } 
+            .services-carousel, .reviews-carousel { padding: 20px 30px; } 
             .service-card { min-width: 80vw; max-width: 80vw; } 
         }
 
@@ -205,16 +212,8 @@
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
         
-        /* Modal Gallery - Liso para celular e PC */
-        .modal-gallery { 
-            display: flex; overflow-x: auto; gap: 15px; padding: 20px; 
-            scrollbar-width: none; background-color: var(--bg-champagne); cursor: grab;
-            -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
-        }
-        .modal-gallery:active { cursor: grabbing; }
-        .modal-gallery::-webkit-scrollbar { display: none; }
-        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; scroll-snap-align: center; pointer-events: none;}
-        .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none;}
+        .modal-gallery-item { flex: 0 0 85%; scroll-snap-align: center; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); pointer-events: none; user-select: none; }
+        .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
         .modal-body { padding: 25px; overflow-y: auto; }
         .modal-cta-text { font-weight: 500; margin-bottom: 15px; color: var(--text-dark); font-size: 0.95rem; }
@@ -227,31 +226,27 @@
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; border-radius: 8px; transform: translateZ(0);}
-        .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
+        .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; user-select: none;}
         
         .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); pointer-events: none;}
-        .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
+        .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none; user-select: none;}
         .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background-color: var(--bg-white); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
-        /* A TRAVA É APENAS NA BOLINHA */
+        /* Trava cravada na bolinha. O resto da imagem não afeta a rolagem. */
         .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 45px; height: 45px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); touch-action: none; }
         .ba-handle::before, .ba-handle::after { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
         .ba-handle::before { border-width: 5px 6px 5px 0; border-color: transparent var(--accent-rose) transparent transparent; left: 6px; }
         .ba-handle::after { border-width: 5px 0 5px 6px; border-color: transparent transparent transparent var(--accent-rose); right: 6px; }
         
+        /* Tag de texto única, dinâmica e no canto inferior direito */
         .ba-label-corner { position: absolute; bottom: 15px; right: 15px; padding: 6px 16px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; transition: background-color 0.3s; }
         @media (max-width: 992px) { .ba-grid { grid-template-columns: 1fr; } .ba-slider-container { height: 300px; } }
 
         .videos { padding: 100px 0; background-color: var(--bg-white); overflow: hidden;}
+        .reels-desktop .reel-item { flex: 0 0 auto; width: 280px; scroll-snap-align: center; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle); transform: translateZ(0); pointer-events: none;}
+        .reels-desktop .reel-item video { width: 100%; height: 100%; object-fit: cover;}
         
-        /* Desktop Videos (4 em linha) */
-        .reels-desktop { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;}
-        .reels-desktop::-webkit-scrollbar { display: none; }
-        .reels-desktop.active { cursor: grabbing; }
-        .reels-desktop .reel-item { flex: 0 0 auto; width: 280px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle); transform: translateZ(0); scroll-snap-align: center;}
-        .reels-desktop .reel-item video { width: 100%; height: 100%; object-fit: cover; pointer-events: auto;}
-        
-        /* Mobile Videos (Main + Stories em baixo) */
+        /* Mobile Videos Layout Stories Restaurado */
         .reels-mobile { display: none; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 400px; margin: 0 auto;}
         .mobile-main-video-wrapper { width: 100%; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle);}
         .mobile-main-video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
@@ -277,15 +272,8 @@
         .btn-google { display: inline-block; margin-top: 15px; padding: 10px 25px; border: 1px solid var(--accent-rose); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; color: var(--accent-rose); transition: var(--transition-smooth); border-radius: 4px;}
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); box-shadow: 0 0 15px rgba(200, 142, 147, 0.4); }
         
-        .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;}
-        .reviews-carousel::-webkit-scrollbar { display: none; }
-        .reviews-carousel.active { cursor: grabbing; }
-        
-        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); transform: translateZ(0); scroll-snap-align: center;}
-        .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
+        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); scroll-snap-align: center; pointer-events: none; user-select: none; transition: var(--transition-smooth); transform: translateZ(0);}
         @media (max-width: 768px) { 
-            .reviews-carousel { padding: 20px 30px; }
             .review-card { min-width: 80vw; max-width: 80vw; } 
         }
         
@@ -294,8 +282,10 @@
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
+        /* Mapa invisível ao mouse na rolagem, ativado com clique */
         .map-section { width: 100%; height: 350px; background: #eee; position: relative; border-top: 1px solid var(--border-light); overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); }
+        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; }
+        .map-section.active .map-iframe { pointer-events: auto; }
 
         .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -343,7 +333,6 @@
                     <li><a href="#about" data-i18n="nav_about">Über Uns</a></li>
                     <li><a href="#services" data-i18n="nav_services">Services</a></li>
                     <li><a href="#reviews" data-i18n="nav_reviews">Bewertungen</a></li>
-                    <!-- Botão padronizado abrindo o novo pop-up de contato -->
                     <li><button onclick="openContactModal()" class="btn btn-outline" style="padding: 10px 20px; font-family: inherit; cursor: pointer;" data-i18n="nav_contact">Kontakt</button></li>
                 </ul>
             </nav>
@@ -596,17 +585,17 @@
             <div class="ba-grid">
                 
                 <div class="ba-slider-container animate-on-scroll">
-                    <!-- Fundo Lado Direito: Imagem BONITA (Depois) -->
+                    <!-- BACKGROUND: Imagem DEPOIS (Bonita) -->
                     <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Depois" class="ba-img">
                     
-                    <!-- Frente Lado Esquerdo: Imagem RUIM (Antes) -->
+                    <!-- FOREGROUND: Imagem ANTES (Ruim) que pode ser arrastada -->
                     <div class="ba-before">
                         <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Antes">
                     </div>
                     
                     <div class="ba-line"></div>
-                    <!-- Trava inserida exclusivamente na bolinha! -->
                     <div class="ba-handle"></div>
+                    <!-- Label unificado no canto inferior direito -->
                     <div class="ba-label-corner">Antes</div>
                 </div>
 
@@ -820,7 +809,7 @@
         </div>
     </section>
 
-    <!-- MAPA INJETADO VIA JAVASCRIPT (Acaba com o lag total) -->
+    <!-- MAPA INJETADO VIA JAVASCRIPT (Acaba com o lag total no PC) -->
     <div class="map-section" id="map-wrap">
         <!-- O iframe aparecerá aqui de forma leve só quando descer -->
     </div>
@@ -850,9 +839,9 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
-                <!-- Botões 100% padronizados na mesma classe e com mesma cor -->
-                <a href="javascript:void(0)" onclick="openContactModal()" class="btn btn-small-footer" data-i18n="btn_contact_us">Fale Conosco</a>
-                <a href="mailto:Kosmet@ik.me" class="btn btn-small-footer" data-i18n="btn_work_with_us">Trabalhe Conosco</a>
+                <!-- Botões 100% padronizados na mesma classe e abrindo mailto e modal corretos -->
+                <button onclick="openContactModal()" class="btn-small-footer" data-i18n="btn_contact_us">Fale Conosco</button>
+                <a href="mailto:Kosmet@ik.me" class="btn-small-footer" data-i18n="btn_work_with_us">Trabalhe Conosco</a>
             </div>
             <div class="social-links">
                 <a href="https://instagram.com/beauty_by_cris" target="_blank">Instagram</a>
@@ -867,20 +856,20 @@
     <div class="float-btn float-top" id="backToTop" onclick="smoothScrollToTop(event)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
     <!-- Modal de Serviço -->
-    <div class="service-modal-overlay" id="serviceModal">
-        <!-- Evento previne fechar clicando fora -->
+    <div class="service-modal-overlay" id="serviceModal" onclick="closeServiceModal()">
+        <!-- Impede fechamento ao clicar dentro do conteúdo -->
         <div class="service-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h3 id="modalServiceName">Nome do Serviço</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
             </div>
-            <!-- Pop-up livre e fluído para celular e drag liso para mouse -->
-            <div class="modal-gallery" id="modalGallery" data-lenis-prevent>
+            <!-- Carrossel no JS restaurado -->
+            <div class="modal-gallery" id="modalGallery">
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 1 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 2 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 3 ]</span></div></div>
             </div>
-            <div class="modal-body" data-lenis-prevent>
+            <div class="modal-body">
                 <p class="modal-cta-text" data-i18n="modal_cta">Conte-nos mais sobre o que você busca ou suas dúvidas:</p>
                 <textarea class="modal-textarea" id="modalDetails" placeholder="Escreva aqui..."></textarea>
                 <button class="modal-send-btn" onclick="sendServiceWhatsApp()">
@@ -891,14 +880,14 @@
         </div>
     </div>
 
-    <!-- Modal Novo para Contato Exclusivo -->
-    <div class="service-modal-overlay" id="contactModal">
+    <!-- Modal de Contato -->
+    <div class="service-modal-overlay" id="contactModal" onclick="closeContactModal()">
         <div class="service-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h3 data-i18n="nav_contact">Kontakt</h3>
                 <button class="modal-close" onclick="closeContactModal()">×</button>
             </div>
-            <div class="modal-body" data-lenis-prevent>
+            <div class="modal-body">
                 <p class="modal-cta-text" data-i18n="modal_cta_contact">Como podemos ajudar você hoje?</p>
                 <textarea class="modal-textarea" id="contactDetails" placeholder="Escreva aqui..."></textarea>
                 <button class="modal-send-btn" onclick="sendContactWhatsApp()">
@@ -914,15 +903,6 @@
         document.querySelectorAll('video').forEach(video => {
             video.volume = 0.5;
         });
-
-        // --- PROTEÇÃO ANTI-CÓPIA E SELEÇÃO ---
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'U' || e.key === 'c')) || (e.metaKey && e.key === 'c')) {
-                e.preventDefault();
-            }
-        });
-        document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 
         // --- INICIALIZAÇÃO DO LENIS (SCROLL SUAVE PREMIUM ZERO LAG) ---
         const lenis = new Lenis({
@@ -943,29 +923,173 @@
         }
         requestAnimationFrame(raf);
 
-        // --- INJEÇÃO DO GOOGLE MAPS LAZY LOAD (Destrava a CPU) ---
+        // --- MOTOR DE ARRASTE PC RESTAURADO E OTIMIZADO (Mouse) ---
+        // Aqui o "ímã" (scroll-snap) é desligado apenas enquanto você arrasta com o mouse
+        const carousels = [
+            document.getElementById('servicesCarousel'), 
+            document.getElementById('reviewsCarousel'),
+            document.getElementById('desktopReels'),
+            document.getElementById('modalGallery')
+        ];
+        
+        carousels.forEach(carousel => {
+            if(!carousel) return;
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            carousel.addEventListener('mousedown', (e) => {
+                isDown = true;
+                carousel.classList.add('active');
+                startX = e.pageX - carousel.getBoundingClientRect().left;
+                scrollLeft = carousel.scrollLeft;
+                // Desliga o ímã nativo para a rolagem com mouse fluir liso igual manteiga
+                carousel.style.scrollSnapType = 'none'; 
+            });
+
+            carousel.addEventListener('mouseleave', () => { 
+                isDown = false; 
+                carousel.classList.remove('active'); 
+                carousel.style.scrollSnapType = 'x mandatory'; // Liga o ímã de volta
+            });
+            carousel.addEventListener('mouseup', () => { 
+                isDown = false; 
+                carousel.classList.remove('active'); 
+                carousel.style.scrollSnapType = 'x mandatory'; 
+            });
+
+            carousel.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - carousel.getBoundingClientRect().left;
+                const walk = (x - startX) * 1.5; 
+                carousel.scrollLeft = scrollLeft - walk;
+            });
+        });
+
+        // --- INJEÇÃO DO GOOGLE MAPS LAZY LOAD (Destrava a CPU na descida do site) ---
         const mapObserver = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.innerHTML = '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
                     obs.unobserve(entry.target);
+                    // Libera interação apenas ao clicar
+                    entry.target.addEventListener('click', () => { entry.target.classList.add('active'); });
+                    entry.target.addEventListener('mouseleave', () => { entry.target.classList.remove('active'); });
                 }
             });
         }, { threshold: 0.1 });
         mapObserver.observe(document.getElementById('map-wrap'));
 
-        document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#') && targetId !== '#') {
-                    e.preventDefault();
-                    lenis.scrollTo(targetId, { offset: -90, duration: 1.5 });
+        // --- SISTEMA DE STORIES DO MOBILE (Clica na bolinha, toca no vídeo principal) ---
+        function changeStory(url, element) {
+            const mainVid = document.getElementById('mobile-main-video');
+            mainVid.src = url;
+            mainVid.volume = 0.5; // Respeita a regra de 50%
+            mainVid.play();
+            document.querySelectorAll('.story-circle').forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // --- LÓGICA DO ANTES/DEPOIS CRAVADA E RESOLVIDA ---
+        document.querySelectorAll('.ba-slider-container').forEach(slider => {
+            const before = slider.querySelector('.ba-before');
+            const handle = slider.querySelector('.ba-handle');
+            const line = slider.querySelector('.ba-line');
+            const label = slider.querySelector('.ba-label-corner');
+            let isSliding = false;
+            
+            const move = (e) => {
+                if(!isSliding) return;
+                let rect = slider.getBoundingClientRect();
+                let x = (e.type.includes('touch') ? e.touches[0].clientX : e.clientX) - rect.left;
+                let percent = Math.max(0, Math.min(x / rect.width * 100, 100));
+                
+                before.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
+                before.style.webkitClipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
+                handle.style.left = percent + '%';
+                if(line) line.style.left = percent + '%';
+
+                // Lógica de texto Cravada solicitada por Jamile: 
+                // Direita (>50%) = "Depois". Esquerda (<50%) = "Antes".
+                if(label) {
+                    if(percent > 50) {
+                        label.innerText = t[currentLang]['lbl_after'] || 'Depois';
+                    } else {
+                        label.innerText = t[currentLang]['lbl_before'] || 'Antes';
+                    }
                 }
-            });
+            }
+            
+            // TRAVA O CLIQUE SÓ NA BOLINHA E NÃO DEIXA A TELA ROLAR AO PUXAR
+            handle.addEventListener('mousedown', (e) => { isSliding = true; e.preventDefault(); e.stopPropagation(); });
+            handle.addEventListener('touchstart', (e) => { isSliding = true; e.stopPropagation(); }, {passive: true});
+            
+            window.addEventListener('mouseup', () => isSliding = false);
+            window.addEventListener('touchend', () => isSliding = false);
+            window.addEventListener('mousemove', move);
+            window.addEventListener('touchmove', move);
         });
 
-        function smoothScrollToTop(e) { e.preventDefault(); lenis.scrollTo(0, { duration: 1.5 }); }
+        // --- SISTEMA DE POP-UP DOS SERVIÇOS E CONTATO ---
+        function openServiceModal(cardElement, serviceKey) {
+            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+            cardElement.classList.add('selected');
 
+            selectedServiceKey = serviceKey;
+            const modal = document.getElementById('serviceModal');
+            const modalTitle = document.getElementById('modalServiceName');
+            const modalDetails = document.getElementById('modalDetails');
+
+            const serviceTitleKey = serviceKey + '_title';
+            if (t[currentLang] && t[currentLang][serviceTitleKey]) {
+                modalTitle.innerText = t[currentLang][serviceTitleKey];
+            } else {
+                modalTitle.innerText = "Service Details"; 
+            }
+
+            modalDetails.value = '';
+            modal.classList.add('active');
+            lenis.stop(); // Pausa rolagem pra não bagunçar
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+            lenis.start();
+            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+        }
+
+        function sendServiceWhatsApp() {
+            if (!selectedServiceKey) return;
+            const details = document.getElementById('modalDetails').value;
+            const serviceName = t[currentLang][selectedServiceKey + '_title'];
+            let messageTemplate = serviceWaTemplates[currentLang] || serviceWaTemplates['de'];
+            let finalMessage = messageTemplate.replace('{service}', serviceName).replace('{details}', details);
+            const waUrl = `https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`;
+            window.open(waUrl, '_blank');
+            closeServiceModal();
+        }
+
+        function openContactModal() {
+            const modal = document.getElementById('contactModal');
+            document.getElementById('contactDetails').value = '';
+            modal.classList.add('active');
+            lenis.stop();
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            lenis.start();
+        }
+
+        function sendContactWhatsApp() {
+            const details = document.getElementById('contactDetails').value;
+            const msg = (waMessages[currentLang] || waMessages['de']) + " " + details;
+            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(msg)}`, '_blank');
+            closeContactModal();
+        }
+
+        // --- SISTEMA DE IDIOMAS ---
         let selectedServiceKey = '';
         let currentLang = 'de'; 
 
@@ -1094,7 +1218,7 @@
                 video_sub: "Vídeos", video_title: "Insights Exclusivos",
                 reviews_sub: "Avaliações dos Clientes", reviews_title: "Google Avaliações", google_reviews_count: "Resumo de 13 avaliações no Google", btn_google_page: "Ver no Google",
                 r1_date: "7 meses atrás", r1_text: "Profissional excelente, fiz uma limpeza de pele gostei muito, recomendo! 👏",
-                r2_date: "1 ano atrás", r2_text: "Amooo a manicure e pedicure da Cris estou muito satisfeita.. Ela é muito simpática e paciente 🫶🥰",
+                r2_date: "1 ano atrás", r2_text: "Amooo a manicure e pedicure da Cris estou muito satisfeita.. Eka é muito simpática e paciente 🫶🥰",
                 r3_date: "2 anos atrás", r3_text: "Profissional excelente, superou as minhas expectativas, obrigada Cris ❤️ Super indico!",
                 r4_date: "2 anos atrás", r4_text: "Já fui lá várias vezes. E seja para cílios ou sobrancelhas, estou absolutamente encantada.",
                 r5_date: "2 anos atrás", r5_text: "Fiz micropigmentação nas sobrancelhas e estou encantada com o resultado. Recomendo sem reservas; merecemos essa sensação de felicidade.",
@@ -1276,84 +1400,6 @@
             }
         }
 
-        // --- SISTEMA DE STORIES DO MOBILE (Clica no circulo e toca no principal) ---
-        function changeStory(url, element) {
-            const mainVid = document.getElementById('mobile-main-video');
-            mainVid.src = url;
-            mainVid.volume = 0.5;
-            mainVid.play();
-            document.querySelectorAll('.story-circle').forEach(c => c.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        // --- POP-UP DOS SERVIÇOS ---
-        function openServiceModal(cardElement, serviceKey) {
-            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-            cardElement.classList.add('selected');
-
-            selectedServiceKey = serviceKey;
-            const modal = document.getElementById('serviceModal');
-            const modalTitle = document.getElementById('modalServiceName');
-            const modalDetails = document.getElementById('modalDetails');
-
-            const serviceTitleKey = serviceKey + '_title';
-            if (t[currentLang] && t[currentLang][serviceTitleKey]) {
-                modalTitle.innerText = t[currentLang][serviceTitleKey];
-            } else {
-                modalTitle.innerText = "Service Details"; 
-            }
-
-            modalDetails.value = '';
-            modal.classList.add('active');
-            lenis.stop(); // Pausa rolagem pra não bagunçar
-        }
-
-        function closeServiceModal() {
-            const modal = document.getElementById('serviceModal');
-            modal.classList.remove('active');
-            lenis.start();
-            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-        }
-
-        function sendServiceWhatsApp() {
-            if (!selectedServiceKey) return;
-            const details = document.getElementById('modalDetails').value;
-            const serviceName = t[currentLang][selectedServiceKey + '_title'];
-            let messageTemplate = serviceWaTemplates[currentLang] || serviceWaTemplates['de'];
-            let finalMessage = messageTemplate.replace('{service}', serviceName).replace('{details}', details);
-            const waUrl = `https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`;
-            window.open(waUrl, '_blank');
-            closeServiceModal();
-        }
-
-        // --- POP-UP DE CONTATO ---
-        function openContactModal() {
-            const modal = document.getElementById('contactModal');
-            document.getElementById('contactDetails').value = '';
-            modal.classList.add('active');
-            lenis.stop();
-        }
-
-        function closeContactModal() {
-            document.getElementById('contactModal').classList.remove('active');
-            lenis.start();
-        }
-
-        function sendContactWhatsApp() {
-            const details = document.getElementById('contactDetails').value;
-            const msg = (waMessages[currentLang] || waMessages['de']) + " " + details;
-            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(msg)}`, '_blank');
-            closeContactModal();
-        }
-
-        document.getElementById('langDropdown').addEventListener('click', () => { document.getElementById('langOptions').classList.toggle('show'); });
-        window.addEventListener('click', (e) => { if (!document.getElementById('langDropdown').contains(e.target)) document.getElementById('langOptions').classList.remove('show'); });
-
-        const burgerBtn = document.getElementById('burger-btn');
-        const navMenu = document.getElementById('nav-menu');
-        burgerBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); });
-        document.querySelectorAll('#nav-menu a').forEach(link => { link.addEventListener('click', () => navMenu.classList.remove('active')); });
-
         const backToTopBtn = document.getElementById('backToTop');
         let isScrolling = false;
         
@@ -1375,81 +1421,6 @@
             });
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
-
-        // --- MOTOR DE ARRASTE PC (Mouse APENAS) - No celular flui 100% liso com CSS nativo ---
-        const carousels = [
-            document.getElementById('servicesCarousel'), 
-            document.getElementById('reviewsCarousel'),
-            document.getElementById('desktopReels'),
-            document.getElementById('modalGallery') // Agora as fotos do pop-up rastreiam o mouse liso no PC!
-        ];
-        
-        carousels.forEach(carousel => {
-            if(!carousel) return;
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            carousel.addEventListener('mousedown', (e) => {
-                isDown = true;
-                carousel.classList.add('active');
-                startX = e.pageX - carousel.getBoundingClientRect().left;
-                scrollLeft = carousel.scrollLeft;
-            });
-
-            // Evita travar os eventos no toque do celular
-            carousel.addEventListener('mouseleave', () => { isDown = false; carousel.classList.remove('active'); });
-            carousel.addEventListener('mouseup', () => { isDown = false; carousel.classList.remove('active'); });
-
-            carousel.addEventListener('mousemove', (e) => {
-                if(!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - carousel.getBoundingClientRect().left;
-                const walk = (x - startX) * 1.5; 
-                carousel.scrollLeft = scrollLeft - walk;
-            });
-        });
-
-        // --- LÓGICA DO ANTES/DEPOIS RESOLVIDA ---
-        document.querySelectorAll('.ba-slider-container').forEach(slider => {
-            const before = slider.querySelector('.ba-before');
-            const handle = slider.querySelector('.ba-handle');
-            const line = slider.querySelector('.ba-line');
-            const label = slider.querySelector('.ba-label-corner');
-            let isSliding = false;
-            
-            const move = (e) => {
-                if(!isSliding) return;
-                let rect = slider.getBoundingClientRect();
-                let x = (e.type.includes('touch') ? e.touches[0].clientX : e.clientX) - rect.left;
-                let percent = Math.max(0, Math.min(x / rect.width * 100, 100));
-                
-                before.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
-                before.style.webkitClipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
-                handle.style.left = percent + '%';
-                if(line) line.style.left = percent + '%';
-
-                // Lógica de texto Cravada: 
-                // Direita (>50%) revela imagem do Antes que cobre a tela inteira. Mas a usuária quer que apareça escrito DEPOIS.
-                // Esquerda (<50%) diminui imagem do Antes, revelando a debaixo. A usuária quer escrito ANTES.
-                if(label) {
-                    if(percent > 50) {
-                        label.innerText = t[currentLang]['lbl_after'] || 'Depois';
-                    } else {
-                        label.innerText = t[currentLang]['lbl_before'] || 'Antes';
-                    }
-                }
-            }
-            
-            // TRAVA O CLIQUE SÓ NA BOLINHA E NÃO DEIXA A TELA ROLAR AO PUXAR
-            handle.addEventListener('mousedown', (e) => { isSliding = true; e.preventDefault(); e.stopPropagation(); });
-            handle.addEventListener('touchstart', (e) => { isSliding = true; e.stopPropagation(); }, {passive: true});
-            
-            window.addEventListener('mouseup', () => isSliding = false);
-            window.addEventListener('touchend', () => isSliding = false);
-            window.addEventListener('mousemove', move);
-            window.addEventListener('touchmove', move);
-        });
 
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
