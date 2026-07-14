@@ -7,10 +7,12 @@
     <link rel="icon" href="https://i.imgur.com/CQpHs8c.png" type="image/png">
     <title>Beauty By Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
     
+    <!-- Importação do Lenis para Scroll Suave Premium -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+
         :root {
             --bg-champagne: #FAF5F0;
             --bg-white: #FFFFFF;
@@ -25,12 +27,31 @@
             --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Lenis Scroll Premium Setup */
-        html.lenis, html.lenis body { height: auto; }
-        .lenis.lenis-smooth { scroll-behavior: auto !important; }
-        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
-        .lenis.lenis-stopped { overflow: hidden; }
-        .lenis.lenis-smooth iframe { pointer-events: none; }
+        /* --- ESTILOS NECESSÁRIOS PARA O LENIS SCROLL --- */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important; /* Desativa o nativo para não conflitar */
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-smooth iframe {
+            pointer-events: none; /* Previne que iframes engulam o scroll */
+        }
+
+        /* --- PROTEÇÃO CSS: IMPEDE SELEÇÃO DE TEXTO E TOQUES AZUIS NO MOBILE --- */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent; /* Remove o flash/fundo azul no Android/iOS ao tocar */
+            outline: none;
+        }
 
         body { 
             font-family: 'Montserrat', sans-serif; 
@@ -38,17 +59,30 @@
             color: var(--text-dark); 
             line-height: 1.6; 
             -webkit-font-smoothing: antialiased;
-            -webkit-user-select: none; user-select: none;
-            overflow-x: clip; /* Fix for mobile horizontal scroll bugs */
+            
+            /* Impede segurar e selecionar ou abrir menu de contexto nativo */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
         
-        textarea, input { -webkit-user-select: text; user-select: text; }
-        html, body { width: 100%; max-width: 100%; }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        /* Libera digitação apenas dentro do formulário/modal de contato */
+        textarea, input {
+            -webkit-user-select: text;
+            -khtml-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
         ul { list-style: none; }
-        img { max-width: 100%; height: auto; }
+        img { max-width: 100%; height: auto; pointer-events: none; } /* Previne arrastar a imagem em si */
         
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
         @media (max-width: 768px) { .container { padding: 0 20px; } }
@@ -71,6 +105,7 @@
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
+        /* Aceleração de GPU no header para não travar o scroll devido ao blur */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -102,7 +137,7 @@
             .lang-dropdown { margin-left: 10px; }
             .current-lang { padding: 6px; font-size: 1.3rem; }
             nav ul li { margin-bottom: 15px; }
-            nav a.btn-outline { margin-top: 10px; }
+            nav a.btn-outline, nav button.btn-outline { margin-top: 10px; }
         }
 
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: var(--bg-champagne); padding-top: 90px; }
@@ -148,7 +183,7 @@
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
-        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; }
+        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; transform: translateZ(0); }
         .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
         .service-card.selected { border-color: var(--accent-rose); background-color: var(--bg-champagne); box-shadow: 0 0 15px rgba(200, 142, 147, 0.3); }
 
@@ -180,7 +215,7 @@
         .modal-gallery { display: flex; overflow-x: auto; gap: 15px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); cursor: grab; }
         .modal-gallery:active { cursor: grabbing; }
         .modal-gallery::-webkit-scrollbar { display: none; }
-        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; pointer-events: none;}
+        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; pointer-events: none; transform: translateZ(0);}
         .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none;}
 
         .modal-body { padding: 25px; overflow-y: auto; }
@@ -212,7 +247,7 @@
         .reels-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .reels-container::-webkit-scrollbar { display: none; }
         .reels-container.active { cursor: grabbing; }
-        .reel-item { flex: 0 0 auto; width: 280px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle); pointer-events: none;}
+        .reel-item { flex: 0 0 auto; width: 280px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle); transform: translateZ(0);}
         .reel-item video { width: 100%; height: 100%; object-fit: cover; pointer-events: auto;}
         
         .mute-btn { position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: var(--transition-smooth); pointer-events: auto;}
@@ -233,7 +268,7 @@
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
-        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); }
+        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); transform: translateZ(0);}
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
         @media (max-width: 768px) { 
             .reviews-carousel { padding: 20px 30px; }
@@ -295,7 +330,6 @@
                     <li><a href="#about" data-i18n="nav_about">Über Uns</a></li>
                     <li><a href="#services" data-i18n="nav_services">Services</a></li>
                     <li><a href="#reviews" data-i18n="nav_reviews">Bewertungen</a></li>
-                    <!-- Botão de contato alterado para abrir o modal -->
                     <li><button onclick="openContactModal()" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_contact">Kontakt</button></li>
                 </ul>
             </nav>
@@ -391,6 +425,7 @@
         
         <div class="services-carousel-wrap">
             <div class="services-carousel" id="servicesCarousel">
+                
                 <div class="service-card" onclick="openServiceModal(this, 's1')" data-i18n-key="s1">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s1_title">Professionelle Gesichtsreinigung</h3>
@@ -533,6 +568,7 @@
                         <div class="s-row"><span class="lbl" data-i18n="lbl_duration">Dauer:</span><span class="val" data-i18n="s13_dur">60 - 90 Min.</span></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -546,16 +582,19 @@
             <div class="ba-grid">
                 
                 <div class="ba-slider-container animate-on-scroll">
-                    <!-- Background = DEPOIS (Sobrancelha bonita, lado direito) -->
+                    <!-- Fundo / Lado Direito (Revelado ao puxar a barra para esquerda) -->
+                    <!-- Esta é a sobrancelha BONITA (Depois) -->
                     <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Depois" class="ba-img">
                     
-                    <!-- Foreground = ANTES (Sobrancelha ruim/falhada, lado esquerdo) -->
+                    <!-- Frente / Lado Esquerdo (Encolhe ao puxar para esquerda, expande ao puxar para direita) -->
+                    <!-- Esta é a sobrancelha RUIM (Antes) -->
                     <div class="ba-before">
                         <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Antes">
                     </div>
                     
                     <div class="ba-line"></div>
                     <div class="ba-handle"></div>
+                    <!-- Label unificada e dinâmica no canto inferior direito -->
                     <div class="ba-label-corner">Antes</div>
                 </div>
 
@@ -773,6 +812,7 @@
         </div>
     </section>
 
+    <!-- O mapa é ativado apenas se você clicar sobre ele (mantendo o scroll liso por cima) -->
     <div class="map-section" id="map-wrap">
         <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
@@ -814,12 +854,12 @@
     </footer>
 
     <a href="https://wa.me/491629384907" class="float-btn float-whatsapp wa-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg></a>
-    
     <div class="float-btn float-top" id="backToTop" onclick="smoothScrollToTop(event)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
-    <!-- Modal para Serviços -->
+    <!-- Modal de Serviços -->
     <div class="service-modal-overlay" id="serviceModal">
-        <div class="service-modal-content">
+        <!-- Parar o evento de clique na área escura de fechar o modal. Só o "X" fecha -->
+        <div class="service-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h3 id="modalServiceName">Nome do Serviço</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
@@ -840,9 +880,10 @@
         </div>
     </div>
 
-    <!-- Modal Novo para Contato -->
+    <!-- Modal Novo para Contato Exclusivo -->
     <div class="service-modal-overlay" id="contactModal">
-        <div class="service-modal-content">
+        <!-- Parar evento também neste modal -->
+        <div class="service-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h3 data-i18n="nav_contact">Kontakt</h3>
                 <button class="modal-close" onclick="closeContactModal()">×</button>
@@ -859,6 +900,11 @@
     </div>
 
     <script>
+        // --- PREPARAÇÃO DE VÍDEOS (Volume a 50%) ---
+        document.querySelectorAll('video').forEach(video => {
+            video.volume = 0.5; // Todos os vídeos começam silenciosamente preparados com apenas metade do volume
+        });
+
         // --- PROTEÇÃO ANTI-CÓPIA ---
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', function(e) {
@@ -897,7 +943,7 @@
         }
         requestAnimationFrame(raf);
 
-        // Desativa/Ativa mapa ao clicar (Impede lag no scroll)
+        // Desativa/Ativa mapa ao clicar (Impede lag no scroll do Desktop)
         const mapWrap = document.getElementById('map-wrap');
         mapWrap.addEventListener('mousedown', () => mapWrap.classList.add('active'));
         mapWrap.addEventListener('mouseleave', () => mapWrap.classList.remove('active'));
@@ -1072,7 +1118,7 @@
                 why_sub: "Ventajas", why_title: "¿Por qué Beauty By Cris?", w1_title: "Higiene Absoluta", w1_desc: "Altos estándares para su seguridad.", w2_title: "Calidad Premium", w2_desc: "Los mejores materiales.", w3_title: "Atención Personalizada", w3_desc: "Tratamientos a su medida.", w4_title: "Ambiente Relajante", w4_desc: "Un oasis de tranquilidad.",
                 services_sub: "Tratamientos", services_title: "Servicios & Rituales", lbl_duration: "Duración:", lbl_benefits: "Beneficios:", lbl_process: "Proceso:",
                 s1_title: "Limpieza Facial", s1_desc: "Limpieza profunda.", s1_ben: "Refina poros", s1_abl: "Limpieza, extracción", s1_dur: "60 min",
-                s2_title: "Micropigmentación", s2_desc: "Cejas ultra-realistas.", s2_ben: "Cejas pobladas", s2_abl: "Pigmentación precisa", s2_dur: "120 min",
+                s2_title: "Micropigmentação", s2_desc: "Cejas ultra-realistas.", s2_ben: "Cejas pobladas", s2_abl: "Pigmentación precisa", s2_dur: "120 min",
                 s3_title: "Pigmentación Labial", s3_desc: "Labios con color 24/7.", s3_ben: "Color 24/7", s3_abl: "Pigmentación suave", s3_dur: "90 min",
                 s4_title: "Plasma Pen", s4_desc: "Estiramiento sin cirugía.", s4_ben: "Lifting inmediato", s4_abl: "Puntos de plasma", s4_dur: "45 min",
                 s5_title: "Depilación", s5_desc: "Eliminación suave del vello.", s5_ben: "Piel lisa", s5_abl: "Eliminación suave", s5_dur: "15-45 min",
@@ -1208,6 +1254,10 @@
                         const key = el.getAttribute('data-i18n');
                         if (t[langCode][key]) el.innerHTML = t[langCode][key];
                     });
+                    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                        const key = el.getAttribute('data-i18n-ph');
+                        if (t[langCode][key]) el.setAttribute('placeholder', t[langCode][key]);
+                    });
                 }
                 mainBody.classList.remove('lang-fading');
                 lenis.scrollTo(0, { duration: 1.5 });
@@ -1217,6 +1267,7 @@
         function toggleMute(btn) {
             const video = btn.previousElementSibling;
             video.muted = !video.muted;
+            video.volume = 0.5; // Garante que, ao ligar o som, ele fique cravado em 50%
             if (video.muted) {
                 btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
             } else {
@@ -1224,26 +1275,33 @@
             }
         }
 
-        // Service Modal
+        // Modal de Serviços
         function openServiceModal(cardElement, serviceKey) {
             if (isDraggingCarousel) return;
+
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             cardElement.classList.add('selected');
+
             selectedServiceKey = serviceKey;
-            
             const modal = document.getElementById('serviceModal');
             const modalTitle = document.getElementById('modalServiceName');
-            document.getElementById('modalDetails').value = '';
-            
+            const modalDetails = document.getElementById('modalDetails');
+
             const serviceTitleKey = serviceKey + '_title';
-            modalTitle.innerText = t[currentLang] && t[currentLang][serviceTitleKey] ? t[currentLang][serviceTitleKey] : "Service";
-            
+            if (t[currentLang] && t[currentLang][serviceTitleKey]) {
+                modalTitle.innerText = t[currentLang][serviceTitleKey];
+            } else {
+                modalTitle.innerText = "Service Details"; 
+            }
+
+            modalDetails.value = '';
             modal.classList.add('active');
             lenis.stop();
         }
 
         function closeServiceModal() {
-            document.getElementById('serviceModal').classList.remove('active');
+            const modal = document.getElementById('serviceModal');
+            modal.classList.remove('active');
             lenis.start();
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
         }
@@ -1254,11 +1312,12 @@
             const serviceName = t[currentLang][selectedServiceKey + '_title'];
             let messageTemplate = serviceWaTemplates[currentLang] || serviceWaTemplates['de'];
             let finalMessage = messageTemplate.replace('{service}', serviceName).replace('{details}', details);
-            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`, '_blank');
+            const waUrl = `https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`;
+            window.open(waUrl, '_blank');
             closeServiceModal();
         }
 
-        // Contact Modal Novo
+        // Modal de Contato Novo
         function openContactModal() {
             const modal = document.getElementById('contactModal');
             document.getElementById('contactDetails').value = '';
@@ -1278,21 +1337,26 @@
             closeContactModal();
         }
 
-        // Dropdowns and UI Events
         document.getElementById('langDropdown').addEventListener('click', () => { document.getElementById('langOptions').classList.toggle('show'); });
         window.addEventListener('click', (e) => { if (!document.getElementById('langDropdown').contains(e.target)) document.getElementById('langOptions').classList.remove('show'); });
 
         const burgerBtn = document.getElementById('burger-btn');
         const navMenu = document.getElementById('nav-menu');
         burgerBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); });
-        document.querySelectorAll('#nav-menu a, #nav-menu button').forEach(el => { el.addEventListener('click', () => navMenu.classList.remove('active')); });
+        document.querySelectorAll('#nav-menu a').forEach(link => { link.addEventListener('click', () => navMenu.classList.remove('active')); });
 
         const backToTopBtn = document.getElementById('backToTop');
         let isScrolling = false;
+        
         window.addEventListener('scroll', () => {
             if (!isScrolling) {
                 window.requestAnimationFrame(() => {
-                    if (window.scrollY > 400) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); }
+                    const scrolled = window.scrollY;
+                    if (scrolled > 400) { 
+                        backToTopBtn.classList.add('visible'); 
+                    } else { 
+                        backToTopBtn.classList.remove('visible'); 
+                    }
                     isScrolling = false;
                 });
                 isScrolling = true;
@@ -1306,9 +1370,10 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
+        // Lógica de Carrossel Suave com Inércia (Serviços, Reviews e Modal)
         const carousels = [
             document.getElementById('servicesCarousel'), 
-            document.getElementById('reviewsCarousel'), 
+            document.getElementById('reviewsCarousel'),
             document.getElementById('modalGallery'),
             document.getElementById('reelsCarousel')
         ];
@@ -1326,7 +1391,10 @@
                 isDown = true;
                 isDraggingCarousel = false; 
                 carousel.classList.add('active');
-                startX = e.pageX; 
+                
+                let rect = carousel.getBoundingClientRect();
+                startX = e.pageX - rect.left;
+                
                 scrollLeft = carousel.scrollLeft;
                 lastX = e.pageX; 
                 velX = 0; 
@@ -1350,7 +1418,8 @@
             carousel.addEventListener('mousemove', (e) => {
                 if(!isDown) return;
                 e.preventDefault();
-                const x = e.pageX;
+                let rect = carousel.getBoundingClientRect();
+                const x = e.pageX - rect.left;
                 const walk = (x - startX) * 1.3; 
                 
                 if (Math.abs(walk) > 5) {
@@ -1370,6 +1439,7 @@
             function momentumLoop(){
                 velX *= 0.95; 
                 carousel.scrollLeft -= velX; 
+
                 if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
                      velX = 0;
                      cancelAnimationFrame(momentumID);
@@ -1383,6 +1453,7 @@
             }
         });
 
+        // BEFORE & AFTER
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
@@ -1401,11 +1472,12 @@
                 handle.style.left = percent + '%';
                 if(line) line.style.left = percent + '%';
 
+                // Lógica de texto: Puxou pra Direita (>50%) revela a ruim (Antes). Puxou pra Esquerda (<50%) revela a bonita (Depois).
                 if(label) {
                     if(percent > 50) {
-                        label.innerText = t[currentLang]['lbl_after'];
+                        label.innerText = t[currentLang]['lbl_before']; // Revelando o Antes
                     } else {
-                        label.innerText = t[currentLang]['lbl_before'];
+                        label.innerText = t[currentLang]['lbl_after']; // Revelando o Depois
                     }
                 }
             }
@@ -1422,16 +1494,19 @@
         // LÓGICA DO VÍDEO INTRODUTÓRIO
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
+
         if (introVideo && staticAfterVideo) {
             const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        introVideo.play().catch(e => console.log("Autoplay prevenido pelo navegador:", e));
+                        introVideo.play().catch(e => console.log("Autoplay prevenido:", e));
                         observer.unobserve(entry.target); 
                     }
                 });
             }, { threshold: 0.3 });
+
             videoObserver.observe(introVideo);
+
             introVideo.addEventListener('ended', () => {
                 introVideo.classList.remove('active');
                 staticAfterVideo.classList.add('active');
