@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty By Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
+    <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty by Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
     <link rel="icon" href="https://i.imgur.com/CQpHs8c.png" type="image/png">
-    <title>Beauty By Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
+    <title>Beauty by Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
     
     <!-- Importação do Lenis para Scroll Suave Premium -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -32,7 +32,7 @@
             height: auto;
         }
         .lenis.lenis-smooth {
-            scroll-behavior: auto !important;
+            scroll-behavior: auto !important; 
         }
         .lenis.lenis-smooth [data-lenis-prevent] {
             overscroll-behavior: contain;
@@ -44,17 +44,17 @@
             pointer-events: none; 
         }
 
-        /* --- PROTEÇÃO CSS --- */
+        /* --- PROTEÇÃO CSS & OTIMIZAÇÃO GPU --- */
         body { 
             font-family: 'Montserrat', sans-serif; 
             background-color: var(--bg-champagne); 
             color: var(--text-dark); 
             line-height: 1.6; 
             -webkit-font-smoothing: antialiased;
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
+            -webkit-user-select: none; 
+            -moz-user-select: none; 
+            -ms-user-select: none; 
+            user-select: none; 
         }
         
         textarea, input {
@@ -64,14 +64,16 @@
             user-select: text;
         }
 
-        /* OTIMIZAÇÃO DE SCROLL MOBILE: overflow-x: clip; garante melhor performance */
+        /* Otimização de Layout para Mobile e Desktop (Clip resolve bugs de renderização no Safari) */
         html, body { width: 100%; max-width: 100%; overflow-x: clip; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
         ul { list-style: none; }
-        img { max-width: 100%; height: auto; }
         
+        /* Previne o navegador de tentar "salvar" a imagem ao arrastar, tirando o lag pesado */
+        img { max-width: 100%; height: auto; -webkit-user-drag: none; }
+
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
         @media (max-width: 768px) { .container { padding: 0 20px; } }
 
@@ -93,13 +95,13 @@
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); will-change: transform, backdrop-filter; }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .logo-img { height: 55px; width: auto; object-fit: contain; }
         .logo-wrap div { white-space: nowrap; }
         nav ul { display: flex; gap: 25px; align-items: center; }
-        nav a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; color: var(--text-dark); }
+        nav a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; color: var(--text-dark); cursor: pointer; }
         nav a:hover { color: var(--accent-rose); }
         
         .lang-dropdown { position: relative; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--text-dark); margin-left: 20px; user-select: none; }
@@ -167,18 +169,11 @@
 
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        
-        /* CSS TOUCH-ACTION: PAN-X OBRIGA O MOBILE A TRAVAR O SCROLL VERTICAL AQUI */
-        .services-carousel { 
-            display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); 
-            scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; 
-            scroll-snap-type: x mandatory;
-            scroll-padding-left: calc(50vw - 650px + 40px);
-        }
+        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
-        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; scroll-snap-align: start; }
+        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; will-change: transform;}
         .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
         .service-card.selected { border-color: var(--accent-rose); background-color: var(--bg-champagne); box-shadow: 0 0 15px rgba(200, 142, 147, 0.3); }
 
@@ -191,26 +186,27 @@
         .s-row .lbl { font-weight: 600; color: var(--accent-rose); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
-        @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; scroll-padding-left: 40px; } }
-        /* REMOVIDO SCROLL-SNAP PARA MAIOR FLUIDEZ NO MOBILE */
+        @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
         @media (max-width: 768px) { 
-            .services-carousel { padding: 20px 30px; scroll-padding-left: 30px; } 
+            .services-carousel { padding: 20px 30px; } 
             .service-card { min-width: 80vw; max-width: 80vw; } 
         }
 
-        .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(42, 36, 37, 0.6); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); padding: 20px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
-        .service-modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .service-modal-content { background-color: var(--bg-white); width: 100%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-subtle); transform: translate3d(0, 30px, 0); transition: var(--transition-smooth); max-height: 90vh; display: flex; flex-direction: column; }
-        .service-modal-overlay.active .service-modal-content { transform: translate3d(0, 0, 0); }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(42, 36, 37, 0.6); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); padding: 20px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-content { background-color: var(--bg-white); width: 100%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-subtle); transform: translate3d(0, 30px, 0); transition: var(--transition-smooth); max-height: 90vh; display: flex; flex-direction: column; }
+        .modal-overlay.active .modal-content { transform: translate3d(0, 0, 0); }
         .modal-header { padding: 20px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
         .modal-header h3 { margin: 0; font-size: 1.4rem; }
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
         
-        .modal-gallery { display: flex; overflow-x: auto; gap: 15px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); cursor: grab; }
+        .modal-gallery { display: flex; overflow-x: auto; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); cursor: grab;}
         .modal-gallery.active { cursor: grabbing; }
         .modal-gallery::-webkit-scrollbar { display: none; }
-        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; }
+        /* Pointer events none na imagem resolve o LAG de desktop */
+        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); will-change: transform; user-select: none; }
+        .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
         .modal-body { padding: 25px; overflow-y: auto; }
         .modal-cta-text { font-weight: 500; margin-bottom: 15px; color: var(--text-dark); font-size: 0.95rem; }
@@ -222,30 +218,32 @@
 
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; border-radius: 8px; transform: translateZ(0);}
-        .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; touch-action: pan-y; border-radius: 8px; transform: translateZ(0);}
+        .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); }
-        .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+        .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); will-change: transform;}
+        .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background-color: var(--bg-white); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
-        /* O touch-action: none na bolinha informa o celular para ignorar scroll nativo ali */
-        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); touch-action: none; }
+        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); will-change: transform;}
         .ba-handle::before, .ba-handle::after { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
         .ba-handle::before { border-width: 5px 6px 5px 0; border-color: transparent var(--accent-rose) transparent transparent; left: 6px; }
         .ba-handle::after { border-width: 5px 0 5px 6px; border-color: transparent transparent transparent var(--accent-rose); right: 6px; }
-        .ba-label { position: absolute; bottom: 15px; padding: 5px 15px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.8); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px;}
-        .lbl-b { left: 15px; } .lbl-a { right: 15px; }
+        
+        .ba-dynamic-label { position: absolute; bottom: 15px; right: 15px; padding: 6px 18px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; font-weight: 500; transition: background 0.3s;}
+        
         @media (max-width: 992px) { .ba-grid { grid-template-columns: 1fr; } .ba-slider-container { height: 300px; } }
 
         .videos { padding: 100px 0; background-color: var(--bg-white); }
-        .video-wrapper { max-width: 900px; margin: 0 auto; position: relative; }
-        .video-container { width: 100%; aspect-ratio: 16/9; background-color: #000; position: relative; overflow: hidden; box-shadow: var(--shadow-subtle); border-radius: 8px;}
-        .video-poster { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: var(--transition-smooth); }
-        .video-play-btn { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80px; height: 80px; background-color: rgba(250, 245, 240, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 2; transition: var(--transition-smooth); }
-        .video-play-btn svg { width: 25px; height: 25px; fill: var(--accent-rose); margin-left: 5px; }
-        .video-play-btn:hover { background-color: var(--accent-rose); transform: translate(-50%, -50%) scale(1.1); }
-        .video-play-btn:hover svg { fill: var(--bg-white); }
+        .reels-wrapper { display: flex; justify-content: center; width: 100%; }
+        .reels-container { width: 100%; max-width: 350px; aspect-ratio: 9/16; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); background: #000; transform: translateZ(0);}
+        .reel-video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.8s ease-in-out; pointer-events: none;}
+        .reel-video.active { opacity: 1; z-index: 2; pointer-events: auto;}
+        
+        .reels-ui { position: absolute; bottom: 20px; right: 20px; z-index: 10; display: flex; flex-direction: column; gap: 10px;}
+        .reels-sound-toggle { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 45px; height: 45px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: var(--transition-smooth);}
+        .reels-sound-toggle:hover { background: var(--accent-rose); transform: scale(1.05);}
+        .reels-sound-toggle svg { width: 22px; height: 22px; fill: white;}
 
         .reviews { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden;}
         .google-summary { background-color: transparent; max-width: 600px; margin: 0 auto 40px auto; text-align: center; }
@@ -255,15 +253,14 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); box-shadow: 0 0 15px rgba(200, 142, 147, 0.4); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; scroll-padding-left: calc(50vw - 650px + 40px); }
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
-        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); scroll-snap-align: start; }
+        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); will-change: transform;}
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
-        @media (max-width: 1380px) { .reviews-carousel { padding: 20px 40px; scroll-padding-left: 40px; } }
         @media (max-width: 768px) { 
-            .reviews-carousel { padding: 20px 30px; scroll-padding-left: 30px; }
+            .reviews-carousel { padding: 20px 30px; }
             .review-card { min-width: 80vw; max-width: 80vw; } 
         }
         
@@ -323,7 +320,8 @@
                     <li><a href="#about" data-i18n="nav_about">Über Uns</a></li>
                     <li><a href="#services" data-i18n="nav_services">Services</a></li>
                     <li><a href="#reviews" data-i18n="nav_reviews">Bewertungen</a></li>
-                    <li><a href="#footer-contacts" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_contact">Kontakt</a></li>
+                    <!-- O Link Contato agora abre o Pop-up -->
+                    <li><a onclick="openContactModal(event)" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_contact">Kontakt</a></li>
                 </ul>
             </nav>
             <div class="lang-dropdown" id="langDropdown">
@@ -417,7 +415,7 @@
         </div>
         
         <div class="services-carousel-wrap">
-            <div class="services-carousel" id="servicesCarousel">
+            <div class="services-carousel" id="servicesCarousel" data-lenis-prevent>
                 
                 <div class="service-card" onclick="openServiceModal(this, 's1')" data-i18n-key="s1">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
@@ -574,44 +572,55 @@
             </div>
             <div class="ba-grid">
                 
-                <div class="ba-slider-container animate-on-scroll">
+                <div class="ba-slider-container animate-on-scroll" data-lenis-prevent>
+                    <!-- Imagem de Baixo (Depois) -->
                     <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Nachher" class="ba-img">
+                    <!-- Imagem de Cima (Antes) cortada com Clip-Path -->
                     <div class="ba-before">
                         <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Vorher">
                     </div>
                     <div class="ba-line"></div>
                     <div class="ba-handle"></div>
-                    <div class="ba-label lbl-b" data-i18n="lbl_before">Vorher</div>
-                    <div class="ba-label lbl-a" data-i18n="lbl_after">Nachher</div>
+                    <!-- Nova Legenda Dinâmica e Unificada no canto inferior direito -->
+                    <div class="ba-dynamic-label" data-i18n="lbl_before">Vorher</div>
                 </div>
 
-                <div class="ba-slider-container animate-on-scroll delay-1">
+                <div class="ba-slider-container animate-on-scroll delay-1" data-lenis-prevent>
                     <img src="" alt="Nachher" class="ba-img media-placeholder">
                     <div class="ba-before">
                         <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;">
                     </div>
                     <div class="ba-line"></div>
                     <div class="ba-handle"></div>
-                    <div class="ba-label lbl-b" data-i18n="lbl_before">Vorher</div>
-                    <div class="ba-label lbl-a" data-i18n="lbl_after">Nachher</div>
+                    <div class="ba-dynamic-label" data-i18n="lbl_before">Vorher</div>
                 </div>
 
             </div>
         </div>
     </section>
 
+    <!-- NOVA SEÇÃO DE VÍDEOS REELS 9:16 -->
     <section class="videos">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="subtitle" data-i18n="video_sub">Einblicke im Video</span>
                 <h2 data-i18n="video_title">Exklusive Behandlungs-Insights</h2>
             </div>
-            <div class="video-wrapper animate-on-scroll">
-                <div class="video-container" id="video-player-container">
-                    <div class="media-placeholder video-poster"><span>[ Video Cover ]</span></div>
-                    <button class="video-play-btn" id="play-btn-trigger">
-                        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                    </button>
+            <div class="reels-wrapper animate-on-scroll">
+                <div class="reels-container" id="reelsContainer">
+                    <video src="https://i.imgur.com/DtGumfd.mp4" class="reel-video active" muted playsinline></video>
+                    <video src="https://i.imgur.com/KqTpjlx.mp4" class="reel-video" muted playsinline></video>
+                    <video src="https://i.imgur.com/Bb0zGuS.mp4" class="reel-video" muted playsinline></video>
+                    <video src="https://i.imgur.com/9WGwd3B.mp4" class="reel-video" muted playsinline></video>
+                    
+                    <div class="reels-ui">
+                        <button class="reels-sound-toggle" id="reelsSoundBtn">
+                            <!-- Ícone Mute inicial -->
+                            <svg id="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                            <!-- Ícone Unmute oculto -->
+                            <svg id="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -633,7 +642,7 @@
         </div>
 
         <div class="reviews-carousel-wrap">
-            <div class="reviews-carousel" id="reviewsCarousel">
+            <div class="reviews-carousel" id="reviewsCarousel" data-lenis-prevent>
                 
                 <div class="review-card">
                     <div class="review-user">
@@ -782,7 +791,7 @@
         </div>
     </section>
 
-    <div class="map-section">
+    <div class="map-section" data-lenis-prevent>
         <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
@@ -811,7 +820,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
-                <a href="mailto:contact@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_contact_us">Fale Conosco</a>
+                <a onclick="openContactModal(event)" class="btn btn-small-footer" data-i18n="btn_contact_us" style="cursor:pointer;">Fale Conosco</a>
                 <a href="mailto:careers@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_work_with_us">Trabalhe Conosco</a>
             </div>
             <div class="social-links">
@@ -826,13 +835,15 @@
     
     <div class="float-btn float-top" id="backToTop" onclick="smoothScrollToTop(event)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
-    <div class="service-modal-overlay" id="serviceModal">
-        <div class="service-modal-content">
+    <!-- MODAL DE SERVIÇOS -->
+    <div class="modal-overlay" id="serviceModal">
+        <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modalServiceName">Nome do Serviço</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
             </div>
             <div class="modal-gallery" id="modalGallery" data-lenis-prevent>
+                <!-- pointer-events:none na imagem remove a lentidão brutal no desktop -->
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 1 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 2 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 3 ]</span></div></div>
@@ -848,10 +859,27 @@
         </div>
     </div>
 
+    <!-- MODAL DE CONTATO EXCLUSIVO -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 data-i18n="contact_modal_title">Entre em Contato</h3>
+                <button class="modal-close" onclick="closeContactModal()">×</button>
+            </div>
+            <div class="modal-body" data-lenis-prevent>
+                <p class="modal-cta-text" data-i18n="contact_modal_desc">Como podemos ajudar? Escreva sua mensagem abaixo e responderemos rapidamente pelo WhatsApp.</p>
+                <textarea class="modal-textarea" id="contactDetails" data-i18n-ph="contact_modal_placeholder" placeholder="Sua mensagem..."></textarea>
+                <button class="modal-send-btn" onclick="sendContactWhatsApp()">
+                    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg>
+                    <span data-i18n="btn_send_whatsapp">Enviar via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // --- PROTEÇÃO ANTI-CÓPIA ---
         document.addEventListener('contextmenu', e => e.preventDefault());
-
         document.addEventListener('keydown', function(e) {
             if (e.key === 'F12' || 
                (e.ctrlKey && e.shiftKey && e.key === 'I') || 
@@ -863,18 +891,16 @@
                 e.preventDefault();
             }
         });
-
         document.addEventListener('dragstart', e => {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
             }
         });
 
-        // --- INICIALIZAÇÃO DO LENIS (SCROLL SUAVE PREMIUM) ---
-        // syncTouch desabilitado para não corromper o Swipe nativo do celular
+        // --- LENIS SCROLL ULTRA LEVE (LERP) ---
+        // Alterado de Easing para Lerp (Interpolação Linear): Exige muito menos processamento, não engasga
         const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+            lerp: 0.08, 
             direction: 'vertical',
             gestureDirection: 'vertical',
             smooth: true,
@@ -893,7 +919,7 @@
         document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
-                if (targetId.startsWith('#') && targetId !== '#') {
+                if (targetId && targetId.startsWith('#') && targetId !== '#') {
                     e.preventDefault();
                     lenis.scrollTo(targetId, { offset: -90, duration: 1.5 });
                 }
@@ -967,7 +993,8 @@
                 info_address: "Standort", info_contact: "Kontakt", info_hours: "Öffnungszeiten", hours_week: "Mo. - Fr.: 09:00 - 18:00", hours_weekend: "Sa. & So.: Geschlossen",
                 footer_rights: "Alle Rechte vorbehalten.", footer_dev: "Entwickelt von:",
                 btn_contact_us: "Kontaktieren Sie uns", btn_work_with_us: "Arbeiten Sie mit uns",
-                modal_cta: "Erzählen Sie uns mehr darüber, was Sie suchen oder welche Fragen Sie haben:", btn_send_whatsapp: "Per WhatsApp senden"
+                modal_cta: "Erzählen Sie uns mehr darüber, was Sie suchen oder welche Fragen Sie haben:", btn_send_whatsapp: "Per WhatsApp senden",
+                contact_modal_title: "Kontakt", contact_modal_desc: "Wie können wir helfen? Schreiben Sie Ihre Nachricht unten.", contact_modal_placeholder: "Ihre Nachricht..."
             },
             en: {
                 nav_about: "About Us", nav_services: "Services", nav_reviews: "Reviews", nav_contact: "Contact",
@@ -1008,7 +1035,8 @@
                 info_address: "Location", info_contact: "Contact", info_hours: "Opening Hours", hours_week: "Mon - Fri: 09:00 - 18:00", hours_weekend: "Sat & Sun: Closed",
                 footer_rights: "All rights reserved.", footer_dev: "Developed by:",
                 btn_contact_us: "Contact Us", btn_work_with_us: "Work with Us",
-                modal_cta: "Tell us more about what you are looking for or any questions you have:", btn_send_whatsapp: "Send via WhatsApp"
+                modal_cta: "Tell us more about what you are looking for or any questions you have:", btn_send_whatsapp: "Send via WhatsApp",
+                contact_modal_title: "Get in Touch", contact_modal_desc: "How can we help? Write your message below.", contact_modal_placeholder: "Your message..."
             },
             pt: {
                 nav_about: "Sobre Nós", nav_services: "Serviços", nav_reviews: "Avaliações", nav_contact: "Contato",
@@ -1049,7 +1077,8 @@
                 info_address: "Endereço", info_contact: "Contato", info_hours: "Horários", hours_week: "Seg. - Sex.: 09:00 - 18:00", hours_weekend: "Sáb. & Dom.: Fechado",
                 footer_rights: "Todos os direitos reservados.", footer_dev: "Desenvolvido por:",
                 btn_contact_us: "Fale Conosco", btn_work_with_us: "Trabalhe Conosco",
-                modal_cta: "Conte-nos mais sobre o que você busca ou suas dúvidas:", btn_send_whatsapp: "Enviar via WhatsApp"
+                modal_cta: "Conte-nos mais sobre o que você busca ou suas dúvidas:", btn_send_whatsapp: "Enviar via WhatsApp",
+                contact_modal_title: "Entre em Contato", contact_modal_desc: "Como podemos ajudar? Escreva sua mensagem abaixo.", contact_modal_placeholder: "Sua mensagem..."
             },
             es: {
                 nav_about: "Nosotros", nav_services: "Servicios", nav_reviews: "Reseñas", nav_contact: "Contacto",
@@ -1086,11 +1115,12 @@
                 r10_date: "hace 1 año", r10_text: "Muy satisfecho con el trabajo.",
                 r11_date: "hace 2 años", r11_text: "Genial",
                 r12_date: "hace 5 días", r12_text: "Hice microblading y pestañas, ¡feliz! Resultado hermoso.",
-                r13_date: "hace 2 weeks", r13_text: "Tratamiento facial excelente. Tratamiento fantástico. Recomiendo.",
+                r13_date: "hace 2 semanas", r13_text: "Tratamiento facial excelente. Tratamiento fantástico. Recomiendo.",
                 info_address: "Ubicación", info_contact: "Contacto", info_hours: "Horarios", hours_week: "Lun - Vie: 09:00 - 18:00", hours_weekend: "Sáb & Dom: Cerrado",
                 footer_rights: "Todos los derechos reservados.", footer_dev: "Desarrollado por:",
                 btn_contact_us: "Contáctenos", btn_work_with_us: "Trabaja con Nosotros",
-                modal_cta: "Cuéntanos más sobre lo que buscas o tus dudas:", btn_send_whatsapp: "Enviar por WhatsApp"
+                modal_cta: "Cuéntanos más sobre lo que buscas o tus dudas:", btn_send_whatsapp: "Enviar por WhatsApp",
+                contact_modal_title: "Contáctenos", contact_modal_desc: "¿Cómo podemos ayudar? Escriba su mensaje abajo.", contact_modal_placeholder: "Su mensaje..."
             },
             fr: {
                 nav_about: "À Propos", nav_services: "Services", nav_reviews: "Avis", nav_contact: "Contact",
@@ -1131,7 +1161,8 @@
                 info_address: "Adresse", info_contact: "Contact", info_hours: "Horaires", hours_week: "Lun - Ven: 09:00 - 18:00", hours_weekend: "Sam & Dim: Fermé",
                 footer_rights: "Tous droits réservés.", footer_dev: "Développé par:",
                 btn_contact_us: "Contactez-nous", btn_work_with_us: "Travailler avec nous",
-                modal_cta: "Dites-nous en plus sur ce que vous recherchez ou vos questions :", btn_send_whatsapp: "Envoyer par WhatsApp"
+                modal_cta: "Dites-nous en plus sur ce que vous recherchez ou vos questions :", btn_send_whatsapp: "Envoyer par WhatsApp",
+                contact_modal_title: "Contactez-nous", contact_modal_desc: "Comment pouvons-nous vous aider? Écrivez ci-dessous.", contact_modal_placeholder: "Votre message..."
             },
             ru: {
                 nav_about: "О Нас", nav_services: "Услуги", nav_reviews: "Отзывы", nav_contact: "Контакты",
@@ -1172,7 +1203,8 @@
                 info_address: "Адрес", info_contact: "Контакты", info_hours: "Часы работы", hours_week: "Пн - Пт: 09:00 - 18:00", hours_weekend: "Сб & Вс: Выходной",
                 footer_rights: "Все права защищены.", footer_dev: "Разработка:",
                 btn_contact_us: "Связаться с нами", btn_work_with_us: "Работайте с нами",
-                modal_cta: "Расскажите нам больше о том, что вы ищете или ваши вопросы:", btn_send_whatsapp: "Отправить в WhatsApp"
+                modal_cta: "Расскажите нам больше о том, что вы ищете или ваши вопросы:", btn_send_whatsapp: "Отправить в WhatsApp",
+                contact_modal_title: "Связаться", contact_modal_desc: "Как мы можем помочь? Напишите сообщение ниже.", contact_modal_placeholder: "Ваше сообщение..."
             }
         };
 
@@ -1201,13 +1233,14 @@
                     });
                 }
                 mainBody.classList.remove('lang-fading');
-                lenis.scrollTo(0, { duration: 1.5 }); // Scroll suave ao topo ao mudar o idioma
+                lenis.scrollTo(0, { duration: 1.5 });
             }, 300);
         }
 
+        // --- LÓGICA DE POP-UPS (MODAIS) ---
+        // Pop-up de Serviços
         function openServiceModal(cardElement, serviceKey) {
             if (isDraggingCarousel) return;
-
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             cardElement.classList.add('selected');
 
@@ -1225,16 +1258,11 @@
 
             modalDetails.value = '';
             modal.classList.add('active');
-            
-            // Pausa a rolagem de fundo usando o Lenis para não quebrar a estrutura nativa
             lenis.stop();
         }
 
         function closeServiceModal() {
-            const modal = document.getElementById('serviceModal');
-            modal.classList.remove('active');
-            
-            // Retoma a rolagem da página
+            document.getElementById('serviceModal').classList.remove('active');
             lenis.start();
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
         }
@@ -1245,14 +1273,34 @@
             const serviceName = t[currentLang][selectedServiceKey + '_title'];
             let messageTemplate = serviceWaTemplates[currentLang] || serviceWaTemplates['de'];
             let finalMessage = messageTemplate.replace('{service}', serviceName).replace('{details}', details);
-            const waUrl = `https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`;
-            window.open(waUrl, '_blank');
+            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`, '_blank');
             closeServiceModal();
         }
 
-        document.getElementById('serviceModal').addEventListener('click', function(e) {
-            if (e.target === this) { closeServiceModal(); }
-        });
+        // Pop-up de Contato
+        function openContactModal(e) {
+            if(e) e.preventDefault();
+            const modal = document.getElementById('contactModal');
+            document.getElementById('contactDetails').value = '';
+            modal.classList.add('active');
+            lenis.stop();
+            // Fecha menu mobile se estiver aberto
+            document.getElementById('nav-menu').classList.remove('active');
+        }
+
+        function closeContactModal() {
+            document.getElementById('contactModal').classList.remove('active');
+            lenis.start();
+        }
+
+        function sendContactWhatsApp() {
+            const details = document.getElementById('contactDetails').value;
+            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(details)}`, '_blank');
+            closeContactModal();
+        }
+
+        // Removido o fechamento ao clicar fora (fundo) por solicitação. 
+        // Os modais agora SÓ fecham pelo "X" ou após enviar a mensagem.
 
         document.getElementById('langDropdown').addEventListener('click', () => { document.getElementById('langOptions').classList.toggle('show'); });
         window.addEventListener('click', (e) => { if (!document.getElementById('langDropdown').contains(e.target)) document.getElementById('langOptions').classList.remove('show'); });
@@ -1268,12 +1316,8 @@
         window.addEventListener('scroll', () => {
             if (!isScrolling) {
                 window.requestAnimationFrame(() => {
-                    const scrolled = window.scrollY;
-                    if (scrolled > 400) { 
-                        backToTopBtn.classList.add('visible'); 
-                    } else { 
-                        backToTopBtn.classList.remove('visible'); 
-                    }
+                    if (window.scrollY > 400) { backToTopBtn.classList.add('visible'); } 
+                    else { backToTopBtn.classList.remove('visible'); }
                     isScrolling = false;
                 });
                 isScrolling = true;
@@ -1291,18 +1335,12 @@
         const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel'), document.getElementById('modalGallery')];
         carousels.forEach(carousel => {
             if(!carousel) return;
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-            let velX = 0; 
-            let lastX = 0;
-            let momentumID;
+            let isDown = false, startX, scrollLeft, velX = 0, lastX = 0, momentumID;
 
             carousel.addEventListener('mousedown', (e) => {
                 isDown = true;
                 isDraggingCarousel = false; 
                 carousel.classList.add('active');
-                carousel.style.scrollSnapType = 'none'; // Desabilita snap ao arrastar com o mouse para não dar conflito
                 startX = e.pageX - carousel.offsetLeft;
                 scrollLeft = carousel.scrollLeft;
                 lastX = e.pageX; 
@@ -1310,96 +1348,75 @@
                 cancelAnimationFrame(momentumID); 
             });
 
-            carousel.addEventListener('mouseleave', () => {
-                if (!isDown) return;
-                isDown = false;
-                carousel.classList.remove('active');
-                beginMomentumTracking();
-            });
-
-            carousel.addEventListener('mouseup', () => {
-                if (!isDown) return;
-                isDown = false;
-                carousel.classList.remove('active');
-                beginMomentumTracking();
-            });
+            carousel.addEventListener('mouseleave', () => { if(isDown){ isDown = false; carousel.classList.remove('active'); beginMomentumTracking(); } });
+            carousel.addEventListener('mouseup', () => { if(isDown){ isDown = false; carousel.classList.remove('active'); beginMomentumTracking(); } });
 
             carousel.addEventListener('mousemove', (e) => {
                 if(!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - carousel.offsetLeft;
                 const walk = (x - startX) * 1.1; 
-                
-                if (Math.abs(walk) > 5) {
-                    isDraggingCarousel = true; 
-                }
-
+                if (Math.abs(walk) > 5) isDraggingCarousel = true; 
                 carousel.scrollLeft = scrollLeft - walk;
                 velX = e.pageX - lastX;
                 lastX = e.pageX;
             });
 
-            function beginMomentumTracking(){
-                cancelAnimationFrame(momentumID);
-                momentumLoop();
-            }
-
+            function beginMomentumTracking(){ cancelAnimationFrame(momentumID); momentumLoop(); }
             function momentumLoop(){
                 velX *= 0.95; 
                 carousel.scrollLeft -= velX; 
-
                 if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
-                     velX = 0;
-                     cancelAnimationFrame(momentumID);
-                     carousel.style.scrollSnapType = ''; // Reativa o snap Premium
-                     return;
+                     velX = 0; cancelAnimationFrame(momentumID); return;
                 }
-                if (Math.abs(velX) > 0.5) {
-                    momentumID = requestAnimationFrame(momentumLoop);
-                } else {
-                     cancelAnimationFrame(momentumID); 
-                     carousel.style.scrollSnapType = ''; // Reativa o snap Premium
-                }
+                if (Math.abs(velX) > 0.5) { momentumID = requestAnimationFrame(momentumLoop); } 
+                else { cancelAnimationFrame(momentumID); }
             }
         });
 
-        // BEFORE & AFTER: OTIMIZADO PARA TRAVAR A TELA E MOVER APENAS PELO HANDLE NO CELULAR
+        // LÓGICA DO ANTES & DEPOIS (AJUSTADO E OTIMIZADO)
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
             const line = slider.querySelector('.ba-line');
+            const label = slider.querySelector('.ba-dynamic-label');
             let isSliding = false;
             
             const move = (e) => {
                 if(!isSliding) return;
-                
-                // TRAVA A ROLAGEM VERTICAL: se for um toque na tela (celular), cancela o scroll da página enquanto mexe.
-                if (e.cancelable && e.type.includes('touch')) {
-                    e.preventDefault(); 
-                }
-
                 let rect = slider.getBoundingClientRect();
                 let x = (e.type.includes('touch') ? e.touches[0].clientX : e.clientX) - rect.left;
                 let percent = Math.max(0, Math.min(x / rect.width * 100, 100));
                 
+                // Aplicar Clip-path dinâmico
                 before.style.clipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
                 before.style.webkitClipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
                 handle.style.left = percent + '%';
                 if(line) line.style.left = percent + '%';
+
+                // Trocar texto da legenda dependendo da posição do handle
+                if(label && t[currentLang]) {
+                    // Se o slider for movido para a direita (>50%), a imagem do ANTES está sendo mostrada
+                    if(percent > 50) {
+                        label.innerText = t[currentLang]['lbl_before'];
+                    } else {
+                        // Se o slider for movido para a esquerda (<50%), a imagem do DEPOIS está sendo mostrada
+                        label.innerText = t[currentLang]['lbl_after'];
+                    }
+                }
             }
             
-            handle.addEventListener('mousedown', () => isSliding = true);
-            handle.addEventListener('touchstart', () => isSliding = true, {passive: true});
+            slider.addEventListener('mousedown', () => isSliding = true);
+            slider.addEventListener('touchstart', () => isSliding = true, {passive: true});
             window.addEventListener('mouseup', () => isSliding = false);
             window.addEventListener('touchend', () => isSliding = false);
             window.addEventListener('mousemove', move);
-            // Passive: false é OBRIGATÓRIO aqui para permitir que o e.preventDefault() funcione e trave a tela.
-            window.addEventListener('touchmove', move, { passive: false }); 
+            window.addEventListener('touchmove', move);
         });
 
+        // LÓGICA DO VÍDEO INTRODUTÓRIO
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
-
         if (introVideo && staticAfterVideo) {
             const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
@@ -1409,20 +1426,67 @@
                     }
                 });
             }, { threshold: 0.3 });
-
             videoObserver.observe(introVideo);
-
             introVideo.addEventListener('ended', () => {
                 introVideo.classList.remove('active');
                 staticAfterVideo.classList.add('active');
             });
         }
 
-        document.getElementById('play-btn-trigger').addEventListener('click', () => {
-            document.getElementById('video-player-container').innerHTML = '<video src="Midias/video.mp4" controls autoplay style="width:100%; height:100%; object-fit:cover;"></video>';
-        });
+        // LÓGICA DO CARROSSEL DE REELS 9:16
+        const reelVideos = document.querySelectorAll('.reel-video');
+        const reelsSoundBtn = document.getElementById('reelsSoundBtn');
+        const iconMuted = document.getElementById('icon-muted');
+        const iconUnmuted = document.getElementById('icon-unmuted');
+        let currentReelIndex = 0;
+        let isReelMuted = true;
 
-        updateWaLinks('de'); // Init WhatsApp Link
+        if(reelVideos.length > 0) {
+            function playNextReel() {
+                reelVideos[currentReelIndex].classList.remove('active');
+                reelVideos[currentReelIndex].pause();
+                reelVideos[currentReelIndex].currentTime = 0;
+                
+                currentReelIndex = (currentReelIndex + 1) % reelVideos.length;
+                
+                reelVideos[currentReelIndex].classList.add('active');
+                reelVideos[currentReelIndex].muted = isReelMuted;
+                reelVideos[currentReelIndex].play().catch(e => console.log("Reels autoplay:", e));
+            }
+
+            // Quando um vídeo termina, toca o próximo
+            reelVideos.forEach(video => {
+                video.addEventListener('ended', playNextReel);
+            });
+
+            // Autoplay inicial quando a seção entra na tela
+            const reelsSectionObserver = new IntersectionObserver((entries) => {
+                if(entries[0].isIntersecting) {
+                    reelVideos[currentReelIndex].play().catch(e => console.log(e));
+                } else {
+                    reelVideos[currentReelIndex].pause();
+                }
+            }, { threshold: 0.5 });
+            reelsSectionObserver.observe(document.getElementById('reelsContainer'));
+
+            // Botão de Áudio (Mute / Unmute)
+            reelsSoundBtn.addEventListener('click', () => {
+                isReelMuted = !isReelMuted;
+                reelVideos[currentReelIndex].muted = isReelMuted;
+                
+                if(isReelMuted) {
+                    iconMuted.style.display = 'block';
+                    iconUnmuted.style.display = 'none';
+                } else {
+                    iconMuted.style.display = 'none';
+                    iconUnmuted.style.display = 'block';
+                    // Força o play caso o navegador tenha bloqueado o autoplay inicial
+                    reelVideos[currentReelIndex].play().catch(e => console.log(e));
+                }
+            });
+        }
+
+        updateWaLinks('de'); 
     </script>
 </body>
 </html>
