@@ -2,17 +2,15 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty By Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
     <link rel="icon" href="https://i.imgur.com/CQpHs8c.png" type="image/png">
     <title>Beauty By Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
     
-    <!-- Importação do Lenis para Scroll Suave Premium -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
-
         :root {
             --bg-champagne: #FAF5F0;
             --bg-white: #FFFFFF;
@@ -27,51 +25,31 @@
             --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- STREAMING_CHUNK:Configuring Lenis Smooth Scroll... */
-        html.lenis, html.lenis body {
-            height: auto;
-        }
-        .lenis.lenis-smooth {
-            scroll-behavior: auto !important; 
-        }
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-        .lenis.lenis-smooth iframe {
-            pointer-events: none; 
-        }
+        /* Lenis Scroll Premium Setup */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-smooth iframe { pointer-events: none; }
 
-        /* --- STREAMING_CHUNK:Setting up base layout and text selection... */
         body { 
             font-family: 'Montserrat', sans-serif; 
             background-color: var(--bg-champagne); 
             color: var(--text-dark); 
             line-height: 1.6; 
             -webkit-font-smoothing: antialiased;
-            -webkit-user-select: none; 
-            -moz-user-select: none; 
-            -ms-user-select: none; 
-            user-select: none; 
+            -webkit-user-select: none; user-select: none;
+            overflow-x: clip; /* Fix for mobile horizontal scroll bugs */
         }
         
-        textarea, input {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
-        }
-
-        html, body { width: 100%; max-width: 100%; overflow-x: clip; }
+        textarea, input { -webkit-user-select: text; user-select: text; }
+        html, body { width: 100%; max-width: 100%; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
         ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
         
-        img { max-width: 100%; height: auto; -webkit-user-drag: none; }
-
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
         @media (max-width: 768px) { .container { padding: 0 20px; } }
 
@@ -93,14 +71,13 @@
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-        /* --- STREAMING_CHUNK:Styling the premium blurred header... */
-        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .logo-img { height: 55px; width: auto; object-fit: contain; }
         .logo-wrap div { white-space: nowrap; }
         nav ul { display: flex; gap: 25px; align-items: center; }
-        nav a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; color: var(--text-dark); cursor: pointer; }
+        nav a { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 500; color: var(--text-dark); }
         nav a:hover { color: var(--accent-rose); }
         
         .lang-dropdown { position: relative; cursor: pointer; font-size: 0.85rem; font-weight: 500; color: var(--text-dark); margin-left: 20px; user-select: none; }
@@ -128,23 +105,20 @@
             nav a.btn-outline { margin-top: 10px; }
         }
 
-        /* --- STREAMING_CHUNK:Styling the Hero section... */
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: var(--bg-champagne); padding-top: 90px; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
         .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; margin-bottom: 25px; }
         .hero-subtitle { color: var(--text-dark); font-weight: 500; font-size: 1.1rem; margin-bottom: 40px; max-width: 550px; }
         
-        .hero-photo-wrap { width: 100%; max-width: 420px; aspect-ratio: 4/5; border-radius: 12px; margin-left: auto; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.1); position: relative; background: var(--bg-white); }
-        .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 70%; transition: transform 0.1s linear; filter: contrast(1.05) brightness(1.02); }
+        .hero-photo-wrap { width: 100%; max-width: 420px; aspect-ratio: 4/5; border-radius: 12px; margin-left: auto; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.1); position: relative; background: var(--bg-white); transform: translateZ(0);}
+        .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 70%; filter: contrast(1.05) brightness(1.02); }
         
         @media (max-width: 992px) { 
             .hero-grid { grid-template-columns: 1fr; text-align: center; } 
             .hero-subtitle, .hero-photo-wrap { margin: 0 auto 40px auto; } 
             .hero-photo-wrap{ max-width: 350px; } 
-            .hero-photo-wrap img { transform: none !important; }
         }
 
-        /* --- STREAMING_CHUNK:Styling the About Us and Video section... */
         .about { padding: 120px 0; background-color: var(--bg-white); }
         .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: center; }
         .about-images { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -158,7 +132,6 @@
         .about-content p { color: var(--text-muted); margin-bottom: 20px; }
         @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; gap: 50px; } }
 
-        /* --- STREAMING_CHUNK:Styling the Benefits cards... */
         .why-us { padding: 80px 0; background-color: var(--bg-champagne); }
         .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .why-card { background: var(--bg-white); padding: 25px 20px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px; }
@@ -169,14 +142,13 @@
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
-        /* --- STREAMING_CHUNK:Styling the Services section & Carousels... */
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
-        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; will-change: transform;}
+        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; }
         .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
         .service-card.selected { border-color: var(--accent-rose); background-color: var(--bg-champagne); box-shadow: 0 0 15px rgba(200, 142, 147, 0.3); }
 
@@ -195,22 +167,21 @@
             .service-card { min-width: 80vw; max-width: 80vw; } 
         }
 
-        /* --- STREAMING_CHUNK:Styling Modals & Pop-ups... */
-        .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(20, 15, 15, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
+        .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(42, 36, 37, 0.6); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: var(--transition-smooth); padding: 20px; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
         .service-modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .service-modal-content { background-color: var(--bg-white); width: 100%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 90vh; display: flex; flex-direction: column; }
-        .service-modal-overlay.active .service-modal-content { transform: scale(1); }
+        .service-modal-content { background-color: var(--bg-white); width: 100%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-subtle); transform: translate3d(0, 30px, 0); transition: var(--transition-smooth); max-height: 90vh; display: flex; flex-direction: column; }
+        .service-modal-overlay.active .service-modal-content { transform: translate3d(0, 0, 0); }
         
         .modal-header { padding: 20px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
         .modal-header h3 { margin: 0; font-size: 1.4rem; }
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
         
-        .modal-gallery { display: flex; overflow-x: auto; gap: 10px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); will-change: transform;}
+        .modal-gallery { display: flex; overflow-x: auto; gap: 15px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); cursor: grab; }
+        .modal-gallery:active { cursor: grabbing; }
         .modal-gallery::-webkit-scrollbar { display: none; }
-        .modal-gallery.active { cursor: grabbing; }
-        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; }
-        .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; pointer-events: none;}
+        .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none;}
 
         .modal-body { padding: 25px; overflow-y: auto; }
         .modal-cta-text { font-weight: 500; margin-bottom: 15px; color: var(--text-dark); font-size: 0.95rem; }
@@ -220,42 +191,36 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- STREAMING_CHUNK:Styling Before & After Slider... */
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; touch-action: pan-y; border-radius: 8px; transform: translateZ(0);}
+        .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; border-radius: 8px; transform: translateZ(0);}
         .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); will-change: clip-path;}
+        .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%); pointer-events: none;}
         .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background-color: var(--bg-white); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
-        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); }
+        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); touch-action: none;}
         .ba-handle::before, .ba-handle::after { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
         .ba-handle::before { border-width: 5px 6px 5px 0; border-color: transparent var(--accent-rose) transparent transparent; left: 6px; }
         .ba-handle::after { border-width: 5px 0 5px 6px; border-color: transparent transparent transparent var(--accent-rose); right: 6px; }
-        .ba-label-corner { position: absolute; bottom: 15px; right: 15px; padding: 6px 15px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
+        
+        .ba-label-corner { position: absolute; bottom: 15px; right: 15px; padding: 6px 16px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; transition: var(--transition-smooth); }
         @media (max-width: 992px) { .ba-grid { grid-template-columns: 1fr; } .ba-slider-container { height: 300px; } }
 
-        /* --- STREAMING_CHUNK:Styling the Video Reels section... */
-        .videos { padding: 100px 0; background-color: var(--bg-white); }
-        .reels-gallery-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 350px; margin: 0 auto; }
+        .videos { padding: 100px 0; background-color: var(--bg-white); overflow: hidden;}
+        .reels-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .reels-container::-webkit-scrollbar { display: none; }
+        .reels-container.active { cursor: grabbing; }
+        .reel-item { flex: 0 0 auto; width: 280px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle); pointer-events: none;}
+        .reel-item video { width: 100%; height: 100%; object-fit: cover; pointer-events: auto;}
         
-        .reels-main-view { width: 100%; aspect-ratio: 9/16; position: relative; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transform: translateZ(0); }
-        .main-reel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; }
-        .main-reel.active { opacity: 1; pointer-events: auto; z-index: 2; }
-        
-        .reels-ui { position: absolute; bottom: 20px; right: 20px; z-index: 10; }
-        .reels-sound-toggle { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 45px; height: 45px; display:flex; align-items:center; justify-content:center; cursor:pointer; backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); transition: var(--transition-smooth); }
-        .reels-sound-toggle:hover { background: var(--accent-rose); transform: scale(1.05); }
-        .reels-sound-toggle svg { width: 22px; height: 22px; fill: white; }
+        .mute-btn { position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: var(--transition-smooth); pointer-events: auto;}
+        .mute-btn:hover { background: var(--accent-rose); transform: scale(1.1); }
+        .mute-btn svg { width: 22px; height: 22px; fill: white; }
+        @media (max-width: 1380px) { .reels-container { padding: 20px 40px; } }
+        @media (max-width: 768px) { .reels-container { padding: 20px 30px; } .reel-item { width: 75vw; } }
 
-        .reels-thumbs { display: flex; gap: 10px; width: 100%; justify-content: space-between; }
-        .reel-thumb { width: calc(25% - 7.5px); aspect-ratio: 9/16; border-radius: 6px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: var(--transition-smooth); opacity: 0.5; position: relative; }
-        .reel-thumb.active { border-color: var(--accent-rose); opacity: 1; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .reel-thumb video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-
-        /* --- STREAMING_CHUNK:Styling reviews and summary block... */
         .reviews { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden;}
         .google-summary { background-color: transparent; max-width: 600px; margin: 0 auto 40px auto; text-align: center; }
         .rating-huge { font-size: 4rem; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 5px; letter-spacing: -2px; }
@@ -268,7 +233,7 @@
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
-        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); will-change: transform;}
+        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); }
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
         @media (max-width: 768px) { 
             .reviews-carousel { padding: 20px 30px; }
@@ -280,27 +245,10 @@
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
-        /* --- STREAMING_CHUNK:Styling Google Maps iframe... */
-        .map-section { 
-            width: 100%; 
-            height: 350px; 
-            background: #eee; 
-            position: relative; 
-            border-top: 1px solid var(--border-light);
-            cursor: pointer;
-        }
-        .map-iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: 0; 
-            filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); 
-            pointer-events: none; /* Disables interaction by default so scroll flows naturally */
-            transition: var(--transition-smooth);
-        }
-        .map-section.active .map-iframe { 
-            pointer-events: auto; /* Active zoom/interactivity only on map click */
-        }
-        
+        .map-section { width: 100%; height: 350px; background: #eee; position: relative; border-top: 1px solid var(--border-light);}
+        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; }
+        .map-section.active .map-iframe { pointer-events: auto; }
+
         .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .info-card { text-align: center; }
@@ -310,7 +258,6 @@
         .info-card .hl { color: var(--accent-rose); font-weight: 600; }
         @media (max-width: 768px) { .clinic-info-grid { grid-template-columns: 1fr; gap: 40px;} }
 
-        /* --- STREAMING_CHUNK:Styling the footer & floating elements... */
         .footer { padding: 40px 0; background-color: var(--text-dark); color: rgba(255,255,255,0.7); text-align: center; font-size: 0.8rem; letter-spacing: 1px; }
         .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
         .social-links a { color: var(--primary-rose); text-transform: uppercase; transition: var(--transition-smooth);}
@@ -330,7 +277,6 @@
         .animate-on-scroll { opacity: 0; transform: translate3d(0, 30px, 0); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); }
         .animate-on-scroll.visible { opacity: 1; transform: translate3d(0, 0, 0); }
         .delay-1 { transition-delay: 0.15s; } .delay-2 { transition-delay: 0.3s; }
-        
         .lang-fading { opacity: 0; transition: opacity 0.3s ease-in-out; }
     </style>
 </head>
@@ -349,7 +295,8 @@
                     <li><a href="#about" data-i18n="nav_about">Über Uns</a></li>
                     <li><a href="#services" data-i18n="nav_services">Services</a></li>
                     <li><a href="#reviews" data-i18n="nav_reviews">Bewertungen</a></li>
-                    <li><a onclick="openContactModal(event)" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_contact">Kontakt</a></li>
+                    <!-- Botão de contato alterado para abrir o modal -->
+                    <li><button onclick="openContactModal()" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_contact">Kontakt</button></li>
                 </ul>
             </nav>
             <div class="lang-dropdown" id="langDropdown">
@@ -382,7 +329,6 @@
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering About Us section... -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
@@ -404,7 +350,6 @@
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering Benefits grid... -->
     <section class="why-us">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -436,7 +381,6 @@
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering Services and rituals carousel... -->
     <section class="services" id="services">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -447,7 +391,6 @@
         
         <div class="services-carousel-wrap">
             <div class="services-carousel" id="servicesCarousel">
-                
                 <div class="service-card" onclick="openServiceModal(this, 's1')" data-i18n-key="s1">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
                     <h3 data-i18n="s1_title">Professionelle Gesichtsreinigung</h3>
@@ -590,12 +533,10 @@
                         <div class="s-row"><span class="lbl" data-i18n="lbl_duration">Dauer:</span><span class="val" data-i18n="s13_dur">60 - 90 Min.</span></div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering Before and After interactive block... -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -605,68 +546,68 @@
             <div class="ba-grid">
                 
                 <div class="ba-slider-container animate-on-scroll">
-                    <!-- Fundo: IMAGEM DEPOIS (Sobrancelha bonita, lado direito) -->
-                    <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Nachher" class="ba-img">
-                    <!-- Frente: IMAGEM ANTES (Sobrancelha falhada, lado esquerdo) -->
+                    <!-- Background = DEPOIS (Sobrancelha bonita, lado direito) -->
+                    <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Depois" class="ba-img">
+                    
+                    <!-- Foreground = ANTES (Sobrancelha ruim/falhada, lado esquerdo) -->
                     <div class="ba-before">
-                        <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Vorher">
+                        <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Antes">
                     </div>
+                    
                     <div class="ba-line"></div>
                     <div class="ba-handle"></div>
-                    <div class="ba-label-corner"></div>
+                    <div class="ba-label-corner">Antes</div>
                 </div>
 
                 <div class="ba-slider-container animate-on-scroll delay-1">
-                    <img src="" alt="Nachher" class="ba-img media-placeholder">
+                    <img src="" alt="Depois" class="ba-img media-placeholder">
                     <div class="ba-before">
-                        <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;">
+                        <img src="" alt="Antes" class="media-placeholder" style="background:#ddd;">
                     </div>
                     <div class="ba-line"></div>
                     <div class="ba-handle"></div>
-                    <div class="ba-label-corner"></div>
+                    <div class="ba-label-corner">Antes</div>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering Video Insights carousels... -->
     <section class="videos">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="subtitle" data-i18n="video_sub">Einblicke im Video</span>
                 <h2 data-i18n="video_title">Exklusive Behandlungs-Insights</h2>
             </div>
-            
-            <div class="reels-gallery-wrap animate-on-scroll">
-                <!-- VÍDEO PRINCIPAL EM EXIBIÇÃO -->
-                <div class="reels-main-view">
-                    <video src="https://i.imgur.com/DtGumfd.mp4" class="main-reel active" muted playsinline></video>
-                    <video src="https://i.imgur.com/KqTpjlx.mp4" class="main-reel" muted playsinline></video>
-                    <video src="https://i.imgur.com/Bb0zGuS.mp4" class="main-reel" muted playsinline></video>
-                    <video src="https://i.imgur.com/9WGwd3B.mp4" class="main-reel" muted playsinline></video>
-                    
-                    <div class="reels-ui">
-                        <button class="reels-sound-toggle" id="reelsSoundBtn" onclick="toggleReelSound()">
-                            <svg id="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                            <svg id="icon-unmuted" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- MINIATURAS SELECIONÁVEIS -->
-                <div class="reels-thumbs">
-                    <div class="reel-thumb active" onclick="switchReel(0)"><video src="https://i.imgur.com/DtGumfd.mp4#t=0.1" preload="metadata"></video></div>
-                    <div class="reel-thumb" onclick="switchReel(1)"><video src="https://i.imgur.com/KqTpjlx.mp4#t=0.1" preload="metadata"></video></div>
-                    <div class="reel-thumb" onclick="switchReel(2)"><video src="https://i.imgur.com/Bb0zGuS.mp4#t=0.1" preload="metadata"></video></div>
-                    <div class="reel-thumb" onclick="switchReel(3)"><video src="https://i.imgur.com/9WGwd3B.mp4#t=0.1" preload="metadata"></video></div>
-                </div>
+        </div>
+        <div class="reels-container" id="reelsCarousel">
+            <div class="reel-item animate-on-scroll">
+                <video src="https://i.imgur.com/DtGumfd.mp4" autoplay loop muted playsinline></video>
+                <button class="mute-btn" onclick="toggleMute(this)">
+                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                </button>
             </div>
-
+            <div class="reel-item animate-on-scroll delay-1">
+                <video src="https://i.imgur.com/KqTpjlx.mp4" autoplay loop muted playsinline></video>
+                <button class="mute-btn" onclick="toggleMute(this)">
+                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                </button>
+            </div>
+            <div class="reel-item animate-on-scroll delay-2">
+                <video src="https://i.imgur.com/Bb0zGuS.mp4" autoplay loop muted playsinline></video>
+                <button class="mute-btn" onclick="toggleMute(this)">
+                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                </button>
+            </div>
+            <div class="reel-item animate-on-scroll">
+                <video src="https://i.imgur.com/9WGwd3B.mp4" autoplay loop muted playsinline></video>
+                <button class="mute-btn" onclick="toggleMute(this)">
+                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering Google reviews and ratings... -->
     <section class="reviews" id="reviews">
         <div class="container">
             <div class="section-header animate-on-scroll" style="margin-bottom: 20px;">
@@ -748,7 +689,7 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r6_text">"Cris' Energie ist die beste, die man dort finden can; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet."</p>
+                    <p class="review-text" data-i18n="r6_text">"Cris' Energie ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet."</p>
                 </div>
 
                 <div class="review-card">
@@ -825,15 +766,14 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r13_text">"Die Gesichtsbehandlung war hervorragend. Cristina can es. Eine fantastische Behandlung. Sehr zu empfehlen."</p>
+                    <p class="review-text" data-i18n="r13_text">"Die Gesichtsbehandlung war hervorragend. Cristina kann es. Eine fantastische Behandlung. Sehr zu empfehlen."</p>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering Google Maps block and info card... -->
-    <div class="map-section" id="mapSection">
+    <div class="map-section" id="map-wrap">
         <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
@@ -859,11 +799,10 @@
         </div>
     </section>
 
-    <!-- --- STREAMING_CHUNK:Rendering static footer details... -->
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
-                <a onclick="openContactModal(event)" class="btn btn-small-footer" data-i18n="btn_contact_us" style="cursor:pointer;">Fale Conosco</a>
+                <button onclick="openContactModal()" class="btn btn-small-footer" data-i18n="btn_contact_us">Fale Conosco</button>
                 <a href="mailto:careers@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_work_with_us">Trabalhe Conosco</a>
             </div>
             <div class="social-links">
@@ -878,19 +817,19 @@
     
     <div class="float-btn float-top" id="backToTop" onclick="smoothScrollToTop(event)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
-    <!-- --- STREAMING_CHUNK:Pop-up modals structure... -->
+    <!-- Modal para Serviços -->
     <div class="service-modal-overlay" id="serviceModal">
         <div class="service-modal-content">
             <div class="modal-header">
                 <h3 id="modalServiceName">Nome do Serviço</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
             </div>
-            <div class="modal-gallery" id="modalGallery" data-lenis-prevent>
+            <div class="modal-gallery" id="modalGallery">
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 1 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 2 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 3 ]</span></div></div>
             </div>
-            <div class="modal-body" data-lenis-prevent>
+            <div class="modal-body">
                 <p class="modal-cta-text" data-i18n="modal_cta">Conte-nos mais sobre o que você busca ou suas dúvidas:</p>
                 <textarea class="modal-textarea" id="modalDetails" placeholder="Escreva aqui..."></textarea>
                 <button class="modal-send-btn" onclick="sendServiceWhatsApp()">
@@ -901,16 +840,16 @@
         </div>
     </div>
 
-    <!-- MODAL DE CONTATO EXCLUSIVO -->
+    <!-- Modal Novo para Contato -->
     <div class="service-modal-overlay" id="contactModal">
         <div class="service-modal-content">
             <div class="modal-header">
-                <h3 data-i18n="contact_modal_title">Entre em Contato</h3>
+                <h3 data-i18n="nav_contact">Kontakt</h3>
                 <button class="modal-close" onclick="closeContactModal()">×</button>
             </div>
-            <div class="modal-body" data-lenis-prevent>
-                <p class="modal-cta-text" data-i18n="contact_modal_desc">Como podemos ajudar? Escreva sua mensagem abaixo e responderemos rapidamente pelo WhatsApp.</p>
-                <textarea class="modal-textarea" id="contactDetails" data-i18n-ph="contact_modal_placeholder" placeholder="Sua mensagem..."></textarea>
+            <div class="modal-body">
+                <p class="modal-cta-text" data-i18n="modal_cta_contact">Como podemos ajudar você hoje?</p>
+                <textarea class="modal-textarea" id="contactDetails" placeholder="Escreva aqui..."></textarea>
                 <button class="modal-send-btn" onclick="sendContactWhatsApp()">
                     <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg>
                     <span data-i18n="btn_send_whatsapp">Enviar via WhatsApp</span>
@@ -939,7 +878,7 @@
             }
         });
 
-        // --- STREAMING_CHUNK:Initializing Lenis dynamic scrolling... ---
+        // --- LENIS SCROLL (Motor Premium) ---
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
@@ -958,11 +897,15 @@
         }
         requestAnimationFrame(raf);
 
-        // --- STREAMING_CHUNK:Configuring anchors for premium navigation... ---
+        // Desativa/Ativa mapa ao clicar (Impede lag no scroll)
+        const mapWrap = document.getElementById('map-wrap');
+        mapWrap.addEventListener('mousedown', () => mapWrap.classList.add('active'));
+        mapWrap.addEventListener('mouseleave', () => mapWrap.classList.remove('active'));
+
         document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
-                if (targetId && targetId.startsWith('#') && targetId !== '#') {
+                if (targetId.startsWith('#') && targetId !== '#') {
                     e.preventDefault();
                     lenis.scrollTo(targetId, { offset: -90, duration: 1.5 });
                 }
@@ -978,6 +921,7 @@
         let currentLang = 'de'; 
         let isDraggingCarousel = false; 
 
+        // TRANSLATIONS
         const waMessages = {
             de: "Hallo! Ich möchte einen Termin vereinbaren...",
             en: "Hello! I would like to book an appointment...",
@@ -1020,24 +964,23 @@
                 ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", lbl_before: "Vorher", lbl_after: "Nachher",
                 video_sub: "Einblicke im Video", video_title: "Exklusive Insights",
                 reviews_sub: "Kundenmeinungen", reviews_title: "Google Bewertungen", google_reviews_count: "Basierend auf 13 Google-Rezensionen", btn_google_page: "Auf Google ansehen",
-                r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir very gut gefallen, ich empfehle es! 👏",
-                r2_date: "vor 1 Jahr", r2_text: "Ich liebe die Maniküre und Pediküre von Cris, ich bin very zufrieden.. Sie ist very freundlich und geduldig 🫶🥰",
+                r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏",
+                r2_date: "vor 1 Jahr", r2_text: "Ich liebe die Maniküre und Pediküre von Cris, ich bin sehr zufrieden.. Sie ist sehr freundlich und geduldig 🫶🥰",
                 r3_date: "vor 2 Jahren", r3_text: "Ausgezeichnete Fachkraft, hat meine Erwartungen übertroffen, danke Cris ❤️ Sehr zu empfehlen!",
                 r4_date: "vor 2 Jahren", r4_text: "Ich war schon oft dort. Ob für Wimpern oder Augenbrauen, ich bin absolut begeistert.",
                 r5_date: "vor 2 Jahren", r5_text: "Habe meine Augenbrauen micropigmentieren lassen und bin begeistert vom Ergebnis. Ich empfehle es vorbehaltlos.",
-                r6_date: "vor 2 Jahren", r6_text: "Cris' Energie ist die beste, die man dort finden can; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet.",
+                r6_date: "vor 2 Jahren", r6_text: "Cris' Energie ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet.",
                 r7_date: "vor 1 Jahr", r7_text: "Ein tolles kleines Studio... Ich hatte dort eine Gesichtsbehandlung mit Plasma Pen und Microblading.",
-                r8_date: "vor 2 Jahren", r8_text: "Ich can es very empfehlen; exzellenter Service und gemütliche Atmosphäre. Ich bin very zufrieden! 👍👏",
-                r9_date: "vor 2 Jahren", r9_text: "Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis very zufrieden.",
-                r10_date: "vor 1 Jahr", r10_text: "Ich war mit der Arbeit very zufrieden.",
+                r8_date: "vor 2 Jahren", r8_text: "Ich kann es sehr empfehlen; exzellenter Service und gemütliche Atmosphäre. Ich bin sehr zufrieden! 👍👏",
+                r9_date: "vor 2 Jahren", r9_text: "Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis sehr zufrieden.",
+                r10_date: "vor 1 Jahr", r10_text: "Ich war mit der Arbeit sehr zufrieden.",
                 r11_date: "vor 2 Jahren", r11_text: "Cool",
                 r12_date: "vor 5 Tagen", r12_text: "Ich habe hier Microblading und Wimpernverlängerung machen lassen und bin extrem glücklich! Das Ergebnis ist wunderschön.",
-                r13_date: "vor 2 Wochen", r13_text: "Die Gesichtsbehandlung war hervorragend. Cristina can es. Eine fantastische Behandlung. Sehr zu empfehlen.",
+                r13_date: "vor 2 Wochen", r13_text: "Die Gesichtsbehandlung war hervorragend. Cristina kann es. Eine fantastische Behandlung. Sehr zu empfehlen.",
                 info_address: "Standort", info_contact: "Kontakt", info_hours: "Öffnungszeiten", hours_week: "Mo. - Fr.: 09:00 - 18:00", hours_weekend: "Sa. & So.: Geschlossen",
                 footer_rights: "Alle Rechte vorbehalten.", footer_dev: "Entwickelt von:",
                 btn_contact_us: "Kontaktieren Sie uns", btn_work_with_us: "Arbeiten Sie mit uns",
-                modal_cta: "Erzählen Sie uns mehr darüber, was Sie suchen oder welche Fragen Sie haben:", btn_send_whatsapp: "Per WhatsApp senden",
-                contact_modal_title: "Kontakt", contact_modal_desc: "Wie können wir helfen? Schreiben Sie Ihre Nachricht unten.", contact_modal_placeholder: "Ihre Nachricht..."
+                modal_cta: "Erzählen Sie uns mehr darüber, was Sie suchen oder welche Fragen Sie haben:", modal_cta_contact: "Wie können wir Ihnen heute helfen?", btn_send_whatsapp: "Per WhatsApp senden"
             },
             en: {
                 nav_about: "About Us", nav_services: "Services", nav_reviews: "Reviews", nav_contact: "Contact",
@@ -1078,8 +1021,7 @@
                 info_address: "Location", info_contact: "Contact", info_hours: "Opening Hours", hours_week: "Mon - Fri: 09:00 - 18:00", hours_weekend: "Sat & Sun: Closed",
                 footer_rights: "All rights reserved.", footer_dev: "Developed by:",
                 btn_contact_us: "Contact Us", btn_work_with_us: "Work with Us",
-                modal_cta: "Tell us more about what you are looking for or any questions you have:", btn_send_whatsapp: "Send via WhatsApp",
-                contact_modal_title: "Get in Touch", contact_modal_desc: "How can we help? Write your message below.", contact_modal_placeholder: "Your message..."
+                modal_cta: "Tell us more about what you are looking for or any questions you have:", modal_cta_contact: "How can we help you today?", btn_send_whatsapp: "Send via WhatsApp"
             },
             pt: {
                 nav_about: "Sobre Nós", nav_services: "Serviços", nav_reviews: "Avaliações", nav_contact: "Contato",
@@ -1105,7 +1047,7 @@
                 video_sub: "Vídeos", video_title: "Insights Exclusivos",
                 reviews_sub: "Avaliações dos Clientes", reviews_title: "Google Avaliações", google_reviews_count: "Resumo de 13 avaliações no Google", btn_google_page: "Ver no Google",
                 r1_date: "7 meses atrás", r1_text: "Profissional excelente, fiz uma limpeza de pele gostei muito, recomendo! 👏",
-                r2_date: "1 ano atrás", r2_text: "Amooo a manicure e pedicure da Cris estou muito satisfeita.. Eka é muito simpática e paciente 🫶🥰",
+                r2_date: "1 ano atrás", r2_text: "Amooo a manicure e pedicure da Cris estou muito satisfeita.. Ela é muito simpática e paciente 🫶🥰",
                 r3_date: "2 anos atrás", r3_text: "Profissional excelente, superou as minhas expectativas, obrigada Cris ❤️ Super indico!",
                 r4_date: "2 anos atrás", r4_text: "Já fui lá várias vezes. E seja para cílios ou sobrancelhas, estou absolutamente encantada.",
                 r5_date: "2 anos atrás", r5_text: "Fiz micropigmentação nas sobrancelhas e estou encantada com o resultado. Recomendo sem reservas; merecemos essa sensação de felicidade.",
@@ -1116,12 +1058,11 @@
                 r10_date: "1 ano atrás", r10_text: "Fiquei muito satisfeito com o trabalho.",
                 r11_date: "2 anos atrás", r11_text: "Legal",
                 r12_date: "5 dias atrás", r12_text: "Fiz microblading e extensão de cílios aqui e estou extremamente feliz! Você se sente muito confortável e o resultado é lindo. Recomendo muito!!",
-                r13_date: "2 semanas atrás", r13_text: "O tratamento facial (limpeza e depilação) foi excelente. Cheguei a uma idade em que já não consigo cuidar dos pelos do nariz e das orelhas sozinha. Mas a Cristina consegue. Um tratamento fantástico, incluindo as unhas das mãos e dos pés. Recomendo muito.",
+                r13_date: "2 semanas atrás", r13_text: "O tratamento facial (limpeza e depilação) foi excelente. Um tratamento fantástico, incluindo as unhas das mãos e dos pés. Recomendo muito.",
                 info_address: "Endereço", info_contact: "Contato", info_hours: "Horários", hours_week: "Seg. - Sex.: 09:00 - 18:00", hours_weekend: "Sáb. & Dom.: Fechado",
                 footer_rights: "Todos os direitos reservados.", footer_dev: "Desenvolvido por:",
                 btn_contact_us: "Fale Conosco", btn_work_with_us: "Trabalhe Conosco",
-                modal_cta: "Conte-nos mais sobre o que você busca ou suas dúvidas:", btn_send_whatsapp: "Enviar via WhatsApp",
-                contact_modal_title: "Entre em Contato", contact_modal_desc: "Como podemos ajudar? Escreva sua mensagem abaixo.", contact_modal_placeholder: "Sua mensagem..."
+                modal_cta: "Conte-nos mais sobre o que você busca ou suas dúvidas:", modal_cta_contact: "Como podemos ajudar você hoje?", btn_send_whatsapp: "Enviar via WhatsApp"
             },
             es: {
                 nav_about: "Nosotros", nav_services: "Servicios", nav_reviews: "Reseñas", nav_contact: "Contacto",
@@ -1140,7 +1081,7 @@
                 s8_title: "Manicura y Pedicura", s8_desc: "Cuidado completo.", s8_ben: "Uñas fuertes", s8_abl: "Corte, hidratación", s8_dur: "60 min",
                 s9_title: "Eliminación PMU", s9_desc: "Despigmentación segura.", s9_ben: "Sin cicatrices", s9_abl: "Removedor", s9_dur: "45 min",
                 s10_title: "Extensión de Pestañas", s10_desc: "Pestañas voluminosas.", s10_ben: "Resistente al agua", s10_abl: "Aplicación una a una", s10_dur: "90-120 min",
-                s11_title: "Eliminación de Millium", s11_desc: "Extracción higiénica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
+                s11_title: "Eliminación de Millium", s11_desc: "Extracción higiênica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
                 ba_sub: "Resultados Reales", ba_title: "Antes & Después", lbl_before: "Antes", lbl_after: "Después",
@@ -1162,8 +1103,7 @@
                 info_address: "Ubicación", info_contact: "Contacto", info_hours: "Horarios", hours_week: "Lun - Vie: 09:00 - 18:00", hours_weekend: "Sáb & Dom: Cerrado",
                 footer_rights: "Todos los derechos reservados.", footer_dev: "Desarrollado por:",
                 btn_contact_us: "Contáctenos", btn_work_with_us: "Trabaja con Nosotros",
-                modal_cta: "Cuéntanos más sobre lo que buscas o tus dudas:", btn_send_whatsapp: "Enviar por WhatsApp",
-                contact_modal_title: "Contáctenos", contact_modal_desc: "¿Cómo podemos ayudar? Escriba su mensaje abajo.", contact_modal_placeholder: "Su mensaje..."
+                modal_cta: "Cuéntanos más sobre lo que buscas o tus dudas:", modal_cta_contact: "¿Cómo podemos ayudarte hoy?", btn_send_whatsapp: "Enviar por WhatsApp"
             },
             fr: {
                 nav_about: "À Propos", nav_services: "Services", nav_reviews: "Avis", nav_contact: "Contact",
@@ -1204,8 +1144,7 @@
                 info_address: "Adresse", info_contact: "Contact", info_hours: "Horaires", hours_week: "Lun - Ven: 09:00 - 18:00", hours_weekend: "Sam & Dim: Fermé",
                 footer_rights: "Tous droits réservés.", footer_dev: "Développé par:",
                 btn_contact_us: "Contactez-nous", btn_work_with_us: "Travailler avec nous",
-                modal_cta: "Dites-nous en plus sur ce que vous recherchez ou vos questions :", btn_send_whatsapp: "Envoyer par WhatsApp",
-                contact_modal_title: "Contactez-nous", contact_modal_desc: "Comment pouvons-nous vous aider? Écrivez ci-dessous.", contact_modal_placeholder: "Votre message..."
+                modal_cta: "Dites-nous en plus sur ce que vous recherchez ou vos questions :", modal_cta_contact: "Comment pouvons-nous vous aider aujourd'hui?", btn_send_whatsapp: "Envoyer par WhatsApp"
             },
             ru: {
                 nav_about: "О Нас", nav_services: "Услуги", nav_reviews: "Отзывы", nav_contact: "Контакты",
@@ -1219,9 +1158,9 @@
                 s3_title: "Пигментация Губ", s3_desc: "Цвет 24/7.", s3_ben: "Сочный цвет", s3_abl: "Нежная пигментация", s3_dur: "90 мин",
                 s4_title: "Plasma Pen", s4_desc: "Лифтинг без операций.", s4_ben: "Подтяжка", s4_abl: "Точечная плазма", s4_dur: "45 мин",
                 s5_title: "Депиляция", s5_desc: "Гладкая кожа.", s5_ben: "Удаление волос", s5_abl: "Воск", s5_dur: "15-45 мин",
-                s6_title: "Педикюр", s6_desc: "Уход за стопами.", s6_ben: "Мягкость", s6_abl: "Ванночка, массаж", s6_dur: "45 min",
+                s6_title: "Педикюр", s6_desc: "Уход за стопами.", s6_ben: "Мягкость", s6_abl: "Ванночка, массаж", s6_dur: "45 мин",
                 s7_title: "Рефлексотерапия", s7_desc: "Массаж стоп.", s7_ben: "Снятие стресса", s7_abl: "Массаж", s7_dur: "30 мин",
-                s8_title: "Маникюр и Пediкюр", s8_desc: "Идеальные руки и ноги.", s8_ben: "Крепкие ногти", s8_abl: "Уход", s8_dur: "60 мин",
+                s8_title: "Маникюр и Педикюр", s8_desc: "Идеальные руки и ноги.", s8_ben: "Крепкие ногти", s8_abl: "Уход", s8_dur: "60 мин",
                 s9_title: "Удаление Татуажа", s9_desc: "Безопасное удаление.", s9_ben: "Без рубцов", s9_abl: "Ремувер", s9_dur: "45 мин",
                 s10_title: "Наращивание Ресниц", s10_desc: "Густые ресницы.", s10_ben: "Стойкость", s10_abl: "Наращивание", s10_dur: "90-120 мин",
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
@@ -1246,8 +1185,7 @@
                 info_address: "Адрес", info_contact: "Контакты", info_hours: "Часы работы", hours_week: "Пн - Пт: 09:00 - 18:00", hours_weekend: "Сб & Вс: Выходной",
                 footer_rights: "Все права защищены.", footer_dev: "Разработка:",
                 btn_contact_us: "Связаться с нами", btn_work_with_us: "Работайте с нами",
-                modal_cta: "Расскажите нам больше о том, что вы ищете или ваши вопросы:", btn_send_whatsapp: "Отправить в WhatsApp",
-                contact_modal_title: "Связаться", contact_modal_desc: "Как мы можем помочь? Напишите сообщение ниже.", contact_modal_placeholder: "Ваше сообщение..."
+                modal_cta: "Расскажите нам больше о том, что вы ищете или ваши вопросы:", modal_cta_contact: "Чем мы можем помочь вам сегодня?", btn_send_whatsapp: "Отправить в WhatsApp"
             }
         };
 
@@ -1270,57 +1208,43 @@
                         const key = el.getAttribute('data-i18n');
                         if (t[langCode][key]) el.innerHTML = t[langCode][key];
                     });
-                    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-                        const key = el.getAttribute('data-i18n-ph');
-                        if (t[langCode][key]) el.setAttribute('placeholder', t[langCode][key]);
-                    });
-                    
-                    document.querySelectorAll('.ba-slider-container').forEach(slider => {
-                        const label = slider.querySelector('.ba-label-corner');
-                        if(label) label.innerText = t[langCode]['lbl_before']; 
-                        
-                        const before = slider.querySelector('.ba-before');
-                        const handle = slider.querySelector('.ba-handle');
-                        const line = slider.querySelector('.ba-line');
-                        if(before) before.style.clipPath = `polygon(0 0, 50% 0, 50% 100%, 0 100%)`;
-                        if(before) before.style.webkitClipPath = `polygon(0 0, 50% 0, 50% 100%, 0 100%)`;
-                        if(handle) handle.style.left = '50%';
-                        if(line) line.style.left = '50%';
-                    });
                 }
                 mainBody.classList.remove('lang-fading');
-                lenis.scrollTo(0, { duration: 1.5 }); 
+                lenis.scrollTo(0, { duration: 1.5 });
             }, 300);
         }
 
-        // --- STREAMING_CHUNK:Refining Modal open/close actions... ---
+        function toggleMute(btn) {
+            const video = btn.previousElementSibling;
+            video.muted = !video.muted;
+            if (video.muted) {
+                btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
+            } else {
+                btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+            }
+        }
+
+        // Service Modal
         function openServiceModal(cardElement, serviceKey) {
             if (isDraggingCarousel) return;
-
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             cardElement.classList.add('selected');
-
             selectedServiceKey = serviceKey;
+            
             const modal = document.getElementById('serviceModal');
             const modalTitle = document.getElementById('modalServiceName');
-            const modalDetails = document.getElementById('modalDetails');
-
+            document.getElementById('modalDetails').value = '';
+            
             const serviceTitleKey = serviceKey + '_title';
-            if (t[currentLang] && t[currentLang][serviceTitleKey]) {
-                modalTitle.innerText = t[currentLang][serviceTitleKey];
-            } else {
-                modalTitle.innerText = "Service Details"; 
-            }
-
-            modalDetails.value = '';
+            modalTitle.innerText = t[currentLang] && t[currentLang][serviceTitleKey] ? t[currentLang][serviceTitleKey] : "Service";
+            
             modal.classList.add('active');
-            lenis.stop(); 
+            lenis.stop();
         }
 
         function closeServiceModal() {
-            const modal = document.getElementById('serviceModal');
-            modal.classList.remove('active');
-            lenis.start(); 
+            document.getElementById('serviceModal').classList.remove('active');
+            lenis.start();
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
         }
 
@@ -1330,19 +1254,16 @@
             const serviceName = t[currentLang][selectedServiceKey + '_title'];
             let messageTemplate = serviceWaTemplates[currentLang] || serviceWaTemplates['de'];
             let finalMessage = messageTemplate.replace('{service}', serviceName).replace('{details}', details);
-            const waUrl = `https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`;
-            window.open(waUrl, '_blank');
+            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(finalMessage)}`, '_blank');
             closeServiceModal();
         }
 
-        // Pop-up de Contato
-        function openContactModal(e) {
-            if(e) e.preventDefault();
+        // Contact Modal Novo
+        function openContactModal() {
             const modal = document.getElementById('contactModal');
             document.getElementById('contactDetails').value = '';
             modal.classList.add('active');
             lenis.stop();
-            document.getElementById('nav-menu').classList.remove('active');
         }
 
         function closeContactModal() {
@@ -1352,33 +1273,32 @@
 
         function sendContactWhatsApp() {
             const details = document.getElementById('contactDetails').value;
-            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(details)}`, '_blank');
+            const msg = (waMessages[currentLang] || waMessages['de']) + " " + details;
+            window.open(`https://wa.me/491629384907?text=${encodeURIComponent(msg)}`, '_blank');
             closeContactModal();
         }
 
+        // Dropdowns and UI Events
         document.getElementById('langDropdown').addEventListener('click', () => { document.getElementById('langOptions').classList.toggle('show'); });
         window.addEventListener('click', (e) => { if (!document.getElementById('langDropdown').contains(e.target)) document.getElementById('langOptions').classList.remove('show'); });
 
         const burgerBtn = document.getElementById('burger-btn');
         const navMenu = document.getElementById('nav-menu');
         burgerBtn.addEventListener('click', () => { navMenu.classList.toggle('active'); });
-        document.querySelectorAll('#nav-menu a').forEach(link => { link.addEventListener('click', () => navMenu.classList.remove('active')); });
+        document.querySelectorAll('#nav-menu a, #nav-menu button').forEach(el => { el.addEventListener('click', () => navMenu.classList.remove('active')); });
 
         const backToTopBtn = document.getElementById('backToTop');
         let isScrolling = false;
-        
         window.addEventListener('scroll', () => {
             if (!isScrolling) {
                 window.requestAnimationFrame(() => {
-                    if (window.scrollY > 400) { backToTopBtn.classList.add('visible'); } 
-                    else { backToTopBtn.classList.remove('visible'); }
+                    if (window.scrollY > 400) { backToTopBtn.classList.add('visible'); } else { backToTopBtn.classList.remove('visible'); }
                     isScrolling = false;
                 });
                 isScrolling = true;
             }
         });
 
-        // --- STREAMING_CHUNK:Configuring Scroll Animation observer... ---
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
@@ -1386,8 +1306,13 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        // Lógica de Carrossel Suave com Inércia
-        const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel'), document.getElementById('modalGallery')];
+        const carousels = [
+            document.getElementById('servicesCarousel'), 
+            document.getElementById('reviewsCarousel'), 
+            document.getElementById('modalGallery'),
+            document.getElementById('reelsCarousel')
+        ];
+        
         carousels.forEach(carousel => {
             if(!carousel) return;
             let isDown = false;
@@ -1396,32 +1321,6 @@
             let velX = 0; 
             let lastX = 0;
             let momentumID;
-
-            const onMouseMove = (e) => {
-                if(!isDown) return;
-                e.preventDefault();
-                const x = e.pageX; 
-                const walk = (x - startX) * 1.3; 
-                
-                if (Math.abs(walk) > 5) {
-                    isDraggingCarousel = true; 
-                }
-
-                carousel.scrollLeft = scrollLeft - walk;
-                velX = e.pageX - lastX;
-                lastX = e.pageX;
-            };
-
-            const onMouseUp = () => {
-                if (!isDown) return;
-                isDown = false;
-                carousel.classList.remove('active');
-                
-                window.removeEventListener('mousemove', onMouseMove);
-                window.removeEventListener('mouseup', onMouseUp);
-                
-                beginMomentumTracking();
-            };
 
             carousel.addEventListener('mousedown', (e) => {
                 isDown = true;
@@ -1432,9 +1331,35 @@
                 lastX = e.pageX; 
                 velX = 0; 
                 cancelAnimationFrame(momentumID); 
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                if (!isDown) return;
+                isDown = false;
+                carousel.classList.remove('active');
+                beginMomentumTracking();
+            });
+
+            carousel.addEventListener('mouseup', () => {
+                if (!isDown) return;
+                isDown = false;
+                carousel.classList.remove('active');
+                beginMomentumTracking();
+            });
+
+            carousel.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX;
+                const walk = (x - startX) * 1.3; 
                 
-                window.addEventListener('mousemove', onMouseMove);
-                window.addEventListener('mouseup', onMouseUp);
+                if (Math.abs(walk) > 5) {
+                    isDraggingCarousel = true; 
+                }
+
+                carousel.scrollLeft = scrollLeft - walk;
+                velX = e.pageX - lastX;
+                lastX = e.pageX;
             });
 
             function beginMomentumTracking(){
@@ -1445,7 +1370,6 @@
             function momentumLoop(){
                 velX *= 0.95; 
                 carousel.scrollLeft -= velX; 
-
                 if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
                      velX = 0;
                      cancelAnimationFrame(momentumID);
@@ -1459,7 +1383,6 @@
             }
         });
 
-        // --- STREAMING_CHUNK:Configuring Before & After dragging constraint... ---
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
@@ -1467,8 +1390,6 @@
             const label = slider.querySelector('.ba-label-corner');
             let isSliding = false;
             
-            if (label) label.innerText = t[currentLang]['lbl_before'];
-
             const move = (e) => {
                 if(!isSliding) return;
                 let rect = slider.getBoundingClientRect();
@@ -1482,9 +1403,9 @@
 
                 if(label) {
                     if(percent > 50) {
-                        label.innerText = t[currentLang]['lbl_before']; // Revela lado esquerdo (Antes)
+                        label.innerText = t[currentLang]['lbl_after'];
                     } else {
-                        label.innerText = t[currentLang]['lbl_after']; // Revela lado direito (Depois)
+                        label.innerText = t[currentLang]['lbl_before'];
                     }
                 }
             }
@@ -1498,7 +1419,7 @@
             window.addEventListener('touchmove', move);
         });
 
-        // --- STREAMING_CHUNK:Setting up Video Player logic... ---
+        // LÓGICA DO VÍDEO INTRODUTÓRIO
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
         if (introVideo && staticAfterVideo) {
@@ -1510,87 +1431,14 @@
                     }
                 });
             }, { threshold: 0.3 });
-
             videoObserver.observe(introVideo);
-
             introVideo.addEventListener('ended', () => {
                 introVideo.classList.remove('active');
                 staticAfterVideo.classList.add('active');
             });
         }
 
-        // --- STREAMING_CHUNK:Setting up interactive Reels gallery... ---
-        const mainReels = document.querySelectorAll('.main-reel');
-        const thumbs = document.querySelectorAll('.reel-thumb');
-        let currentReelIndex = 0;
-        let isReelMuted = true;
-
-        function switchReel(index) {
-            if (index === currentReelIndex) return;
-            
-            mainReels[currentReelIndex].classList.remove('active');
-            mainReels[currentReelIndex].pause();
-            
-            thumbs[currentReelIndex].classList.remove('active');
-            
-            currentReelIndex = index;
-            
-            mainReels[currentReelIndex].classList.add('active');
-            mainReels[currentReelIndex].muted = isReelMuted;
-            
-            thumbs[currentReelIndex].classList.add('active');
-            
-            mainReels[currentReelIndex].play().catch(e => console.log(e));
-        }
-
-        mainReels.forEach((reel, idx) => {
-            reel.addEventListener('ended', () => {
-                let nextIdx = (idx + 1) % mainReels.length;
-                switchReel(nextIdx);
-            });
-        });
-
-        const mainVideoObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    mainReels[currentReelIndex].play().catch(e => console.log(e));
-                } else {
-                    mainReels[currentReelIndex].pause();
-                }
-            });
-        }, { threshold: 0.2 });
-        mainVideoObserver.observe(document.querySelector('.reels-main-view'));
-
-        function toggleReelSound() {
-            isReelMuted = !isReelMuted;
-            const iconMuted = document.getElementById('icon-muted');
-            const iconUnmuted = document.getElementById('icon-unmuted');
-            
-            mainReels.forEach(reel => {
-                reel.muted = isReelMuted;
-            });
-
-            if (isReelMuted) {
-                iconMuted.style.display = 'block';
-                iconUnmuted.style.display = 'none';
-            } else {
-                iconMuted.style.display = 'none';
-                iconUnmuted.style.display = 'block';
-            }
-        }
-
-        // --- STREAMING_CHUNK:Configuring Map Scroll Pass-through... ---
-        const mapSec = document.getElementById('mapSection');
-        if (mapSec) {
-            mapSec.addEventListener('click', () => {
-                mapSec.classList.add('active');
-            });
-            mapSec.addEventListener('mouseleave', () => {
-                mapSec.classList.remove('active');
-            });
-        }
-
-        updateWaLinks('de'); // Init WhatsApp Link
+        updateWaLinks('de');
     </script>
 </body>
 </html>
