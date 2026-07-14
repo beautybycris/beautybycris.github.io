@@ -231,13 +231,9 @@
         .ba-handle::before, .ba-handle::after { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
         .ba-handle::before { border-width: 5px 6px 5px 0; border-color: transparent var(--accent-rose) transparent transparent; left: 6px; }
         .ba-handle::after { border-width: 5px 0 5px 6px; border-color: transparent transparent transparent var(--accent-rose); right: 6px; }
-        
-        .ba-labels { position: absolute; bottom: 15px; width: 100%; display: flex; justify-content: space-between; padding: 0 15px; pointer-events: none; z-index: 5; }
-        .ba-label-fixed { background: rgba(42,36,37,0.85); color: #fff; padding: 6px 15px; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; letter-spacing: 1px; }
-        
+        .ba-label-corner { position: absolute; bottom: 15px; right: 15px; padding: 6px 15px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
         @media (max-width: 992px) { .ba-grid { grid-template-columns: 1fr; } .ba-slider-container { height: 300px; } }
 
-        /* --- GALERIA DE VÍDEOS REELS --- */
         .videos { padding: 100px 0; background-color: var(--bg-white); }
         .reels-gallery-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 350px; margin: 0 auto; }
         
@@ -583,36 +579,26 @@
             </div>
             <div class="ba-grid">
                 
-                <div class="ba-slider-container animate-on-scroll">
-                    <!-- A IMAGEM DE DEPOIS FICA NA ESQUERDA (ba-before revela ela) -->
+                <div class="ba-slider-container animate-on-scroll" data-lenis-prevent>
+                    <!-- Fundo: IMAGEM DEPOIS (Sobrancelha bonita, lado direito) -->
+                    <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Nachher" class="ba-img">
+                    <!-- Frente: IMAGEM ANTES (Sobrancelha falhada, lado esquerdo) -->
                     <div class="ba-before">
-                        <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Depois">
+                        <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Vorher">
                     </div>
-                    <!-- A IMAGEM DE ANTES FICA NO FUNDO (Aparece na Direita) -->
-                    <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Antes" class="ba-img">
-                    
                     <div class="ba-line"></div>
                     <div class="ba-handle"></div>
-                    
-                    <div class="ba-labels">
-                        <div class="ba-label-fixed" data-i18n="lbl_after">Nachher</div>
-                        <div class="ba-label-fixed" data-i18n="lbl_before">Vorher</div>
-                    </div>
+                    <div class="ba-label-corner"></div>
                 </div>
 
-                <div class="ba-slider-container animate-on-scroll delay-1">
+                <div class="ba-slider-container animate-on-scroll delay-1" data-lenis-prevent>
+                    <img src="" alt="Nachher" class="ba-img media-placeholder">
                     <div class="ba-before">
-                        <img src="" alt="Depois" class="media-placeholder" style="background:#ddd;">
+                        <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;">
                     </div>
-                    <img src="" alt="Antes" class="ba-img media-placeholder">
-                    
                     <div class="ba-line"></div>
                     <div class="ba-handle"></div>
-                    
-                    <div class="ba-labels">
-                        <div class="ba-label-fixed" data-i18n="lbl_after">Nachher</div>
-                        <div class="ba-label-fixed" data-i18n="lbl_before">Vorher</div>
-                    </div>
+                    <div class="ba-label-corner"></div>
                 </div>
 
             </div>
@@ -1259,6 +1245,21 @@
                         const key = el.getAttribute('data-i18n-ph');
                         if (t[langCode][key]) el.setAttribute('placeholder', t[langCode][key]);
                     });
+                    
+                    // Atualiza os labels dinâmicos de Antes/Depois na troca de idioma
+                    document.querySelectorAll('.ba-slider-container').forEach(slider => {
+                        const label = slider.querySelector('.ba-label-corner');
+                        if(label) label.innerText = t[langCode]['lbl_before']; 
+                        
+                        // Reseta a barra pro meio
+                        const before = slider.querySelector('.ba-before');
+                        const handle = slider.querySelector('.ba-handle');
+                        const line = slider.querySelector('.ba-line');
+                        if(before) before.style.clipPath = `polygon(0 0, 50% 0, 50% 100%, 0 100%)`;
+                        if(before) before.style.webkitClipPath = `polygon(0 0, 50% 0, 50% 100%, 0 100%)`;
+                        if(handle) handle.style.left = '50%';
+                        if(line) line.style.left = '50%';
+                    });
                 }
                 mainBody.classList.remove('lang-fading');
                 lenis.scrollTo(0, { duration: 1.5 }); // Scroll suave ao topo ao mudar o idioma
@@ -1417,7 +1418,7 @@
             }
 
             function momentumLoop(){
-                velX *= 0.94; // Atrito
+                velX *= 0.95; 
                 carousel.scrollLeft -= velX; 
 
                 if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
@@ -1433,13 +1434,17 @@
             }
         });
 
-        // --- STREAMING_CHUNK:Lógica Otimizada Antes e Depois ---
+        // BEFORE & AFTER OTIMIZADO - APENAS NA BOLINHA E TEXTO DINÂMICO
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
             const line = slider.querySelector('.ba-line');
+            const label = slider.querySelector('.ba-label-corner');
             let isSliding = false;
             
+            // Define o texto inicial
+            if (label) label.innerText = t[currentLang]['lbl_before'];
+
             const move = (e) => {
                 if(!isSliding) return;
                 let rect = slider.getBoundingClientRect();
@@ -1450,85 +1455,28 @@
                 before.style.webkitClipPath = `polygon(0 0, ${percent}% 0, ${percent}% 100%, 0 100%)`;
                 handle.style.left = percent + '%';
                 if(line) line.style.left = percent + '%';
+
+                // Troca o texto dinamicamente baseado em quanto a imagem aparece
+                if(label) {
+                    if(percent < 50) {
+                        label.innerText = t[currentLang]['lbl_after'];
+                    } else {
+                        label.innerText = t[currentLang]['lbl_before'];
+                    }
+                }
             }
             
-            slider.addEventListener('mousedown', () => isSliding = true);
-            slider.addEventListener('touchstart', () => isSliding = true, {passive: true});
+            // EVENTOS ADICIONADOS **EXCLUSIVAMENTE** NA BOLINHA (HANDLE)
+            handle.addEventListener('mousedown', (e) => { isSliding = true; e.preventDefault(); e.stopPropagation(); });
+            handle.addEventListener('touchstart', (e) => { isSliding = true; e.stopPropagation(); }, {passive: true});
+            
             window.addEventListener('mouseup', () => isSliding = false);
             window.addEventListener('touchend', () => isSliding = false);
             window.addEventListener('mousemove', move);
             window.addEventListener('touchmove', move);
         });
 
-        // --- STREAMING_CHUNK:Nova Lógica da Galeria de Vídeos (Reels) ---
-        const mainReels = document.querySelectorAll('.main-reel');
-        const thumbReels = document.querySelectorAll('.reel-thumb');
-        const iconMuted = document.getElementById('icon-muted');
-        const iconUnmuted = document.getElementById('icon-unmuted');
-        
-        let currentMainReel = 0;
-        let isMainReelMuted = true;
-
-        function switchReel(index) {
-            if (index === currentMainReel || mainReels.length === 0) return;
-            
-            // Pausa e esconde o atual
-            mainReels[currentMainReel].classList.remove('active');
-            thumbReels[currentMainReel].classList.remove('active');
-            mainReels[currentMainReel].pause();
-            
-            // Atualiza o índice
-            currentMainReel = index;
-            
-            // Ativa e toca o novo
-            mainReels[currentMainReel].classList.add('active');
-            thumbReels[currentMainReel].classList.add('active');
-            mainReels[currentMainReel].muted = isMainReelMuted;
-            mainReels[currentMainReel].currentTime = 0;
-            
-            // Promessa de play (Evita erros no navegador)
-            let playPromise = mainReels[currentMainReel].play();
-            if (playPromise !== undefined) {
-                playPromise.catch(error => { console.log("Auto-play bloqueado:", error); });
-            }
-        }
-
-        // Tocar próximo vídeo suavemente ao terminar
-        mainReels.forEach((video, index) => {
-            video.addEventListener('ended', () => {
-                let nextIndex = (index + 1) % mainReels.length;
-                switchReel(nextIndex);
-            });
-        });
-
-        // Iniciar primeiro vídeo ao chegar na seção
-        const reelsSectionObserver = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting && mainReels.length > 0) {
-                mainReels[currentMainReel].play().catch(e => console.log(e));
-            }
-        }, { threshold: 0.3 });
-        
-        let reelsWrap = document.querySelector('.reels-gallery-wrap');
-        if(reelsWrap) reelsSectionObserver.observe(reelsWrap);
-
-        function toggleReelSound() {
-            if (mainReels.length === 0) return;
-            
-            isMainReelMuted = !isMainReelMuted;
-            mainReels[currentMainReel].muted = isMainReelMuted;
-            
-            if(isMainReelMuted) {
-                iconMuted.style.display = 'block';
-                iconUnmuted.style.display = 'none';
-            } else {
-                iconMuted.style.display = 'none';
-                iconUnmuted.style.display = 'block';
-                // Força o play novamente caso o som estivesse travado pelo Chrome
-                mainReels[currentMainReel].play().catch(e => console.log(e));
-            }
-        }
-
-        // LÓGICA DO VÍDEO INTRODUTÓRIO (ABOUT)
+        // LÓGICA DO VÍDEO INTRODUTÓRIO
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
         if (introVideo && staticAfterVideo) {
