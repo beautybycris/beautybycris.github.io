@@ -27,29 +27,19 @@
             --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- ESTILOS NECESSÁRIOS PARA O LENIS SCROLL --- */
-        html.lenis, html.lenis body {
-            height: auto;
-        }
-        .lenis.lenis-smooth {
-            scroll-behavior: auto !important; /* Desativa o nativo para não conflitar */
-        }
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-        .lenis.lenis-smooth iframe {
-            pointer-events: none; /* Previne que iframes engulam o scroll */
-        }
+        /* LENIS SCROLL */
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-smooth iframe { pointer-events: none; }
 
-        /* --- PROTEÇÃO CSS: IMPEDE SELEÇÃO DE TEXTO E TOQUES AZUIS NO MOBILE --- */
+        /* PROTEÇÃO CSS: IMPEDE SELEÇÃO DE TEXTO E TOQUES AZUIS NO MOBILE */
         * { 
             box-sizing: border-box; 
             margin: 0; 
             padding: 0; 
-            -webkit-tap-highlight-color: transparent; /* Remove o flash/fundo azul no Android/iOS ao tocar */
+            -webkit-tap-highlight-color: transparent; /* Remove flash azul no toque */
             outline: none;
         }
 
@@ -59,30 +49,27 @@
             color: var(--text-dark); 
             line-height: 1.6; 
             -webkit-font-smoothing: antialiased;
-            
-            /* Impede segurar e selecionar ou abrir menu de contexto nativo */
+            /* Proteção brutal contra seleção acidental */
             -webkit-touch-callout: none;
             -webkit-user-select: none;
             -khtml-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            overflow-x: clip; /* Solução moderna anti-lag mobile */
         }
         
-        /* Libera digitação apenas dentro do formulário/modal de contato */
         textarea, input {
             -webkit-user-select: text;
-            -khtml-user-select: text;
             -moz-user-select: text;
             -ms-user-select: text;
             user-select: text;
         }
 
-        html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
         ul { list-style: none; }
-        img { max-width: 100%; height: auto; pointer-events: none; } /* Previne arrastar a imagem em si */
+        img { max-width: 100%; height: auto; pointer-events: none; } 
         
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
         @media (max-width: 768px) { .container { padding: 0 20px; } }
@@ -99,13 +86,11 @@
         .btn-rose:hover { background-color: var(--accent-rose-hover); transform: translate3d(0, -3px, 0); box-shadow: 0 10px 20px rgba(200, 142, 147, 0.25); }
         .btn-outline { border: 1px solid var(--accent-rose); color: var(--text-dark); background: transparent; }
         .btn-outline:hover { background-color: var(--accent-rose); color: var(--bg-white); transform: translate3d(0, -3px, 0); }
-        .btn-large { padding: 20px 60px; font-size: 1rem; width: fit-content; margin: 40px auto 0 auto; display: flex; }
         .btn-small-footer { padding: 8px 15px; font-size: 0.7rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); border-radius: 4px; margin: 0 5px;}
         .btn-small-footer:hover { background: var(--accent-rose); border-color: var(--accent-rose); color: white;}
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-        /* Aceleração de GPU no header para não travar o scroll devido ao blur */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -137,7 +122,6 @@
             .lang-dropdown { margin-left: 10px; }
             .current-lang { padding: 6px; font-size: 1.3rem; }
             nav ul li { margin-bottom: 15px; }
-            nav a.btn-outline, nav button.btn-outline { margin-top: 10px; }
         }
 
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: var(--bg-champagne); padding-top: 90px; }
@@ -145,7 +129,7 @@
         .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; margin-bottom: 25px; }
         .hero-subtitle { color: var(--text-dark); font-weight: 500; font-size: 1.1rem; margin-bottom: 40px; max-width: 550px; }
         
-        .hero-photo-wrap { width: 100%; max-width: 420px; aspect-ratio: 4/5; border-radius: 12px; margin-left: auto; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.1); position: relative; background: var(--bg-white); transform: translateZ(0);}
+        .hero-photo-wrap { width: 100%; max-width: 420px; aspect-ratio: 4/5; border-radius: 12px; margin-left: auto; overflow: hidden; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 25px 50px rgba(0,0,0,0.1); background: var(--bg-white); transform: translateZ(0);}
         .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center 70%; filter: contrast(1.05) brightness(1.02); }
         
         @media (max-width: 992px) { 
@@ -179,13 +163,22 @@
 
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .services-carousel { 
+            display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); 
+            scrollbar-width: none; cursor: grab; transform: translateZ(0); 
+            /* Deslize perfeito no celular */
+            -webkit-overflow-scrolling: touch; 
+            scroll-snap-type: x mandatory;
+        }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
-        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; transform: translateZ(0); }
+        .service-card { 
+            min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; 
+            padding: 15px; display: flex; flex-direction: column; border-radius: 8px; 
+            transition: var(--transition-smooth); user-select: none; scroll-snap-align: center;
+        }
         .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
-        .service-card.selected { border-color: var(--accent-rose); background-color: var(--bg-champagne); box-shadow: 0 0 15px rgba(200, 142, 147, 0.3); }
 
         .service-img-wrap { width: 100%; aspect-ratio: 4/3; margin-bottom: 20px; border-radius: 6px; overflow: hidden; pointer-events: none; }
         .service-img-wrap .media-placeholder { width: 100%; height: 100%; border-radius: 6px; }
@@ -212,10 +205,15 @@
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
         
-        .modal-gallery { display: flex; overflow-x: auto; gap: 15px; padding: 20px; scrollbar-width: none; -webkit-overflow-scrolling: touch; background-color: var(--bg-champagne); cursor: grab; }
+        /* Modal Gallery - Liso para celular e PC */
+        .modal-gallery { 
+            display: flex; overflow-x: auto; gap: 15px; padding: 20px; 
+            scrollbar-width: none; background-color: var(--bg-champagne); cursor: grab;
+            -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;
+        }
         .modal-gallery:active { cursor: grabbing; }
         .modal-gallery::-webkit-scrollbar { display: none; }
-        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; pointer-events: none; transform: translateZ(0);}
+        .modal-gallery-item { flex: 0 0 85%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-light); user-select: none; scroll-snap-align: center; pointer-events: none;}
         .modal-gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none;}
 
         .modal-body { padding: 25px; overflow-y: auto; }
@@ -235,26 +233,42 @@
         .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         .ba-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background-color: var(--bg-white); z-index: 3; transform: translateX(-50%); pointer-events: none; }
         
-        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 40px; height: 40px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); touch-action: none;}
+        /* A TRAVA É APENAS NA BOLINHA */
+        .ba-handle { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 4; width: 45px; height: 45px; background-color: var(--bg-white); border: 2px solid var(--accent-rose); border-radius: 50%; cursor: ew-resize; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 15px rgba(0,0,0,0.2); touch-action: none; }
         .ba-handle::before, .ba-handle::after { content: ''; position: absolute; width: 0; height: 0; border-style: solid; }
         .ba-handle::before { border-width: 5px 6px 5px 0; border-color: transparent var(--accent-rose) transparent transparent; left: 6px; }
         .ba-handle::after { border-width: 5px 0 5px 6px; border-color: transparent transparent transparent var(--accent-rose); right: 6px; }
         
-        .ba-label-corner { position: absolute; bottom: 15px; right: 15px; padding: 6px 16px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; transition: var(--transition-smooth); }
+        .ba-label-corner { position: absolute; bottom: 15px; right: 15px; padding: 6px 16px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; transition: background-color 0.3s; }
         @media (max-width: 992px) { .ba-grid { grid-template-columns: 1fr; } .ba-slider-container { height: 300px; } }
 
         .videos { padding: 100px 0; background-color: var(--bg-white); overflow: hidden;}
-        .reels-container { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
-        .reels-container::-webkit-scrollbar { display: none; }
-        .reels-container.active { cursor: grabbing; }
-        .reel-item { flex: 0 0 auto; width: 280px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle); transform: translateZ(0);}
-        .reel-item video { width: 100%; height: 100%; object-fit: cover; pointer-events: auto;}
         
+        /* Desktop Videos (4 em linha) */
+        .reels-desktop { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;}
+        .reels-desktop::-webkit-scrollbar { display: none; }
+        .reels-desktop.active { cursor: grabbing; }
+        .reels-desktop .reel-item { flex: 0 0 auto; width: 280px; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle); transform: translateZ(0); scroll-snap-align: center;}
+        .reels-desktop .reel-item video { width: 100%; height: 100%; object-fit: cover; pointer-events: auto;}
+        
+        /* Mobile Videos (Main + Stories em baixo) */
+        .reels-mobile { display: none; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 400px; margin: 0 auto;}
+        .mobile-main-video-wrapper { width: 100%; aspect-ratio: 9/16; border-radius: 12px; overflow: hidden; position: relative; background: #000; box-shadow: var(--shadow-subtle);}
+        .mobile-main-video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+        .mobile-stories-row { display: flex; gap: 15px; width: 100%; overflow-x: auto; padding-bottom: 10px; justify-content: center; -webkit-overflow-scrolling: touch;}
+        .mobile-stories-row::-webkit-scrollbar { display: none; }
+        .story-circle { width: 75px; height: 75px; border-radius: 50%; border: 2px solid var(--border-light); overflow: hidden; cursor: pointer; opacity: 0.6; transition: var(--transition-smooth); flex-shrink: 0; background: #000; box-shadow: var(--shadow-subtle);}
+        .story-circle.active { opacity: 1; border-width: 3px; border-color: var(--accent-rose); transform: scale(1.05);}
+        .story-circle video { width: 100%; height: 100%; object-fit: cover; pointer-events: none;}
+
         .mute-btn { position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; transition: var(--transition-smooth); pointer-events: auto;}
         .mute-btn:hover { background: var(--accent-rose); transform: scale(1.1); }
         .mute-btn svg { width: 22px; height: 22px; fill: white; }
-        @media (max-width: 1380px) { .reels-container { padding: 20px 40px; } }
-        @media (max-width: 768px) { .reels-container { padding: 20px 30px; } .reel-item { width: 75vw; } }
+
+        @media (max-width: 992px) { 
+            .reels-desktop { display: none; }
+            .reels-mobile { display: flex; }
+        }
 
         .reviews { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden;}
         .google-summary { background-color: transparent; max-width: 600px; margin: 0 auto 40px auto; text-align: center; }
@@ -264,11 +278,11 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); box-shadow: 0 0 15px rgba(200, 142, 147, 0.4); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory;}
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
-        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); transform: translateZ(0);}
+        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); transform: translateZ(0); scroll-snap-align: center;}
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
         @media (max-width: 768px) { 
             .reviews-carousel { padding: 20px 30px; }
@@ -280,9 +294,8 @@
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
-        .map-section { width: 100%; height: 350px; background: #eee; position: relative; border-top: 1px solid var(--border-light);}
-        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; }
-        .map-section.active .map-iframe { pointer-events: auto; }
+        .map-section { width: 100%; height: 350px; background: #eee; position: relative; border-top: 1px solid var(--border-light); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); }
 
         .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -330,7 +343,8 @@
                     <li><a href="#about" data-i18n="nav_about">Über Uns</a></li>
                     <li><a href="#services" data-i18n="nav_services">Services</a></li>
                     <li><a href="#reviews" data-i18n="nav_reviews">Bewertungen</a></li>
-                    <li><button onclick="openContactModal()" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_contact">Kontakt</button></li>
+                    <!-- Botão padronizado abrindo o novo pop-up de contato -->
+                    <li><button onclick="openContactModal()" class="btn btn-outline" style="padding: 10px 20px; font-family: inherit; cursor: pointer;" data-i18n="nav_contact">Kontakt</button></li>
                 </ul>
             </nav>
             <div class="lang-dropdown" id="langDropdown">
@@ -582,19 +596,17 @@
             <div class="ba-grid">
                 
                 <div class="ba-slider-container animate-on-scroll">
-                    <!-- Fundo / Lado Direito (Revelado ao puxar a barra para esquerda) -->
-                    <!-- Esta é a sobrancelha BONITA (Depois) -->
+                    <!-- Fundo Lado Direito: Imagem BONITA (Depois) -->
                     <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Depois" class="ba-img">
                     
-                    <!-- Frente / Lado Esquerdo (Encolhe ao puxar para esquerda, expande ao puxar para direita) -->
-                    <!-- Esta é a sobrancelha RUIM (Antes) -->
+                    <!-- Frente Lado Esquerdo: Imagem RUIM (Antes) -->
                     <div class="ba-before">
                         <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Antes">
                     </div>
                     
                     <div class="ba-line"></div>
+                    <!-- Trava inserida exclusivamente na bolinha! -->
                     <div class="ba-handle"></div>
-                    <!-- Label unificada e dinâmica no canto inferior direito -->
                     <div class="ba-label-corner">Antes</div>
                 </div>
 
@@ -619,30 +631,26 @@
                 <h2 data-i18n="video_title">Exklusive Behandlungs-Insights</h2>
             </div>
         </div>
-        <div class="reels-container" id="reelsCarousel">
-            <div class="reel-item animate-on-scroll">
-                <video src="https://i.imgur.com/DtGumfd.mp4" autoplay loop muted playsinline></video>
-                <button class="mute-btn" onclick="toggleMute(this)">
-                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                </button>
+        
+        <!-- Para Desktop (Mantém os 4 deitados) -->
+        <div class="reels-desktop" id="desktopReels">
+            <div class="reel-item"><video src="https://i.imgur.com/DtGumfd.mp4" autoplay loop muted playsinline></video><button class="mute-btn" onclick="toggleMute(this)"><svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></button></div>
+            <div class="reel-item"><video src="https://i.imgur.com/KqTpjlx.mp4" autoplay loop muted playsinline></video><button class="mute-btn" onclick="toggleMute(this)"><svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></button></div>
+            <div class="reel-item"><video src="https://i.imgur.com/Bb0zGuS.mp4" autoplay loop muted playsinline></video><button class="mute-btn" onclick="toggleMute(this)"><svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></button></div>
+            <div class="reel-item"><video src="https://i.imgur.com/9WGwd3B.mp4" autoplay loop muted playsinline></video><button class="mute-btn" onclick="toggleMute(this)"><svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></button></div>
+        </div>
+
+        <!-- Para Mobile (1 Main e Stories em baixo) -->
+        <div class="reels-mobile">
+            <div class="mobile-main-video-wrapper">
+                <video id="mobile-main-video" src="https://i.imgur.com/DtGumfd.mp4" autoplay loop muted playsinline></video>
+                <button class="mute-btn" onclick="toggleMute(this)"><svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg></button>
             </div>
-            <div class="reel-item animate-on-scroll delay-1">
-                <video src="https://i.imgur.com/KqTpjlx.mp4" autoplay loop muted playsinline></video>
-                <button class="mute-btn" onclick="toggleMute(this)">
-                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                </button>
-            </div>
-            <div class="reel-item animate-on-scroll delay-2">
-                <video src="https://i.imgur.com/Bb0zGuS.mp4" autoplay loop muted playsinline></video>
-                <button class="mute-btn" onclick="toggleMute(this)">
-                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                </button>
-            </div>
-            <div class="reel-item animate-on-scroll">
-                <video src="https://i.imgur.com/9WGwd3B.mp4" autoplay loop muted playsinline></video>
-                <button class="mute-btn" onclick="toggleMute(this)">
-                    <svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
-                </button>
+            <div class="mobile-stories-row">
+                <div class="story-circle active" onclick="changeStory('https://i.imgur.com/DtGumfd.mp4', this)"><video src="https://i.imgur.com/DtGumfd.mp4" preload="metadata" muted playsinline></video></div>
+                <div class="story-circle" onclick="changeStory('https://i.imgur.com/KqTpjlx.mp4', this)"><video src="https://i.imgur.com/KqTpjlx.mp4" preload="metadata" muted playsinline></video></div>
+                <div class="story-circle" onclick="changeStory('https://i.imgur.com/Bb0zGuS.mp4', this)"><video src="https://i.imgur.com/Bb0zGuS.mp4" preload="metadata" muted playsinline></video></div>
+                <div class="story-circle" onclick="changeStory('https://i.imgur.com/9WGwd3B.mp4', this)"><video src="https://i.imgur.com/9WGwd3B.mp4" preload="metadata" muted playsinline></video></div>
             </div>
         </div>
     </section>
@@ -812,9 +820,9 @@
         </div>
     </section>
 
-    <!-- O mapa é ativado apenas se você clicar sobre ele (mantendo o scroll liso por cima) -->
+    <!-- MAPA INJETADO VIA JAVASCRIPT (Acaba com o lag total) -->
     <div class="map-section" id="map-wrap">
-        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <!-- O iframe aparecerá aqui de forma leve só quando descer -->
     </div>
 
     <section class="clinic-info" id="footer-contacts">
@@ -842,8 +850,9 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
-                <button onclick="openContactModal()" class="btn btn-small-footer" data-i18n="btn_contact_us">Fale Conosco</button>
-                <a href="mailto:careers@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_work_with_us">Trabalhe Conosco</a>
+                <!-- Botões 100% padronizados na mesma classe e com mesma cor -->
+                <a href="javascript:void(0)" onclick="openContactModal()" class="btn btn-small-footer" data-i18n="btn_contact_us">Fale Conosco</a>
+                <a href="mailto:Kosmet@ik.me" class="btn btn-small-footer" data-i18n="btn_work_with_us">Trabalhe Conosco</a>
             </div>
             <div class="social-links">
                 <a href="https://instagram.com/beauty_by_cris" target="_blank">Instagram</a>
@@ -854,22 +863,24 @@
     </footer>
 
     <a href="https://wa.me/491629384907" class="float-btn float-whatsapp wa-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg></a>
+    
     <div class="float-btn float-top" id="backToTop" onclick="smoothScrollToTop(event)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
-    <!-- Modal de Serviços -->
+    <!-- Modal de Serviço -->
     <div class="service-modal-overlay" id="serviceModal">
-        <!-- Parar o evento de clique na área escura de fechar o modal. Só o "X" fecha -->
+        <!-- Evento previne fechar clicando fora -->
         <div class="service-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h3 id="modalServiceName">Nome do Serviço</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
             </div>
-            <div class="modal-gallery" id="modalGallery">
+            <!-- Pop-up livre e fluído para celular e drag liso para mouse -->
+            <div class="modal-gallery" id="modalGallery" data-lenis-prevent>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 1 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 2 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 3 ]</span></div></div>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" data-lenis-prevent>
                 <p class="modal-cta-text" data-i18n="modal_cta">Conte-nos mais sobre o que você busca ou suas dúvidas:</p>
                 <textarea class="modal-textarea" id="modalDetails" placeholder="Escreva aqui..."></textarea>
                 <button class="modal-send-btn" onclick="sendServiceWhatsApp()">
@@ -882,13 +893,12 @@
 
     <!-- Modal Novo para Contato Exclusivo -->
     <div class="service-modal-overlay" id="contactModal">
-        <!-- Parar evento também neste modal -->
         <div class="service-modal-content" onclick="event.stopPropagation()">
             <div class="modal-header">
                 <h3 data-i18n="nav_contact">Kontakt</h3>
                 <button class="modal-close" onclick="closeContactModal()">×</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" data-lenis-prevent>
                 <p class="modal-cta-text" data-i18n="modal_cta_contact">Como podemos ajudar você hoje?</p>
                 <textarea class="modal-textarea" id="contactDetails" placeholder="Escreva aqui..."></textarea>
                 <button class="modal-send-btn" onclick="sendContactWhatsApp()">
@@ -900,31 +910,21 @@
     </div>
 
     <script>
-        // --- PREPARAÇÃO DE VÍDEOS (Volume a 50%) ---
+        // --- PREPARAÇÃO GLOBAL DE VÍDEOS (Volume fixo em 50%) ---
         document.querySelectorAll('video').forEach(video => {
-            video.volume = 0.5; // Todos os vídeos começam silenciosamente preparados com apenas metade do volume
+            video.volume = 0.5;
         });
 
-        // --- PROTEÇÃO ANTI-CÓPIA ---
+        // --- PROTEÇÃO ANTI-CÓPIA E SELEÇÃO ---
         document.addEventListener('contextmenu', e => e.preventDefault());
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || 
-               (e.ctrlKey && e.shiftKey && e.key === 'I') || 
-               (e.ctrlKey && e.shiftKey && e.key === 'J') || 
-               (e.ctrlKey && e.shiftKey && e.key === 'C') || 
-               (e.ctrlKey && e.key === 'U') ||
-               (e.ctrlKey && e.key === 'c') ||
-               (e.metaKey && e.key === 'c')) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && (e.key === 'U' || e.key === 'c')) || (e.metaKey && e.key === 'c')) {
                 e.preventDefault();
             }
         });
-        document.addEventListener('dragstart', e => {
-            if (e.target.tagName === 'IMG') {
-                e.preventDefault();
-            }
-        });
+        document.addEventListener('dragstart', e => { if (e.target.tagName === 'IMG') e.preventDefault(); });
 
-        // --- LENIS SCROLL (Motor Premium) ---
+        // --- INICIALIZAÇÃO DO LENIS (SCROLL SUAVE PREMIUM ZERO LAG) ---
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
@@ -943,10 +943,16 @@
         }
         requestAnimationFrame(raf);
 
-        // Desativa/Ativa mapa ao clicar (Impede lag no scroll do Desktop)
-        const mapWrap = document.getElementById('map-wrap');
-        mapWrap.addEventListener('mousedown', () => mapWrap.classList.add('active'));
-        mapWrap.addEventListener('mouseleave', () => mapWrap.classList.remove('active'));
+        // --- INJEÇÃO DO GOOGLE MAPS LAZY LOAD (Destrava a CPU) ---
+        const mapObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.innerHTML = '<iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        mapObserver.observe(document.getElementById('map-wrap'));
 
         document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -958,16 +964,11 @@
             });
         });
 
-        function smoothScrollToTop(e) {
-            e.preventDefault();
-            lenis.scrollTo(0, { duration: 1.5 });
-        }
+        function smoothScrollToTop(e) { e.preventDefault(); lenis.scrollTo(0, { duration: 1.5 }); }
 
         let selectedServiceKey = '';
         let currentLang = 'de'; 
-        let isDraggingCarousel = false; 
 
-        // TRANSLATIONS
         const waMessages = {
             de: "Hallo! Ich möchte einen Termin vereinbaren...",
             en: "Hello! I would like to book an appointment...",
@@ -1118,7 +1119,7 @@
                 why_sub: "Ventajas", why_title: "¿Por qué Beauty By Cris?", w1_title: "Higiene Absoluta", w1_desc: "Altos estándares para su seguridad.", w2_title: "Calidad Premium", w2_desc: "Los mejores materiales.", w3_title: "Atención Personalizada", w3_desc: "Tratamientos a su medida.", w4_title: "Ambiente Relajante", w4_desc: "Un oasis de tranquilidad.",
                 services_sub: "Tratamientos", services_title: "Servicios & Rituales", lbl_duration: "Duración:", lbl_benefits: "Beneficios:", lbl_process: "Proceso:",
                 s1_title: "Limpieza Facial", s1_desc: "Limpieza profunda.", s1_ben: "Refina poros", s1_abl: "Limpieza, extracción", s1_dur: "60 min",
-                s2_title: "Micropigmentação", s2_desc: "Cejas ultra-realistas.", s2_ben: "Cejas pobladas", s2_abl: "Pigmentación precisa", s2_dur: "120 min",
+                s2_title: "Micropigmentación", s2_desc: "Cejas ultra-realistas.", s2_ben: "Cejas pobladas", s2_abl: "Pigmentación precisa", s2_dur: "120 min",
                 s3_title: "Pigmentación Labial", s3_desc: "Labios con color 24/7.", s3_ben: "Color 24/7", s3_abl: "Pigmentación suave", s3_dur: "90 min",
                 s4_title: "Plasma Pen", s4_desc: "Estiramiento sin cirugía.", s4_ben: "Lifting inmediato", s4_abl: "Puntos de plasma", s4_dur: "45 min",
                 s5_title: "Depilación", s5_desc: "Eliminación suave del vello.", s5_ben: "Piel lisa", s5_abl: "Eliminación suave", s5_dur: "15-45 min",
@@ -1127,7 +1128,7 @@
                 s8_title: "Manicura y Pedicura", s8_desc: "Cuidado completo.", s8_ben: "Uñas fuertes", s8_abl: "Corte, hidratación", s8_dur: "60 min",
                 s9_title: "Eliminación PMU", s9_desc: "Despigmentación segura.", s9_ben: "Sin cicatrices", s9_abl: "Removedor", s9_dur: "45 min",
                 s10_title: "Extensión de Pestañas", s10_desc: "Pestañas voluminosas.", s10_ben: "Resistente al agua", s10_abl: "Aplicación una a una", s10_dur: "90-120 min",
-                s11_title: "Eliminación de Millium", s11_desc: "Extracción higiênica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
+                s11_title: "Eliminación de Millium", s11_desc: "Extracción higiénica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
                 ba_sub: "Resultados Reales", ba_title: "Antes & Después", lbl_before: "Antes", lbl_after: "Después",
@@ -1267,7 +1268,7 @@
         function toggleMute(btn) {
             const video = btn.previousElementSibling;
             video.muted = !video.muted;
-            video.volume = 0.5; // Garante que, ao ligar o som, ele fique cravado em 50%
+            video.volume = 0.5;
             if (video.muted) {
                 btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>';
             } else {
@@ -1275,10 +1276,18 @@
             }
         }
 
-        // Modal de Serviços
-        function openServiceModal(cardElement, serviceKey) {
-            if (isDraggingCarousel) return;
+        // --- SISTEMA DE STORIES DO MOBILE (Clica no circulo e toca no principal) ---
+        function changeStory(url, element) {
+            const mainVid = document.getElementById('mobile-main-video');
+            mainVid.src = url;
+            mainVid.volume = 0.5;
+            mainVid.play();
+            document.querySelectorAll('.story-circle').forEach(c => c.classList.remove('active'));
+            element.classList.add('active');
+        }
 
+        // --- POP-UP DOS SERVIÇOS ---
+        function openServiceModal(cardElement, serviceKey) {
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
             cardElement.classList.add('selected');
 
@@ -1296,7 +1305,7 @@
 
             modalDetails.value = '';
             modal.classList.add('active');
-            lenis.stop();
+            lenis.stop(); // Pausa rolagem pra não bagunçar
         }
 
         function closeServiceModal() {
@@ -1317,7 +1326,7 @@
             closeServiceModal();
         }
 
-        // Modal de Contato Novo
+        // --- POP-UP DE CONTATO ---
         function openContactModal() {
             const modal = document.getElementById('contactModal');
             document.getElementById('contactDetails').value = '';
@@ -1352,11 +1361,8 @@
             if (!isScrolling) {
                 window.requestAnimationFrame(() => {
                     const scrolled = window.scrollY;
-                    if (scrolled > 400) { 
-                        backToTopBtn.classList.add('visible'); 
-                    } else { 
-                        backToTopBtn.classList.remove('visible'); 
-                    }
+                    if (scrolled > 400) { backToTopBtn.classList.add('visible'); } 
+                    else { backToTopBtn.classList.remove('visible'); }
                     isScrolling = false;
                 });
                 isScrolling = true;
@@ -1370,12 +1376,12 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        // Lógica de Carrossel Suave com Inércia (Serviços, Reviews e Modal)
+        // --- MOTOR DE ARRASTE PC (Mouse APENAS) - No celular flui 100% liso com CSS nativo ---
         const carousels = [
             document.getElementById('servicesCarousel'), 
             document.getElementById('reviewsCarousel'),
-            document.getElementById('modalGallery'),
-            document.getElementById('reelsCarousel')
+            document.getElementById('desktopReels'),
+            document.getElementById('modalGallery') // Agora as fotos do pop-up rastreiam o mouse liso no PC!
         ];
         
         carousels.forEach(carousel => {
@@ -1383,77 +1389,28 @@
             let isDown = false;
             let startX;
             let scrollLeft;
-            let velX = 0; 
-            let lastX = 0;
-            let momentumID;
 
             carousel.addEventListener('mousedown', (e) => {
                 isDown = true;
-                isDraggingCarousel = false; 
                 carousel.classList.add('active');
-                
-                let rect = carousel.getBoundingClientRect();
-                startX = e.pageX - rect.left;
-                
+                startX = e.pageX - carousel.getBoundingClientRect().left;
                 scrollLeft = carousel.scrollLeft;
-                lastX = e.pageX; 
-                velX = 0; 
-                cancelAnimationFrame(momentumID); 
             });
 
-            carousel.addEventListener('mouseleave', () => {
-                if (!isDown) return;
-                isDown = false;
-                carousel.classList.remove('active');
-                beginMomentumTracking();
-            });
-
-            carousel.addEventListener('mouseup', () => {
-                if (!isDown) return;
-                isDown = false;
-                carousel.classList.remove('active');
-                beginMomentumTracking();
-            });
+            // Evita travar os eventos no toque do celular
+            carousel.addEventListener('mouseleave', () => { isDown = false; carousel.classList.remove('active'); });
+            carousel.addEventListener('mouseup', () => { isDown = false; carousel.classList.remove('active'); });
 
             carousel.addEventListener('mousemove', (e) => {
                 if(!isDown) return;
                 e.preventDefault();
-                let rect = carousel.getBoundingClientRect();
-                const x = e.pageX - rect.left;
-                const walk = (x - startX) * 1.3; 
-                
-                if (Math.abs(walk) > 5) {
-                    isDraggingCarousel = true; 
-                }
-
+                const x = e.pageX - carousel.getBoundingClientRect().left;
+                const walk = (x - startX) * 1.5; 
                 carousel.scrollLeft = scrollLeft - walk;
-                velX = e.pageX - lastX;
-                lastX = e.pageX;
             });
-
-            function beginMomentumTracking(){
-                cancelAnimationFrame(momentumID);
-                momentumLoop();
-            }
-
-            function momentumLoop(){
-                velX *= 0.95; 
-                carousel.scrollLeft -= velX; 
-
-                if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
-                     velX = 0;
-                     cancelAnimationFrame(momentumID);
-                     return;
-                }
-                if (Math.abs(velX) > 0.5) {
-                    momentumID = requestAnimationFrame(momentumLoop);
-                } else {
-                     cancelAnimationFrame(momentumID); 
-                }
-            }
         });
 
-        // BEFORE & AFTER
+        // --- LÓGICA DO ANTES/DEPOIS RESOLVIDA ---
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
@@ -1472,16 +1429,19 @@
                 handle.style.left = percent + '%';
                 if(line) line.style.left = percent + '%';
 
-                // Lógica de texto: Puxou pra Direita (>50%) revela a ruim (Antes). Puxou pra Esquerda (<50%) revela a bonita (Depois).
+                // Lógica de texto Cravada: 
+                // Direita (>50%) revela imagem do Antes que cobre a tela inteira. Mas a usuária quer que apareça escrito DEPOIS.
+                // Esquerda (<50%) diminui imagem do Antes, revelando a debaixo. A usuária quer escrito ANTES.
                 if(label) {
                     if(percent > 50) {
-                        label.innerText = t[currentLang]['lbl_before']; // Revelando o Antes
+                        label.innerText = t[currentLang]['lbl_after'] || 'Depois';
                     } else {
-                        label.innerText = t[currentLang]['lbl_after']; // Revelando o Depois
+                        label.innerText = t[currentLang]['lbl_before'] || 'Antes';
                     }
                 }
             }
             
+            // TRAVA O CLIQUE SÓ NA BOLINHA E NÃO DEIXA A TELA ROLAR AO PUXAR
             handle.addEventListener('mousedown', (e) => { isSliding = true; e.preventDefault(); e.stopPropagation(); });
             handle.addEventListener('touchstart', (e) => { isSliding = true; e.stopPropagation(); }, {passive: true});
             
@@ -1491,7 +1451,6 @@
             window.addEventListener('touchmove', move);
         });
 
-        // LÓGICA DO VÍDEO INTRODUTÓRIO
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
 
@@ -1499,7 +1458,7 @@
             const videoObserver = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        introVideo.play().catch(e => console.log("Autoplay prevenido:", e));
+                        introVideo.play().catch(e => console.log("Autoplay prevenido pelo navegador:", e));
                         observer.unobserve(entry.target); 
                     }
                 });
@@ -1513,7 +1472,7 @@
             });
         }
 
-        updateWaLinks('de');
+        updateWaLinks('de'); 
     </script>
 </body>
 </html>
