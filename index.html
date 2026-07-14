@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty by Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
+    <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty By Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
     <link rel="icon" href="https://i.imgur.com/CQpHs8c.png" type="image/png">
-    <title>Beauty by Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
+    <title>Beauty By Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
     
     <!-- Importação do Lenis para Scroll Suave Premium -->
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -27,7 +27,7 @@
             --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* --- ESTILOS NECESSÁRIOS PARA O LENIS SCROLL --- */
+        /* --- STREAMING_CHUNK:Configuring Lenis Smooth Scroll... */
         html.lenis, html.lenis body {
             height: auto;
         }
@@ -44,7 +44,7 @@
             pointer-events: none; 
         }
 
-        /* --- PROTEÇÃO CSS & OTIMIZAÇÃO GPU --- */
+        /* --- STREAMING_CHUNK:Setting up base layout and text selection... */
         body { 
             font-family: 'Montserrat', sans-serif; 
             background-color: var(--bg-champagne); 
@@ -64,14 +64,12 @@
             user-select: text;
         }
 
-        /* Otimização de Layout para Mobile e Desktop (Clip resolve bugs de renderização no Safari) */
         html, body { width: 100%; max-width: 100%; overflow-x: clip; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
         ul { list-style: none; }
         
-        /* Previne o navegador de tentar "salvar" a imagem ao arrastar, tirando o lag pesado */
         img { max-width: 100%; height: auto; -webkit-user-drag: none; }
 
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
@@ -95,6 +93,7 @@
 
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
+        /* --- STREAMING_CHUNK:Styling the premium blurred header... */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -129,6 +128,7 @@
             nav a.btn-outline { margin-top: 10px; }
         }
 
+        /* --- STREAMING_CHUNK:Styling the Hero section... */
         .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: var(--bg-champagne); padding-top: 90px; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
         .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; margin-bottom: 25px; }
@@ -144,6 +144,7 @@
             .hero-photo-wrap img { transform: none !important; }
         }
 
+        /* --- STREAMING_CHUNK:Styling the About Us and Video section... */
         .about { padding: 120px 0; background-color: var(--bg-white); }
         .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: center; }
         .about-images { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -157,6 +158,7 @@
         .about-content p { color: var(--text-muted); margin-bottom: 20px; }
         @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; gap: 50px; } }
 
+        /* --- STREAMING_CHUNK:Styling the Benefits cards... */
         .why-us { padding: 80px 0; background-color: var(--bg-champagne); }
         .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .why-card { background: var(--bg-white); padding: 25px 20px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px; }
@@ -167,6 +169,7 @@
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
+        /* --- STREAMING_CHUNK:Styling the Services section & Carousels... */
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
@@ -192,7 +195,7 @@
             .service-card { min-width: 80vw; max-width: 80vw; } 
         }
 
-        /* --- OVERLAY DO MODAL OTIMIZADO PARA PERFORMANCE (SEM BLUR) --- */
+        /* --- STREAMING_CHUNK:Styling Modals & Pop-ups... */
         .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(20, 15, 15, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
         .service-modal-overlay.active { opacity: 1; pointer-events: auto; }
         .service-modal-content { background-color: var(--bg-white); width: 100%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 90vh; display: flex; flex-direction: column; }
@@ -217,7 +220,7 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- ANTES & DEPOIS OTIMIZADO --- */
+        /* --- STREAMING_CHUNK:Styling Before & After Slider... */
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
         .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .ba-slider-container { position: relative; width: 100%; height: 400px; border: 1px solid var(--border-light); box-shadow: var(--shadow-subtle); overflow: hidden; background: #fff; touch-action: pan-y; border-radius: 8px; transform: translateZ(0);}
@@ -234,6 +237,7 @@
         .ba-label-corner { position: absolute; bottom: 15px; right: 15px; padding: 6px 15px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; background-color: rgba(42,36,37,0.85); color: #fff; z-index: 5; pointer-events: none; border-radius: 4px; font-weight: 600; font-family: 'Montserrat', sans-serif;}
         @media (max-width: 992px) { .ba-grid { grid-template-columns: 1fr; } .ba-slider-container { height: 300px; } }
 
+        /* --- STREAMING_CHUNK:Styling the Video Reels section... */
         .videos { padding: 100px 0; background-color: var(--bg-white); }
         .reels-gallery-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 350px; margin: 0 auto; }
         
@@ -251,6 +255,7 @@
         .reel-thumb.active { border-color: var(--accent-rose); opacity: 1; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .reel-thumb video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
+        /* --- STREAMING_CHUNK:Styling reviews and summary block... */
         .reviews { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden;}
         .google-summary { background-color: transparent; max-width: 600px; margin: 0 auto 40px auto; text-align: center; }
         .rating-huge { font-size: 4rem; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 5px; letter-spacing: -2px; }
@@ -275,9 +280,26 @@
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
-        .map-section { width: 100%; height: 350px; background: #eee; position: relative; border-top: 1px solid var(--border-light);}
-        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; }
-        .map-section:hover .map-iframe { pointer-events: auto; }
+        /* --- STREAMING_CHUNK:Styling Google Maps iframe... */
+        .map-section { 
+            width: 100%; 
+            height: 350px; 
+            background: #eee; 
+            position: relative; 
+            border-top: 1px solid var(--border-light);
+            cursor: pointer;
+        }
+        .map-iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: 0; 
+            filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); 
+            pointer-events: none; /* Disables interaction by default so scroll flows naturally */
+            transition: var(--transition-smooth);
+        }
+        .map-section.active .map-iframe { 
+            pointer-events: auto; /* Active zoom/interactivity only on map click */
+        }
         
         .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -288,6 +310,7 @@
         .info-card .hl { color: var(--accent-rose); font-weight: 600; }
         @media (max-width: 768px) { .clinic-info-grid { grid-template-columns: 1fr; gap: 40px;} }
 
+        /* --- STREAMING_CHUNK:Styling the footer & floating elements... */
         .footer { padding: 40px 0; background-color: var(--text-dark); color: rgba(255,255,255,0.7); text-align: center; font-size: 0.8rem; letter-spacing: 1px; }
         .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
         .social-links a { color: var(--primary-rose); text-transform: uppercase; transition: var(--transition-smooth);}
@@ -326,7 +349,6 @@
                     <li><a href="#about" data-i18n="nav_about">Über Uns</a></li>
                     <li><a href="#services" data-i18n="nav_services">Services</a></li>
                     <li><a href="#reviews" data-i18n="nav_reviews">Bewertungen</a></li>
-                    <!-- O Link Contato agora abre o Pop-up -->
                     <li><a onclick="openContactModal(event)" class="btn btn-outline" style="padding: 10px 20px;" data-i18n="nav_contact">Kontakt</a></li>
                 </ul>
             </nav>
@@ -360,6 +382,7 @@
         </div>
     </section>
 
+    <!-- --- STREAMING_CHUNK:Rendering About Us section... -->
     <section class="about" id="about">
         <div class="container">
             <div class="about-grid">
@@ -381,6 +404,7 @@
         </div>
     </section>
 
+    <!-- --- STREAMING_CHUNK:Rendering Benefits grid... -->
     <section class="why-us">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -412,6 +436,7 @@
         </div>
     </section>
 
+    <!-- --- STREAMING_CHUNK:Rendering Services and rituals carousel... -->
     <section class="services" id="services">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -420,7 +445,6 @@
             </div>
         </div>
         
-        <!-- REMOVIDO data-lenis-prevent PARA ROLAGEM LISA NO COMPUTADOR -->
         <div class="services-carousel-wrap">
             <div class="services-carousel" id="servicesCarousel">
                 
@@ -571,6 +595,7 @@
         </div>
     </section>
 
+    <!-- --- STREAMING_CHUNK:Rendering Before and After interactive block... -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -579,7 +604,7 @@
             </div>
             <div class="ba-grid">
                 
-                <div class="ba-slider-container animate-on-scroll" data-lenis-prevent>
+                <div class="ba-slider-container animate-on-scroll">
                     <!-- Fundo: IMAGEM DEPOIS (Sobrancelha bonita, lado direito) -->
                     <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Nachher" class="ba-img">
                     <!-- Frente: IMAGEM ANTES (Sobrancelha falhada, lado esquerdo) -->
@@ -591,7 +616,7 @@
                     <div class="ba-label-corner"></div>
                 </div>
 
-                <div class="ba-slider-container animate-on-scroll delay-1" data-lenis-prevent>
+                <div class="ba-slider-container animate-on-scroll delay-1">
                     <img src="" alt="Nachher" class="ba-img media-placeholder">
                     <div class="ba-before">
                         <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;">
@@ -605,6 +630,7 @@
         </div>
     </section>
 
+    <!-- --- STREAMING_CHUNK:Rendering Video Insights carousels... -->
     <section class="videos">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -640,6 +666,7 @@
         </div>
     </section>
 
+    <!-- --- STREAMING_CHUNK:Rendering Google reviews and ratings... -->
     <section class="reviews" id="reviews">
         <div class="container">
             <div class="section-header animate-on-scroll" style="margin-bottom: 20px;">
@@ -651,11 +678,10 @@
                 <div class="rating-huge text-gradient">5,0</div>
                 <div class="stars-gradient">★★★★★</div>
                 <p data-i18n="google_reviews_count" style="color: var(--text-muted);">Basierend auf 13 Google-Rezensionen</p>
-                <a href="https://www.google.com/search?q=Beauty+by+Cris+Beleza+Facial+Baden-Baden" target="_blank" class="btn-google" data-i18n="btn_google_page">Auf Google ansehen</a>
+                <a href="https://www.google.com/search?q=Beauty+By+Cris+Beleza+Facial+Baden-Baden" target="_blank" class="btn-google" data-i18n="btn_google_page">Auf Google ansehen</a>
             </div>
         </div>
 
-        <!-- REMOVIDO data-lenis-prevent PARA ROLAGEM LISA -->
         <div class="reviews-carousel-wrap">
             <div class="reviews-carousel" id="reviewsCarousel">
                 
@@ -722,7 +748,7 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r6_text">"Cris' Energie ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet."</p>
+                    <p class="review-text" data-i18n="r6_text">"Cris' Energie ist die beste, die man dort finden can; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet."</p>
                 </div>
 
                 <div class="review-card">
@@ -799,14 +825,15 @@
                         </div>
                     </div>
                     <div class="stars-gradient">★★★★★</div>
-                    <p class="review-text" data-i18n="r13_text">"Die Gesichtsbehandlung war hervorragend. Cristina kann es. Eine fantastische Behandlung. Sehr zu empfehlen."</p>
+                    <p class="review-text" data-i18n="r13_text">"Die Gesichtsbehandlung war hervorragend. Cristina can es. Eine fantastische Behandlung. Sehr zu empfehlen."</p>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <div class="map-section" data-lenis-prevent>
+    <!-- --- STREAMING_CHUNK:Rendering Google Maps block and info card... -->
+    <div class="map-section" id="mapSection">
         <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
 
@@ -832,6 +859,7 @@
         </div>
     </section>
 
+    <!-- --- STREAMING_CHUNK:Rendering static footer details... -->
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
@@ -850,14 +878,14 @@
     
     <div class="float-btn float-top" id="backToTop" onclick="smoothScrollToTop(event)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
+    <!-- --- STREAMING_CHUNK:Pop-up modals structure... -->
     <div class="service-modal-overlay" id="serviceModal">
         <div class="service-modal-content">
             <div class="modal-header">
                 <h3 id="modalServiceName">Nome do Serviço</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
             </div>
-            <!-- SEM data-lenis-prevent AQUI PARA PERMITIR ARRASTE LISO -->
-            <div class="modal-gallery" id="modalGallery">
+            <div class="modal-gallery">
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 1 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 2 ]</span></div></div>
                 <div class="modal-gallery-item"><div class="media-placeholder" style="height:100%;"><span>[ Foto 3 ]</span></div></div>
@@ -911,7 +939,7 @@
             }
         });
 
-        // --- INICIALIZAÇÃO DO LENIS ---
+        // --- STREAMING_CHUNK:Initializing Lenis dynamic scrolling... ---
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
@@ -930,6 +958,7 @@
         }
         requestAnimationFrame(raf);
 
+        // --- STREAMING_CHUNK:Configuring anchors for premium navigation... ---
         document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
@@ -991,19 +1020,19 @@
                 ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", lbl_before: "Vorher", lbl_after: "Nachher",
                 video_sub: "Einblicke im Video", video_title: "Exklusive Insights",
                 reviews_sub: "Kundenmeinungen", reviews_title: "Google Bewertungen", google_reviews_count: "Basierend auf 13 Google-Rezensionen", btn_google_page: "Auf Google ansehen",
-                r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏",
-                r2_date: "vor 1 Jahr", r2_text: "Ich liebe die Maniküre und Pediküre von Cris, ich bin sehr zufrieden.. Sie ist sehr freundlich und geduldig 🫶🥰",
+                r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir very gut gefallen, ich empfehle es! 👏",
+                r2_date: "vor 1 Jahr", r2_text: "Ich liebe die Maniküre und Pediküre von Cris, ich bin very zufrieden.. Sie ist very freundlich und geduldig 🫶🥰",
                 r3_date: "vor 2 Jahren", r3_text: "Ausgezeichnete Fachkraft, hat meine Erwartungen übertroffen, danke Cris ❤️ Sehr zu empfehlen!",
                 r4_date: "vor 2 Jahren", r4_text: "Ich war schon oft dort. Ob für Wimpern oder Augenbrauen, ich bin absolut begeistert.",
                 r5_date: "vor 2 Jahren", r5_text: "Habe meine Augenbrauen micropigmentieren lassen und bin begeistert vom Ergebnis. Ich empfehle es vorbehaltlos.",
-                r6_date: "vor 2 Jahren", r6_text: "Cris' Energie ist die beste, die man dort finden kann; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet.",
+                r6_date: "vor 2 Jahren", r6_text: "Cris' Energie ist die beste, die man dort finden can; ihre Arbeit ist erstklassig, Gesichtsbehandlungen und Lippen sind ausgezeichnet.",
                 r7_date: "vor 1 Jahr", r7_text: "Ein tolles kleines Studio... Ich hatte dort eine Gesichtsbehandlung mit Plasma Pen und Microblading.",
-                r8_date: "vor 2 Jahren", r8_text: "Ich kann es sehr empfehlen; exzellenter Service und gemütliche Atmosphäre. Ich bin sehr zufrieden! 👍👏",
-                r9_date: "vor 2 Jahren", r9_text: "Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis sehr zufrieden.",
-                r10_date: "vor 1 Jahr", r10_text: "Ich war mit der Arbeit sehr zufrieden.",
+                r8_date: "vor 2 Jahren", r8_text: "Ich can es very empfehlen; exzellenter Service und gemütliche Atmosphäre. Ich bin very zufrieden! 👍👏",
+                r9_date: "vor 2 Jahren", r9_text: "Habe Wimpernverlängerung gemacht und bin mit dem Ergebnis very zufrieden.",
+                r10_date: "vor 1 Jahr", r10_text: "Ich war mit der Arbeit very zufrieden.",
                 r11_date: "vor 2 Jahren", r11_text: "Cool",
                 r12_date: "vor 5 Tagen", r12_text: "Ich habe hier Microblading und Wimpernverlängerung machen lassen und bin extrem glücklich! Das Ergebnis ist wunderschön.",
-                r13_date: "vor 2 Wochen", r13_text: "Die Gesichtsbehandlung war hervorragend. Cristina kann es. Eine fantastische Behandlung. Sehr zu empfehlen.",
+                r13_date: "vor 2 Wochen", r13_text: "Die Gesichtsbehandlung war hervorragend. Cristina can es. Eine fantastische Behandlung. Sehr zu empfehlen.",
                 info_address: "Standort", info_contact: "Kontakt", info_hours: "Öffnungszeiten", hours_week: "Mo. - Fr.: 09:00 - 18:00", hours_weekend: "Sa. & So.: Geschlossen",
                 footer_rights: "Alle Rechte vorbehalten.", footer_dev: "Entwickelt von:",
                 btn_contact_us: "Kontaktieren Sie uns", btn_work_with_us: "Arbeiten Sie mit uns",
@@ -1190,9 +1219,9 @@
                 s3_title: "Пигментация Губ", s3_desc: "Цвет 24/7.", s3_ben: "Сочный цвет", s3_abl: "Нежная пигментация", s3_dur: "90 мин",
                 s4_title: "Plasma Pen", s4_desc: "Лифтинг без операций.", s4_ben: "Подтяжка", s4_abl: "Точечная плазма", s4_dur: "45 мин",
                 s5_title: "Депиляция", s5_desc: "Гладкая кожа.", s5_ben: "Удаление волос", s5_abl: "Воск", s5_dur: "15-45 мин",
-                s6_title: "Педикюр", s6_desc: "Уход за стопами.", s6_ben: "Мягкость", s6_abl: "Ванночка, массаж", s6_dur: "45 мин",
+                s6_title: "Педикюр", s6_desc: "Уход за стопами.", s6_ben: "Мягкость", s6_abl: "Ванночка, массаж", s6_dur: "45 min",
                 s7_title: "Рефлексотерапия", s7_desc: "Массаж стоп.", s7_ben: "Снятие стресса", s7_abl: "Массаж", s7_dur: "30 мин",
-                s8_title: "Маникюр и Педикюр", s8_desc: "Идеальные руки и ноги.", s8_ben: "Крепкие ногти", s8_abl: "Уход", s8_dur: "60 мин",
+                s8_title: "Маникюр и Пediкюр", s8_desc: "Идеальные руки и ноги.", s8_ben: "Крепкие ногти", s8_abl: "Уход", s8_dur: "60 мин",
                 s9_title: "Удаление Татуажа", s9_desc: "Безопасное удаление.", s9_ben: "Без рубцов", s9_abl: "Ремувер", s9_dur: "45 мин",
                 s10_title: "Наращивание Ресниц", s10_desc: "Густые ресницы.", s10_ben: "Стойкость", s10_abl: "Наращивание", s10_dur: "90-120 мин",
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
@@ -1246,12 +1275,10 @@
                         if (t[langCode][key]) el.setAttribute('placeholder', t[langCode][key]);
                     });
                     
-                    // Atualiza os labels dinâmicos de Antes/Depois na troca de idioma
                     document.querySelectorAll('.ba-slider-container').forEach(slider => {
                         const label = slider.querySelector('.ba-label-corner');
                         if(label) label.innerText = t[langCode]['lbl_before']; 
                         
-                        // Reseta a barra pro meio
                         const before = slider.querySelector('.ba-before');
                         const handle = slider.querySelector('.ba-handle');
                         const line = slider.querySelector('.ba-line');
@@ -1262,11 +1289,11 @@
                     });
                 }
                 mainBody.classList.remove('lang-fading');
-                lenis.scrollTo(0, { duration: 1.5 }); // Scroll suave ao topo ao mudar o idioma
+                lenis.scrollTo(0, { duration: 1.5 }); 
             }, 300);
         }
 
-        // --- STREAMING_CHUNK:Lógica Aprimorada dos Modais ---
+        // --- STREAMING_CHUNK:Refining Modal open/close actions... ---
         function openServiceModal(cardElement, serviceKey) {
             if (isDraggingCarousel) return;
 
@@ -1287,13 +1314,13 @@
 
             modalDetails.value = '';
             modal.classList.add('active');
-            lenis.stop(); // Pausa o fundo suavemente
+            lenis.stop(); 
         }
 
         function closeServiceModal() {
             const modal = document.getElementById('serviceModal');
             modal.classList.remove('active');
-            lenis.start(); // Volta o scroll
+            lenis.start(); 
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
         }
 
@@ -1351,6 +1378,7 @@
             }
         });
 
+        // --- STREAMING_CHUNK:Configuring Scroll Animation observer... ---
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
@@ -1358,7 +1386,7 @@
         }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
-        // --- STREAMING_CHUNK:Sistema de Arraste à Prova de Falhas ---
+        // --- STREAMING_CHUNK:Configuring horizontal drag with inertia... ---
         const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel'), document.getElementById('modalGallery')];
         carousels.forEach(carousel => {
             if(!carousel) return;
@@ -1372,9 +1400,8 @@
             const onMouseMove = (e) => {
                 if(!isDown) return;
                 e.preventDefault();
-                // Calcula baseando na janela para não bugar se o mouse sair da div
                 const x = e.pageX; 
-                const walk = (x - startX) * 1.3; // Velocidade do arraste
+                const walk = (x - startX) * 1.3; 
                 
                 if (Math.abs(walk) > 5) {
                     isDraggingCarousel = true; 
@@ -1390,7 +1417,6 @@
                 isDown = false;
                 carousel.classList.remove('active');
                 
-                // Remove os eventos da janela quando soltar o botão
                 window.removeEventListener('mousemove', onMouseMove);
                 window.removeEventListener('mouseup', onMouseUp);
                 
@@ -1407,7 +1433,6 @@
                 velX = 0; 
                 cancelAnimationFrame(momentumID); 
                 
-                // Escuta o mouse NA JANELA TODA, assim não fecha/trava se sair
                 window.addEventListener('mousemove', onMouseMove);
                 window.addEventListener('mouseup', onMouseUp);
             });
@@ -1434,7 +1459,7 @@
             }
         });
 
-        // BEFORE & AFTER OTIMIZADO - APENAS NA BOLINHA E TEXTO DINÂMICO
+        // --- STREAMING_CHUNK:Configuring Before & After dragging constraint... ---
         document.querySelectorAll('.ba-slider-container').forEach(slider => {
             const before = slider.querySelector('.ba-before');
             const handle = slider.querySelector('.ba-handle');
@@ -1442,7 +1467,6 @@
             const label = slider.querySelector('.ba-label-corner');
             let isSliding = false;
             
-            // Define o texto inicial
             if (label) label.innerText = t[currentLang]['lbl_before'];
 
             const move = (e) => {
@@ -1456,7 +1480,6 @@
                 handle.style.left = percent + '%';
                 if(line) line.style.left = percent + '%';
 
-                // Troca o texto dinamicamente baseado em quanto a imagem aparece
                 if(label) {
                     if(percent < 50) {
                         label.innerText = t[currentLang]['lbl_after'];
@@ -1466,7 +1489,6 @@
                 }
             }
             
-            // EVENTOS ADICIONADOS **EXCLUSIVAMENTE** NA BOLINHA (HANDLE)
             handle.addEventListener('mousedown', (e) => { isSliding = true; e.preventDefault(); e.stopPropagation(); });
             handle.addEventListener('touchstart', (e) => { isSliding = true; e.stopPropagation(); }, {passive: true});
             
@@ -1476,7 +1498,7 @@
             window.addEventListener('touchmove', move);
         });
 
-        // LÓGICA DO VÍDEO INTRODUTÓRIO
+        // --- STREAMING_CHUNK:Setting up Video Player logic... ---
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
         if (introVideo && staticAfterVideo) {
@@ -1494,6 +1516,77 @@
             introVideo.addEventListener('ended', () => {
                 introVideo.classList.remove('active');
                 staticAfterVideo.classList.add('active');
+            });
+        }
+
+        // --- STREAMING_CHUNK:Setting up interactive Reels gallery... ---
+        const mainReels = document.querySelectorAll('.main-reel');
+        const thumbs = document.querySelectorAll('.reel-thumb');
+        let currentReelIndex = 0;
+        let isReelMuted = true;
+
+        function switchReel(index) {
+            if (index === currentReelIndex) return;
+            
+            mainReels[currentReelIndex].classList.remove('active');
+            mainReels[currentReelIndex].pause();
+            
+            thumbs[currentReelIndex].classList.remove('active');
+            
+            currentReelIndex = index;
+            
+            mainReels[currentReelIndex].classList.add('active');
+            mainReels[currentReelIndex].muted = isReelMuted;
+            
+            thumbs[currentReelIndex].classList.add('active');
+            
+            mainReels[currentReelIndex].play().catch(e => console.log(e));
+        }
+
+        mainReels.forEach((reel, idx) => {
+            reel.addEventListener('ended', () => {
+                let nextIdx = (idx + 1) % mainReels.length;
+                switchReel(nextIdx);
+            });
+        });
+
+        const mainVideoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    mainReels[currentReelIndex].play().catch(e => console.log(e));
+                } else {
+                    mainReels[currentReelIndex].pause();
+                }
+            });
+        }, { threshold: 0.2 });
+        mainVideoObserver.observe(document.querySelector('.reels-main-view'));
+
+        function toggleReelSound() {
+            isReelMuted = !isReelMuted;
+            const iconMuted = document.getElementById('icon-muted');
+            const iconUnmuted = document.getElementById('icon-unmuted');
+            
+            mainReels.forEach(reel => {
+                reel.muted = isReelMuted;
+            });
+
+            if (isReelMuted) {
+                iconMuted.style.display = 'block';
+                iconUnmuted.style.display = 'none';
+            } else {
+                iconMuted.style.display = 'none';
+                iconUnmuted.style.display = 'block';
+            }
+        }
+
+        // --- STREAMING_CHUNK:Configuring Map Scroll Pass-through... ---
+        const mapSec = document.getElementById('mapSection');
+        if (mapSec) {
+            mapSec.addEventListener('click', () => {
+                mapSec.classList.add('active');
+            });
+            mapSec.addEventListener('mouseleave', () => {
+                mapSec.classList.remove('active');
             });
         }
 
