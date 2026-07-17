@@ -209,9 +209,8 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- Antes & Depois Section --- */
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
-        .ba-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; } /* 4 imagens alinhadas */
+        .ba-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; } 
         .ba-item { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; }
         .ba-item-title { font-size: 1.4rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
         .ba-item-desc { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; text-align: center; }
@@ -309,7 +308,6 @@
         .float-top:hover { background-color: var(--accent-rose); }
         .float-top svg { width: 24px; height: 24px; fill: var(--bg-white); }
 
-        /* Animações refinadas para rolagem */
         .animate-on-scroll { opacity: 0; transform: translate3d(0, 30px, 0); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); }
         .animate-on-scroll.visible { opacity: 1; transform: translate3d(0, 0, 0); }
         
@@ -580,28 +578,28 @@
         </div>
     </section>
 
-    <!-- Modal de Serviços Atualizado com Imagem Hero -->
+    <!-- Modal de Serviços Atualizado com Idioma Base em Alemão -->
     <div class="service-modal-overlay" id="serviceModal">
         <div class="service-modal-content">
             <div class="modal-header">
-                <h3 id="modalServiceName">Nome do Serviço</h3>
+                <h3 id="modalServiceName">Service Details</h3>
                 <button class="modal-close" onclick="closeServiceModal()">×</button>
             </div>
             <div class="modal-body" data-lenis-prevent>
                 <div id="modalHeroImg" class="modal-hero-img-wrap">
                     <!-- A imagem será clonada dinamicamente pelo JS aqui -->
                 </div>
-                <p class="modal-cta-text" data-i18n="modal_cta">Conte-nos mais sobre o que você busca ou suas dúvidas:</p>
-                <textarea class="modal-textarea" id="modalDetails" placeholder="Escreva aqui..."></textarea>
+                <p class="modal-cta-text" data-i18n="modal_cta">Erzählen Sie uns mehr darüber, was Sie suchen oder welche Fragen Sie haben:</p>
+                <textarea class="modal-textarea" id="modalDetails" data-i18n-ph="contact_modal_placeholder" placeholder="Ihre Nachricht..."></textarea>
                 <button class="modal-send-btn" onclick="sendServiceWhatsApp()">
                     <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg>
-                    <span data-i18n="btn_send_whatsapp">Enviar via WhatsApp</span>
+                    <span data-i18n="btn_send_whatsapp">Per WhatsApp senden</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Seção Antes & Depois Atualizada (4 Colunas) -->
+    <!-- Seção Antes & Depois -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -618,7 +616,6 @@
                             <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" loading="lazy">
                         </div>
                     </div>
-                    <!-- Adicionado 'delay-1' para o texto aparecer suavemente APÓS a foto -->
                     <p class="ba-item-desc animate-on-scroll delay-1" data-i18n="ba_desc_1">Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet...</p>
                 </div>
 
@@ -634,7 +631,7 @@
                 </div>
 
                 <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_3">Microlabial</h3>
+                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_3">Lippenpigmentierung</h3>
                     <div class="ba-slider-container animate-on-scroll">
                         <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
                         <div class="ba-before">
@@ -645,7 +642,7 @@
                 </div>
 
                 <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_4">Extensão de Cílios</h3>
+                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_4">Wimpernverlängerung</h3>
                     <div class="ba-slider-container animate-on-scroll">
                         <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
                         <div class="ba-before">
@@ -885,8 +882,9 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
-                <a onclick="openContactModal(event)" class="btn btn-small-footer" data-i18n="btn_contact_us" style="cursor:pointer;">Fale Conosco</a>
-                <a href="mailto:careers@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_work_with_us">Trabalhe Conosco</a>
+                <!-- Alterado o texto base para alemão -->
+                <a onclick="openContactModal(event)" class="btn btn-small-footer" data-i18n="btn_contact_us" style="cursor:pointer;">Kontaktieren Sie uns</a>
+                <a href="mailto:careers@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_work_with_us">Arbeiten Sie mit uns</a>
             </div>
             <div class="social-links">
                 <a href="https://instagram.com/beauty_by_cris" target="_blank">Instagram</a>
@@ -900,18 +898,19 @@
     
     <div class="float-btn float-top" id="backToTop" onclick="smoothScrollToTop(event)"><svg viewBox="0 0 24 24"><path d="M12 4l-8 8h6v8h4v-8h6z" /></svg></div>
 
+    <!-- Modal de Contato: Texto Base Atualizado para Alemão -->
     <div class="service-modal-overlay" id="contactModal">
         <div class="service-modal-content">
             <div class="modal-header">
-                <h3 data-i18n="contact_modal_title">Entre em Contato</h3>
+                <h3 data-i18n="contact_modal_title">Kontakt</h3>
                 <button class="modal-close" onclick="closeContactModal()">×</button>
             </div>
             <div class="modal-body" data-lenis-prevent>
-                <p class="modal-cta-text" data-i18n="contact_modal_desc">Como podemos ajudar? Escreva sua mensagem abaixo e responderemos rapidamente pelo WhatsApp.</p>
-                <textarea class="modal-textarea" id="contactDetails" data-i18n-ph="contact_modal_placeholder" placeholder="Sua mensagem..."></textarea>
+                <p class="modal-cta-text" data-i18n="contact_modal_desc">Wie können wir helfen? Schreiben Sie Ihre Nachricht unten.</p>
+                <textarea class="modal-textarea" id="contactDetails" data-i18n-ph="contact_modal_placeholder" placeholder="Ihre Nachricht..."></textarea>
                 <button class="modal-send-btn" onclick="sendContactWhatsApp()">
                     <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg>
-                    <span data-i18n="btn_send_whatsapp">Enviar via WhatsApp</span>
+                    <span data-i18n="btn_send_whatsapp">Per WhatsApp senden</span>
                 </button>
             </div>
         </div>
@@ -1015,8 +1014,8 @@
                 ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", lbl_before: "Vorher", lbl_after: "Nachher",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.",
-                ba_title_3: "Microlabial", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.",
-                ba_title_4: "Extensão de Cílios", ba_desc_4: "Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen, damit Sie sich jeden Tag noch schöner fühlen.",
+                ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.",
+                ba_title_4: "Wimpernverlängerung", ba_desc_4: "Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen, damit Sie sich jeden Tag noch schöner fühlen.",
                 video_sub: "Einblicke im Video", video_title: "Exklusive Insights",
                 reviews_sub: "Kundenmeinungen", reviews_title: "Google Bewertungen", google_reviews_count: "Basierend auf 13 Google-Rezensionen", btn_google_page: "Auf Google ansehen",
                 r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏",
@@ -1085,7 +1084,7 @@
                 contact_modal_title: "Get in Touch", contact_modal_desc: "How can we help? Write your message below.", contact_modal_placeholder: "Your message..."
             },
             pt: {
-                nav_about: "Sobre Nós", nav_services: "Serviços", nav_reviews: "Avaliações", nav_contact: "Contato",
+                nav_about: "Sobre Nós", nav_services: "Serv Serviços", nav_reviews: "Avaliações", nav_contact: "Contato",
                 hero_title: "Sua beleza natural em <span class='text-gradient'>Foco</span>", hero_subtitle: "Experimente tratamentos cosméticos sob medida no mais alto nível. Perfeição, higiene absoluta e bem-estar exclusivo.",
                 btn_explore_services: "Explorar Tratamentos",
                 about_sub: "O Studio", about_title: "Excelência em Estética e Cuidado", about_p1: "Nosso studio foi fundado com o propósito de realçar a beleza natural que existe em você, com técnicas avançadas e ambiente de total conforto.", about_p2: "Com profissionais altamente qualificados e equipamentos modernos, garantimos resultados incríveis e seguros.",
@@ -1275,6 +1274,20 @@
             document.querySelectorAll('.wa-link').forEach(link => { link.href = `https://wa.me/491629384907?text=${msg}`; });
         }
 
+        // Função isolada para aplicar traduções (pode ser chamada sem o fading da tela)
+        function applyTranslations(langCode) {
+            if (t[langCode]) {
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    if (t[langCode][key]) el.innerHTML = t[langCode][key];
+                });
+                document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                    const key = el.getAttribute('data-i18n-ph');
+                    if (t[langCode][key]) el.setAttribute('placeholder', t[langCode][key]);
+                });
+            }
+        }
+
         function selectLang(langCode, langFlag) {
             const mainBody = document.getElementById('main-body');
             mainBody.classList.add('lang-fading');
@@ -1283,23 +1296,13 @@
                 document.getElementById('currentLang').innerHTML = langFlag;
                 document.getElementById('langOptions').classList.remove('show');
                 updateWaLinks(langCode);
-                
-                if (t[langCode]) {
-                    document.querySelectorAll('[data-i18n]').forEach(el => {
-                        const key = el.getAttribute('data-i18n');
-                        if (t[langCode][key]) el.innerHTML = t[langCode][key];
-                    });
-                    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-                        const key = el.getAttribute('data-i18n-ph');
-                        if (t[langCode][key]) el.setAttribute('placeholder', t[langCode][key]);
-                    });
-                }
+                applyTranslations(langCode);
                 mainBody.classList.remove('lang-fading');
                 lenis.scrollTo(0, { duration: 1.5 }); 
             }, 300);
         }
 
-        // Lógica de abertura do Modal Melhorada
+        // --- Configuração dos Modais ---
         function openServiceModal(cardElement, serviceKey) {
             if (isDraggingCarousel) return;
 
@@ -1312,7 +1315,6 @@
             const modalDetails = document.getElementById('modalDetails');
             const modalHeroImg = document.getElementById('modalHeroImg');
 
-            // Clona a imagem do card para o modal
             const imgWrapHtml = cardElement.querySelector('.service-img-wrap').innerHTML;
             modalHeroImg.innerHTML = imgWrapHtml;
 
@@ -1366,6 +1368,7 @@
             closeContactModal();
         }
 
+        // --- Configuração dos Eventos Básicos ---
         document.getElementById('langDropdown').addEventListener('click', () => { document.getElementById('langOptions').classList.toggle('show'); });
         window.addEventListener('click', (e) => { if (!document.getElementById('langDropdown').contains(e.target)) document.getElementById('langOptions').classList.remove('show'); });
 
@@ -1396,6 +1399,7 @@
         
         document.querySelectorAll('.animate-on-scroll, .animate-left').forEach(el => observer.observe(el));
 
+        // --- Carrosseis (Touch e Arrastar) ---
         const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel')];
         carousels.forEach(carousel => {
             if(!carousel) return;
@@ -1425,10 +1429,8 @@
                 if (!isDown) return;
                 isDown = false;
                 carousel.classList.remove('active');
-                
                 window.removeEventListener('mousemove', onMouseMove);
                 window.removeEventListener('mouseup', onMouseUp);
-                
                 beginMomentumTracking();
             };
 
@@ -1441,7 +1443,6 @@
                 lastX = e.pageX; 
                 velX = 0; 
                 cancelAnimationFrame(momentumID); 
-                
                 window.addEventListener('mousemove', onMouseMove);
                 window.addEventListener('mouseup', onMouseUp);
             });
@@ -1468,32 +1469,25 @@
             }
         });
 
-        // Lógica de Revelação do Antes & Depois Melhorada
+        // --- Efeito Antes & Depois ---
         const baScrollReveal = () => {
             const windowHeight = window.innerHeight;
-            
-            // O centro da tela do usuário
             const startY = windowHeight * 0.55; 
-            // Pouco depois do centro (revelação super rápida)
             const endY = windowHeight * 0.40; 
 
             document.querySelectorAll('.ba-slider-container').forEach(slider => {
                 const before = slider.querySelector('.ba-before');
                 const rect = slider.getBoundingClientRect();
-                
-                // Pegando exatamente o centro da imagem para servir de "gatilho"
                 const elCenter = rect.top + (rect.height / 2);
 
                 if (elCenter < startY && elCenter > 0) {
                     let progress = (startY - elCenter) / (startY - endY);
                     progress = Math.max(0, Math.min(progress, 1)); 
-                    
                     let currentPercent = 100 - (progress * 100);
 
                     before.style.clipPath = `polygon(0 0, ${currentPercent}% 0, ${currentPercent}% 100%, 0 100%)`;
                     before.style.webkitClipPath = `polygon(0 0, ${currentPercent}% 0, ${currentPercent}% 100%, 0 100%)`;
                 } else if (elCenter >= startY) {
-                    // Mantém escondido enquanto não chegar no meio da tela
                     before.style.clipPath = `polygon(0 0, 100% 0, 100% 100%, 0 100%)`;
                     before.style.webkitClipPath = `polygon(0 0, 100% 0, 100% 100%, 0 100%)`;
                 }
@@ -1503,6 +1497,7 @@
         window.addEventListener('scroll', baScrollReveal);
         baScrollReveal(); 
 
+        // --- Vídeos ---
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
         if (introVideo && staticAfterVideo) {
@@ -1530,17 +1525,14 @@
 
         function switchReel(index) {
             if (index === currentReelIndex) return;
-            
             mainReels[currentReelIndex].classList.remove('active');
             mainReels[currentReelIndex].pause();
-            
             thumbs[currentReelIndex].classList.remove('active');
             
             currentReelIndex = index;
             
             mainReels[currentReelIndex].classList.add('active');
             mainReels[currentReelIndex].muted = isReelMuted;
-            
             thumbs[currentReelIndex].classList.add('active');
             
             mainReels[currentReelIndex].play().catch(e => console.log(e));
@@ -1569,9 +1561,7 @@
             const iconMuted = document.getElementById('icon-muted');
             const iconUnmuted = document.getElementById('icon-unmuted');
             
-            mainReels.forEach(reel => {
-                reel.muted = isReelMuted;
-            });
+            mainReels.forEach(reel => { reel.muted = isReelMuted; });
 
             if (isReelMuted) {
                 iconMuted.style.display = 'block';
@@ -1582,17 +1572,20 @@
             }
         }
 
+        // --- Mapa ---
         const mapSec = document.getElementById('mapSection');
         if (mapSec) {
-            mapSec.addEventListener('click', () => {
-                mapSec.classList.add('active');
-            });
-            mapSec.addEventListener('mouseleave', () => {
-                mapSec.classList.remove('active');
-            });
+            mapSec.addEventListener('click', () => { mapSec.classList.add('active'); });
+            mapSec.addEventListener('mouseleave', () => { mapSec.classList.remove('active'); });
         }
 
-        updateWaLinks('de'); 
+        // --- INICIALIZAÇÃO CORRETA ---
+        // Força a aplicação das traduções em todo o site assim que o script carrega (evitando PT residual)
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTranslations(currentLang);
+            updateWaLinks(currentLang);
+        });
+
     </script>
 </body>
 </html>
