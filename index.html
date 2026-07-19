@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty By Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
-    <!-- Favicon atualizado -->
     <link rel="icon" href="https://i.imgur.com/qrDE4l2.png" type="image/png">
     <title>Beauty By Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
     
@@ -164,6 +163,7 @@
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
+        /* --- Services Section --- */
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
@@ -210,18 +210,23 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- Antes & Depois Section --- */
-        .before-after { padding: 100px 0; background-color: var(--bg-champagne); }
+        /* --- Antes & Depois Carousel Section --- */
+        .before-after { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden; }
         
-        /* Grid reconfigurada para 3 colunas (3x2) */
-        .ba-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; } 
-        
-        /* Container do Item sem moldura */
+        .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
+        .ba-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .ba-carousel::-webkit-scrollbar { display: none; }
+        .ba-carousel.active { cursor: grabbing; }
+
+        /* Container do Item no Carrossel */
         .ba-item { 
+            min-width: 380px; 
+            max-width: 380px; 
             display: flex; 
             flex-direction: column; 
             gap: 15px; 
-            margin-bottom: 20px; 
+            user-select: none;
+            will-change: transform;
         }
 
         .ba-item-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
@@ -241,18 +246,22 @@
             position: relative; 
             width: 100%; 
             aspect-ratio: 4/3; 
-            height: auto;
             border-radius: 8px; 
             overflow: hidden; 
             transform: translateZ(0);
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-light);
         }
         .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
         .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); will-change: clip-path;}
         .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        @media (max-width: 992px) { .ba-grid { grid-template-columns: repeat(2, 1fr); gap: 30px;} }
-        @media (max-width: 768px) { .ba-grid { grid-template-columns: 1fr; gap: 40px;} }
+        @media (max-width: 1380px) { .ba-carousel { padding: 20px 40px; } }
+        @media (max-width: 768px) { 
+            .ba-carousel { padding: 20px 30px; gap: 20px;} 
+            .ba-item { min-width: 85vw; max-width: 85vw; } 
+        }
 
         .videos { padding: 100px 0; background-color: var(--bg-white); }
         .reels-gallery-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 350px; margin: 0 auto; }
@@ -347,6 +356,8 @@
         .delay-1 { transition-delay: 0.15s; } 
         .delay-2 { transition-delay: 0.3s; }
         .delay-3 { transition-delay: 0.45s; }
+        .delay-4 { transition-delay: 0.6s; }
+        .delay-5 { transition-delay: 0.75s; }
         
         .lang-fading { opacity: 0; transition: opacity 0.3s ease-in-out; }
     </style>
@@ -356,7 +367,6 @@
     <header>
         <div class="container nav-container">
             <a href="#main-body" class="logo-wrap">
-                <!-- Logo Header Atualizada -->
                 <img src="https://i.imgur.com/qrDE4l2.png" alt="Logo" class="logo-img">
                 <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--text-dark); font-weight: 600;">
                     Beauty By <span class="text-gradient">Cris</span>
@@ -404,7 +414,6 @@
         <div class="container">
             <div class="about-grid">
                 <div class="about-images animate-on-scroll">
-                    <!-- Imagem About 1 Atualizada -->
                     <img src="https://i.imgur.com/4odPu38.jpeg" alt="Ambiente do Studio Beauty By Cris" class="about-img-1" loading="lazy">
                     
                     <div class="about-img-2-slider">
@@ -630,82 +639,82 @@
         </div>
     </div>
 
-    <!-- Seção Antes & Depois (Atualizada 3x2, Sem Moldura) -->
+    <!-- Seção Antes & Depois (Em Carrossel com Swipe) -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="subtitle" data-i18n="ba_sub">Echte Ergebnisse</span>
                 <h2 data-i18n="ba_title">Vorher & Nachher</h2>
             </div>
-            
-            <div class="ba-grid">
+        </div>
+        
+        <div class="ba-carousel-wrap">
+            <div class="ba-carousel" id="baCarousel">
                 
-                <!-- Linha 1 -->
-                <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_1">Microblading</h3>
-                    <div class="ba-slider-container animate-on-scroll">
+                <div class="ba-item animate-on-scroll">
+                    <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
+                    <div class="ba-slider-container">
                         <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Nachher" class="ba-img" loading="lazy">
                         <div class="ba-before">
                             <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" loading="lazy">
                         </div>
                     </div>
-                    <p class="ba-item-desc animate-on-scroll delay-1" data-i18n="ba_desc_1">Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_1">Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.</p>
                 </div>
 
-                <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_2">Plasma Pen</h3>
-                    <div class="ba-slider-container animate-on-scroll delay-1">
+                <div class="ba-item animate-on-scroll delay-1">
+                    <h3 class="ba-item-title" data-i18n="ba_title_2">Plasma Pen</h3>
+                    <div class="ba-slider-container">
                         <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
                         <div class="ba-before">
                             <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
                         </div>
                     </div>
-                    <p class="ba-item-desc animate-on-scroll delay-2" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.</p>
                 </div>
 
-                <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_3">Lippenpigmentierung</h3>
-                    <div class="ba-slider-container animate-on-scroll delay-2">
+                <div class="ba-item animate-on-scroll delay-2">
+                    <h3 class="ba-item-title" data-i18n="ba_title_3">Lippenpigmentierung</h3>
+                    <div class="ba-slider-container">
                         <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
                         <div class="ba-before">
                             <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
                         </div>
                     </div>
-                    <p class="ba-item-desc animate-on-scroll delay-3" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.</p>
                 </div>
 
-                <!-- Linha 2 -->
-                <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_4">Wimpernverlängerung</h3>
-                    <div class="ba-slider-container animate-on-scroll">
+                <div class="ba-item animate-on-scroll delay-3">
+                    <h3 class="ba-item-title" data-i18n="ba_title_4">Wimpernverlängerung</h3>
+                    <div class="ba-slider-container">
                         <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
                         <div class="ba-before">
                             <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
                         </div>
                     </div>
-                    <p class="ba-item-desc animate-on-scroll delay-1" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen.</p>
                 </div>
 
-                <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
-                    <div class="ba-slider-container animate-on-scroll delay-1">
+                <div class="ba-item animate-on-scroll delay-4">
+                    <h3 class="ba-item-title" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
+                    <div class="ba-slider-container">
                         <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
                         <div class="ba-before">
                             <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
                         </div>
                     </div>
-                    <p class="ba-item-desc animate-on-scroll delay-2" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße, das Ihren persönlichen Stil hervorhebt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße, das Ihren persönlichen Stil hervorhebt.</p>
                 </div>
 
-                <div class="ba-item">
-                    <h3 class="ba-item-title animate-left" data-i18n="ba_title_6">Gesichtsreinigung</h3>
-                    <div class="ba-slider-container animate-on-scroll delay-2">
+                <div class="ba-item animate-on-scroll delay-5">
+                    <h3 class="ba-item-title" data-i18n="ba_title_6">Gesichtsreinigung</h3>
+                    <div class="ba-slider-container">
                         <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
                         <div class="ba-before">
                             <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
                         </div>
                     </div>
-                    <p class="ba-item-desc animate-on-scroll delay-3" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde, strahlende und glatte Haut, die Ihre natürliche Schönheit hervorhebt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde, strahlende und glatte Haut, die Ihre natürliche Schönheit hervorhebt.</p>
                 </div>
 
             </div>
@@ -1463,7 +1472,13 @@
         
         document.querySelectorAll('.animate-on-scroll, .animate-left').forEach(el => observer.observe(el));
 
-        const carousels = [document.getElementById('servicesCarousel'), document.getElementById('reviewsCarousel')];
+        // INCLUINDO o baCarousel no array de carrosséis arrastáveis (Mouse Drag)
+        const carousels = [
+            document.getElementById('servicesCarousel'), 
+            document.getElementById('reviewsCarousel'),
+            document.getElementById('baCarousel')
+        ];
+        
         carousels.forEach(carousel => {
             if(!carousel) return;
             let isDown = false;
@@ -1532,6 +1547,7 @@
             }
         });
 
+        // Revelação do Antes & Depois
         const baScrollReveal = () => {
             const windowHeight = window.innerHeight;
             const startY = windowHeight * 0.55; 
