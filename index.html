@@ -163,7 +163,6 @@
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
-        /* --- Services Section --- */
         .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
@@ -218,7 +217,7 @@
         .ba-carousel::-webkit-scrollbar { display: none; }
         .ba-carousel.active { cursor: grabbing; }
 
-        /* Container do Item no Carrossel */
+        /* Item do Carrossel sem moldura */
         .ba-item { 
             min-width: 380px; 
             max-width: 380px; 
@@ -254,8 +253,30 @@
         }
         .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        .ba-before { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); will-change: clip-path;}
+        /* Nova lógica do Antes, movida para o CSS para super performance */
+        .ba-before { 
+            position: absolute; 
+            top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
+            will-change: clip-path;
+            transition: clip-path 1.5s cubic-bezier(0.25, 1, 0.2, 1), -webkit-clip-path 1.5s cubic-bezier(0.25, 1, 0.2, 1);
+        }
         .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
+        
+        /* Classe ativada quando a foto entra na tela */
+        .ba-item.revealed .ba-before {
+            clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
+        }
+
+        /* Interatividade perfeita: Hover no mouse ou segurar o dedo no celular mostra o Antes novamente */
+        .ba-slider-container:hover .ba-before, 
+        .ba-slider-container:active .ba-before {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+            transition: clip-path 0.4s ease-out, -webkit-clip-path 0.4s ease-out;
+        }
         
         @media (max-width: 1380px) { .ba-carousel { padding: 20px 40px; } }
         @media (max-width: 768px) { 
@@ -639,7 +660,7 @@
         </div>
     </div>
 
-    <!-- Seção Antes & Depois (Em Carrossel com Swipe) -->
+    <!-- Seção Antes & Depois (Em Carrossel com Swipe, Ultra Leve) -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -1472,7 +1493,6 @@
         
         document.querySelectorAll('.animate-on-scroll, .animate-left').forEach(el => observer.observe(el));
 
-        // INCLUINDO o baCarousel no array de carrosséis arrastáveis (Mouse Drag)
         const carousels = [
             document.getElementById('servicesCarousel'), 
             document.getElementById('reviewsCarousel'),
@@ -1547,33 +1567,23 @@
             }
         });
 
-        // Revelação do Antes & Depois
-        const baScrollReveal = () => {
-            const windowHeight = window.innerHeight;
-            const startY = windowHeight * 0.55; 
-            const endY = windowHeight * 0.40; 
-
-            document.querySelectorAll('.ba-slider-container').forEach(slider => {
-                const before = slider.querySelector('.ba-before');
-                const rect = slider.getBoundingClientRect();
-                const elCenter = rect.top + (rect.height / 2);
-
-                if (elCenter < startY && elCenter > 0) {
-                    let progress = (startY - elCenter) / (startY - endY);
-                    progress = Math.max(0, Math.min(progress, 1)); 
-                    let currentPercent = 100 - (progress * 100);
-
-                    before.style.clipPath = `polygon(0 0, ${currentPercent}% 0, ${currentPercent}% 100%, 0 100%)`;
-                    before.style.webkitClipPath = `polygon(0 0, ${currentPercent}% 0, ${currentPercent}% 100%, 0 100%)`;
-                } else if (elCenter >= startY) {
-                    before.style.clipPath = `polygon(0 0, 100% 0, 100% 100%, 0 100%)`;
-                    before.style.webkitClipPath = `polygon(0 0, 100% 0, 100% 100%, 0 100%)`;
+        // --- Nova Lógica Ultra Leve para o Antes & Depois (CSS Animation API) ---
+        const baObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Espera meio segundo para a pessoa ver o "Antes" e então revela o "Depois"
+                    setTimeout(() => {
+                        entry.target.classList.add('revealed');
+                    }, 500);
+                    
+                    // Como a revelação já foi feita, deixamos o CSS cuidar do Hover
+                    // Isso poupa a placa de vídeo de calcular scrolls desnecessários
+                    baObserver.unobserve(entry.target);
                 }
             });
-        };
+        }, { threshold: 0.5 }); // O gatilho dispara quando 50% da foto entra na tela
 
-        window.addEventListener('scroll', baScrollReveal);
-        baScrollReveal(); 
+        document.querySelectorAll('.ba-item').forEach(el => baObserver.observe(el));
 
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
