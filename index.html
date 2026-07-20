@@ -53,7 +53,7 @@
             box-sizing: border-box; 
             margin: 0; 
             padding: 0; 
-            -webkit-tap-highlight-color: transparent; /* Remove the blue highlight on mobile */
+            -webkit-tap-highlight-color: transparent; 
         }
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
@@ -170,18 +170,32 @@
 
         /* CARROSSEIS: Scroll nativo e protegido */
         .services-carousel, .ba-carousel, .reviews-carousel { 
-            display: flex; gap: 20px; 
-            overflow-x: auto; overflow-y: hidden; /* Garante que scroll Y vá para a página */
-            scrollbar-width: none; cursor: grab; 
+            display: flex; 
+            overflow-x: auto; 
+            overflow-y: hidden; 
+            scrollbar-width: none; 
+            cursor: grab; 
             -webkit-overflow-scrolling: touch; 
-            touch-action: pan-x pan-y; /* Permite rolar nos dois eixos nativamente */
+            touch-action: pan-x pan-y; 
+            overscroll-behavior-x: contain;
+            
+            /* Ajuste de espaçamento que impede que itens encostem na parede */
+            padding: 20px 0 20px calc(50vw - 650px + 40px);
+            gap: 20px;
         }
         .services-carousel::-webkit-scrollbar, .ba-carousel::-webkit-scrollbar, .reviews-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active, .ba-carousel.active, .reviews-carousel.active { cursor: grabbing; }
+        
+        /* Hack invisível para garantir a margem na parede da direita */
+        .services-carousel::after, .ba-carousel::after, .reviews-carousel::after {
+            content: ""; 
+            display: block; 
+            flex-shrink: 0;
+            width: calc(50vw - 650px + 40px);
+        }
 
         .services { padding: 100px 0; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .services-carousel { padding: 20px calc(50vw - 650px + 40px); }
         
         .service-card { min-width: 300px; max-width: 300px; flex-shrink: 0; background-color: #ffffff; border: 1px solid var(--border-light); padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; }
         .service-card:hover { transform: translate3d(0, -3px, 0); }
@@ -196,8 +210,18 @@
         .s-row .lbl { font-weight: 600; color: var(--accent-rose); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
-        @media (max-width: 1380px) { .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 40px; } }
-        @media (max-width: 768px) { .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 20px; } .service-card { min-width: 80vw; max-width: 80vw; } }
+        /* Ajustes Responsivos do Espaçamento dos Carrosseis */
+        @media (max-width: 1380px) { 
+            .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 0 20px 40px; } 
+            .services-carousel::after, .ba-carousel::after, .reviews-carousel::after { width: 40px; }
+        }
+        @media (max-width: 768px) { 
+            .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 0 20px 35px; } /* Aumentado para desgrudar da parede esquerda */
+            .services-carousel::after, .ba-carousel::after, .reviews-carousel::after { width: 35px; } /* Aumentado para desgrudar da parede direita */
+            
+            .service-card { min-width: 80vw; max-width: 80vw; }
+            .review-card { min-width: 80vw; max-width: 80vw; } 
+        }
 
         /* Modal de Serviços */
         .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(20, 15, 15, 0.9); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
@@ -221,7 +245,7 @@
         /* --- Antes & Depois Carousel Section --- */
         .before-after { padding: 100px 0; background-color: transparent; position: relative; z-index: 2; border-bottom: 1px solid var(--border-light); }
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .ba-carousel { padding: 20px calc(50vw - 650px + 40px); gap: 30px; }
+        .ba-carousel { gap: 30px; }
 
         .ba-item { min-width: 380px; max-width: 380px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; user-select: none; }
         .ba-item-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
@@ -310,19 +334,17 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { padding: 20px calc(50vw - 650px + 40px); }
         
         .review-card { min-width: 320px; max-width: 320px; flex-shrink: 0; background-color: #ffffff; border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); }
         .review-card:hover { border-color: var(--accent-rose); transform: translate3d(0, -3px, 0); }
-        @media (max-width: 768px) { .review-card { min-width: 80vw; max-width: 80vw; } }
         .review-user { margin-bottom: 10px; }
         .user-meta h4 { font-size: 1rem; font-family: 'Montserrat', sans-serif; margin-bottom: 2px;}
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
-        /* --- Seção de Clínica (CORRIGIDA) --- */
+        /* --- Seção de Clínica --- */
         .clinic-info-wrap {
-            background-color: rgba(250, 245, 240, 0.97); /* Corrigido para acompanhar a cor de fundo transparente da glass-section */
+            background-color: rgba(250, 245, 240, 0.97); 
             position: relative;
             z-index: 2;
             color: var(--text-dark);
@@ -428,8 +450,8 @@
         .float-top svg { width: 22px; height: 22px; fill: currentColor; }
 
         @media (max-width: 768px) {
-            .float-whatsapp { bottom: 90px; } /* Ajuste de altura no mobile */
-            .float-top { bottom: 155px; } /* Ajuste de altura no mobile */
+            .float-whatsapp { bottom: 90px; } 
+            .float-top { bottom: 155px; } 
         }
 
         .animate-on-scroll { opacity: 0; transform: translate3d(0, 30px, 0); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); }
@@ -446,7 +468,6 @@
 </head>
 <body id="main-body">
 
-    <!-- Fundo de Vídeo Fixo -->
     <div id="fixed-bg-wrap">
         <video id="bgScrollVideo" src="https://i.imgur.com/OXbytk4.mp4" muted playsinline preload="auto"></video>
         <div class="bg-overlay"></div>
@@ -559,7 +580,8 @@
         </div>
         
         <div class="services-carousel-wrap">
-            <div class="services-carousel" id="servicesCarousel" data-lenis-prevent="true">
+            <!-- Nota: O atributo data-lenis-prevent garante que o Lenis não interfira na rolagem deste elemento -->
+            <div class="services-carousel" id="servicesCarousel" data-lenis-prevent>
                 
                 <div class="service-card" onclick="openServiceModal(this, 's1')" data-i18n-key="s1">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
@@ -735,7 +757,7 @@
         </div>
         
         <div class="ba-carousel-wrap">
-            <div class="ba-carousel" id="baCarousel" data-lenis-prevent="true">
+            <div class="ba-carousel" id="baCarousel" data-lenis-prevent>
                 
                 <div class="ba-item animate-on-scroll">
                     <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
@@ -800,7 +822,6 @@
                 <div class="ba-item animate-on-scroll delay-4">
                     <h3 class="ba-item-title" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
                     <div class="ba-slider-container">
-                        <!-- Imagens com IDs para facilitar a troca no JS -->
                         <img src="https://i.imgur.com/uI8dSL1.jpeg" alt="Vorher" class="ba-img" id="maniPediBefore" loading="lazy" style="background: transparent;">
                         <div class="ba-after">
                             <img src="https://i.imgur.com/eBZ8iz9.jpeg" alt="Nachher" id="maniPediAfter" loading="lazy">
@@ -809,7 +830,6 @@
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Tippen und halten für nachher</span>
                         </div>
-                        <!-- Botões Interativos (Pedicure ativo por padrão) -->
                         <div class="ba-toggle-btn btn-left active" id="btnPedi" onclick="switchManiPedi('pedi', event)" data-i18n="lbl_pedicure">Pediküre</div>
                         <div class="ba-toggle-btn btn-right" id="btnMani" onclick="switchManiPedi('mani', event)" data-i18n="lbl_manicure">Maniküre</div>
                     </div>
@@ -883,7 +903,7 @@
         </div>
 
         <div class="reviews-carousel-wrap">
-            <div class="reviews-carousel" id="reviewsCarousel" data-lenis-prevent="true">
+            <div class="reviews-carousel" id="reviewsCarousel" data-lenis-prevent>
                 
                 <div class="review-card">
                     <div class="review-user">
@@ -1032,7 +1052,7 @@
         </div>
     </section>
 
-    <!-- --- Seção de Clínica (FUNDO CORRIGIDO) --- -->
+    <!-- --- Seção de Clínica --- -->
     <div class="clinic-info-wrap">
         <div class="map-section" id="mapSection">
             <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1061,7 +1081,7 @@
         </section>
     </div>
 
-    <!-- RODAPÉ FINAL - Totalmente transparente -->
+    <!-- RODAPÉ FINAL -->
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
@@ -1127,7 +1147,6 @@
 
         const isMobileDevice = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth <= 992;
         
-        // --- LÓGICA DE TELA CHEIA (FULLSCREEN) PARA PC E MOBILE ---
         let hasAttemptedFullscreen = false;
         
         function requestFullscreen() {
@@ -1145,11 +1164,10 @@
             hasAttemptedFullscreen = true; 
         }
 
-        // Adicionado touchstart para garantir a ativação do Fullscreen imediatamente ao primeiro toque no celular
         document.addEventListener('click', requestFullscreen, { passive: true, once: true });
         document.addEventListener('touchstart', requestFullscreen, { passive: true, once: true });
 
-        // --- LENIS SCROLL (CORRIGIDO PARA RODAR GLOBALMENTE E ATIVAR FLUIDEZ NO MOBILE) ---
+        // --- LENIS SCROLL ATIVADO ---
         let lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
@@ -1157,7 +1175,7 @@
             gestureDirection: 'vertical',
             smooth: true,
             mouseMultiplier: 1,
-            smoothTouch: true, // Ativa a aceleração e fluidez para telas touch (mobile)
+            smoothTouch: true, // Fluidez mantida no celular
             infinite: false,
         });
 
@@ -1637,7 +1655,7 @@
         
         document.querySelectorAll('.animate-on-scroll, .animate-left').forEach(el => observer.observe(el));
 
-        // Carrosseis interativos - Apenas Mouse (arrastar no PC)
+        // Carrosseis interativos - Script drag habilitado SOMENTE para PC para não quebrar touch nativo
         const carousels = [
             document.getElementById('servicesCarousel'), 
             document.getElementById('reviewsCarousel'),
@@ -1675,6 +1693,9 @@
             };
 
             carousel.addEventListener('mousedown', (e) => {
+                // Impede que o script simule drag em celulares (deixa o scroll nativo agir)
+                if (window.innerWidth <= 992) return;
+
                 isDown = true;
                 isDraggingCarousel = false; 
                 carousel.classList.add('active');
@@ -1726,10 +1747,9 @@
             }, { passive: true });
         });
 
-        // --- FUNCIONALIDADE BOTÕES MANICURE/PEDICURE ---
         function switchManiPedi(type, event) {
             if(event) {
-                event.stopPropagation(); // Impede de ativar a imagem
+                event.stopPropagation();
             }
             const beforeImg = document.getElementById('maniPediBefore');
             const afterImg = document.getElementById('maniPediAfter');
@@ -1751,7 +1771,6 @@
             }
         }
 
-        // --- A SOLUÇÃO DEFINITIVA DO VÍDEO ---
         const bgScrollVideo = document.getElementById('bgScrollVideo');
         const baSection = document.getElementById('before-after-section'); 
 
