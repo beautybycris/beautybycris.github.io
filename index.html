@@ -36,7 +36,7 @@
 
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background-color: transparent; /* Fundo transparente para o vídeo aparecer */
+            background-color: transparent; 
             color: var(--text-dark); 
             line-height: 1.6; 
             -webkit-font-smoothing: antialiased;
@@ -46,9 +46,7 @@
             user-select: none; 
         }
         
-        textarea, input {
-            -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;
-        }
+        textarea, input { -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text; }
 
         html, body { width: 100%; max-width: 100%; overflow-x: clip; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,7 +78,6 @@
         #fixed-bg-wrap video { width: 100%; height: 100%; object-fit: cover; }
         .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 245, 240, 0.88); z-index: 1; }
 
-        /* Header */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -115,8 +112,12 @@
             nav a.btn-outline { margin-top: 10px; }
         }
 
-        /* Seções Iniciais Transparentes (Revelam o Vídeo de Fundo) */
-        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 90px; background-color: transparent; }
+        /* 
+         * Seções Iniciais Transparentes (Revelam o Vídeo de Fundo) 
+         * NOTA: Aumentei o espaçamento (height/padding) de propósito para alongar o 
+         * caminho do scroll. Isso faz o vídeo rodar muito mais devagar e suave. 
+         */
+        .hero { position: relative; min-height: 110vh; display: flex; align-items: center; padding-top: 90px; background-color: transparent; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
         .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; margin-bottom: 25px; }
         .hero-subtitle { color: var(--text-dark); font-weight: 500; font-size: 1.1rem; margin-bottom: 40px; max-width: 550px; }
@@ -131,7 +132,7 @@
             .hero-photo-wrap img { transform: none !important; }
         }
 
-        .about { padding: 120px 0; background-color: transparent; }
+        .about { padding: 150px 0; background-color: transparent; }
         .about-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 80px; align-items: center; }
         .about-images { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         
@@ -144,7 +145,7 @@
         .about-content p { color: var(--text-muted); margin-bottom: 20px; }
         @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; gap: 50px; } }
 
-        .why-us { padding: 80px 0 140px 0; background-color: transparent; }
+        .why-us { padding: 100px 0 200px 0; background-color: transparent; }
         .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .why-card { background: var(--bg-white); padding: 25px 20px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px; }
         .why-card:hover { transform: translate3d(0, -5px, 0); box-shadow: 0 0 20px rgba(200, 142, 147, 0.4); border-color: var(--accent-rose); }
@@ -154,8 +155,8 @@
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
-        /* Serviços com Fundo Branco (esconde o vídeo) */
-        .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; position: relative; z-index: 2; border-top: 1px solid var(--border-light); }
+        /* Serviços com Fundo Branco (esconde o vídeo e serve como "âncora final" do vídeo) */
+        .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; position: relative; z-index: 2; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .services-carousel::-webkit-scrollbar { display: none; }
@@ -196,8 +197,8 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- Antes & Depois Carousel Section (Fundo Transparente p/ ver o Vídeo Estático) --- */
-        .before-after { padding: 100px 0; background-color: transparent; position: relative; z-index: 2; border-top: 1px solid var(--border-light); }
+        /* --- Antes & Depois Carousel Section (Fundo Transparente p/ ver o Vídeo Estático Rosê) --- */
+        .before-after { padding: 100px 0; background-color: transparent; position: relative; z-index: 2; border-bottom: 1px solid var(--border-light); }
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .ba-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .ba-carousel::-webkit-scrollbar { display: none; }
@@ -205,46 +206,25 @@
 
         .ba-item { min-width: 380px; max-width: 380px; display: flex; flex-direction: column; gap: 15px; user-select: none; will-change: transform;}
         .ba-item-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
-        .ba-item-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--accent-rose); line-height: 1.4; text-align: center; font-style: italic; }
+        .ba-item-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--text-dark); line-height: 1.4; text-align: center; font-style: italic; }
         
-        /* Container das Imagens 4:3 (ULTRA LEVE, Sem Destaque Azul no Mobile) */
         .ba-slider-container { 
-            position: relative; 
-            width: 100%; 
-            aspect-ratio: 4/3; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            transform: translateZ(0);
-            box-shadow: var(--shadow-subtle);
-            border: 1px solid var(--border-light);
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent; 
-            user-select: none;
-            -webkit-user-select: none;
+            position: relative; width: 100%; aspect-ratio: 4/3; border-radius: 8px; overflow: hidden; transform: translateZ(0);
+            box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); cursor: pointer;
+            -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none;
         }
         
-        /* A imagem base agora é o ANTES */
         .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        /* O DEPOIS fica escondido por cima. Revelado via CSS Puro */
         .ba-after { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
-            clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); 
-            -webkit-clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); 
-            will-change: clip-path;
-            transition: clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1), -webkit-clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1);
-            pointer-events: none;
+            clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); 
+            will-change: clip-path; transition: clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1), -webkit-clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1); pointer-events: none;
         }
         .ba-after img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        /* Quando passar o mouse (PC) ou pressionar/segurar o dedo (Mobile) revela o Depois */
-        .ba-slider-container:hover .ba-after,
-        .ba-slider-container.touch-active .ba-after {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-        }
+        .ba-slider-container:hover .ba-after, .ba-slider-container.touch-active .ba-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
 
-        /* Badge Indicativo */
         .ba-badge {
             position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
             background: rgba(250, 245, 240, 0.95); color: var(--accent-rose);
@@ -262,7 +242,7 @@
         @media (max-width: 768px) { .ba-carousel { padding: 20px 30px; gap: 20px;} .ba-item { min-width: 85vw; max-width: 85vw; } }
 
         /* Videos (Fundo Branco bloqueia o video traseiro) */
-        .videos { padding: 100px 0; background-color: var(--bg-white); position: relative; z-index: 2; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+        .videos { padding: 100px 0; background-color: var(--bg-white); position: relative; z-index: 2; border-bottom: 1px solid var(--border-light); }
         .reels-gallery-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 350px; margin: 0 auto; }
         .reels-main-view { width: 100%; aspect-ratio: 9/16; position: relative; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transform: translateZ(0); }
         .main-reel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; }
@@ -299,7 +279,7 @@
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
-        /* --- Fundo Rose Gold para o Rodapé e Elementos Finais --- */
+        /* --- Fundo Rose Gold Metálico para o Rodapé e Mapa --- */
         .bg-rose-gold-wrap {
             background: linear-gradient(135deg, #F3E0DE 0%, #E6D0BA 100%);
             position: relative;
@@ -308,7 +288,7 @@
             border-top: 1px solid var(--border-light);
         }
 
-        .map-section { width: 100%; height: 350px; position: relative; cursor: pointer; }
+        .map-section { width: 100%; height: 350px; position: relative; cursor: pointer; border-bottom: 1px solid var(--border-light);}
         .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; transition: var(--transition-smooth); }
         .map-section.active .map-iframe { pointer-events: auto; }
         
@@ -339,7 +319,6 @@
 
         .animate-on-scroll { opacity: 0; transform: translate3d(0, 30px, 0); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); }
         .animate-on-scroll.visible { opacity: 1; transform: translate3d(0, 0, 0); }
-        
         .animate-left { opacity: 0; transform: translate3d(-50px, 0, 0); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); }
         .animate-left.visible { opacity: 1; transform: translate3d(0, 0, 0); }
         
@@ -425,7 +404,6 @@
         </div>
     </section>
 
-    <!-- Usado como âncora final para a rolagem do vídeo -->
     <section class="why-us" id="whyUsSection">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -457,6 +435,7 @@
         </div>
     </section>
 
+    <!-- Usado como marca final de rolagem do vídeo -->
     <section class="services" id="services">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -634,7 +613,7 @@
         </div>
     </div>
 
-    <!-- Seção Antes & Depois (Com o fundo congelado no vídeo final) -->
+    <!-- Seção Antes & Depois (Com fundo Transparente exibindo o vídeo congelado Rosê) -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -649,9 +628,7 @@
                 <div class="ba-item animate-on-scroll">
                     <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
                     <div class="ba-slider-container">
-                        <!-- Imagem Base Visível agora é o ANTES -->
                         <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" class="ba-img" loading="lazy">
-                        <!-- Imagem Escondida (Revelada ao tocar/hover) agora é o DEPOIS -->
                         <div class="ba-after">
                             <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Nachher" loading="lazy">
                         </div>
@@ -774,7 +751,7 @@
         </div>
     </section>
 
-    <!-- Seção Avaliações (Fundo Transparente p/ ver o Vídeo) -->
+    <!-- Seção Avaliações (Fundo Transparente p/ ver o Vídeo Congelado Rosê) -->
     <section class="reviews" id="reviews">
         <div class="container">
             <div class="section-header animate-on-scroll" style="margin-bottom: 20px;">
@@ -940,7 +917,7 @@
         </div>
     </section>
 
-    <!-- Novo Wrapper Rosê Gold Metálico para as 3 últimas seções -->
+    <!-- --- Fundo Rose Gold Metálico para o Rodapé e Mapa --- -->
     <div class="bg-rose-gold-wrap">
         <div class="map-section" id="mapSection">
             <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1340,7 +1317,7 @@
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
                 s12_title: "Микронидлинг Лица", s12_desc: "Омоложение.", s12_ben: "Упругая кожа", s12_abl: "Сыворотка", s12_dur: "60 мин",
                 s13_title: "Микронидлинг Тела", s13_desc: "Уменьшение растяжек.", s13_ben: "Гладкость", s13_abl: "Уход", s13_dur: "60-90 мин",
-                ba_sub: "Результаты", ba_title: "До & После", ba_badge_pc: "Наведите курсор", ba_badge_mobile: "Удерживайте для После",
+                ba_sub: "Результаты", ba_title: "До & После", ba_badge_pc: "Наведите курсор", ba_badge_mobile: "Удерживайте",
                 ba_title_1: "Microblading", ba_desc_1: "Микроблейдинг — это волосковая техника, обеспечивающая чрезвычайно естественный эффект, исправляя недостатки, очерчивая форму бровей и подчеркивая выражение лица.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Plasma Pen — это эстетическая процедура, стимулирующая выработку естественного коллагена, придающая упругость, сглаживающая мимические морщины и безопасно омолаживающая кожу.",
                 ba_title_3: "Microlabial", ba_desc_3: "Микропигментация губ подчеркивает контур, выравнивает тон и создает деликатный эффект помады, делая губы более здоровыми, женственными и естественно красивыми.",
@@ -1518,11 +1495,7 @@
                 e.preventDefault();
                 const x = e.pageX; 
                 const walk = (x - startX) * 1.3; 
-                
-                if (Math.abs(walk) > 5) {
-                    isDraggingCarousel = true; 
-                }
-
+                if (Math.abs(walk) > 5) isDraggingCarousel = true; 
                 carousel.scrollLeft = scrollLeft - walk;
                 velX = e.pageX - lastX;
                 lastX = e.pageX;
@@ -1550,81 +1523,68 @@
                 window.addEventListener('mouseup', onMouseUp);
             });
 
-            function beginMomentumTracking(){
-                cancelAnimationFrame(momentumID);
-                momentumLoop();
-            }
-
+            function beginMomentumTracking(){ cancelAnimationFrame(momentumID); momentumLoop(); }
             function momentumLoop(){
                 velX *= 0.95; 
                 carousel.scrollLeft -= velX; 
-
                 if (carousel.scrollLeft <= 0 || carousel.scrollLeft >= (carousel.scrollWidth - carousel.clientWidth)) {
-                     velX = 0;
-                     cancelAnimationFrame(momentumID);
-                     return;
+                     velX = 0; cancelAnimationFrame(momentumID); return;
                 }
-                if (Math.abs(velX) > 0.5) {
-                    momentumID = requestAnimationFrame(momentumLoop);
-                } else {
-                     cancelAnimationFrame(momentumID); 
-                }
+                if (Math.abs(velX) > 0.5) momentumID = requestAnimationFrame(momentumLoop);
+                else cancelAnimationFrame(momentumID); 
             }
         });
 
         // --- Lógica de Interação de Toque (Mobile) do Antes/Depois ---
         document.querySelectorAll('.ba-slider-container').forEach(container => {
-            container.addEventListener('touchstart', () => {
-                container.classList.add('touch-active');
-            }, { passive: true });
-            
-            ['touchend', 'touchcancel'].forEach(evt => {
-                container.addEventListener(evt, () => {
-                    container.classList.remove('touch-active');
-                }, { passive: true });
-            });
+            container.addEventListener('touchstart', () => { container.classList.add('touch-active'); }, { passive: true });
+            ['touchend', 'touchcancel'].forEach(evt => { container.addEventListener(evt, () => { container.classList.remove('touch-active'); }, { passive: true }); });
         });
 
-        // --- Lógica de Sincronia de Vídeo no Scroll (Com Lerp - Ultra Suave) ---
+        // --- Lógica Otimizada de Scrubbing de Vídeo (Fim das Travadas) ---
         const bgScrollVideo = document.getElementById('bgScrollVideo');
-        const whyUsSection = document.getElementById('whyUsSection');
+        const servicesSection = document.getElementById('services');
 
-        if (bgScrollVideo && whyUsSection) {
+        if (bgScrollVideo && servicesSection) {
             bgScrollVideo.pause();
+            bgScrollVideo.preload = "auto";
             
             let isVideoLoaded = false;
-            let targetTime = 0;
-            let currentTime = 0;
-            
             bgScrollVideo.addEventListener('loadedmetadata', () => { isVideoLoaded = true; });
-            if(bgScrollVideo.readyState >= 1) isVideoLoaded = true;
+            if (bgScrollVideo.readyState >= 1) isVideoLoaded = true;
 
+            let ticking = false;
+            
             window.addEventListener('scroll', () => {
-                if(!isVideoLoaded || !bgScrollVideo.duration) return;
-                
-                // O scroll é medido desde o topo até a pessoa passar a seção "Warum Beauty By Cris"
-                const scrollEnd = whyUsSection.offsetTop + whyUsSection.offsetHeight - (window.innerHeight / 2);
-                
-                let progress = window.scrollY / scrollEnd;
-                progress = Math.max(0, Math.min(1, progress));
-                
-                targetTime = progress * bgScrollVideo.duration;
-            }, { passive: true });
-
-            // Efeito de Interpolação Linear (Lerp) para remover os engasgos (stuttering)
-            function renderVideo() {
-                if (isVideoLoaded && bgScrollVideo.duration > 0) {
-                    // Aproxima a currentTime da targetTime gradativamente (suavidade de 5%)
-                    currentTime += (targetTime - currentTime) * 0.05; 
-                    
-                    // Só atualiza o player se a diferença for tangível, economizando CPU/GPU
-                    if (Math.abs(targetTime - currentTime) > 0.005) {
-                        bgScrollVideo.currentTime = currentTime;
-                    }
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        if (isVideoLoaded && bgScrollVideo.duration > 0) {
+                            
+                            // O vídeo vai de 0 até bater no topo da seção de serviços
+                            const scrollEnd = servicesSection.offsetTop;
+                            
+                            let progress = window.scrollY / scrollEnd;
+                            progress = Math.max(0, Math.min(1, progress));
+                            
+                            const targetTime = progress * bgScrollVideo.duration;
+                            
+                            // TÉCNICA ANTI-STUTTERING (ANTI-TRAVAMENTO)
+                            // Apenas decodifica um novo frame se houver rolagem suficiente (ex: 0.04 segundos)
+                            // Isso impede o navegador de engasgar decodificando milésimos de segundo
+                            if (progress === 1) {
+                                // Garante que congele perfeitamente no frame final
+                                bgScrollVideo.currentTime = bgScrollVideo.duration - 0.01;
+                            } else if (progress === 0) {
+                                bgScrollVideo.currentTime = 0;
+                            } else if (Math.abs(bgScrollVideo.currentTime - targetTime) > 0.04) {
+                                bgScrollVideo.currentTime = targetTime;
+                            }
+                        }
+                        ticking = false;
+                    });
+                    ticking = true;
                 }
-                requestAnimationFrame(renderVideo);
-            }
-            requestAnimationFrame(renderVideo);
+            }, { passive: true });
         }
 
         const introVideo = document.getElementById('intro-video');
