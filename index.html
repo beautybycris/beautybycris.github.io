@@ -209,7 +209,7 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- Antes & Depois Carousel Section --- */
+        /* --- Antes & Depois Section --- */
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden; }
         
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
@@ -217,7 +217,6 @@
         .ba-carousel::-webkit-scrollbar { display: none; }
         .ba-carousel.active { cursor: grabbing; }
 
-        /* Item do Carrossel sem moldura */
         .ba-item { 
             min-width: 380px; 
             max-width: 380px; 
@@ -230,7 +229,6 @@
 
         .ba-item-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
         
-        /* Descrição Elegante com a cor Rosê */
         .ba-item-desc { 
             font-family: 'Cormorant Garamond', serif; 
             font-size: 1.15rem; 
@@ -240,7 +238,7 @@
             font-style: italic;
         }
         
-        /* Container das Imagens 4:3 */
+        /* Container das Imagens: Ultra Leve e Interativo */
         .ba-slider-container { 
             position: relative; 
             width: 100%; 
@@ -250,32 +248,51 @@
             transform: translateZ(0);
             box-shadow: var(--shadow-subtle);
             border: 1px solid var(--border-light);
-        }
-        .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
-        
-        /* Nova lógica do Antes, movida para o CSS para super performance */
-        .ba-before { 
-            position: absolute; 
-            top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); 
-            will-change: clip-path;
-            transition: clip-path 1.5s cubic-bezier(0.25, 1, 0.2, 1), -webkit-clip-path 1.5s cubic-bezier(0.25, 1, 0.2, 1);
-        }
-        .ba-before img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
-        
-        /* Classe ativada quando a foto entra na tela */
-        .ba-item.revealed .ba-before {
-            clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
-            -webkit-clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%);
+            cursor: pointer;
         }
 
-        /* Interatividade perfeita: Hover no mouse ou segurar o dedo no celular mostra o Antes novamente */
-        .ba-slider-container:hover .ba-before, 
-        .ba-slider-container:active .ba-before {
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
-            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
-            transition: clip-path 0.4s ease-out, -webkit-clip-path 0.4s ease-out;
+        .img-after, .img-before { 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+            object-position: center; 
+            pointer-events: none; 
+            transition: opacity 0.4s ease-in-out;
+        }
+        
+        .img-after { z-index: 1; }
+        .img-before { z-index: 2; opacity: 0; }
+        
+        /* Efeito ao passar o mouse ou segurar o dedo */
+        .ba-slider-container:hover .img-before,
+        .ba-slider-container:active .img-before { 
+            opacity: 1; 
+        }
+
+        /* Badge Indicativo */
+        .ba-badge {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(250, 245, 240, 0.9);
+            color: var(--accent-rose);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 3;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .ba-slider-container:hover .ba-badge,
+        .ba-slider-container:active .ba-badge { 
+            opacity: 0; 
         }
         
         @media (max-width: 1380px) { .ba-carousel { padding: 20px 40px; } }
@@ -675,10 +692,11 @@
                 <div class="ba-item animate-on-scroll">
                     <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
                     <div class="ba-slider-container">
-                        <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Nachher" class="ba-img" loading="lazy">
-                        <div class="ba-before">
-                            <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" loading="lazy">
-                        </div>
+                        <!-- Imagem do DEPOIS (Padrão visível) -->
+                        <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Nachher" class="img-after" loading="lazy">
+                        <!-- Imagem do ANTES (Escondida, aparece no toque) -->
+                        <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" class="img-before" loading="lazy">
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_1">Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.</p>
                 </div>
@@ -686,10 +704,9 @@
                 <div class="ba-item animate-on-scroll delay-1">
                     <h3 class="ba-item-title" data-i18n="ba_title_2">Plasma Pen</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
-                        <div class="ba-before">
-                            <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
-                        </div>
+                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
+                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.</p>
                 </div>
@@ -697,10 +714,9 @@
                 <div class="ba-item animate-on-scroll delay-2">
                     <h3 class="ba-item-title" data-i18n="ba_title_3">Lippenpigmentierung</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
-                        <div class="ba-before">
-                            <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
-                        </div>
+                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
+                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.</p>
                 </div>
@@ -708,10 +724,9 @@
                 <div class="ba-item animate-on-scroll delay-3">
                     <h3 class="ba-item-title" data-i18n="ba_title_4">Wimpernverlängerung</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
-                        <div class="ba-before">
-                            <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
-                        </div>
+                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
+                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen.</p>
                 </div>
@@ -719,10 +734,9 @@
                 <div class="ba-item animate-on-scroll delay-4">
                     <h3 class="ba-item-title" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
-                        <div class="ba-before">
-                            <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
-                        </div>
+                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
+                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße, das Ihren persönlichen Stil hervorhebt.</p>
                 </div>
@@ -730,10 +744,9 @@
                 <div class="ba-item animate-on-scroll delay-5">
                     <h3 class="ba-item-title" data-i18n="ba_title_6">Gesichtsreinigung</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="ba-img media-placeholder" loading="lazy">
-                        <div class="ba-before">
-                            <img src="" alt="Vorher" class="media-placeholder" style="background:#ddd;" loading="lazy">
-                        </div>
+                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
+                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde, strahlende und glatte Haut, die Ihre natürliche Schönheit hervorhebt.</p>
                 </div>
@@ -1096,7 +1109,7 @@
                 s11_title: "Entfernung von Milien", s11_desc: "Entfernung von Hautgrieß.", s11_ben: "Glattes Hautbild", s11_abl: "Präzises Öffnen", s11_dur: "20 Min.",
                 s12_title: "Gesichts-Microneedling", s12_desc: "Anti-Aging zur Hautverjüngung.", s12_ben: "Festere Haut", s12_abl: "Needling mit Serum", s12_dur: "60 Min.",
                 s13_title: "Körper-Microneedling", s13_desc: "Reduzierung von Dehnungsstreifen.", s13_ben: "Gewebestraffung", s13_abl: "Intensives Needling", s13_dur: "60-90 Min.",
-                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", lbl_before: "Vorher", lbl_after: "Nachher",
+                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge: "Gedrückt halten für Vorher",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.",
                 ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.",
@@ -1144,7 +1157,7 @@
                 s11_title: "Milia Removal", s11_desc: "Gentle extraction of milia.", s11_ben: "Smooth skin", s11_abl: "Precise extraction", s11_dur: "20 min",
                 s12_title: "Facial Microneedling", s12_desc: "Collagen stimulation.", s12_ben: "Firmer skin", s12_abl: "Needling with serum", s12_dur: "60 min",
                 s13_title: "Body Microneedling", s13_desc: "Reduce stretch marks.", s13_ben: "Tissue firming", s13_abl: "Deep needling", s13_dur: "60-90 min",
-                ba_sub: "Real Results", ba_title: "Before & After", lbl_before: "Before", lbl_after: "After",
+                ba_sub: "Real Results", ba_title: "Before & After", ba_badge: "Hold to see Before",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading is a hair-by-hair technique that provides an extremely natural effect, correcting flaws, defining the shape of the eyebrows, and enhancing facial expression, elevating your self-esteem and transmitting more confidence at all times.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "The Plasma Pen is an aesthetic treatment that stimulates natural collagen production, promoting firmness, smoothing expression lines, reducing sagging, and safely rejuvenating the skin without surgery, giving back a younger and renewed appearance.",
                 ba_title_3: "Microlabial", ba_desc_3: "Lip Micropigmentation enhances lip contours, evens out the tone, and provides a delicate lipstick effect, leaving your lips looking healthier, more feminine, defined, and naturally beautiful, valuing your smile and your self-esteem.",
@@ -1192,7 +1205,7 @@
                 s11_title: "Remoção de Milium", s11_desc: "Extração higiênica e indolor.", s11_ben: "Pele lisa", s11_abl: "Micro-extração", s11_dur: "20 min",
                 s12_title: "Microagulhamento Facial", s12_desc: "Indução de colágeno.", s12_ben: "Pele firme", s12_abl: "Needling com sérum", s12_dur: "60 min",
                 s13_title: "Microagulhamento Corporal", s13_desc: "Regeneração de estrias.", s13_ben: "Estrias suavizadas", s13_abl: "Needling profundo", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", lbl_before: "Antes", lbl_after: "Depois",
+                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge: "Segure para ver o Antes",
                 ba_title_1: "Microblading", ba_desc_1: "O Microblading é uma técnica fio a fio que proporciona um efeito extremamente natural, corrigindo falhas, definindo o formato das sobrancelhas e valorizando a expressão do rosto, elevando sua autoestima e transmitindo mais confiança em todos os momentos.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "A Plasma Pen é um tratamento estético que estimula a produção natural de colágeno, promovendo firmeza, suavizando linhas de expressão, reduzindo a flacidez e rejuvenescendo a pele de forma segura, sem cirurgia e com resultados naturais, devolvendo uma aparência mais jovem e renovada.",
                 ba_title_3: "Microlabial", ba_desc_3: "A Micropigmentação Labial realça o contorno dos lábios, uniformiza a tonalidade e proporciona um delicado efeito de batom, deixando os lábios com aparência mais saudável, feminina, definida e naturalmente bonita, valorizando seu sorriso e sua autoestima.",
@@ -1240,7 +1253,7 @@
                 s11_title: "Eliminación de Millium", s11_desc: "Extracción higiénica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reales", ba_title: "Antes & Después", lbl_before: "Antes", lbl_after: "Después",
+                ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge: "Mantén para ver el Antes",
                 ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial, elevando su autoestima y transmitiendo más confianza en todo momento.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuveneciendo la piel de forma segura, sin cirugía y con resultados naturales.",
                 ba_title_3: "Microlabial", ba_desc_3: "La Micropigmentación Labial realza el contorno de los labios, uniformiza el tono y proporciona un delicado efecto de lápiz labial, dejando los labios con una apariencia más saludable, femenina, definida y naturalmente hermosa.",
@@ -1288,7 +1301,7 @@
                 s11_title: "Retrait de Milium", s11_desc: "Extraction hygiénique.", s11_ben: "Peau lisse", s11_abl: "Extraction", s11_dur: "20 min",
                 s12_title: "Microneedling Visage", s12_desc: "Stimulation collagène.", s12_ben: "Peau ferme", s12_abl: "Sérum", s12_dur: "60 min",
                 s13_title: "Microneedling Corps", s13_desc: "Réduit vergetures.", s13_ben: "Fermeté", s13_abl: "Needling", s13_dur: "60-90 min",
-                ba_sub: "Résultats", ba_title: "Avant & Après", lbl_before: "Avant", lbl_after: "Après",
+                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge: "Maintenez pour voir Avant",
                 ba_title_1: "Microblading", ba_desc_1: "Le Microblading est une technique poil par poil qui offre un effet extrêmement naturel, corrigeant les défauts, définissant la forme des sourcils et valorisant l'expression du visage, renforçant ainsi votre estime de vous.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Le Plasma Pen est un traitement esthétique qui stimule la production naturelle de collagène, favorisant la fermeté, lissant les lignes d'expression, réduisant le relâchement et rajeunissant la peau de manière sûre, sans chirurgie.",
                 ba_title_3: "Microlabial", ba_desc_3: "La micropigmentation des lèvres sublime le contour des lèvres, uniformise la couleur et offre un effet rouge à lèvres délicat, laissant les lèvres plus saines, féminines, définies et naturellement belles.",
@@ -1336,7 +1349,7 @@
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
                 s12_title: "Микронидлинг Лица", s12_desc: "Омоложение.", s12_ben: "Упругая кожа", s12_abl: "Сыворотка", s12_dur: "60 мин",
                 s13_title: "Микронидлинг Тела", s13_desc: "Уменьшение растяжек.", s13_ben: "Гладкость", s13_abl: "Уход", s13_dur: "60-90 мин",
-                ba_sub: "Результаты", ba_title: "До & После", lbl_before: "До", lbl_after: "После",
+                ba_sub: "Результаты", ba_title: "До & После", ba_badge: "Удерживайте, чтобы увидеть До",
                 ba_title_1: "Microblading", ba_desc_1: "Микроблейдинг — это волосковая техника, обеспечивающая чрезвычайно естественный эффект, исправляя недостатки, очерчивая форму бровей и подчеркивая выражение лица, повышая вашу уверенность в себе в любой момент.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Plasma Pen — это эстетическая процедура, стимулирующая выработку естественного коллагена, придающая упругость, сглаживающая мимические морщины, уменьшающая дряблость и безопасно омолаживающая кожу.",
                 ba_title_3: "Microlabial", ba_desc_3: "Микропигментация губ подчеркивает контур, выравнивает тон и создает деликатный эффект помады, делая губы более здоровыми, женственными, очерченными и естественно красивыми.",
@@ -1493,6 +1506,7 @@
         
         document.querySelectorAll('.animate-on-scroll, .animate-left').forEach(el => observer.observe(el));
 
+        // Todos os carrosseis interativos
         const carousels = [
             document.getElementById('servicesCarousel'), 
             document.getElementById('reviewsCarousel'),
@@ -1567,21 +1581,18 @@
             }
         });
 
-        // --- Nova Lógica Ultra Leve para o Antes & Depois (CSS Animation API) ---
+        // Revelação Automática da Seção (Nova e Ultra Leve)
         const baObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    // Espera meio segundo para a pessoa ver o "Antes" e então revela o "Depois"
+                    // Após meio segundo que o item entrou na tela, ele revela o Depois
                     setTimeout(() => {
                         entry.target.classList.add('revealed');
                     }, 500);
-                    
-                    // Como a revelação já foi feita, deixamos o CSS cuidar do Hover
-                    // Isso poupa a placa de vídeo de calcular scrolls desnecessários
                     baObserver.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.5 }); // O gatilho dispara quando 50% da foto entra na tela
+        }, { threshold: 0.5 });
 
         document.querySelectorAll('.ba-item').forEach(el => baObserver.observe(el));
 
