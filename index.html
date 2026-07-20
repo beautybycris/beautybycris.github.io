@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Exklusives Ästhetik- & Kosmetik-Studio Beauty By Cris. Professionelle Behandlungen für Ihre natürliche Schönheit.">
     <link rel="icon" href="https://i.imgur.com/qrDE4l2.png" type="image/png">
     <title>Beauty By Cris | Exklusives Kosmetik- & Ästhetik-Studio</title>
@@ -55,7 +55,7 @@
         ul { list-style: none; }
         img { max-width: 100%; height: auto; -webkit-user-drag: none; }
 
-        .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
+        .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
         @media (max-width: 768px) { .container { padding: 0 20px; } }
 
         .text-gradient { background: linear-gradient(135deg, var(--accent-rose), var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
@@ -73,12 +73,12 @@
         
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-        /* --- Vídeo Fixo no Fundo --- */
-        #fixed-bg-wrap { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; }
-        #fixed-bg-wrap video { width: 100%; height: 100%; object-fit: cover; }
-        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 245, 240, 0.88); z-index: 1; }
+        /* --- Vídeo Fixo no Fundo (Aceleração de Hardware via will-change) --- */
+        #fixed-bg-wrap { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; transform: translateZ(0); will-change: transform; pointer-events: none;}
+        #fixed-bg-wrap video { width: 100%; height: 100%; object-fit: cover; transform: translateZ(0); }
+        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 245, 240, 0.82); z-index: 1; }
 
-        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .logo-img { height: 55px; width: auto; object-fit: contain; }
@@ -112,12 +112,7 @@
             nav a.btn-outline { margin-top: 10px; }
         }
 
-        /* 
-         * Seções Iniciais Transparentes (Revelam o Vídeo de Fundo) 
-         * NOTA: Aumentei o espaçamento (height/padding) de propósito para alongar o 
-         * caminho do scroll. Isso faz o vídeo rodar muito mais devagar e suave. 
-         */
-        .hero { position: relative; min-height: 110vh; display: flex; align-items: center; padding-top: 90px; background-color: transparent; }
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 90px; background-color: transparent; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
         .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; margin-bottom: 25px; }
         .hero-subtitle { color: var(--text-dark); font-weight: 500; font-size: 1.1rem; margin-bottom: 40px; max-width: 550px; }
@@ -145,26 +140,28 @@
         .about-content p { color: var(--text-muted); margin-bottom: 20px; }
         @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; gap: 50px; } }
 
-        .why-us { padding: 100px 0 200px 0; background-color: transparent; }
+        .why-us { padding: 100px 0; background-color: transparent; }
         .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-        .why-card { background: var(--bg-white); padding: 25px 20px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px; }
-        .why-card:hover { transform: translate3d(0, -5px, 0); box-shadow: 0 0 20px rgba(200, 142, 147, 0.4); border-color: var(--accent-rose); }
+        .why-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 25px 20px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px; }
+        .why-card:hover { transform: translate3d(0, -5px, 0); box-shadow: 0 0 20px rgba(200, 142, 147, 0.4); border-color: var(--accent-rose); background: rgba(255, 255, 255, 0.9); }
         .why-card svg { width: 35px; height: 35px; fill: var(--accent-rose); margin-bottom: 15px; }
         .why-card h4 { font-size: 1.1rem; margin-bottom: 10px; }
         .why-card p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; }
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
-        /* Serviços com Fundo Branco (esconde o vídeo e serve como "âncora final" do vídeo) */
-        .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; position: relative; z-index: 2; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
+        /* Vidro Fosco nas seções do meio (revela o vídeo passando devagar atrás) */
+        .glass-section { background-color: rgba(255, 255, 255, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.5); }
+
+        .services { padding: 100px 0; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
-        .service-card { min-width: 300px; max-width: 300px; background-color: transparent; border: 1px solid transparent; padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; will-change: transform;}
-        .service-card:hover { background-color: var(--bg-champagne); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
-        .service-card.selected { border-color: var(--accent-rose); background-color: var(--bg-champagne); box-shadow: 0 0 15px rgba(200, 142, 147, 0.3); }
+        .service-card { min-width: 300px; max-width: 300px; background-color: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: 1px solid var(--border-light); padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; will-change: transform;}
+        .service-card:hover { background-color: rgba(250, 245, 240, 0.9); box-shadow: var(--shadow-subtle); border: 1px solid var(--border-light); transform: translate3d(0, -3px, 0); }
+        .service-card.selected { border-color: var(--accent-rose); background-color: rgba(250, 245, 240, 0.95); box-shadow: 0 0 15px rgba(200, 142, 147, 0.3); }
 
         .service-img-wrap { width: 100%; aspect-ratio: 4/3; margin-bottom: 20px; border-radius: 6px; overflow: hidden; pointer-events: none; }
         .service-img-wrap .media-placeholder { width: 100%; height: 100%; border-radius: 6px; }
@@ -176,7 +173,7 @@
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
         @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
-        @media (max-width: 768px) { .services-carousel { padding: 20px 30px; } .service-card { min-width: 80vw; max-width: 80vw; } }
+        @media (max-width: 768px) { .services-carousel { padding: 20px 20px; } .service-card { min-width: 80vw; max-width: 80vw; } }
 
         /* Modal de Serviços */
         .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(20, 15, 15, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
@@ -197,7 +194,7 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- Antes & Depois Carousel Section (Fundo Transparente p/ ver o Vídeo Estático Rosê) --- */
+        /* --- Antes & Depois Carousel Section --- */
         .before-after { padding: 100px 0; background-color: transparent; position: relative; z-index: 2; border-bottom: 1px solid var(--border-light); }
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .ba-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
@@ -223,26 +220,39 @@
         }
         .ba-after img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        .ba-slider-container:hover .ba-after, .ba-slider-container.touch-active .ba-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-
+        /* Nova Lógica do Selo Discreto no Canto Superior Esquerdo */
         .ba-badge {
-            position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
-            background: rgba(250, 245, 240, 0.95); color: var(--accent-rose);
-            padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.75rem;
-            text-transform: uppercase; letter-spacing: 1px; z-index: 3; pointer-events: none;
-            transition: opacity 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.15); white-space: nowrap;
+            position: absolute; top: 10px; left: 10px;
+            background: rgba(250, 245, 240, 0.85); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+            color: var(--accent-rose); padding: 4px 10px; border-radius: 4px; font-weight: 600; font-size: 0.65rem;
+            text-transform: uppercase; letter-spacing: 0.5px; z-index: 3; pointer-events: none;
+            transition: opacity 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap;
         }
 
         .badge-mobile { display: none; }
         .badge-pc { display: inline; }
-        @media (hover: none) and (pointer: coarse) { .badge-pc { display: none; } .badge-mobile { display: inline; } }
-        .ba-slider-container:hover .ba-badge, .ba-slider-container.touch-active .ba-badge { opacity: 0; }
+        
+        /* Hover no PC revela a imagem; no Mobile apenas o touch revela */
+        @media (hover: hover) and (pointer: fine) {
+            .ba-slider-container:hover .ba-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            .ba-slider-container:hover .ba-badge { opacity: 0; }
+        }
+        @media (hover: none) and (pointer: coarse) { 
+            .badge-pc { display: none; } .badge-mobile { display: inline; } 
+        }
+        /* Classe ativada via JS para toque mobile */
+        .ba-slider-container.touch-active .ba-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        .ba-slider-container.touch-active .ba-badge { opacity: 0; }
         
         @media (max-width: 1380px) { .ba-carousel { padding: 20px 40px; } }
-        @media (max-width: 768px) { .ba-carousel { padding: 20px 30px; gap: 20px;} .ba-item { min-width: 85vw; max-width: 85vw; } }
+        @media (max-width: 768px) { 
+            .ba-carousel { padding: 20px 20px; gap: 15px;} 
+            /* Reduzido para 75vw para que a próxima imagem "apareça cortada" na tela */
+            .ba-item { min-width: 75vw; max-width: 75vw; } 
+        }
 
-        /* Videos (Fundo Branco bloqueia o video traseiro) */
-        .videos { padding: 100px 0; background-color: var(--bg-white); position: relative; z-index: 2; border-bottom: 1px solid var(--border-light); }
+        /* Videos */
+        .videos { padding: 100px 0; }
         .reels-gallery-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 350px; margin: 0 auto; }
         .reels-main-view { width: 100%; aspect-ratio: 9/16; position: relative; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transform: translateZ(0); }
         .main-reel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; }
@@ -258,7 +268,7 @@
         .reel-thumb.active { border-color: var(--accent-rose); opacity: 1; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .reel-thumb video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        /* Reviews (Fundo Transparente para revelar o video) */
+        /* Reviews */
         .reviews { padding: 100px 0; background-color: transparent; overflow: hidden; position: relative; z-index: 2;}
         .google-summary { background-color: transparent; max-width: 600px; margin: 0 auto 40px auto; text-align: center; }
         .rating-huge { font-size: 4rem; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 5px; letter-spacing: -2px; }
@@ -271,26 +281,27 @@
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
-        .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); will-change: transform;}
-        .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
-        @media (max-width: 768px) { .reviews-carousel { padding: 20px 30px; } .review-card { min-width: 80vw; max-width: 80vw; } }
+        .review-card { min-width: 320px; max-width: 320px; background-color: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); will-change: transform;}
+        .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0); background-color: #fff;}
+        @media (max-width: 768px) { .reviews-carousel { padding: 20px 20px; } .review-card { min-width: 80vw; max-width: 80vw; } }
         .review-user { margin-bottom: 10px; }
         .user-meta h4 { font-size: 1rem; font-family: 'Montserrat', sans-serif; margin-bottom: 2px;}
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
-        /* --- Fundo Rose Gold Metálico para o Rodapé e Mapa --- */
+        /* --- Fundo Rose Gold Translúcido para o Rodapé e Mapa --- */
         .bg-rose-gold-wrap {
-            background: linear-gradient(135deg, #F3E0DE 0%, #E6D0BA 100%);
+            background: linear-gradient(135deg, rgba(243, 224, 222, 0.85) 0%, rgba(230, 208, 186, 0.85) 100%);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             position: relative;
             z-index: 2;
             color: var(--text-dark);
-            border-top: 1px solid var(--border-light);
+            border-top: 1px solid rgba(255,255,255,0.5);
         }
 
-        .map-section { width: 100%; height: 350px; position: relative; cursor: pointer; border-bottom: 1px solid var(--border-light);}
+        .map-section { width: 100%; height: 350px; position: relative; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.3);}
         .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; transition: var(--transition-smooth); }
-        .map-section.active .map-iframe { pointer-events: auto; }
+        .map-section.active .map-iframe { pointer-events: auto; filter: none; }
         
         .clinic-info { padding: 80px 0; }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -331,9 +342,9 @@
 </head>
 <body id="main-body">
 
-    <!-- Fundo de Vídeo Fixo -->
+    <!-- Fundo de Vídeo Fixo (Ocupa todo o scroll) -->
     <div id="fixed-bg-wrap">
-        <video id="bgScrollVideo" src="https://i.imgur.com/OXbytk4.mp4" muted playsinline preload="auto"></video>
+        <video id="bgScrollVideo" src="https://i.imgur.com/vdDyBzi.mp4" muted playsinline preload="auto"></video>
         <div class="bg-overlay"></div>
     </div>
 
@@ -435,8 +446,8 @@
         </div>
     </section>
 
-    <!-- Usado como marca final de rolagem do vídeo -->
-    <section class="services" id="services">
+    <!-- Vidro Fosco aplicado nas seções seguintes para mostrar o vídeo -->
+    <section class="services glass-section" id="services">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="subtitle" data-i18n="services_sub">Exklusive Behandlungen</span>
@@ -613,7 +624,7 @@
         </div>
     </div>
 
-    <!-- Seção Antes & Depois (Com fundo Transparente exibindo o vídeo congelado Rosê) -->
+    <!-- Seção Antes & Depois -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -634,7 +645,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_1">Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.</p>
@@ -649,7 +660,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.</p>
@@ -664,7 +675,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.</p>
@@ -679,7 +690,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert.</p>
@@ -694,7 +705,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße.</p>
@@ -709,7 +720,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine und gesunde Haut.</p>
@@ -719,7 +730,7 @@
         </div>
     </section>
 
-    <section class="videos">
+    <section class="videos glass-section">
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="subtitle" data-i18n="video_sub">Einblicke im Video</span>
@@ -751,7 +762,7 @@
         </div>
     </section>
 
-    <!-- Seção Avaliações (Fundo Transparente p/ ver o Vídeo Congelado Rosê) -->
+    <!-- Seção Avaliações -->
     <section class="reviews" id="reviews">
         <div class="container">
             <div class="section-header animate-on-scroll" style="margin-bottom: 20px;">
@@ -917,7 +928,7 @@
         </div>
     </section>
 
-    <!-- --- Fundo Rose Gold Metálico para o Rodapé e Mapa --- -->
+    <!-- --- Fundo Rose Gold Translúcido para revelar o final do vídeo --- -->
     <div class="bg-rose-gold-wrap">
         <div class="map-section" id="mapSection">
             <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1001,37 +1012,50 @@
             }
         });
 
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-            direction: 'vertical',
-            gestureDirection: 'vertical',
-            smooth: true,
-            mouseMultiplier: 1,
-            smoothTouch: false, 
-            touchMultiplier: 2,
-            infinite: false,
-        });
+        // Lenis ativado apenas no PC para fluidez perfeita no mobile usando GPU nativa
+        const isMobileDevice = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth <= 992;
+        
+        let lenis;
+        if (!isMobileDevice) {
+            lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false, // Força uso nativo no touch (Mobile)
+                infinite: false,
+            });
 
-        function raf(time) {
-            lenis.raf(time);
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
             requestAnimationFrame(raf);
         }
-        requestAnimationFrame(raf);
 
         document.querySelectorAll('nav a, .hero-buttons a').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const targetId = this.getAttribute('href');
                 if (targetId && targetId.startsWith('#') && targetId !== '#') {
                     e.preventDefault();
-                    lenis.scrollTo(targetId, { offset: -90, duration: 1.5 });
+                    if(lenis) {
+                        lenis.scrollTo(targetId, { offset: -90, duration: 1.5 });
+                    } else {
+                        document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                    }
                 }
             });
         });
 
         function smoothScrollToTop(e) {
             e.preventDefault();
-            lenis.scrollTo(0, { duration: 1.5 });
+            if(lenis) {
+                lenis.scrollTo(0, { duration: 1.5 });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         }
 
         let selectedServiceKey = '';
@@ -1077,7 +1101,7 @@
                 s11_title: "Entfernung von Milien", s11_desc: "Entfernung von Hautgrieß.", s11_ben: "Glattes Hautbild", s11_abl: "Präzises Öffnen", s11_dur: "20 Min.",
                 s12_title: "Gesichts-Microneedling", s12_desc: "Anti-Aging zur Hautverjüngung.", s12_ben: "Festere Haut", s12_abl: "Needling mit Serum", s12_dur: "60 Min.",
                 s13_title: "Körper-Microneedling", s13_desc: "Reduzierung von Dehnungsstreifen.", s13_ben: "Gewebestraffung", s13_abl: "Intensives Needling", s13_dur: "60-90 Min.",
-                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge_pc: "Mit der Maus drüberfahren", ba_badge_mobile: "Gedrückt halten",
+                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge_pc: "Mit der Maus drüberfahren", ba_badge_mobile: "Halten für nachher",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.",
                 ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.",
@@ -1125,7 +1149,7 @@
                 s11_title: "Milia Removal", s11_desc: "Gentle extraction of milia.", s11_ben: "Smooth skin", s11_abl: "Precise extraction", s11_dur: "20 min",
                 s12_title: "Facial Microneedling", s12_desc: "Collagen stimulation.", s12_ben: "Firmer skin", s12_abl: "Needling with serum", s12_dur: "60 min",
                 s13_title: "Body Microneedling", s13_desc: "Reduce stretch marks.", s13_ben: "Tissue firming", s13_abl: "Deep needling", s13_dur: "60-90 min",
-                ba_sub: "Real Results", ba_title: "Before & After", ba_badge_pc: "Hover your mouse", ba_badge_mobile: "Hold to see After",
+                ba_sub: "Real Results", ba_title: "Before & After", ba_badge_pc: "Hover your mouse", ba_badge_mobile: "Hold for after",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading is a hair-by-hair technique that provides an extremely natural effect, correcting flaws, defining the shape of the eyebrows, and enhancing facial expression.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "The Plasma Pen is an aesthetic treatment that stimulates natural collagen production, promoting firmness, smoothing expression lines, reducing sagging, and safely rejuvenating the skin.",
                 ba_title_3: "Microlabial", ba_desc_3: "Lip Micropigmentation enhances lip contours, evens out the tone, and provides a delicate lipstick effect, leaving your lips looking healthier, more feminine, and naturally beautiful.",
@@ -1173,7 +1197,7 @@
                 s11_title: "Remoção de Milium", s11_desc: "Extração higiênica e indolor.", s11_ben: "Pele lisa", s11_abl: "Micro-extração", s11_dur: "20 min",
                 s12_title: "Microagulhamento Facial", s12_desc: "Indução de colágeno.", s12_ben: "Pele firme", s12_abl: "Needling com sérum", s12_dur: "60 min",
                 s13_title: "Microagulhamento Corporal", s13_desc: "Regeneração de estrias.", s13_ben: "Estrias suavizadas", s13_abl: "Needling profundo", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge_pc: "Passe o mouse", ba_badge_mobile: "Segure para Depois",
+                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge_pc: "Passe o mouse", ba_badge_mobile: "Segure para depois",
                 ba_title_1: "Microblading", ba_desc_1: "O Microblading é uma técnica fio a fio que proporciona um efeito extremamente natural, corrigindo falhas, definindo o formato das sobrancelhas e valorizando a expressão do rosto.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "A Plasma Pen é um tratamento estético que estimula a produção natural de colágeno, promovendo firmeza, suavizando linhas de expressão, reduzindo a flacidez e rejuvenescendo a pele de forma segura.",
                 ba_title_3: "Microlabial", ba_desc_3: "A Micropigmentação Labial realça o contorno dos lábios, uniformiza a tonalidade e proporciona um delicado efeito de batom, deixando os lábios com aparência mais saudável e feminina.",
@@ -1221,9 +1245,9 @@
                 s11_title: "Eliminación de Millium", s11_desc: "Extracción higiénica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge_pc: "Pase el ratón", ba_badge_mobile: "Mantén para Después",
+                ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge_pc: "Pase el ratón", ba_badge_mobile: "Mantenga para después",
                 ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuveneciendo la piel de forma segura.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuvenescendo la piel de forma segura.",
                 ba_title_3: "Microlabial", ba_desc_3: "La Micropigmentación Labial realza el contorno de los labios, uniformiza el tono y proporciona un delicado efecto de lápiz labial, dejando los labios con una apariencia más saludable y femenina.",
                 ba_title_4: "Extensión de Pestañas", ba_desc_4: "La Extensión de Pestañas realza la belleza natural de su mirada, proporcionando más elegancia, expresión y autoestima. Las pestañas se aplican de forma personalizada para destacar sus rasgos.",
                 ba_title_5: "Manicura y Pedicura", ba_desc_5: "El cuidado completo con Manicura y Pedicura garantiza uñas perfectamente modeladas, cutículas hidratadas y una apariencia impecable y elegante para sus manos y pies.",
@@ -1269,7 +1293,7 @@
                 s11_title: "Retrait de Milium", s11_desc: "Extraction hygiénique.", s11_ben: "Peau lisse", s11_abl: "Extraction", s11_dur: "20 min",
                 s12_title: "Microneedling Visage", s12_desc: "Stimulation collagène.", s12_ben: "Peau ferme", s12_abl: "Sérum", s12_dur: "60 min",
                 s13_title: "Microneedling Corps", s13_desc: "Réduit vergetures.", s13_ben: "Fermeté", s13_abl: "Needling", s13_dur: "60-90 min",
-                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge_pc: "Survolez avec la souris", ba_badge_mobile: "Maintenez pour l'Après",
+                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge_pc: "Survolez avec la souris", ba_badge_mobile: "Maintenez pour l'après",
                 ba_title_1: "Microblading", ba_desc_1: "Le Microblading est une technique poil par poil qui offre un effet extrêmement naturel, corrigeant les défauts, définissant la forme des sourcils et valorisant l'expression du visage.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Le Plasma Pen est un traitement esthétique qui stimule la production naturelle de collagène, favorisant la fermeté, lissant les lignes d'expression, réduisant le relâchement et rajeunissant la peau.",
                 ba_title_3: "Microlabial", ba_desc_3: "La micropigmentation des lèvres sublime le contour des lèvres, uniformise la couleur et offre un effet rouge à lèvres délicat, laissant les lèvres plus saines, féminines et naturellement belles.",
@@ -1375,7 +1399,8 @@
                 updateWaLinks(langCode);
                 applyTranslations(langCode);
                 mainBody.classList.remove('lang-fading');
-                lenis.scrollTo(0, { duration: 1.5 }); 
+                if(lenis) lenis.scrollTo(0, { duration: 1.5 });
+                else window.scrollTo({ top: 0, behavior: 'smooth' });
             }, 300);
         }
 
@@ -1403,13 +1428,13 @@
 
             modalDetails.value = '';
             modal.classList.add('active');
-            lenis.stop(); 
+            if(lenis) lenis.stop(); 
         }
 
         function closeServiceModal() {
             const modal = document.getElementById('serviceModal');
             modal.classList.remove('active');
-            lenis.start(); 
+            if(lenis) lenis.start(); 
             document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
         }
 
@@ -1429,13 +1454,13 @@
             const modal = document.getElementById('contactModal');
             document.getElementById('contactDetails').value = '';
             modal.classList.add('active');
-            lenis.stop();
+            if(lenis) lenis.stop();
             document.getElementById('nav-menu').classList.remove('active');
         }
 
         function closeContactModal() {
             document.getElementById('contactModal').classList.remove('active');
-            lenis.start();
+            if(lenis) lenis.start();
         }
 
         function sendContactWhatsApp() {
@@ -1493,12 +1518,13 @@
             const onMouseMove = (e) => {
                 if(!isDown) return;
                 e.preventDefault();
-                const x = e.pageX; 
+                const x = e.pageX || (e.touches && e.touches[0].pageX); 
+                if(!x) return;
                 const walk = (x - startX) * 1.3; 
                 if (Math.abs(walk) > 5) isDraggingCarousel = true; 
                 carousel.scrollLeft = scrollLeft - walk;
-                velX = e.pageX - lastX;
-                lastX = e.pageX;
+                velX = x - lastX;
+                lastX = x;
             };
 
             const onMouseUp = () => {
@@ -1535,17 +1561,28 @@
             }
         });
 
-        // --- Lógica de Interação de Toque (Mobile) do Antes/Depois ---
+        // --- NOVA Lógica de Toque (Mobile) do Antes/Depois: APERTE E SEGURE ---
         document.querySelectorAll('.ba-slider-container').forEach(container => {
-            container.addEventListener('touchstart', () => { container.classList.add('touch-active'); }, { passive: true });
-            ['touchend', 'touchcancel'].forEach(evt => { container.addEventListener(evt, () => { container.classList.remove('touch-active'); }, { passive: true }); });
+            // Quando o dedo toca a tela
+            container.addEventListener('touchstart', (e) => { 
+                container.classList.add('touch-active'); 
+            }, { passive: true });
+            
+            // Quando o dedo sai da tela
+            container.addEventListener('touchend', (e) => { 
+                container.classList.remove('touch-active'); 
+            }, { passive: true });
+            
+            // Quando a ação é cancelada (ex: um scroll começou)
+            container.addEventListener('touchcancel', (e) => { 
+                container.classList.remove('touch-active'); 
+            }, { passive: true });
         });
 
-        // --- Lógica Otimizada de Scrubbing de Vídeo (Fim das Travadas) ---
+        // --- Lógica Otimizada de Vídeo até o Rodapé ---
         const bgScrollVideo = document.getElementById('bgScrollVideo');
-        const servicesSection = document.getElementById('services');
 
-        if (bgScrollVideo && servicesSection) {
+        if (bgScrollVideo) {
             bgScrollVideo.pause();
             bgScrollVideo.preload = "auto";
             
@@ -1560,23 +1597,20 @@
                     window.requestAnimationFrame(() => {
                         if (isVideoLoaded && bgScrollVideo.duration > 0) {
                             
-                            // O vídeo vai de 0 até bater no topo da seção de serviços
-                            const scrollEnd = servicesSection.offsetTop;
+                            // Altura total rolável da página (do topo até o final do rodapé)
+                            const scrollEnd = document.documentElement.scrollHeight - window.innerHeight;
                             
                             let progress = window.scrollY / scrollEnd;
                             progress = Math.max(0, Math.min(1, progress));
                             
                             const targetTime = progress * bgScrollVideo.duration;
                             
-                            // TÉCNICA ANTI-STUTTERING (ANTI-TRAVAMENTO)
-                            // Apenas decodifica um novo frame se houver rolagem suficiente (ex: 0.04 segundos)
-                            // Isso impede o navegador de engasgar decodificando milésimos de segundo
+                            // Otimização: Apenas atualiza se a diferença de frame for perceptível
                             if (progress === 1) {
-                                // Garante que congele perfeitamente no frame final
                                 bgScrollVideo.currentTime = bgScrollVideo.duration - 0.01;
                             } else if (progress === 0) {
                                 bgScrollVideo.currentTime = 0;
-                            } else if (Math.abs(bgScrollVideo.currentTime - targetTime) > 0.04) {
+                            } else if (Math.abs(bgScrollVideo.currentTime - targetTime) > 0.03) {
                                 bgScrollVideo.currentTime = targetTime;
                             }
                         }
