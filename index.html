@@ -28,25 +28,15 @@
             --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        html.lenis, html.lenis body {
-            height: auto;
-        }
-        .lenis.lenis-smooth {
-            scroll-behavior: auto !important; 
-        }
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-        .lenis.lenis-smooth iframe {
-            pointer-events: none; 
-        }
+        html.lenis, html.lenis body { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto !important; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-smooth iframe { pointer-events: none; }
 
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background-color: var(--bg-champagne); 
+            background-color: transparent; /* Fundo transparente para o vídeo aparecer */
             color: var(--text-dark); 
             line-height: 1.6; 
             -webkit-font-smoothing: antialiased;
@@ -57,10 +47,7 @@
         }
         
         textarea, input {
-            -webkit-user-select: text;
-            -moz-user-select: text;
-            -ms-user-select: text;
-            user-select: text;
+            -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text;
         }
 
         html, body { width: 100%; max-width: 100%; overflow-x: clip; }
@@ -68,7 +55,6 @@
         h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; color: var(--text-dark); }
         a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
         ul { list-style: none; }
-        
         img { max-width: 100%; height: auto; -webkit-user-drag: none; }
 
         .container { width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 40px; }
@@ -86,11 +72,15 @@
         .btn-rose:hover { background-color: var(--accent-rose-hover); transform: translate3d(0, -3px, 0); box-shadow: 0 10px 20px rgba(200, 142, 147, 0.25); }
         .btn-outline { border: 1px solid var(--accent-rose); color: var(--text-dark); background: transparent; }
         .btn-outline:hover { background-color: var(--accent-rose); color: var(--bg-white); transform: translate3d(0, -3px, 0); }
-        .btn-small-footer { padding: 8px 15px; font-size: 0.7rem; letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.3); color: rgba(255,255,255,0.7); border-radius: 4px; margin: 0 5px;}
-        .btn-small-footer:hover { background: var(--accent-rose); border-color: var(--accent-rose); color: white;}
-
+        
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
+        /* --- Vídeo Fixo no Fundo --- */
+        #fixed-bg-wrap { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; }
+        #fixed-bg-wrap video { width: 100%; height: 100%; object-fit: cover; }
+        .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 245, 240, 0.88); z-index: 1; }
+
+        /* Header */
         header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); border-bottom: 1px solid rgba(239, 233, 226, 0.5); transition: var(--transition-smooth); transform: translateZ(0); }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
@@ -125,15 +115,8 @@
             nav a.btn-outline { margin-top: 10px; }
         }
 
-        /* --- Scroll Video Wrapper Styles --- */
-        #videoScrollWrap { position: relative; width: 100%; }
-        .sticky-video-bg { position: sticky; top: 0; left: 0; width: 100%; height: 100vh; overflow: hidden; z-index: 0; background: var(--text-dark); }
-        .sticky-video-bg video { width: 100%; height: 100%; object-fit: cover; }
-        .sticky-video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 245, 240, 0.85); z-index: 1; }
-        .scrollable-content-over-video { position: relative; z-index: 2; margin-top: -100vh; }
-
-        /* Torna o fundo dessas seções transparente para vermos o vídeo */
-        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background-color: transparent; padding-top: 90px; }
+        /* Seções Iniciais Transparentes (Revelam o Vídeo de Fundo) */
+        .hero { position: relative; min-height: 100vh; display: flex; align-items: center; padding-top: 90px; background-color: transparent; }
         .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
         .hero-content h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); font-weight: 300; margin-bottom: 25px; }
         .hero-subtitle { color: var(--text-dark); font-weight: 500; font-size: 1.1rem; margin-bottom: 40px; max-width: 550px; }
@@ -161,7 +144,7 @@
         .about-content p { color: var(--text-muted); margin-bottom: 20px; }
         @media (max-width: 992px) { .about-grid { grid-template-columns: 1fr; gap: 50px; } }
 
-        .why-us { padding: 80px 0 160px 0; background-color: transparent; }
+        .why-us { padding: 80px 0 140px 0; background-color: transparent; }
         .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
         .why-card { background: var(--bg-white); padding: 25px 20px; text-align: center; border: 1px solid var(--border-light); transition: var(--transition-smooth); border-radius: 8px; }
         .why-card:hover { transform: translate3d(0, -5px, 0); box-shadow: 0 0 20px rgba(200, 142, 147, 0.4); border-color: var(--accent-rose); }
@@ -171,8 +154,8 @@
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
-        /* A partir daqui, volta ao fundo sólido natural */
-        .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; position: relative; z-index: 3; border-top: 1px solid var(--border-light); }
+        /* Serviços com Fundo Branco (esconde o vídeo) */
+        .services { padding: 100px 0; background-color: var(--bg-white); overflow: hidden; position: relative; z-index: 2; border-top: 1px solid var(--border-light); }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .services-carousel::-webkit-scrollbar { display: none; }
@@ -192,25 +175,20 @@
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
         @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
-        @media (max-width: 768px) { 
-            .services-carousel { padding: 20px 30px; } 
-            .service-card { min-width: 80vw; max-width: 80vw; } 
-        }
+        @media (max-width: 768px) { .services-carousel { padding: 20px 30px; } .service-card { min-width: 80vw; max-width: 80vw; } }
 
+        /* Modal de Serviços */
         .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(20, 15, 15, 0.85); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
         .service-modal-overlay.active { opacity: 1; pointer-events: auto; }
         .service-modal-content { background-color: var(--bg-white); width: 100%; max-width: 500px; border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); max-height: 90vh; display: flex; flex-direction: column; }
         .service-modal-overlay.active .service-modal-content { transform: scale(1); }
-        
         .modal-header { padding: 20px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; }
         .modal-header h3 { margin: 0; font-size: 1.4rem; }
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: var(--transition-smooth); line-height: 1; padding: 5px; }
         .modal-close:hover { color: var(--accent-rose); transform: rotate(90deg); }
-
         .modal-body { padding: 25px; overflow-y: auto; }
         .modal-hero-img-wrap { width: 100%; height: 220px; border-radius: 8px; margin-bottom: 20px; overflow: hidden; border: 1px solid var(--border-light); }
         .modal-hero-img-wrap img, .modal-hero-img-wrap .media-placeholder { width: 100%; height: 100%; object-fit: cover; }
-        
         .modal-cta-text { font-weight: 500; margin-bottom: 15px; color: var(--text-dark); font-size: 0.95rem; }
         .modal-textarea { width: 100%; height: 100px; padding: 12px; border: 1px solid var(--border-light); border-radius: 8px; font-family: 'Montserrat', sans-serif; resize: none; outline: none; transition: var(--transition-smooth); font-size: 0.9rem; background-color: var(--bg-champagne);}
         .modal-textarea:focus { border-color: var(--accent-rose); background-color: var(--bg-white); }
@@ -218,34 +196,16 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- Antes & Depois Carousel Section --- */
-        .before-after { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden; position: relative; z-index: 3; }
-        
+        /* --- Antes & Depois Carousel Section (Fundo Transparente p/ ver o Vídeo Estático) --- */
+        .before-after { padding: 100px 0; background-color: transparent; position: relative; z-index: 2; border-top: 1px solid var(--border-light); }
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
         .ba-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
         .ba-carousel::-webkit-scrollbar { display: none; }
         .ba-carousel.active { cursor: grabbing; }
 
-        .ba-item { 
-            min-width: 380px; 
-            max-width: 380px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; 
-            user-select: none;
-            will-change: transform;
-        }
-
+        .ba-item { min-width: 380px; max-width: 380px; display: flex; flex-direction: column; gap: 15px; user-select: none; will-change: transform;}
         .ba-item-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
-        
-        .ba-item-desc { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 1.15rem; 
-            color: var(--accent-rose); 
-            line-height: 1.4; 
-            text-align: center; 
-            font-style: italic;
-        }
+        .ba-item-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--accent-rose); line-height: 1.4; text-align: center; font-style: italic; }
         
         /* Container das Imagens 4:3 (ULTRA LEVE, Sem Destaque Azul no Mobile) */
         .ba-slider-container { 
@@ -266,7 +226,7 @@
         /* A imagem base agora é o ANTES */
         .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        /* O DEPOIS fica escondido por cima. É revelado instantaneamente com aceleração CSS pura */
+        /* O DEPOIS fica escondido por cima. Revelado via CSS Puro */
         .ba-after { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
             clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); 
@@ -284,51 +244,26 @@
             -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
 
-        /* Badge Indicativo (Segure para ver) */
+        /* Badge Indicativo */
         .ba-badge {
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(250, 245, 240, 0.95);
-            color: var(--accent-rose);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 3;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            white-space: nowrap;
+            position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
+            background: rgba(250, 245, 240, 0.95); color: var(--accent-rose);
+            padding: 8px 16px; border-radius: 20px; font-weight: 600; font-size: 0.75rem;
+            text-transform: uppercase; letter-spacing: 1px; z-index: 3; pointer-events: none;
+            transition: opacity 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.15); white-space: nowrap;
         }
 
-        /* Lógica Responsiva para os Badges PC x Mobile */
         .badge-mobile { display: none; }
         .badge-pc { display: inline; }
-        
-        @media (hover: none) and (pointer: coarse) {
-            .badge-pc { display: none; }
-            .badge-mobile { display: inline; }
-        }
-
-        /* Esconde o aviso ao revelar a imagem */
-        .ba-slider-container:hover .ba-badge,
-        .ba-slider-container.touch-active .ba-badge { 
-            opacity: 0; 
-        }
+        @media (hover: none) and (pointer: coarse) { .badge-pc { display: none; } .badge-mobile { display: inline; } }
+        .ba-slider-container:hover .ba-badge, .ba-slider-container.touch-active .ba-badge { opacity: 0; }
         
         @media (max-width: 1380px) { .ba-carousel { padding: 20px 40px; } }
-        @media (max-width: 768px) { 
-            .ba-carousel { padding: 20px 30px; gap: 20px;} 
-            .ba-item { min-width: 85vw; max-width: 85vw; } 
-        }
+        @media (max-width: 768px) { .ba-carousel { padding: 20px 30px; gap: 20px;} .ba-item { min-width: 85vw; max-width: 85vw; } }
 
-        .videos { padding: 100px 0; background-color: var(--bg-white); position: relative; z-index: 3;}
+        /* Videos (Fundo Branco bloqueia o video traseiro) */
+        .videos { padding: 100px 0; background-color: var(--bg-white); position: relative; z-index: 2; border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light); }
         .reels-gallery-wrap { display: flex; flex-direction: column; align-items: center; gap: 20px; width: 100%; max-width: 350px; margin: 0 auto; }
-        
         .reels-main-view { width: 100%; aspect-ratio: 9/16; position: relative; border-radius: 12px; overflow: hidden; background: #000; box-shadow: 0 20px 40px rgba(0,0,0,0.15); transform: translateZ(0); }
         .main-reel { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease; pointer-events: none; }
         .main-reel.active { opacity: 1; pointer-events: auto; z-index: 2; }
@@ -343,7 +278,8 @@
         .reel-thumb.active { border-color: var(--accent-rose); opacity: 1; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .reel-thumb video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
 
-        .reviews { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden; position: relative; z-index: 3;}
+        /* Reviews (Fundo Transparente para revelar o video) */
+        .reviews { padding: 100px 0; background-color: transparent; overflow: hidden; position: relative; z-index: 2;}
         .google-summary { background-color: transparent; max-width: 600px; margin: 0 auto 40px auto; text-align: center; }
         .rating-huge { font-size: 4rem; font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 5px; letter-spacing: -2px; }
         .google-summary p { font-size: 0.9rem; margin-top: 5px;}
@@ -357,48 +293,38 @@
         
         .review-card { min-width: 320px; max-width: 320px; background-color: var(--bg-white); border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); will-change: transform;}
         .review-card:hover { box-shadow: 0 0 20px rgba(200, 142, 147, 0.3); border-color: var(--accent-rose); transform: translate3d(0, -3px, 0);}
-        @media (max-width: 768px) { 
-            .reviews-carousel { padding: 20px 30px; }
-            .review-card { min-width: 80vw; max-width: 80vw; } 
-        }
-        
+        @media (max-width: 768px) { .reviews-carousel { padding: 20px 30px; } .review-card { min-width: 80vw; max-width: 80vw; } }
         .review-user { margin-bottom: 10px; }
         .user-meta h4 { font-size: 1rem; font-family: 'Montserrat', sans-serif; margin-bottom: 2px;}
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
         .review-text { color: var(--text-dark); font-size: 0.9rem; font-style: italic; line-height: 1.5; }
 
-        .map-section { 
-            width: 100%; 
-            height: 350px; 
-            background: #eee; 
-            position: relative; 
+        /* --- Fundo Rose Gold para o Rodapé e Elementos Finais --- */
+        .bg-rose-gold-wrap {
+            background: linear-gradient(135deg, #F3E0DE 0%, #E6D0BA 100%);
+            position: relative;
+            z-index: 2;
+            color: var(--text-dark);
             border-top: 1px solid var(--border-light);
-            cursor: pointer;
-            z-index: 3;
         }
-        .map-iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: 0; 
-            filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); 
-            pointer-events: none; 
-            transition: var(--transition-smooth);
-        }
+
+        .map-section { width: 100%; height: 350px; position: relative; cursor: pointer; }
+        .map-iframe { width: 100%; height: 100%; border: 0; filter: contrast(1.1) opacity(0.9) sepia(0.2) hue-rotate(320deg); pointer-events: none; transition: var(--transition-smooth); }
         .map-section.active .map-iframe { pointer-events: auto; }
         
-        .clinic-info { padding: 80px 0; background-color: var(--bg-champagne); position: relative; z-index: 3;}
+        .clinic-info { padding: 80px 0; }
         .clinic-info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .info-card { text-align: center; }
         .info-card svg { width: 30px; height: 30px; fill: var(--accent-rose); margin-bottom: 15px; }
         .info-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .info-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+        .info-card p { font-size: 0.9rem; line-height: 1.6; }
         .info-card .hl { color: var(--accent-rose); font-weight: 600; }
         @media (max-width: 768px) { .clinic-info-grid { grid-template-columns: 1fr; gap: 40px;} }
 
-        .footer { padding: 40px 0; background-color: var(--text-dark); color: rgba(255,255,255,0.7); text-align: center; font-size: 0.8rem; letter-spacing: 1px; position: relative; z-index: 3;}
+        .footer { padding: 40px 0; text-align: center; font-size: 0.8rem; letter-spacing: 1px; border-top: 1px solid rgba(255,255,255,0.4); }
         .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; }
-        .social-links a { color: var(--primary-rose); text-transform: uppercase; transition: var(--transition-smooth);}
-        .social-links a:hover { color: var(--bg-white); }
+        .social-links a { color: var(--accent-rose); font-weight: 600; text-transform: uppercase; transition: var(--transition-smooth);}
+        .social-links a:hover { color: var(--text-dark); }
         .footer-buttons { margin-bottom: 20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
 
         .float-btn { position: fixed; right: 30px; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 100; cursor: pointer; transition: var(--transition-smooth); }
@@ -417,16 +343,20 @@
         .animate-left { opacity: 0; transform: translate3d(-50px, 0, 0); transition: opacity 0.8s cubic-bezier(0.25, 1, 0.2, 1), transform 0.8s cubic-bezier(0.25, 1, 0.2, 1); }
         .animate-left.visible { opacity: 1; transform: translate3d(0, 0, 0); }
         
-        .delay-1 { transition-delay: 0.15s; } 
-        .delay-2 { transition-delay: 0.3s; }
-        .delay-3 { transition-delay: 0.45s; }
-        .delay-4 { transition-delay: 0.6s; }
+        .delay-1 { transition-delay: 0.15s; } .delay-2 { transition-delay: 0.3s; }
+        .delay-3 { transition-delay: 0.45s; } .delay-4 { transition-delay: 0.6s; }
         .delay-5 { transition-delay: 0.75s; }
         
         .lang-fading { opacity: 0; transition: opacity 0.3s ease-in-out; }
     </style>
 </head>
 <body id="main-body">
+
+    <!-- Fundo de Vídeo Fixo -->
+    <div id="fixed-bg-wrap">
+        <video id="bgScrollVideo" src="https://i.imgur.com/OXbytk4.mp4" muted playsinline preload="auto"></video>
+        <div class="bg-overlay"></div>
+    </div>
 
     <header>
         <div class="container nav-container">
@@ -459,83 +389,73 @@
         </div>
     </header>
 
-    <!-- Wrapper do Vídeo Scrubbing de Fundo -->
-    <div id="videoScrollWrap">
-        <!-- O Vídeo de Fundo Fixo -->
-        <div class="sticky-video-bg">
-            <video id="bgScrollVideo" src="https://i.imgur.com/OXbytk4.mp4" muted playsinline preload="auto"></video>
-            <div class="sticky-video-overlay"></div>
+    <section class="hero" id="hero">
+        <div class="container hero-grid">
+            <div class="hero-content animate-on-scroll">
+                <h1 data-i18n="hero_title">Ihre natürliche Schönheit im <span class="text-gradient">Fokus</span></h1>
+                <p class="hero-subtitle" data-i18n="hero_subtitle">Erleben Sie maßgeschneiderte Kosmetikbehandlungen auf höchstem Niveau. Perfektion, kompromisslose Hygiene und exklusives Wohlbefinden.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn btn-rose" data-i18n="btn_explore_services">Behandlungen entdecken</a>
+                </div>
+            </div>
+            <div class="hero-photo-wrap animate-on-scroll delay-1">
+                <img src="https://i.imgur.com/uEvaDBI.png" alt="Cristina Reisch" id="parallax-img" fetchpriority="high">
+            </div>
         </div>
-        
-        <!-- O Conteúdo Transparente Rolando por cima -->
-        <div class="scrollable-content-over-video">
-            <section class="hero" id="hero">
-                <div class="container hero-grid">
-                    <div class="hero-content animate-on-scroll">
-                        <h1 data-i18n="hero_title">Ihre natürliche Schönheit im <span class="text-gradient">Fokus</span></h1>
-                        <p class="hero-subtitle" data-i18n="hero_subtitle">Erleben Sie maßgeschneiderte Kosmetikbehandlungen auf höchstem Niveau. Perfektion, kompromisslose Hygiene und exklusives Wohlbefinden.</p>
-                        <div class="hero-buttons">
-                            <a href="#services" class="btn btn-rose" data-i18n="btn_explore_services">Behandlungen entdecken</a>
-                        </div>
-                    </div>
-                    <div class="hero-photo-wrap animate-on-scroll delay-1">
-                        <img src="https://i.imgur.com/uEvaDBI.png" alt="Cristina Reisch" id="parallax-img" fetchpriority="high">
-                    </div>
-                </div>
-            </section>
+    </section>
 
-            <section class="about" id="about">
-                <div class="container">
-                    <div class="about-grid">
-                        <div class="about-images animate-on-scroll">
-                            <img src="https://i.imgur.com/4odPu38.jpeg" alt="Ambiente do Studio Beauty By Cris" class="about-img-1" loading="lazy">
-                            <div class="about-img-2-slider">
-                                <video src="https://i.imgur.com/DiFnIe4.mp4" muted playsinline class="slider-media active" id="intro-video"></video>
-                                <img src="https://i.imgur.com/CaIjzRk.jpeg" alt="Detalhe do Studio" class="slider-media" id="static-after-video" loading="lazy">
-                            </div>
-                        </div>
-                        <div class="about-content animate-on-scroll delay-1">
-                            <span class="subtitle" data-i18n="about_sub">Das Studio</span>
-                            <h3 data-i18n="about_title">Exzellenz in Ästhetik und Pflege</h3>
-                            <p data-i18n="about_p1">Unser Studio wurde mit dem Ziel gegründet, Ihre natürliche Schönheit hervorzuheben, mit fortschrittlichen Techniken und einer Umgebung für Ihren totalen Komfort.</p>
-                            <p data-i18n="about_p2">Mit hochqualifizierten Fachleuten und modernster Ausstattung garantieren wir unglaubliche und sichere Ergebnisse bei all unseren Behandlungen.</p>
-                        </div>
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-images animate-on-scroll">
+                    <img src="https://i.imgur.com/4odPu38.jpeg" alt="Ambiente do Studio Beauty By Cris" class="about-img-1" loading="lazy">
+                    
+                    <div class="about-img-2-slider">
+                        <video src="https://i.imgur.com/DiFnIe4.mp4" muted playsinline class="slider-media active" id="intro-video"></video>
+                        <img src="https://i.imgur.com/CaIjzRk.jpeg" alt="Detalhe do Studio" class="slider-media" id="static-after-video" loading="lazy">
                     </div>
                 </div>
-            </section>
-
-            <section class="why-us">
-                <div class="container">
-                    <div class="section-header animate-on-scroll">
-                        <span class="subtitle" data-i18n="why_sub">Vorteile</span>
-                        <h2 data-i18n="why_title">Warum Beauty By Cris?</h2>
-                    </div>
-                    <div class="why-grid">
-                        <div class="why-card animate-on-scroll">
-                            <svg viewBox="0 0 24 24"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg>
-                            <h4 data-i18n="w1_title">Absolute Hygiene</h4>
-                            <p data-i18n="w1_desc">Höchste klinische Standards für Ihre Sicherheit.</p>
-                        </div>
-                        <div class="why-card animate-on-scroll delay-1">
-                            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                            <h4 data-i18n="w2_title">Premium Qualität</h4>
-                            <p data-i18n="w2_desc">Ausschließlich erstklassige Materialien & Geräte.</p>
-                        </div>
-                        <div class="why-card animate-on-scroll delay-2">
-                            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-                            <h4 data-i18n="w3_title">Persönliche Betreuung</h4>
-                            <p data-i18n="w3_desc">Maßgeschneiderte Behandlungen nur für Sie.</p>
-                        </div>
-                        <div class="why-card animate-on-scroll">
-                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
-                            <h4 data-i18n="w4_title">Entspannendes Ambiente</h4>
-                            <p data-i18n="w4_desc">Eine Oase der Ruhe für Körper und Geist.</p>
-                        </div>
-                    </div>
+                <div class="about-content animate-on-scroll delay-1">
+                    <span class="subtitle" data-i18n="about_sub">Das Studio</span>
+                    <h3 data-i18n="about_title">Exzellenz in Ästhetik und Pflege</h3>
+                    <p data-i18n="about_p1">Unser Studio wurde mit dem Ziel gegründet, Ihre natürliche Schönheit hervorzuheben, mit fortschrittlichen Techniken und einer Umgebung für Ihren totalen Komfort.</p>
+                    <p data-i18n="about_p2">Mit hochqualifizierten Fachleuten und modernster Ausstattung garantieren wir unglaubliche und sichere Ergebnisse bei all unseren Behandlungen.</p>
                 </div>
-            </section>
+            </div>
         </div>
-    </div> <!-- Fim Wrapper do Vídeo de Fundo -->
+    </section>
+
+    <!-- Usado como âncora final para a rolagem do vídeo -->
+    <section class="why-us" id="whyUsSection">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="subtitle" data-i18n="why_sub">Vorteile</span>
+                <h2 data-i18n="why_title">Warum Beauty By Cris?</h2>
+            </div>
+            <div class="why-grid">
+                <div class="why-card animate-on-scroll">
+                    <svg viewBox="0 0 24 24"><path d="M12 2L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-3zm-2 16l-4-4 1.41-1.41L10 15.17l6.59-6.59L18 10l-8 8z"/></svg>
+                    <h4 data-i18n="w1_title">Absolute Hygiene</h4>
+                    <p data-i18n="w1_desc">Höchste klinische Standards für Ihre Sicherheit.</p>
+                </div>
+                <div class="why-card animate-on-scroll delay-1">
+                    <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    <h4 data-i18n="w2_title">Premium Qualität</h4>
+                    <p data-i18n="w2_desc">Ausschließlich erstklassige Materialien & Geräte.</p>
+                </div>
+                <div class="why-card animate-on-scroll delay-2">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <h4 data-i18n="w3_title">Persönliche Betreuung</h4>
+                    <p data-i18n="w3_desc">Maßgeschneiderte Behandlungen nur für Sie.</p>
+                </div>
+                <div class="why-card animate-on-scroll">
+                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+                    <h4 data-i18n="w4_title">Entspannendes Ambiente</h4>
+                    <p data-i18n="w4_desc">Eine Oase der Ruhe für Körper und Geist.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section class="services" id="services">
         <div class="container">
@@ -714,11 +634,11 @@
         </div>
     </div>
 
-    <!-- Seção Antes & Depois -->
+    <!-- Seção Antes & Depois (Com o fundo congelado no vídeo final) -->
     <section class="before-after">
         <div class="container">
             <div class="section-header animate-on-scroll">
-                <span class="subtitle" data-i18n="ba_sub">Echte Ergebnisse</span>
+                <span class="subtitle" style="color: var(--text-dark);" data-i18n="ba_sub">Echte Ergebnisse</span>
                 <h2 data-i18n="ba_title">Vorher & Nachher</h2>
             </div>
         </div>
@@ -729,9 +649,9 @@
                 <div class="ba-item animate-on-scroll">
                     <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
                     <div class="ba-slider-container">
-                        <!-- Imagem Base (Antes) -->
+                        <!-- Imagem Base Visível agora é o ANTES -->
                         <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" class="ba-img" loading="lazy">
-                        <!-- Imagem Escondida (Depois) -->
+                        <!-- Imagem Escondida (Revelada ao tocar/hover) agora é o DEPOIS -->
                         <div class="ba-after">
                             <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Nachher" loading="lazy">
                         </div>
@@ -755,7 +675,7 @@
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
                         </div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-2">
@@ -770,7 +690,7 @@
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
                         </div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-3">
@@ -785,7 +705,7 @@
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
                         </div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-4">
@@ -800,7 +720,7 @@
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
                         </div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße, das Ihren persönlichen Stil hervorhebt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-5">
@@ -815,7 +735,7 @@
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Gedrückt halten</span>
                         </div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde, strahlende und glatte Haut, die Ihre natürliche Schönheit hervorhebt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine und gesunde Haut.</p>
                 </div>
 
             </div>
@@ -854,10 +774,11 @@
         </div>
     </section>
 
+    <!-- Seção Avaliações (Fundo Transparente p/ ver o Vídeo) -->
     <section class="reviews" id="reviews">
         <div class="container">
             <div class="section-header animate-on-scroll" style="margin-bottom: 20px;">
-                <span class="subtitle" data-i18n="reviews_sub">Kundenmeinungen</span>
+                <span class="subtitle" style="color: var(--text-dark);" data-i18n="reviews_sub">Kundenmeinungen</span>
                 <h2 data-i18n="reviews_title">Google Bewertungen</h2>
             </div>
 
@@ -865,7 +786,7 @@
                 <div class="rating-huge text-gradient">5,0</div>
                 <div class="stars-gradient">★★★★★</div>
                 <p data-i18n="google_reviews_count" style="color: var(--text-muted);">Basierend auf 13 Google-Rezensionen</p>
-                <a href="https://www.google.com/search?q=Beauty+By+Cris+Beleza+Facial+Baden-Baden" target="_blank" class="btn-google" data-i18n="btn_google_page">Auf Google ansehen</a>
+                <a href="https://www.google.com/search?q=Beauty+By+Cris+Beleza+Facial+Baden-Baden" target="_blank" class="btn-google" style="color: var(--text-dark); border-color: var(--text-dark);" data-i18n="btn_google_page">Auf Google ansehen</a>
             </div>
         </div>
 
@@ -1019,45 +940,48 @@
         </div>
     </section>
 
-    <div class="map-section" id="mapSection">
-        <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <!-- Novo Wrapper Rosê Gold Metálico para as 3 últimas seções -->
+    <div class="bg-rose-gold-wrap">
+        <div class="map-section" id="mapSection">
+            <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <section class="clinic-info" id="footer-contacts">
+            <div class="container">
+                <div class="clinic-info-grid">
+                    <div class="info-card animate-on-scroll">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5-2.5 2.5z" /></svg>
+                        <h3 data-i18n="info_address">Standort</h3>
+                        <p>Blütenfeldpl. 1 - 8<br>76532 Baden-Baden<br>Deutschland</p>
+                    </div>
+                    <div class="info-card animate-on-scroll delay-1">
+                        <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" /></svg>
+                        <h3 data-i18n="info_contact">Kontakt</h3>
+                        <p>Tel: <a href="tel:+491629384907" class="hl">+49 162 9384907</a><br>WhatsApp: <a href="https://wa.me/491629384907" class="hl wa-link" target="_blank">Chat</a></p>
+                    </div>
+                    <div class="info-card animate-on-scroll delay-2">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" /></svg>
+                        <h3 data-i18n="info_hours">Öffnungszeiten</h3>
+                        <p><span data-i18n="hours_week">Mo. - Fr.: 09:00 - 18:00</span><br><span data-i18n="hours_weekend" class="hl">Sa. & So.: Geschlossen</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-buttons">
+                    <a onclick="openContactModal(event)" class="btn btn-small-footer" data-i18n="btn_contact_us" style="cursor:pointer;">Kontaktieren Sie uns</a>
+                    <a href="mailto:careers@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_work_with_us">Arbeiten Sie mit uns</a>
+                </div>
+                <div class="social-links">
+                    <a href="https://instagram.com/beauty_by_cris" target="_blank">Instagram</a>
+                    <a href="https://wa.me/491629384907" target="_blank" class="wa-link">WhatsApp</a>
+                </div>
+                <div>© 2026 Beauty By Cris. <span data-i18n="footer_rights">Alle Rechte vorbehalten.</span> | <span data-i18n="footer_dev">Entwickelt von:</span> <a href="https://instagram.com/insideprojectco" target="_blank" rel="noopener" style="color:var(--text-dark); font-weight:600;">Inside Project Co.</a></div>
+            </div>
+        </footer>
     </div>
-
-    <section class="clinic-info" id="footer-contacts">
-        <div class="container">
-            <div class="clinic-info-grid">
-                <div class="info-card animate-on-scroll">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5-2.5 2.5z" /></svg>
-                    <h3 data-i18n="info_address">Standort</h3>
-                    <p>Blütenfeldpl. 1 - 8<br>76532 Baden-Baden<br>Deutschland</p>
-                </div>
-                <div class="info-card animate-on-scroll delay-1">
-                    <svg viewBox="0 0 24 24"><path d="M20 15.5c-1.25 0-2.45-.2-3.57-.57-.35-.11-.74-.03-1.02.24l-2.2 2.2c-2.83-1.44-5.15-3.75-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.5c0-.55-.45-1-1-1z" /></svg>
-                    <h3 data-i18n="info_contact">Kontakt</h3>
-                    <p>Tel: <a href="tel:+491629384907" class="hl">+49 162 9384907</a><br>WhatsApp: <a href="https://wa.me/491629384907" class="hl wa-link" target="_blank">Chat</a></p>
-                </div>
-                <div class="info-card animate-on-scroll delay-2">
-                    <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" /></svg>
-                    <h3 data-i18n="info_hours">Öffnungszeiten</h3>
-                    <p><span data-i18n="hours_week">Mo. - Fr.: 09:00 - 18:00</span><br><span data-i18n="hours_weekend" class="hl">Sa. & So.: Geschlossen</span></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-buttons">
-                <a onclick="openContactModal(event)" class="btn btn-small-footer" data-i18n="btn_contact_us" style="cursor:pointer;">Kontaktieren Sie uns</a>
-                <a href="mailto:careers@beautybycris.com" class="btn btn-small-footer" data-i18n="btn_work_with_us">Arbeiten Sie mit uns</a>
-            </div>
-            <div class="social-links">
-                <a href="https://instagram.com/beauty_by_cris" target="_blank">Instagram</a>
-                <a href="https://wa.me/491629384907" target="_blank" class="wa-link">WhatsApp</a>
-            </div>
-            <div>© 2026 Beauty By Cris. <span data-i18n="footer_rights">Alle Rechte vorbehalten.</span> | <span data-i18n="footer_dev">Entwickelt von:</span> <a href="https://instagram.com/insideprojectco" target="_blank" rel="noopener" style="color:var(--accent-rose); font-weight:600;">Inside Project Co.</a></div>
-        </div>
-    </footer>
 
     <a href="https://wa.me/491629384907" class="float-btn float-whatsapp wa-link" target="_blank"><svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg></a>
     
@@ -1178,11 +1102,11 @@
                 s13_title: "Körper-Microneedling", s13_desc: "Reduzierung von Dehnungsstreifen.", s13_ben: "Gewebestraffung", s13_abl: "Intensives Needling", s13_dur: "60-90 Min.",
                 ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge_pc: "Mit der Maus drüberfahren", ba_badge_mobile: "Gedrückt halten",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.",
-                ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.",
-                ba_title_4: "Wimpernverlängerung", ba_desc_4: "Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen.",
-                ba_title_5: "Maniküre & Pediküre", ba_desc_5: "Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße, das Ihren persönlichen Stil hervorhebt.",
-                ba_title_6: "Gesichtsreinigung", ba_desc_6: "Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde, strahlende und glatte Haut, die Ihre natürliche Schönheit hervorhebt.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.",
+                ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.",
+                ba_title_4: "Wimpernverlängerung", ba_desc_4: "Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert.",
+                ba_title_5: "Maniküre & Pediküre", ba_desc_5: "Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße.",
+                ba_title_6: "Gesichtsreinigung", ba_desc_6: "Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde und strahlende Haut.",
                 video_sub: "Einblicke im Video", video_title: "Exklusive Insights",
                 reviews_sub: "Kundenmeinungen", reviews_title: "Google Bewertungen", google_reviews_count: "Basierend auf 13 Google-Rezensionen", btn_google_page: "Auf Google ansehen",
                 r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏",
@@ -1224,13 +1148,13 @@
                 s11_title: "Milia Removal", s11_desc: "Gentle extraction of milia.", s11_ben: "Smooth skin", s11_abl: "Precise extraction", s11_dur: "20 min",
                 s12_title: "Facial Microneedling", s12_desc: "Collagen stimulation.", s12_ben: "Firmer skin", s12_abl: "Needling with serum", s12_dur: "60 min",
                 s13_title: "Body Microneedling", s13_desc: "Reduce stretch marks.", s13_ben: "Tissue firming", s13_abl: "Deep needling", s13_dur: "60-90 min",
-                ba_sub: "Real Results", ba_title: "Before & After", ba_badge_pc: "Hover to see After", ba_badge_mobile: "Hold to see After",
-                ba_title_1: "Microblading", ba_desc_1: "Microblading is a hair-by-hair technique that provides an extremely natural effect, correcting flaws, defining the shape of the eyebrows, and enhancing facial expression, elevating your self-esteem and transmitting more confidence at all times.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "The Plasma Pen is an aesthetic treatment that stimulates natural collagen production, promoting firmness, smoothing expression lines, reducing sagging, and safely rejuvenating the skin without surgery, giving back a younger and renewed appearance.",
-                ba_title_3: "Microlabial", ba_desc_3: "Lip Micropigmentation enhances lip contours, evens out the tone, and provides a delicate lipstick effect, leaving your lips looking healthier, more feminine, defined, and naturally beautiful, valuing your smile and your self-esteem.",
-                ba_title_4: "Eyelash Extensions", ba_desc_4: "Eyelash Extensions enhance the natural beauty of your eyes, providing more elegance, expression, and self-esteem. The lashes are applied individually to highlight your features, transmitting a more striking, confident, and sophisticated look.",
-                ba_title_5: "Manicure & Pedicure", ba_desc_5: "Complete Manicure and Pedicure care guarantees perfectly shaped nails, hydrated cuticles, and a flawless, elegant appearance for your hands and feet, enhancing your style and health.",
-                ba_title_6: "Facial Cleansing", ba_desc_6: "Professional Facial Cleansing removes impurities and unclogs pores while stimulating cell renewal and collagen production. The result is incredibly clean, healthy, glowing, and smooth skin, enhancing your natural beauty.",
+                ba_sub: "Real Results", ba_title: "Before & After", ba_badge_pc: "Hover your mouse", ba_badge_mobile: "Hold to see After",
+                ba_title_1: "Microblading", ba_desc_1: "Microblading is a hair-by-hair technique that provides an extremely natural effect, correcting flaws, defining the shape of the eyebrows, and enhancing facial expression.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "The Plasma Pen is an aesthetic treatment that stimulates natural collagen production, promoting firmness, smoothing expression lines, reducing sagging, and safely rejuvenating the skin.",
+                ba_title_3: "Microlabial", ba_desc_3: "Lip Micropigmentation enhances lip contours, evens out the tone, and provides a delicate lipstick effect, leaving your lips looking healthier, more feminine, and naturally beautiful.",
+                ba_title_4: "Eyelash Extensions", ba_desc_4: "Eyelash Extensions enhance the natural beauty of your eyes, providing more elegance, expression, and self-esteem. The lashes are applied individually to highlight your features.",
+                ba_title_5: "Manicure & Pedicure", ba_desc_5: "Complete Manicure and Pedicure care guarantees perfectly shaped nails, hydrated cuticles, and a flawless, elegant appearance for your hands and feet.",
+                ba_title_6: "Facial Cleansing", ba_desc_6: "Professional Facial Cleansing removes impurities and unclogs pores while stimulating cell renewal and collagen production. The result is incredibly clean and healthy skin.",
                 video_sub: "Video Insights", video_title: "Treatment Insights",
                 reviews_sub: "Customer Reviews", reviews_title: "Google Reviews", google_reviews_count: "Based on 13 Google reviews", btn_google_page: "View on Google",
                 r1_date: "7 months ago", r1_text: "Excellent professional, I had a facial cleansing and liked it a lot, recommend! 👏",
@@ -1273,12 +1197,12 @@
                 s12_title: "Microagulhamento Facial", s12_desc: "Indução de colágeno.", s12_ben: "Pele firme", s12_abl: "Needling com sérum", s12_dur: "60 min",
                 s13_title: "Microagulhamento Corporal", s13_desc: "Regeneração de estrias.", s13_ben: "Estrias suavizadas", s13_abl: "Needling profundo", s13_dur: "60-90 min",
                 ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge_pc: "Passe o mouse", ba_badge_mobile: "Segure para Depois",
-                ba_title_1: "Microblading", ba_desc_1: "O Microblading é uma técnica fio a fio que proporciona um efeito extremamente natural, corrigindo falhas, definindo o formato das sobrancelhas e valorizando a expressão do rosto, elevando sua autoestima e transmitindo mais confiança em todos os momentos.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "A Plasma Pen é um tratamento estético que estimula a produção natural de colágeno, promovendo firmeza, suavizando linhas de expressão, reduzindo a flacidez e rejuvenescendo a pele de forma segura, sem cirurgia e com resultados naturais, devolvendo uma aparência mais jovem e renovada.",
-                ba_title_3: "Microlabial", ba_desc_3: "A Micropigmentação Labial realça o contorno dos lábios, uniformiza a tonalidade e proporciona um delicado efeito de batom, deixando os lábios com aparência mais saudável, feminina, definida e naturalmente bonita, valorizando seu sorriso e sua autoestima.",
-                ba_title_4: "Extensão de Cílios", ba_desc_4: "A Extensão de Cílios realça a beleza natural do olhar, proporcionando mais elegância, expressão e autoestima. Os fios são aplicados de forma personalizada para destacar seus traços, transmitindo um olhar mais marcante, confiante e sofisticado.",
-                ba_title_5: "Manicure e Pedicure", ba_desc_5: "O cuidado completo com Manicure e Pedicure garante unhas perfeitamente modeladas, cutículas hidratadas e uma aparência impecável e elegante para suas mãos e pés, valorizando seu estilo e saúde.",
-                ba_title_6: "Limpeza de Pele", ba_desc_6: "A Limpeza de Pele Profunda remove impurezas e desobstrui os poros, estimulando a renovação celular e a produção de colágeno. O resultado é uma pele incrivelmente limpa, saudável, iluminada e com textura suave, valorizando a sua beleza natural.",
+                ba_title_1: "Microblading", ba_desc_1: "O Microblading é uma técnica fio a fio que proporciona um efeito extremamente natural, corrigindo falhas, definindo o formato das sobrancelhas e valorizando a expressão do rosto.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "A Plasma Pen é um tratamento estético que estimula a produção natural de colágeno, promovendo firmeza, suavizando linhas de expressão, reduzindo a flacidez e rejuvenescendo a pele de forma segura.",
+                ba_title_3: "Microlabial", ba_desc_3: "A Micropigmentação Labial realça o contorno dos lábios, uniformiza a tonalidade e proporciona um delicado efeito de batom, deixando os lábios com aparência mais saudável e feminina.",
+                ba_title_4: "Extensão de Cílios", ba_desc_4: "A Extensão de Cílios realça a beleza natural do olhar, proporcionando mais elegância, expressão e autoestima. Os fios são aplicados de forma personalizada para destacar seus traços.",
+                ba_title_5: "Manicure e Pedicure", ba_desc_5: "O cuidado completo com Manicure e Pedicure garante unhas perfeitamente modeladas, cutículas hidratadas e uma aparência impecável e elegante para suas mãos e pés.",
+                ba_title_6: "Limpeza de Pele", ba_desc_6: "A Limpeza de Pele Profunda remove impurezas e desobstrui os poros, estimulando a renovação celular e a produção de colágeno. O resultado é uma pele incrivelmente limpa, saudável e iluminada.",
                 video_sub: "Vídeos", video_title: "Insights Exclusivos",
                 reviews_sub: "Avaliações dos Clientes", reviews_title: "Google Avaliações", google_reviews_count: "Resumo de 13 avaliações no Google", btn_google_page: "Ver no Google",
                 r1_date: "7 meses atrás", r1_text: "Profissional excelente, fiz uma limpeza de pele gostei muito, recomendo! 👏",
@@ -1321,12 +1245,12 @@
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
                 ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge_pc: "Pase el ratón", ba_badge_mobile: "Mantén para Después",
-                ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial, elevando su autoestima y transmitiendo más confianza en todo momento.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuveneciendo la piel de forma segura, sin cirugía y con resultados naturales.",
-                ba_title_3: "Microlabial", ba_desc_3: "La Micropigmentación Labial realza el contorno de los labios, uniformiza el tono y proporciona un delicado efecto de lápiz labial, dejando los labios con una apariencia más saludable, femenina, definida y naturalmente hermosa.",
-                ba_title_4: "Extensión de Pestañas", ba_desc_4: "La Extensión de Pestañas realza la belleza natural de su mirada, proporcionando más elegancia, expresión y autoestima. Las pestañas se aplican de forma personalizada para destacar sus rasgos, transmitiendo una mirada más impactante.",
+                ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuveneciendo la piel de forma segura.",
+                ba_title_3: "Microlabial", ba_desc_3: "La Micropigmentación Labial realza el contorno de los labios, uniformiza el tono y proporciona un delicado efecto de lápiz labial, dejando los labios con una apariencia más saludable y femenina.",
+                ba_title_4: "Extensión de Pestañas", ba_desc_4: "La Extensión de Pestañas realza la belleza natural de su mirada, proporcionando más elegancia, expresión y autoestima. Las pestañas se aplican de forma personalizada para destacar sus rasgos.",
                 ba_title_5: "Manicura y Pedicura", ba_desc_5: "El cuidado completo con Manicura y Pedicura garantiza uñas perfectamente modeladas, cutículas hidratadas y una apariencia impecable y elegante para sus manos y pies.",
-                ba_title_6: "Limpieza Facial", ba_desc_6: "La Limpieza Facial Profunda elimina impurezas y desobstruye los poros, además de estimular la renovación celular y el colágeno. El resultado es una piel increíblemente limpia, saludable, luminosa y con textura suave, resaltando su belleza natural.",
+                ba_title_6: "Limpieza Facial", ba_desc_6: "La Limpieza Facial Profunda elimina impurezas y desobstruye los poros, además de estimular la renovación celular y el colágeno. El resultado es una piel increíblemente limpia y saludable.",
                 video_sub: "Videos", video_title: "Insights Exclusivos",
                 reviews_sub: "Opiniones", reviews_title: "Reseñas de Google", google_reviews_count: "Basado en 13 reseñas en Google", btn_google_page: "Ver en Google",
                 r1_date: "hace 7 meses", r1_text: "Excelente profesional, limpieza de cutis muy buena, recomiendo! 👏",
@@ -1368,13 +1292,13 @@
                 s11_title: "Retrait de Milium", s11_desc: "Extraction hygiénique.", s11_ben: "Peau lisse", s11_abl: "Extraction", s11_dur: "20 min",
                 s12_title: "Microneedling Visage", s12_desc: "Stimulation collagène.", s12_ben: "Peau ferme", s12_abl: "Sérum", s12_dur: "60 min",
                 s13_title: "Microneedling Corps", s13_desc: "Réduit vergetures.", s13_ben: "Fermeté", s13_abl: "Needling", s13_dur: "60-90 min",
-                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge_pc: "Passez la souris", ba_badge_mobile: "Maintenez pour voir",
-                ba_title_1: "Microblading", ba_desc_1: "Le Microblading est une technique poil par poil qui offre un effet extrêmement naturel, corrigeant les défauts, définissant la forme des sourcils et valorisant l'expression du visage, renforçant ainsi votre estime de vous.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "Le Plasma Pen est un traitement esthétique qui stimule la production naturelle de collagène, favorisant la fermeté, lissant les lignes d'expression, réduisant le relâchement et rajeunissant la peau de manière sûre, sans chirurgie.",
-                ba_title_3: "Microlabial", ba_desc_3: "La micropigmentation des lèvres sublime le contour des lèvres, uniformise la couleur et offre un effet rouge à lèvres délicat, laissant les lèvres plus saines, féminines, définies et naturellement belles.",
+                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge_pc: "Survolez avec la souris", ba_badge_mobile: "Maintenez pour l'Après",
+                ba_title_1: "Microblading", ba_desc_1: "Le Microblading est une technique poil par poil qui offre un effet extrêmement naturel, corrigeant les défauts, définissant la forme des sourcils et valorisant l'expression du visage.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "Le Plasma Pen est un traitement esthétique qui stimule la production naturelle de collagène, favorisant la fermeté, lissant les lignes d'expression, réduisant le relâchement et rajeunissant la peau.",
+                ba_title_3: "Microlabial", ba_desc_3: "La micropigmentation des lèvres sublime le contour des lèvres, uniformise la couleur et offre un effet rouge à lèvres délicat, laissant les lèvres plus saines, féminines et naturellement belles.",
                 ba_title_4: "Extensions de Cils", ba_desc_4: "L'Extension de Cils met en valeur la beauté naturelle de votre regard, offrant plus d'élégance, d'expression et d'estime de soi. Les cils sont appliqués de manière personnalisée pour souligner vos traits.",
                 ba_title_5: "Manucure & Pédicure", ba_desc_5: "Le soin complet Manucure et Pédicure garantit des ongles parfaitement modelés, des cuticules hydratées et une apparence impeccable et élégante pour vos mains et vos pieds.",
-                ba_title_6: "Nettoyage du Visage", ba_desc_6: "Le Nettoyage de Peau Professionnel élimine les impuretés et désobstrue les pores, tout en stimulant le renouvellement cellulaire et le collagène. Le résultat est une peau incroyablement propre, saine, lumineuse et douce, mettant en valeur votre beauté naturelle.",
+                ba_title_6: "Nettoyage du Visage", ba_desc_6: "Le Nettoyage de Peau Professionnel élimine les impuretés et désobstrue les pores, tout en stimulant le renouvellement cellulaire et le collagène. Le résultat est une peau incroyablement propre et saine.",
                 video_sub: "Vidéos", video_title: "Aperçu des Soins",
                 reviews_sub: "Avis Clients", reviews_title: "Avis Google", google_reviews_count: "Basé sur 13 avis Google", btn_google_page: "Voir sur Google",
                 r1_date: "il y a 7 mois", r1_text: "Excellente professionnelle, nettoyage de peau parfait ! 👏",
@@ -1416,13 +1340,13 @@
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
                 s12_title: "Микронидлинг Лица", s12_desc: "Омоложение.", s12_ben: "Упругая кожа", s12_abl: "Сыворотка", s12_dur: "60 мин",
                 s13_title: "Микронидлинг Тела", s13_desc: "Уменьшение растяжек.", s13_ben: "Гладкость", s13_abl: "Уход", s13_dur: "60-90 мин",
-                ba_sub: "Результаты", ba_title: "До & После", ba_badge_pc: "Наведите курсор", ba_badge_mobile: "Удерживайте",
-                ba_title_1: "Microblading", ba_desc_1: "Микроблейдинг — это волосковая техника, обеспечивающая чрезвычайно естественный эффект, исправляя недостатки, очерчивая форму бровей и подчеркивая выражение лица, повышая вашу уверенность в себе в любой момент.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "Plasma Pen — это эстетическая процедура, стимулирующая выработку естественного коллагена, придающая упругость, сглаживающая мимические морщины, уменьшающая дряблость и безопасно омолаживающая кожу.",
-                ba_title_3: "Microlabial", ba_desc_3: "Микропигментация губ подчеркивает контур, выравнивает тон и создает деликатный эффект помады, делая губы более здоровыми, женственными, очерченными и естественно красивыми.",
-                ba_title_4: "Наращивание Ресниц", ba_desc_4: "Наращивание ресниц подчеркивает естественную красоту вашего взгляда, придавая больше элегантности, выразительности и уверенности. Ресницы наносятся индивидуально.",
-                ba_title_5: "Маникюр и Педикюр", ba_desc_5: "Комплексный уход за руками и ногами гарантирует идеальную форму ногтей, увлажненную кутикулу и безупречный, элегантный внешний вид, подчеркивая ваш стиль и здоровье.",
-                ba_title_6: "Чистка Лица", ba_desc_6: "Профессиональная чистка лица удаляет загрязнения и очищает поры, стимулируя обновление клеток и выработку коллагена. Результат — невероятно чистая, здоровая, сияющая и гладкая кожа, подчеркивающая вашу естественную красоту.",
+                ba_sub: "Результаты", ba_title: "До & После", ba_badge_pc: "Наведите курсор", ba_badge_mobile: "Удерживайте для После",
+                ba_title_1: "Microblading", ba_desc_1: "Микроблейдинг — это волосковая техника, обеспечивающая чрезвычайно естественный эффект, исправляя недостатки, очерчивая форму бровей и подчеркивая выражение лица.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "Plasma Pen — это эстетическая процедура, стимулирующая выработку естественного коллагена, придающая упругость, сглаживающая мимические морщины и безопасно омолаживающая кожу.",
+                ba_title_3: "Microlabial", ba_desc_3: "Микропигментация губ подчеркивает контур, выравнивает тон и создает деликатный эффект помады, делая губы более здоровыми, женственными и естественно красивыми.",
+                ba_title_4: "Наращивание Ресниц", ba_desc_4: "Наращивание ресниц подчеркивает естественную красоту вашего взгляда, придавая больше элегантности, выразительности и уверенности.",
+                ba_title_5: "Маникюр и Педикюр", ba_desc_5: "Комплексный уход за руками и ногами гарантирует идеальную форму ногтей, увлажненную кутикулу и безупречный, элегантный внешний вид.",
+                ba_title_6: "Чистка Лица", ba_desc_6: "Профессиональная чистка лица удаляет загрязнения и очищает поры, стимулируя обновление клеток и выработку коллагена. Результат — невероятно чистая, здоровая и сияющая кожа.",
                 video_sub: "Видео", video_title: "Обзор Процедур",
                 reviews_sub: "Отзывы", reviews_title: "Google Отзывы", google_reviews_count: "13 отзывов в Google", btn_google_page: "Смотреть в Google",
                 r1_date: "7 месяцев назад", r1_text: "Отличный специалист, чистка супер! 👏",
@@ -1650,12 +1574,10 @@
 
         // --- Lógica de Interação de Toque (Mobile) do Antes/Depois ---
         document.querySelectorAll('.ba-slider-container').forEach(container => {
-            // Quando a pessoa encostar o dedo, revela o Depois
             container.addEventListener('touchstart', () => {
                 container.classList.add('touch-active');
             }, { passive: true });
             
-            // Quando ela soltar (ou o toque for cancelado), volta para o Antes
             ['touchend', 'touchcancel'].forEach(evt => {
                 container.addEventListener(evt, () => {
                     container.classList.remove('touch-active');
@@ -1663,45 +1585,46 @@
             });
         });
 
-        // --- Lógica de Sincronia de Vídeo no Scroll (Scrubbing) ---
+        // --- Lógica de Sincronia de Vídeo no Scroll (Com Lerp - Ultra Suave) ---
         const bgScrollVideo = document.getElementById('bgScrollVideo');
-        const videoScrollWrap = document.getElementById('videoScrollWrap');
+        const whyUsSection = document.getElementById('whyUsSection');
 
-        if (bgScrollVideo && videoScrollWrap) {
-            // Pausa o vídeo para controlar os frames pelo scroll
+        if (bgScrollVideo && whyUsSection) {
             bgScrollVideo.pause();
             
             let isVideoLoaded = false;
+            let targetTime = 0;
+            let currentTime = 0;
             
-            bgScrollVideo.addEventListener('loadedmetadata', () => {
-                isVideoLoaded = true;
-            });
-            if(bgScrollVideo.readyState >= 1) {
-                isVideoLoaded = true;
-            }
+            bgScrollVideo.addEventListener('loadedmetadata', () => { isVideoLoaded = true; });
+            if(bgScrollVideo.readyState >= 1) isVideoLoaded = true;
 
             window.addEventListener('scroll', () => {
-                if(!isVideoLoaded) return;
+                if(!isVideoLoaded || !bgScrollVideo.duration) return;
                 
-                const wrapRect = videoScrollWrap.getBoundingClientRect();
-                const wrapTop = wrapRect.top;
-                const wrapHeight = wrapRect.height;
-                const windowHeight = window.innerHeight;
-
-                const maxScroll = wrapHeight - windowHeight;
+                // O scroll é medido desde o topo até a pessoa passar a seção "Warum Beauty By Cris"
+                const scrollEnd = whyUsSection.offsetTop + whyUsSection.offsetHeight - (window.innerHeight / 2);
                 
-                let progress = 0;
-                if (maxScroll > 0) {
-                    progress = -wrapTop / maxScroll;
-                    progress = Math.max(0, Math.min(1, progress));
-                }
-
-                requestAnimationFrame(() => {
-                    if (bgScrollVideo.duration > 0) {
-                        bgScrollVideo.currentTime = progress * bgScrollVideo.duration;
-                    }
-                });
+                let progress = window.scrollY / scrollEnd;
+                progress = Math.max(0, Math.min(1, progress));
+                
+                targetTime = progress * bgScrollVideo.duration;
             }, { passive: true });
+
+            // Efeito de Interpolação Linear (Lerp) para remover os engasgos (stuttering)
+            function renderVideo() {
+                if (isVideoLoaded && bgScrollVideo.duration > 0) {
+                    // Aproxima a currentTime da targetTime gradativamente (suavidade de 5%)
+                    currentTime += (targetTime - currentTime) * 0.05; 
+                    
+                    // Só atualiza o player se a diferença for tangível, economizando CPU/GPU
+                    if (Math.abs(targetTime - currentTime) > 0.005) {
+                        bgScrollVideo.currentTime = currentTime;
+                    }
+                }
+                requestAnimationFrame(renderVideo);
+            }
+            requestAnimationFrame(renderVideo);
         }
 
         const introVideo = document.getElementById('intro-video');
