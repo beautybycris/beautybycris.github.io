@@ -80,8 +80,16 @@
         /* Sem blur e bem opaco para destacar o conteúdo acima */
         .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 245, 240, 0.88); z-index: 1; }
 
-        /* Sem efeito pesado no header */
-        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-color: rgba(250, 245, 240, 0.98); border-bottom: 1px solid rgba(239, 233, 226, 0.8); transition: var(--transition-smooth); transform: translateZ(0); }
+        /* HEADER - 70% Transparente com leve desfoque para não prejudicar leitura */
+        header { 
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000; 
+            background-color: rgba(250, 245, 240, 0.3); 
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(239, 233, 226, 0.3); 
+            transition: var(--transition-smooth); 
+            transform: translateZ(0); 
+        }
         .nav-container { display: flex; justify-content: space-between; align-items: center; height: 90px; }
         .logo-wrap { display: flex; align-items: center; gap: 15px; cursor: pointer; }
         .logo-img { height: 55px; width: auto; object-fit: contain; }
@@ -102,7 +110,7 @@
         .burger div { width: 25px; height: 2px; background-color: var(--text-dark); transition: var(--transition-smooth); }
         
         @media (max-width: 992px) {
-            header { background-color: var(--bg-champagne); border-bottom: 1px solid var(--border-light); }
+            header { background-color: rgba(250, 245, 240, 0.3); border-bottom: 1px solid rgba(239, 233, 226, 0.3); }
             nav { position: fixed; top: 90px; left: 0; right: 0; background-color: var(--bg-champagne); height: 0; overflow: hidden; transition: var(--transition-smooth); }
             nav.active { height: 100vh; border-bottom: 1px solid var(--border-light); }
             nav ul { flex-direction: column; padding: 40px 0; }
@@ -1001,7 +1009,7 @@
                 </div>
                 
                 <div class="footer-dev">
-                    <span data-i18n="footer_dev">Entwickelt von:</span> <a href="#" target="_blank" rel="noopener">Inside Project C.O.</a>
+                    <span data-i18n="footer_dev">Entwickelt von:</span> <a href="https://www.instagram.com/insideprojectco/" target="_blank" rel="noopener">Project Inside C.O.</a>
                 </div>
             </div>
         </footer>
