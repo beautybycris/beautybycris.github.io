@@ -1613,7 +1613,7 @@
             }, { passive: true });
         });
 
-        // --- LÓGICA DE VÍDEO EXTREMA: MAX FPS E FLUIDEZ NO MOBILE ---
+// --- LÓGICA DE VÍDEO EXTREMA: MAX FPS E FLUIDEZ NO MOBILE ---
         const bgScrollVideo = document.getElementById('bgScrollVideo');
         const baSection = document.getElementById('before-after-section'); // NOVO ALVO DO VÍDEO
 
@@ -1654,8 +1654,6 @@
             // Inicia o motor do vídeo
             requestAnimationFrame(renderVideo);
         }
-
-        const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
         if (introVideo && staticAfterVideo) {
             const videoObserver = new IntersectionObserver((entries, observer) => {
