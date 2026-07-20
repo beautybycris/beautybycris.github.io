@@ -209,7 +209,7 @@
         .modal-send-btn:hover { background-color: #1EBE5D; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
         .modal-send-btn svg { width: 20px; height: 20px; fill: white; }
 
-        /* --- Antes & Depois Section --- */
+        /* --- Antes & Depois Carousel Section --- */
         .before-after { padding: 100px 0; background-color: var(--bg-champagne); overflow: hidden; }
         
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
@@ -217,6 +217,7 @@
         .ba-carousel::-webkit-scrollbar { display: none; }
         .ba-carousel.active { cursor: grabbing; }
 
+        /* Item do Carrossel sem moldura */
         .ba-item { 
             min-width: 380px; 
             max-width: 380px; 
@@ -229,6 +230,7 @@
 
         .ba-item-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
         
+        /* Descrição Elegante com a cor Rosê */
         .ba-item-desc { 
             font-family: 'Cormorant Garamond', serif; 
             font-size: 1.15rem; 
@@ -238,7 +240,7 @@
             font-style: italic;
         }
         
-        /* Container das Imagens: Ultra Leve e Interativo */
+        /* Container das Imagens 4:3 (ULTRA LEVE) */
         .ba-slider-container { 
             position: relative; 
             width: 100%; 
@@ -249,28 +251,33 @@
             box-shadow: var(--shadow-subtle);
             border: 1px solid var(--border-light);
             cursor: pointer;
-        }
-
-        .img-after, .img-before { 
-            position: absolute; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            object-fit: cover; 
-            object-position: center; 
-            pointer-events: none; 
-            transition: opacity 0.4s ease-in-out;
+            -webkit-tap-highlight-color: transparent; /* Remove a seleção/piscar azul chato do mobile */
+            user-select: none;
+            -webkit-user-select: none;
         }
         
-        .img-after { z-index: 1; }
-        .img-before { z-index: 2; opacity: 0; }
+        /* A imagem base agora é o ANTES */
+        .ba-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
-        /* Efeito ao passar o mouse ou segurar o dedo */
-        .ba-slider-container:hover .img-before,
-        .ba-slider-container:active .img-before { 
-            opacity: 1; 
+        /* O DEPOIS fica escondido por cima. É revelado instantaneamente com aceleração CSS pura */
+        .ba-after { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
+            clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); 
+            -webkit-clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); 
+            will-change: clip-path;
+            transition: clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1), -webkit-clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1);
+            pointer-events: none;
+        }
+        .ba-after img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
+        
+        /* Quando passar o mouse (PC) ou pressionar/segurar o dedo (Mobile) revela o Depois */
+        .ba-slider-container:hover .ba-after,
+        .ba-slider-container:active .ba-after {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
         }
 
-        /* Badge Indicativo */
+        /* Badge Indicativo (Segure para ver) */
         .ba-badge {
             position: absolute;
             bottom: 15px;
@@ -290,6 +297,7 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
+        /* Esconde o aviso ao revelar a imagem */
         .ba-slider-container:hover .ba-badge,
         .ba-slider-container:active .ba-badge { 
             opacity: 0; 
@@ -692,11 +700,13 @@
                 <div class="ba-item animate-on-scroll">
                     <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
                     <div class="ba-slider-container">
-                        <!-- Imagem do DEPOIS (Padrão visível) -->
-                        <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Nachher" class="img-after" loading="lazy">
-                        <!-- Imagem do ANTES (Escondida, aparece no toque) -->
-                        <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" class="img-before" loading="lazy">
-                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
+                        <!-- Imagem Base Visível agora é o ANTES -->
+                        <img src="https://i.imgur.com/Q9oIXao.jpeg" alt="Vorher" class="ba-img" loading="lazy">
+                        <!-- Imagem Escondida (Revelada ao tocar/hover) agora é o DEPOIS -->
+                        <div class="ba-after">
+                            <img src="https://i.imgur.com/XVCL0sy.jpeg" alt="Nachher" loading="lazy">
+                        </div>
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Nachher</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_1">Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.</p>
                 </div>
@@ -704,51 +714,61 @@
                 <div class="ba-item animate-on-scroll delay-1">
                     <h3 class="ba-item-title" data-i18n="ba_title_2">Plasma Pen</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
-                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
-                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
+                        <img src="" alt="Vorher" class="ba-img media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-after">
+                            <img src="" alt="Nachher" class="media-placeholder" loading="lazy">
+                        </div>
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Nachher</div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-2">
                     <h3 class="ba-item-title" data-i18n="ba_title_3">Lippenpigmentierung</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
-                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
-                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
+                        <img src="" alt="Vorher" class="ba-img media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-after">
+                            <img src="" alt="Nachher" class="media-placeholder" loading="lazy">
+                        </div>
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Nachher</div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-3">
                     <h3 class="ba-item-title" data-i18n="ba_title_4">Wimpernverlängerung</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
-                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
-                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
+                        <img src="" alt="Vorher" class="ba-img media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-after">
+                            <img src="" alt="Nachher" class="media-placeholder" loading="lazy">
+                        </div>
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Nachher</div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-4">
                     <h3 class="ba-item-title" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
-                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
-                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
+                        <img src="" alt="Vorher" class="ba-img media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-after">
+                            <img src="" alt="Nachher" class="media-placeholder" loading="lazy">
+                        </div>
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Nachher</div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße, das Ihren persönlichen Stil hervorhebt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-5">
                     <h3 class="ba-item-title" data-i18n="ba_title_6">Gesichtsreinigung</h3>
                     <div class="ba-slider-container">
-                        <img src="" alt="Nachher" class="img-after media-placeholder" loading="lazy">
-                        <img src="" alt="Vorher" class="img-before media-placeholder" style="background:#ddd;" loading="lazy">
-                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Vorher</div>
+                        <img src="" alt="Vorher" class="ba-img media-placeholder" style="background:#ddd;" loading="lazy">
+                        <div class="ba-after">
+                            <img src="" alt="Nachher" class="media-placeholder" loading="lazy">
+                        </div>
+                        <div class="ba-badge" data-i18n="ba_badge">Gedrückt halten für Nachher</div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde, strahlende und glatte Haut, die Ihre natürliche Schönheit hervorhebt.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine und gesunde Haut.</p>
                 </div>
 
             </div>
@@ -1109,13 +1129,13 @@
                 s11_title: "Entfernung von Milien", s11_desc: "Entfernung von Hautgrieß.", s11_ben: "Glattes Hautbild", s11_abl: "Präzises Öffnen", s11_dur: "20 Min.",
                 s12_title: "Gesichts-Microneedling", s12_desc: "Anti-Aging zur Hautverjüngung.", s12_ben: "Festere Haut", s12_abl: "Needling mit Serum", s12_dur: "60 Min.",
                 s13_title: "Körper-Microneedling", s13_desc: "Reduzierung von Dehnungsstreifen.", s13_ben: "Gewebestraffung", s13_abl: "Intensives Needling", s13_dur: "60-90 Min.",
-                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge: "Gedrückt halten für Vorher",
-                ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt, um ein jüngeres und erfrischtes Aussehen zurückzugeben.",
-                ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen, was Ihr Lächeln und Ihr Selbstwertgefühl stärkt.",
-                ba_title_4: "Wimpernverlängerung", ba_desc_4: "Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert, um Ihre Gesichtszüge zu betonen und einen markanteren, selbstbewussteren und anspruchsvolleren Blick zu verleihen.",
-                ba_title_5: "Maniküre & Pediküre", ba_desc_5: "Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße, das Ihren persönlichen Stil hervorhebt.",
-                ba_title_6: "Gesichtsreinigung", ba_desc_6: "Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine, gesunde, strahlende und glatte Haut, die Ihre natürliche Schönheit hervorhebt.",
+                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge: "Gedrückt halten für Nachher",
+                ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet und die Haut sicher verjüngt.",
+                ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder aussehen.",
+                ba_title_4: "Wimpernverlängerung", ba_desc_4: "Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl.",
+                ba_title_5: "Maniküre & Pediküre", ba_desc_5: "Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses Aussehen für Ihre Hände und Füße.",
+                ba_title_6: "Gesichtsreinigung", ba_desc_6: "Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration anregt. Das Ergebnis ist eine reine und gesunde Haut.",
                 video_sub: "Einblicke im Video", video_title: "Exklusive Insights",
                 reviews_sub: "Kundenmeinungen", reviews_title: "Google Bewertungen", google_reviews_count: "Basierend auf 13 Google-Rezensionen", btn_google_page: "Auf Google ansehen",
                 r1_date: "vor 7 Monaten", r1_text: "Hervorragender Profi, ich hatte eine Gesichtsreinigung und es hat mir sehr gut gefallen, ich empfehle es! 👏",
@@ -1157,13 +1177,13 @@
                 s11_title: "Milia Removal", s11_desc: "Gentle extraction of milia.", s11_ben: "Smooth skin", s11_abl: "Precise extraction", s11_dur: "20 min",
                 s12_title: "Facial Microneedling", s12_desc: "Collagen stimulation.", s12_ben: "Firmer skin", s12_abl: "Needling with serum", s12_dur: "60 min",
                 s13_title: "Body Microneedling", s13_desc: "Reduce stretch marks.", s13_ben: "Tissue firming", s13_abl: "Deep needling", s13_dur: "60-90 min",
-                ba_sub: "Real Results", ba_title: "Before & After", ba_badge: "Hold to see Before",
-                ba_title_1: "Microblading", ba_desc_1: "Microblading is a hair-by-hair technique that provides an extremely natural effect, correcting flaws, defining the shape of the eyebrows, and enhancing facial expression, elevating your self-esteem and transmitting more confidence at all times.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "The Plasma Pen is an aesthetic treatment that stimulates natural collagen production, promoting firmness, smoothing expression lines, reducing sagging, and safely rejuvenating the skin without surgery, giving back a younger and renewed appearance.",
-                ba_title_3: "Microlabial", ba_desc_3: "Lip Micropigmentation enhances lip contours, evens out the tone, and provides a delicate lipstick effect, leaving your lips looking healthier, more feminine, defined, and naturally beautiful, valuing your smile and your self-esteem.",
-                ba_title_4: "Eyelash Extensions", ba_desc_4: "Eyelash Extensions enhance the natural beauty of your eyes, providing more elegance, expression, and self-esteem. The lashes are applied individually to highlight your features, transmitting a more striking, confident, and sophisticated look.",
-                ba_title_5: "Manicure & Pedicure", ba_desc_5: "Complete Manicure and Pedicure care guarantees perfectly shaped nails, hydrated cuticles, and a flawless, elegant appearance for your hands and feet, enhancing your style and health.",
-                ba_title_6: "Facial Cleansing", ba_desc_6: "Professional Facial Cleansing removes impurities and unclogs pores while stimulating cell renewal and collagen production. The result is incredibly clean, healthy, glowing, and smooth skin, enhancing your natural beauty.",
+                ba_sub: "Real Results", ba_title: "Before & After", ba_badge: "Hold to see After",
+                ba_title_1: "Microblading", ba_desc_1: "Microblading is a hair-by-hair technique that provides an extremely natural effect, correcting flaws, defining the shape of the eyebrows, and enhancing facial expression.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "The Plasma Pen is an aesthetic treatment that stimulates natural collagen production, promoting firmness, smoothing expression lines, reducing sagging, and safely rejuvenating the skin.",
+                ba_title_3: "Microlabial", ba_desc_3: "Lip Micropigmentation enhances lip contours, evens out the tone, and provides a delicate lipstick effect, leaving your lips looking healthier, more feminine, and naturally beautiful.",
+                ba_title_4: "Eyelash Extensions", ba_desc_4: "Eyelash Extensions enhance the natural beauty of your eyes, providing more elegance, expression, and self-esteem. The lashes are applied individually to highlight your features.",
+                ba_title_5: "Manicure & Pedicure", ba_desc_5: "Complete Manicure and Pedicure care guarantees perfectly shaped nails, hydrated cuticles, and a flawless, elegant appearance for your hands and feet.",
+                ba_title_6: "Facial Cleansing", ba_desc_6: "Professional Facial Cleansing removes impurities and unclogs pores while stimulating cell renewal and collagen production. The result is incredibly clean and healthy skin.",
                 video_sub: "Video Insights", video_title: "Treatment Insights",
                 reviews_sub: "Customer Reviews", reviews_title: "Google Reviews", google_reviews_count: "Based on 13 Google reviews", btn_google_page: "View on Google",
                 r1_date: "7 months ago", r1_text: "Excellent professional, I had a facial cleansing and liked it a lot, recommend! 👏",
@@ -1205,13 +1225,13 @@
                 s11_title: "Remoção de Milium", s11_desc: "Extração higiênica e indolor.", s11_ben: "Pele lisa", s11_abl: "Micro-extração", s11_dur: "20 min",
                 s12_title: "Microagulhamento Facial", s12_desc: "Indução de colágeno.", s12_ben: "Pele firme", s12_abl: "Needling com sérum", s12_dur: "60 min",
                 s13_title: "Microagulhamento Corporal", s13_desc: "Regeneração de estrias.", s13_ben: "Estrias suavizadas", s13_abl: "Needling profundo", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge: "Segure para ver o Antes",
+                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge: "Segure para ver o Depois",
                 ba_title_1: "Microblading", ba_desc_1: "O Microblading é uma técnica fio a fio que proporciona um efeito extremamente natural, corrigindo falhas, definindo o formato das sobrancelhas e valorizando a expressão do rosto, elevando sua autoestima e transmitindo mais confiança em todos os momentos.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "A Plasma Pen é um tratamento estético que estimula a produção natural de colágeno, promovendo firmeza, suavizando linhas de expressão, reduzindo a flacidez e rejuvenescendo a pele de forma segura, sem cirurgia e com resultados naturais, devolvendo uma aparência mais jovem e renovada.",
-                ba_title_3: "Microlabial", ba_desc_3: "A Micropigmentação Labial realça o contorno dos lábios, uniformiza a tonalidade e proporciona um delicado efeito de batom, deixando os lábios com aparência mais saudável, feminina, definida e naturalmente bonita, valorizando seu sorriso e sua autoestima.",
-                ba_title_4: "Extensão de Cílios", ba_desc_4: "A Extensão de Cílios realça a beleza natural do olhar, proporcionando mais elegância, expressão e autoestima. Os fios são aplicados de forma personalizada para destacar seus traços, transmitindo um olhar mais marcante, confiante e sofisticado.",
-                ba_title_5: "Manicure e Pedicure", ba_desc_5: "O cuidado completo com Manicure e Pedicure garante unhas perfeitamente modeladas, cutículas hidratadas e uma aparência impecável e elegante para suas mãos e pés, valorizando seu estilo e saúde.",
-                ba_title_6: "Limpeza de Pele", ba_desc_6: "A Limpeza de Pele Profunda remove impurezas e desobstrui os poros, estimulando a renovação celular e a produção de colágeno. O resultado é uma pele incrivelmente limpa, saudável, iluminada e com textura suave, valorizando a sua beleza natural.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "A Plasma Pen é um tratamento estético que estimula a produção natural de colágeno, promovendo firmeza, suavizando linhas de expressão, reduzindo a flacidez e rejuvenescendo a pele de forma segura, sem cirurgia e com resultados naturais.",
+                ba_title_3: "Microlabial", ba_desc_3: "A Micropigmentação Labial realça o contorno dos lábios, uniformiza a tonalidade e proporciona um delicado efeito de batom, deixando os lábios com aparência mais saudável, feminina, definida e naturalmente bonita.",
+                ba_title_4: "Extensão de Cílios", ba_desc_4: "A Extensão de Cílios realça a beleza natural do olhar, proporcionando mais elegância, expressão e autoestima. Os fios são aplicados de forma personalizada para destacar seus traços.",
+                ba_title_5: "Manicure e Pedicure", ba_desc_5: "O cuidado completo com Manicure e Pedicure garante unhas perfeitamente modeladas, cutículas hidratadas e uma aparência impecável e elegante para suas mãos e pés.",
+                ba_title_6: "Limpeza de Pele", ba_desc_6: "A Limpeza de Pele Profunda remove impurezas e desobstrui os poros, estimulando a renovação celular e a produção de colágeno. O resultado é uma pele incrivelmente limpa, saudável, iluminada e com textura suave.",
                 video_sub: "Vídeos", video_title: "Insights Exclusivos",
                 reviews_sub: "Avaliações dos Clientes", reviews_title: "Google Avaliações", google_reviews_count: "Resumo de 13 avaliações no Google", btn_google_page: "Ver no Google",
                 r1_date: "7 meses atrás", r1_text: "Profissional excelente, fiz uma limpeza de pele gostei muito, recomendo! 👏",
@@ -1253,13 +1273,13 @@
                 s11_title: "Eliminación de Millium", s11_desc: "Extracción higiénica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge: "Mantén para ver el Antes",
-                ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial, elevando su autoestima y transmitiendo más confianza en todo momento.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuveneciendo la piel de forma segura, sin cirugía y con resultados naturales.",
+                ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge: "Mantén para ver el Después",
+                ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuveneciendo la piel de forma segura, sin cirugía.",
                 ba_title_3: "Microlabial", ba_desc_3: "La Micropigmentación Labial realza el contorno de los labios, uniformiza el tono y proporciona un delicado efecto de lápiz labial, dejando los labios con una apariencia más saludable, femenina, definida y naturalmente hermosa.",
-                ba_title_4: "Extensión de Pestañas", ba_desc_4: "La Extensión de Pestañas realza la belleza natural de su mirada, proporcionando más elegancia, expresión y autoestima. Las pestañas se aplican de forma personalizada para destacar sus rasgos, transmitiendo una mirada más impactante.",
+                ba_title_4: "Extensión de Pestañas", ba_desc_4: "La Extensión de Pestañas realza la belleza natural de su mirada, proporcionando más elegancia, expresión y autoestima. Las pestañas se aplican de forma personalizada para destacar sus rasgos.",
                 ba_title_5: "Manicura y Pedicura", ba_desc_5: "El cuidado completo con Manicura y Pedicura garantiza uñas perfectamente modeladas, cutículas hidratadas y una apariencia impecable y elegante para sus manos y pies.",
-                ba_title_6: "Limpieza Facial", ba_desc_6: "La Limpieza Facial Profunda elimina impurezas y desobstruye los poros, además de estimular la renovación celular y el colágeno. El resultado es una piel increíblemente limpia, saludable, luminosa y con textura suave, resaltando su belleza natural.",
+                ba_title_6: "Limpieza Facial", ba_desc_6: "La Limpieza Facial Profunda elimina impurezas y desobstruye los poros, además de estimular la renovación celular y el colágeno. El resultado es una piel increíblemente limpia y saludable.",
                 video_sub: "Videos", video_title: "Insights Exclusivos",
                 reviews_sub: "Opiniones", reviews_title: "Reseñas de Google", google_reviews_count: "Basado en 13 reseñas en Google", btn_google_page: "Ver en Google",
                 r1_date: "hace 7 meses", r1_text: "Excelente profesional, limpieza de cutis muy buena, recomiendo! 👏",
@@ -1301,13 +1321,13 @@
                 s11_title: "Retrait de Milium", s11_desc: "Extraction hygiénique.", s11_ben: "Peau lisse", s11_abl: "Extraction", s11_dur: "20 min",
                 s12_title: "Microneedling Visage", s12_desc: "Stimulation collagène.", s12_ben: "Peau ferme", s12_abl: "Sérum", s12_dur: "60 min",
                 s13_title: "Microneedling Corps", s13_desc: "Réduit vergetures.", s13_ben: "Fermeté", s13_abl: "Needling", s13_dur: "60-90 min",
-                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge: "Maintenez pour voir Avant",
-                ba_title_1: "Microblading", ba_desc_1: "Le Microblading est une technique poil par poil qui offre un effet extrêmement naturel, corrigeant les défauts, définissant la forme des sourcils et valorisant l'expression du visage, renforçant ainsi votre estime de vous.",
+                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge: "Maintenez pour voir l'Après",
+                ba_title_1: "Microblading", ba_desc_1: "Le Microblading est une technique poil par poil qui offre un effet extrêmement naturel, corrigeant les défauts, définissant la forme des sourcils et valorisant l'expression du visage.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Le Plasma Pen est un traitement esthétique qui stimule la production naturelle de collagène, favorisant la fermeté, lissant les lignes d'expression, réduisant le relâchement et rajeunissant la peau de manière sûre, sans chirurgie.",
                 ba_title_3: "Microlabial", ba_desc_3: "La micropigmentation des lèvres sublime le contour des lèvres, uniformise la couleur et offre un effet rouge à lèvres délicat, laissant les lèvres plus saines, féminines, définies et naturellement belles.",
                 ba_title_4: "Extensions de Cils", ba_desc_4: "L'Extension de Cils met en valeur la beauté naturelle de votre regard, offrant plus d'élégance, d'expression et d'estime de soi. Les cils sont appliqués de manière personnalisée pour souligner vos traits.",
                 ba_title_5: "Manucure & Pédicure", ba_desc_5: "Le soin complet Manucure et Pédicure garantit des ongles parfaitement modelés, des cuticules hydratées et une apparence impeccable et élégante pour vos mains et vos pieds.",
-                ba_title_6: "Nettoyage du Visage", ba_desc_6: "Le Nettoyage de Peau Professionnel élimine les impuretés et désobstrue les pores, tout en stimulant le renouvellement cellulaire et le collagène. Le résultat est une peau incroyablement propre, saine, lumineuse et douce, mettant en valeur votre beauté naturelle.",
+                ba_title_6: "Nettoyage du Visage", ba_desc_6: "Le Nettoyage de Peau Professionnel élimine les impuretés et désobstrue les pores, tout en stimulant le renouvellement cellulaire et le collagène. Le résultat est une peau incroyablement propre, saine, lumineuse et douce.",
                 video_sub: "Vidéos", video_title: "Aperçu des Soins",
                 reviews_sub: "Avis Clients", reviews_title: "Avis Google", google_reviews_count: "Basé sur 13 avis Google", btn_google_page: "Voir sur Google",
                 r1_date: "il y a 7 mois", r1_text: "Excellente professionnelle, nettoyage de peau parfait ! 👏",
@@ -1349,13 +1369,13 @@
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
                 s12_title: "Микронидлинг Лица", s12_desc: "Омоложение.", s12_ben: "Упругая кожа", s12_abl: "Сыворотка", s12_dur: "60 мин",
                 s13_title: "Микронидлинг Тела", s13_desc: "Уменьшение растяжек.", s13_ben: "Гладкость", s13_abl: "Уход", s13_dur: "60-90 мин",
-                ba_sub: "Результаты", ba_title: "До & После", ba_badge: "Удерживайте, чтобы увидеть До",
-                ba_title_1: "Microblading", ba_desc_1: "Микроблейдинг — это волосковая техника, обеспечивающая чрезвычайно естественный эффект, исправляя недостатки, очерчивая форму бровей и подчеркивая выражение лица, повышая вашу уверенность в себе в любой момент.",
-                ba_title_2: "Plasma Pen", ba_desc_2: "Plasma Pen — это эстетическая процедура, стимулирующая выработку естественного коллагена, придающая упругость, сглаживающая мимические морщины, уменьшающая дряблость и безопасно омолаживающая кожу.",
-                ba_title_3: "Microlabial", ba_desc_3: "Микропигментация губ подчеркивает контур, выравнивает тон и создает деликатный эффект помады, делая губы более здоровыми, женственными, очерченными и естественно красивыми.",
+                ba_sub: "Результаты", ba_title: "До & После", ba_badge: "Удерживайте, чтобы увидеть После",
+                ba_title_1: "Microblading", ba_desc_1: "Микроблейдинг — это волосковая техника, обеспечивающая чрезвычайно естественный эффект, исправляя недостатки, очерчивая форму бровей и подчеркивая выражение лица.",
+                ba_title_2: "Plasma Pen", ba_desc_2: "Plasma Pen — это эстетическая процедура, стимулирующая выработку естественного коллагена, придающая упругость, сглаживающая мимические морщины и безопасно омолаживающая кожу.",
+                ba_title_3: "Microlabial", ba_desc_3: "Микропигментация губ подчеркивает контур, выравнивает тон и создает деликатный эффект помады, делая губы более здоровыми, женственными и естественно красивыми.",
                 ba_title_4: "Наращивание Ресниц", ba_desc_4: "Наращивание ресниц подчеркивает естественную красоту вашего взгляда, придавая больше элегантности, выразительности и уверенности. Ресницы наносятся индивидуально.",
-                ba_title_5: "Маникюр и Педикюр", ba_desc_5: "Комплексный уход за руками и ногами гарантирует идеальную форму ногтей, увлажненную кутикулу и безупречный, элегантный внешний вид, подчеркивая ваш стиль и здоровье.",
-                ba_title_6: "Чистка Лица", ba_desc_6: "Профессиональная чистка лица удаляет загрязнения и очищает поры, стимулируя обновление клеток и выработку коллагена. Результат — невероятно чистая, здоровая, сияющая и гладкая кожа, подчеркивающая вашу естественную красоту.",
+                ba_title_5: "Маникюр и Педикюр", ba_desc_5: "Комплексный уход за руками и ногами гарантирует идеальную форму ногтей, увлажненную кутикулу и безупречный, элегантный внешний вид.",
+                ba_title_6: "Чистка Лица", ba_desc_6: "Профессиональная чистка лица удаляет загрязнения и очищает поры, стимулируя обновление клеток и выработку коллагена. Результат — невероятно чистая, здоровая и сияющая кожа.",
                 video_sub: "Видео", video_title: "Обзор Процедур",
                 reviews_sub: "Отзывы", reviews_title: "Google Отзывы", google_reviews_count: "13 отзывов в Google", btn_google_page: "Смотреть в Google",
                 r1_date: "7 месяцев назад", r1_text: "Отличный специалист, чистка супер! 👏",
@@ -1581,20 +1601,7 @@
             }
         });
 
-        // Revelação Automática da Seção (Nova e Ultra Leve)
-        const baObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Após meio segundo que o item entrou na tela, ele revela o Depois
-                    setTimeout(() => {
-                        entry.target.classList.add('revealed');
-                    }, 500);
-                    baObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        document.querySelectorAll('.ba-item').forEach(el => baObserver.observe(el));
+        // Removido o baScrollReveal super pesado! Agora é 100% via CSS :hover e :active
 
         const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
