@@ -706,7 +706,7 @@
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
                     </div>
-                    <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.</p>
+                    <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und naturally schön aussehen.</p>
                 </div>
 
                 <div class="ba-item animate-on-scroll delay-3">
@@ -1617,11 +1617,12 @@
 
         if (bgScrollVideo && baSection) {
             bgScrollVideo.pause();
-            
+            bgScrollVideo.currentTime = 0;
+
             let isVideoLoaded = false;
             let scrollEnd = 0;
-            let currentVideoTime = 0;
             let targetTime = 0;
+            let isSeeking = false; // <-- A CHAVE: Controle de decodificação
 
             function calculateScrollBounds() {
                 scrollEnd = (baSection.offsetTop + baSection.offsetHeight) - window.innerHeight;
@@ -1631,12 +1632,13 @@
             window.addEventListener('resize', calculateScrollBounds);
             window.addEventListener('load', calculateScrollBounds);
 
-            bgScrollVideo.addEventListener('loadedmetadata', () => { 
+            // Garante que captura a duração mesmo se o vídeo já estiver em cache
+            bgScrollVideo.addEventListener('loadedmetadata', () => {
                 isVideoLoaded = true;
-                calculateScrollBounds(); 
+                calculateScrollBounds();
             });
-            
-            if (bgScrollVideo.readyState >= 1) {
+
+            if (bgScrollVideo.readyState >= 2) {
                 isVideoLoaded = true;
                 calculateScrollBounds();
             }
@@ -1650,24 +1652,31 @@
             }
 
             if (typeof lenis !== 'undefined' && lenis) {
+                // O Lenis já entrega um valor suave, sem necessidade de Lerp matemático extra
                 lenis.on('scroll', (e) => updateTargetTime(e.animatedScroll));
             } else {
                 window.addEventListener('scroll', () => updateTargetTime(window.scrollY), { passive: true });
             }
 
+            // O navegador avisa quando terminou de buscar (seek) o frame exato
+            bgScrollVideo.addEventListener('seeked', () => {
+                isSeeking = false;
+            });
+
             function renderVideo() {
                 if (isVideoLoaded && bgScrollVideo.duration > 0) {
-                    currentVideoTime += (targetTime - currentVideoTime) * 0.1;
-                    
-                    if (Math.abs(bgScrollVideo.currentTime - currentVideoTime) > 0.03) {
-                        bgScrollVideo.currentTime = currentVideoTime;
+                    // Atualiza apenas se a diferença for > 1 frame (~0.04s) E o navegador estiver livre
+                    if (!isSeeking && Math.abs(bgScrollVideo.currentTime - targetTime) > 0.04) {
+                        isSeeking = true;
+                        bgScrollVideo.currentTime = targetTime;
                     }
                 }
                 requestAnimationFrame(renderVideo);
             }
             
             requestAnimationFrame(renderVideo);
-            
+
+            // Hack para ativar o vídeo no iOS no primeiro toque
             document.addEventListener('touchstart', () => {
                 bgScrollVideo.play().then(() => bgScrollVideo.pause()).catch(() => {});
             }, { once: true });
