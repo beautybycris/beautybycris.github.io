@@ -653,7 +653,6 @@
         </div>
     </div>
 
-    <!-- O VÍDEO AGORA TERMINA NESTA SEÇÃO -->
     <section class="before-after" id="before-after-section">
         <div class="container">
             <div class="section-header animate-on-scroll">
@@ -725,7 +724,6 @@
                     <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert.</p>
                 </div>
 
-                <!-- IMAGENS MANICURE & PEDICURE APLICADAS AQUI -->
                 <div class="ba-item animate-on-scroll delay-4">
                     <h3 class="ba-item-title" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
                     <div class="ba-slider-container">
@@ -1613,47 +1611,69 @@
             }, { passive: true });
         });
 
-// --- LÓGICA DE VÍDEO EXTREMA: MAX FPS E FLUIDEZ NO MOBILE ---
+        // --- LÓGICA DE VÍDEO EXTREMA: MAX FPS E FLUIDEZ NO MOBILE ---
         const bgScrollVideo = document.getElementById('bgScrollVideo');
-        const baSection = document.getElementById('before-after-section'); // NOVO ALVO DO VÍDEO
+        const baSection = document.getElementById('before-after-section'); // ONDE O VÍDEO DEVE PARAR
 
         if (bgScrollVideo && baSection) {
             bgScrollVideo.pause();
             
             let isVideoLoaded = false;
-            bgScrollVideo.addEventListener('loadedmetadata', () => { isVideoLoaded = true; });
-            if (bgScrollVideo.readyState >= 1) isVideoLoaded = true;
-
+            let scrollEnd = 0;
             let currentVideoTime = 0;
+            let targetTime = 0;
+
+            function calculateScrollBounds() {
+                scrollEnd = (baSection.offsetTop + baSection.offsetHeight) - window.innerHeight;
+                if (scrollEnd <= 0) scrollEnd = 1000;
+            }
+
+            window.addEventListener('resize', calculateScrollBounds);
+            window.addEventListener('load', calculateScrollBounds);
+
+            bgScrollVideo.addEventListener('loadedmetadata', () => { 
+                isVideoLoaded = true;
+                calculateScrollBounds(); 
+            });
+            
+            if (bgScrollVideo.readyState >= 1) {
+                isVideoLoaded = true;
+                calculateScrollBounds();
+            }
+
+            function updateTargetTime(currentScroll) {
+                if (!isVideoLoaded || !bgScrollVideo.duration || scrollEnd === 0) return;
+                
+                let progress = currentScroll / scrollEnd;
+                progress = Math.max(0, Math.min(1, progress));
+                targetTime = progress * bgScrollVideo.duration;
+            }
+
+            if (typeof lenis !== 'undefined' && lenis) {
+                lenis.on('scroll', (e) => updateTargetTime(e.animatedScroll));
+            } else {
+                window.addEventListener('scroll', () => updateTargetTime(window.scrollY), { passive: true });
+            }
 
             function renderVideo() {
                 if (isVideoLoaded && bgScrollVideo.duration > 0) {
+                    currentVideoTime += (targetTime - currentVideoTime) * 0.1;
                     
-                    // Ao ler o scrollY diretamente dentro do RequestAnimationFrame, 
-                    // forçamos o navegador (incluindo iOS) a atualizar o frame mesmo com o dedo sendo arrastado
-                    let scrollEnd = (baSection.offsetTop + baSection.offsetHeight) - window.innerHeight;
-                    if (scrollEnd <= 0) scrollEnd = 1000;
-                    
-                    let progress = window.scrollY / scrollEnd;
-                    progress = Math.max(0, Math.min(1, progress));
-                    
-                    let targetTime = progress * bgScrollVideo.duration;
-
-                    // Lerp para transição macia
-                    currentVideoTime += (targetTime - currentVideoTime) * 0.15;
-                    
-                    // Limite baixíssimo (0.01) para aproveitar todos os frames possíveis do vídeo sem travamento
-                    if (Math.abs(bgScrollVideo.currentTime - currentVideoTime) > 0.01) {
+                    if (Math.abs(bgScrollVideo.currentTime - currentVideoTime) > 0.03) {
                         bgScrollVideo.currentTime = currentVideoTime;
                     }
                 }
-                // O loop se repete indefinidamente, garantindo atualização em tempo real
                 requestAnimationFrame(renderVideo);
             }
             
-            // Inicia o motor do vídeo
             requestAnimationFrame(renderVideo);
+            
+            document.addEventListener('touchstart', () => {
+                bgScrollVideo.play().then(() => bgScrollVideo.pause()).catch(() => {});
+            }, { once: true });
         }
+
+        const introVideo = document.getElementById('intro-video');
         const staticAfterVideo = document.getElementById('static-after-video');
         if (introVideo && staticAfterVideo) {
             const videoObserver = new IntersectionObserver((entries, observer) => {
