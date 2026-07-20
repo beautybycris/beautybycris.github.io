@@ -80,13 +80,13 @@
         /* Sem blur e bem opaco para destacar o conteúdo acima */
         .bg-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(250, 245, 240, 0.88); z-index: 1; }
 
-        /* HEADER - 70% Transparente com leve desfoque para não prejudicar leitura */
+        /* HEADER - Quase totalmente transparente (0.05) com desfoque moderado */
         header { 
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000; 
-            background-color: rgba(250, 245, 240, 0.3); 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(239, 233, 226, 0.3); 
+            background-color: rgba(250, 245, 240, 0.05); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(239, 233, 226, 0.1); 
             transition: var(--transition-smooth); 
             transform: translateZ(0); 
         }
@@ -110,7 +110,7 @@
         .burger div { width: 25px; height: 2px; background-color: var(--text-dark); transition: var(--transition-smooth); }
         
         @media (max-width: 992px) {
-            header { background-color: rgba(250, 245, 240, 0.3); border-bottom: 1px solid rgba(239, 233, 226, 0.3); }
+            header { background-color: rgba(250, 245, 240, 0.05); border-bottom: 1px solid rgba(239, 233, 226, 0.1); }
             nav { position: fixed; top: 90px; left: 0; right: 0; background-color: var(--bg-champagne); height: 0; overflow: hidden; transition: var(--transition-smooth); }
             nav.active { height: 100vh; border-bottom: 1px solid var(--border-light); }
             nav ul { flex-direction: column; padding: 40px 0; }
@@ -161,7 +161,6 @@
         @media (max-width: 992px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 576px) { .why-grid { grid-template-columns: 1fr; } }
 
-        /* Sem vidro fosco! Cor sólida quase opaca */
         .glass-section { background-color: rgba(250, 245, 240, 0.97); position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.5); }
 
         .services { padding: 100px 0; }
@@ -239,7 +238,6 @@
             transition: opacity 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap;
         }
 
-        /* Botões customizados inferiores (Pedicure / Manicure) */
         .label-bottom-left, .label-bottom-right {
             position: absolute; bottom: 10px; z-index: 4; 
             background: rgba(250, 245, 240, 0.95); color: var(--accent-rose); 
@@ -1097,6 +1095,29 @@
 
         const isMobileDevice = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) || window.innerWidth <= 992;
         
+        // --- LÓGICA DE TELA CHEIA (FULLSCREEN) ---
+        let hasAttemptedFullscreen = false;
+        
+        function requestFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => console.log("Fullscreen bloqueado pelo navegador:", err));
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen().catch(err => console.log("Fullscreen bloqueado pelo navegador:", err));
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen().catch(err => console.log("Fullscreen bloqueado pelo navegador:", err));
+            }
+        }
+
+        // Tenta entrar em tela cheia no primeiro toque na tela no celular (único meio permitido pelos navegadores)
+        document.addEventListener('touchstart', function() {
+            if (isMobileDevice && !hasAttemptedFullscreen) {
+                hasAttemptedFullscreen = true; // Marca que já tentou, para não tentar novamente se o usuário sair
+                requestFullscreen();
+            }
+        }, { passive: true });
+
+        // --- LENIS SCROLL ---
         let lenis;
         if (!isMobileDevice) {
             lenis = new Lenis({
@@ -1565,7 +1586,6 @@
         window.addEventListener('scroll', () => {
             if (!isScrolling) {
                 window.requestAnimationFrame(() => {
-                    // Lógica corrigida: o botão só aparece nos últimos ~350 pixels da página
                     const scrollPosition = window.scrollY + window.innerHeight;
                     const documentHeight = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
                     
