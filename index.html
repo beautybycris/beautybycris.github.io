@@ -776,17 +776,17 @@
                     <h3 class="ba-item-title" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
                     <div class="ba-slider-container">
                         <!-- Imagens com IDs para facilitar a troca no JS -->
-                        <img src="https://i.imgur.com/sM8ozWw.jpeg" alt="Vorher" class="ba-img" id="maniPediBefore" loading="lazy">
+                        <img src="https://i.imgur.com/uI8dSL1.jpeg" alt="Vorher" class="ba-img" id="maniPediBefore" loading="lazy">
                         <div class="ba-after">
-                            <img src="https://i.imgur.com/t9PNWRj.jpeg" alt="Nachher" id="maniPediAfter" loading="lazy">
+                            <img src="https://i.imgur.com/eBZ8iz9.jpeg" alt="Nachher" id="maniPediAfter" loading="lazy">
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
                             <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
                         </div>
-                        <!-- Botões Interativos substituem as antigas labels -->
-                        <div class="ba-toggle-btn btn-left" id="btnPedi" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()" onclick="switchManiPedi('pedi', event)" data-i18n="lbl_pedicure">Pedicure</div>
-                        <div class="ba-toggle-btn btn-right active" id="btnMani" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()" onclick="switchManiPedi('mani', event)" data-i18n="lbl_manicure">Maniküre</div>
+                        <!-- Botões Interativos (Pedicure ativo por padrão) -->
+                        <div class="ba-toggle-btn btn-left active" id="btnPedi" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()" onclick="switchManiPedi('pedi', event)" data-i18n="lbl_pedicure">Pediküre</div>
+                        <div class="ba-toggle-btn btn-right" id="btnMani" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()" onclick="switchManiPedi('mani', event)" data-i18n="lbl_manicure">Maniküre</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße.</p>
                 </div>
@@ -1107,18 +1107,17 @@
         function requestFullscreen() {
             const elem = document.documentElement;
             if (elem.requestFullscreen) {
-                elem.requestFullscreen().catch(err => console.log("Fullscreen bloqueado pelo navegador:", err));
+                elem.requestFullscreen().catch(err => console.log("Fullscreen bloqueado:", err));
             } else if (elem.webkitRequestFullscreen) { /* Safari */
-                elem.webkitRequestFullscreen().catch(err => console.log("Fullscreen bloqueado pelo navegador:", err));
+                elem.webkitRequestFullscreen().catch(err => console.log("Fullscreen bloqueado:", err));
             } else if (elem.msRequestFullscreen) { /* IE11 */
-                elem.msRequestFullscreen().catch(err => console.log("Fullscreen bloqueado pelo navegador:", err));
+                elem.msRequestFullscreen().catch(err => console.log("Fullscreen bloqueado:", err));
             }
         }
 
-        // Tenta entrar em tela cheia no primeiro toque na tela no celular (único meio permitido pelos navegadores)
         document.addEventListener('touchstart', function() {
             if (isMobileDevice && !hasAttemptedFullscreen) {
-                hasAttemptedFullscreen = true; // Marca que já tentou, para não tentar novamente se o usuário sair
+                hasAttemptedFullscreen = true; 
                 requestFullscreen();
             }
         }, { passive: true });
@@ -1210,7 +1209,7 @@
                 s11_title: "Entfernung von Milien", s11_desc: "Entfernung von Hautgrieß.", s11_ben: "Glattes Hautbild", s11_abl: "Präzises Öffnen", s11_dur: "20 Min.",
                 s12_title: "Gesichts-Microneedling", s12_desc: "Anti-Aging zur Hautverjüngung.", s12_ben: "Festere Haut", s12_abl: "Needling mit Serum", s12_dur: "60 Min.",
                 s13_title: "Körper-Microneedling", s13_desc: "Reduzierung von Dehnungsstreifen.", s13_ben: "Gewebestraffung", s13_abl: "Intensives Needling", s13_dur: "60-90 Min.",
-                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge_pc: "Mit der Maus drüberfahren", ba_badge_mobile: "Halten für nachher", lbl_pedicure: "Pedicure", lbl_manicure: "Maniküre",
+                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge_pc: "Mit der Maus drüberfahren", ba_badge_mobile: "Halten für nachher", lbl_pedicure: "Pediküre", lbl_manicure: "Maniküre",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.",
                 ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.",
@@ -1300,7 +1299,7 @@
                 s5_title: "Depilação com Cera", s5_desc: "Remoção suave dos pelos.", s5_ben: "Pele lisa", s5_abl: "Remoção suave", s5_dur: "15-45 min",
                 s6_title: "Cuidados com os Pés", s6_desc: "Cuidado especializado para pés.", s6_ben: "Remoção de calos", s6_abl: "Escalda-pés, massagem", s6_dur: "45 min",
                 s7_title: "Reflexologia", s7_desc: "Massagem terapêutica nos pés.", s7_ben: "Alívio do estresse", s7_abl: "Massagem focada", s7_dur: "30 min",
-                s8_title: "Manicure e Pedicura", s8_desc: "Cuidado completo.", s8_ben: "Unhas fortes", s8_abl: "Corte, hidratação", s8_dur: "60 min",
+                s8_title: "Manicure e Pedicure", s8_desc: "Cuidado completo.", s8_ben: "Unhas fortes", s8_abl: "Corte, hidratação", s8_dur: "60 min",
                 s9_title: "Remoção de PMU", s9_desc: "Despigmentação segura.", s9_ben: "Sem cicatrizes", s9_abl: "Removedor químico", s9_dur: "45 min",
                 s10_title: "Extensão de Cílios", s10_desc: "Cílios alongados e volumosos.", s10_ben: "À prova d'água", s10_abl: "Acoplagem fio a fio", s10_dur: "90-120 min",
                 s11_title: "Remoção de Milium", s11_desc: "Extração higiênica e indolor.", s11_ben: "Pele lisa", s11_abl: "Micro-extração", s11_dur: "20 min",
@@ -1444,7 +1443,7 @@
                 s5_title: "Депиляция", s5_desc: "Гладкая кожа.", s5_ben: "Удаление волос", s5_abl: "Воск", s5_dur: "15-45 мин",
                 s6_title: "Педикюр", s6_desc: "Уход за стопами.", s6_ben: "Мягкость", s6_abl: "Ванночка, массаж", s6_dur: "45 min",
                 s7_title: "Рефлексотерапия", s7_desc: "Массаж стоп.", s7_ben: "Снятие стресса", s7_abl: "Массаж", s7_dur: "30 мин",
-                s8_title: "Маникюр и Пediкюр", s8_desc: "Идеальные руки и ноги.", s8_ben: "Крепкие ногти", s8_abl: "Уход", s8_dur: "60 мин",
+                s8_title: "Маникюр и Педикюр", s8_desc: "Идеальные руки и ноги.", s8_ben: "Крепкие ногти", s8_abl: "Уход", s8_dur: "60 мин",
                 s9_title: "Удаление Татуажа", s9_desc: "Безопасное удаление.", s9_ben: "Без рубцов", s9_abl: "Ремувер", s9_dur: "45 мин",
                 s10_title: "Наращивание Ресниц", s10_desc: "Густые ресницы.", s10_ben: "Стойкость", s10_abl: "Наращивание", s10_dur: "90-120 мин",
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
@@ -1691,7 +1690,7 @@
             }, { passive: true });
         });
 
-        // --- FUNCIONALIDADE BOTÕES MANICURE/PEDICURE ---
+        // --- FUNCIONALIDADE BOTÕES MANIKURE/PEDIKURE ---
         function switchManiPedi(type, event) {
             if(event) {
                 event.stopPropagation(); // Impede de ativar o slider arrastável
@@ -1702,90 +1701,114 @@
             const btnPedi = document.getElementById('btnPedi');
 
             if (type === 'mani') {
-                beforeImg.src = 'https://i.imgur.com/sM8ozWw.jpeg';
-                afterImg.src = 'https://i.imgur.com/t9PNWRj.jpeg';
+                beforeImg.src = ''; // Deixado em branco a pedido
+                afterImg.src = '';
+                beforeImg.style.background = '#ddd'; // Fundo cinza para não quebrar o layout
                 btnMani.classList.add('active');
                 btnPedi.classList.remove('active');
             } else {
                 beforeImg.src = 'https://i.imgur.com/uI8dSL1.jpeg';
                 afterImg.src = 'https://i.imgur.com/eBZ8iz9.jpeg';
+                beforeImg.style.background = 'transparent';
                 btnPedi.classList.add('active');
                 btnMani.classList.remove('active');
             }
         }
 
-        // --- LÓGICA DE VÍDEO EXTREMA CORRIGIDA PARA MOBILE ---
+        // --- A SOLUÇÃO DEFINITIVA DO VÍDEO ---
         const bgScrollVideo = document.getElementById('bgScrollVideo');
         const baSection = document.getElementById('before-after-section'); 
 
         if (bgScrollVideo && baSection) {
-            bgScrollVideo.pause();
-            bgScrollVideo.currentTime = 0;
-
-            let isVideoLoaded = false;
-            let scrollEnd = 0;
-            let targetTime = 0;
-            let isSeeking = false; 
-            let seekTimeout;
-
-            function calculateScrollBounds() {
-                scrollEnd = (baSection.offsetTop + baSection.offsetHeight) - window.innerHeight;
-                if (scrollEnd <= 0) scrollEnd = 1000;
-            }
-
-            // O ResizeObserver garante que o scroll enderá certo mesmo se fotos carregarem depois no mobile
-            const resizeObserver = new ResizeObserver(calculateScrollBounds);
-            resizeObserver.observe(document.body);
-            window.addEventListener('load', calculateScrollBounds);
-
-            bgScrollVideo.addEventListener('loadedmetadata', () => {
-                isVideoLoaded = true;
-                calculateScrollBounds();
-            });
-
-            if (bgScrollVideo.readyState >= 2) {
-                isVideoLoaded = true;
-                calculateScrollBounds();
-            }
-
-            function updateTargetTime(currentScroll) {
-                if (!isVideoLoaded || !bgScrollVideo.duration || scrollEnd === 0) return;
+            
+            if (isMobileDevice) {
+                // SOLUÇÃO DEFINITIVA MOBILE: Play suave e contínuo no fundo. (Zero lag!)
+                bgScrollVideo.loop = true;
+                bgScrollVideo.muted = true;
+                bgScrollVideo.playsInline = true;
                 
-                let progress = currentScroll / scrollEnd;
-                progress = Math.max(0, Math.min(1, progress));
-                targetTime = progress * bgScrollVideo.duration;
-            }
+                // Hack para iniciar no iOS
+                document.addEventListener('touchstart', () => {
+                    bgScrollVideo.play().catch(()=>{});
+                }, { once: true });
 
-            if (typeof lenis !== 'undefined' && lenis) {
-                lenis.on('scroll', (e) => updateTargetTime(e.animatedScroll));
-            } else {
-                window.addEventListener('scroll', () => updateTargetTime(window.scrollY), { passive: true });
-            }
-
-            bgScrollVideo.addEventListener('seeked', () => {
-                isSeeking = false;
-                clearTimeout(seekTimeout);
-            });
-
-            function renderVideo() {
-                if (isVideoLoaded && bgScrollVideo.duration > 0) {
-                    if (!isSeeking && Math.abs(bgScrollVideo.currentTime - targetTime) > 0.05) {
-                        isSeeking = true;
-                        bgScrollVideo.currentTime = targetTime;
-                        
-                        // Trava de segurança: Se o celular falhar em disparar o 'seeked', a gente destrava manualmente.
-                        seekTimeout = setTimeout(() => { isSeeking = false; }, 80);
+                // Opcional: Pausa o vídeo quando sai da tela para economizar bateria
+                const videoObserver = new IntersectionObserver((entries) => {
+                    let isVisible = entries.some(entry => entry.isIntersecting);
+                    if (isVisible) {
+                        bgScrollVideo.play().catch(()=>{});
+                    } else {
+                        bgScrollVideo.pause();
                     }
+                }, { threshold: 0 });
+                
+                // Observa as sessões onde o vídeo ainda deve aparecer
+                videoObserver.observe(document.getElementById('hero'));
+                videoObserver.observe(document.getElementById('about'));
+                videoObserver.observe(document.getElementById('whyUsSection'));
+
+            } else {
+                // SOLUÇÃO DESKTOP: Mantido o Scrub perfeito pelo scroll
+                bgScrollVideo.pause();
+                bgScrollVideo.currentTime = 0;
+
+                let isVideoLoaded = false;
+                let scrollEnd = 0;
+                let targetTime = 0;
+                let isSeeking = false; 
+                let seekTimeout;
+
+                function calculateScrollBounds() {
+                    scrollEnd = (baSection.offsetTop + baSection.offsetHeight) - window.innerHeight;
+                    if (scrollEnd <= 0) scrollEnd = 1000;
                 }
+
+                const resizeObserver = new ResizeObserver(calculateScrollBounds);
+                resizeObserver.observe(document.body);
+                window.addEventListener('load', calculateScrollBounds);
+
+                bgScrollVideo.addEventListener('loadedmetadata', () => {
+                    isVideoLoaded = true;
+                    calculateScrollBounds();
+                });
+
+                if (bgScrollVideo.readyState >= 2) {
+                    isVideoLoaded = true;
+                    calculateScrollBounds();
+                }
+
+                function updateTargetTime(currentScroll) {
+                    if (!isVideoLoaded || !bgScrollVideo.duration || scrollEnd === 0) return;
+                    
+                    let progress = currentScroll / scrollEnd;
+                    progress = Math.max(0, Math.min(1, progress));
+                    targetTime = progress * bgScrollVideo.duration;
+                }
+
+                if (typeof lenis !== 'undefined' && lenis) {
+                    lenis.on('scroll', (e) => updateTargetTime(e.animatedScroll));
+                } else {
+                    window.addEventListener('scroll', () => updateTargetTime(window.scrollY), { passive: true });
+                }
+
+                bgScrollVideo.addEventListener('seeked', () => {
+                    isSeeking = false;
+                    clearTimeout(seekTimeout);
+                });
+
+                function renderVideo() {
+                    if (isVideoLoaded && bgScrollVideo.duration > 0) {
+                        if (!isSeeking && Math.abs(bgScrollVideo.currentTime - targetTime) > 0.05) {
+                            isSeeking = true;
+                            bgScrollVideo.currentTime = targetTime;
+                            seekTimeout = setTimeout(() => { isSeeking = false; }, 80);
+                        }
+                    }
+                    requestAnimationFrame(renderVideo);
+                }
+                
                 requestAnimationFrame(renderVideo);
             }
-            
-            requestAnimationFrame(renderVideo);
-
-            // Hack de iOS
-            document.addEventListener('touchstart', () => {
-                bgScrollVideo.play().then(() => bgScrollVideo.pause()).catch(() => {});
-            }, { once: true });
         }
 
         const introVideo = document.getElementById('intro-video');
