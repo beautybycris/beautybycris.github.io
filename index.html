@@ -165,7 +165,7 @@
 
         .services { padding: 100px 0; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; touch-action: pan-y; -webkit-overflow-scrolling: touch; }
         .services-carousel::-webkit-scrollbar { display: none; }
         .services-carousel.active { cursor: grabbing; }
         
@@ -207,7 +207,8 @@
         /* --- Antes & Depois Carousel Section --- */
         .before-after { padding: 100px 0; background-color: transparent; position: relative; z-index: 2; border-bottom: 1px solid var(--border-light); }
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .ba-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        /* Adicionado touch-action: pan-y para resolver de vez o bug de rolagem nativa no mobile */
+        .ba-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; touch-action: pan-y; -webkit-overflow-scrolling: touch; }
         .ba-carousel::-webkit-scrollbar { display: none; }
         .ba-carousel.active { cursor: grabbing; }
 
@@ -262,8 +263,10 @@
         @media (hover: none) and (pointer: coarse) { 
             .badge-pc { display: none; } .badge-mobile { display: inline; } 
         }
-        .ba-slider-container.touch-active .ba-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-        .ba-slider-container.touch-active .ba-badge { opacity: 0; }
+        
+        /* Agora, no mobile, a troca de imagem ocorre por clique (adicionando a classe show-after) ao invés de toque contínuo */
+        .ba-slider-container.show-after .ba-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+        .ba-slider-container.show-after .ba-badge { opacity: 0; }
         
         @media (max-width: 1380px) { .ba-carousel { padding: 20px 40px; } }
         @media (max-width: 768px) { 
@@ -297,7 +300,7 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
+        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; touch-action: pan-y; -webkit-overflow-scrolling: touch; }
         .reviews-carousel::-webkit-scrollbar { display: none; }
         .reviews-carousel.active { cursor: grabbing; }
         
@@ -316,6 +319,15 @@
             z-index: 2;
             color: var(--text-dark);
             border-top: 1px solid rgba(255,255,255,0.5);
+        }
+
+        /* TORNANDO O RODAPÉ TRANSPARENTE NO MOBILE PARA VER O VÍDEO */
+        @media (max-width: 992px) {
+            .bg-rose-gold-wrap {
+                background: rgba(250, 245, 240, 0.75); 
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
         }
 
         .map-section { width: 100%; height: 350px; position: relative; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.3);}
@@ -529,7 +541,7 @@
         <div class="container">
             <div class="section-header animate-on-scroll">
                 <span class="subtitle" data-i18n="services_sub">Exklusive Behandlungen</span>
-                <h2 data-i18n="services_title">Unsere Services & Rituale</h2>
+                <h2 data-i18n="services_title">Unsere Services</h2>
             </div>
         </div>
         
@@ -721,7 +733,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Toque para o depois</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_1">Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.</p>
@@ -736,7 +748,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Toque para o depois</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_2">Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.</p>
@@ -751,7 +763,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Toque para o depois</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_3">Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und naturally schön aussehen.</p>
@@ -766,7 +778,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Toque para o depois</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_4">Die Wimpernverlängerung unterstreicht die natürliche Schönheit des Blicks und sorgt für mehr Eleganz, Ausdruck und Selbstwertgefühl. Die Wimpern werden individuell appliziert.</p>
@@ -776,17 +788,17 @@
                     <h3 class="ba-item-title" data-i18n="ba_title_5">Maniküre & Pediküre</h3>
                     <div class="ba-slider-container">
                         <!-- Imagens com IDs para facilitar a troca no JS -->
-                        <img src="https://i.imgur.com/uI8dSL1.jpeg" alt="Vorher" class="ba-img" id="maniPediBefore" loading="lazy">
+                        <img src="https://i.imgur.com/uI8dSL1.jpeg" alt="Vorher" class="ba-img" id="maniPediBefore" loading="lazy" style="background: transparent;">
                         <div class="ba-after">
                             <img src="https://i.imgur.com/eBZ8iz9.jpeg" alt="Nachher" id="maniPediAfter" loading="lazy">
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Toque para o depois</span>
                         </div>
                         <!-- Botões Interativos (Pedicure ativo por padrão) -->
-                        <div class="ba-toggle-btn btn-left active" id="btnPedi" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()" onclick="switchManiPedi('pedi', event)" data-i18n="lbl_pedicure">Pediküre</div>
-                        <div class="ba-toggle-btn btn-right" id="btnMani" onmousedown="event.stopPropagation()" ontouchstart="event.stopPropagation()" onclick="switchManiPedi('mani', event)" data-i18n="lbl_manicure">Maniküre</div>
+                        <div class="ba-toggle-btn btn-left active" id="btnPedi" onclick="switchManiPedi('pedi', event)" data-i18n="lbl_pedicure">Pediküre</div>
+                        <div class="ba-toggle-btn btn-right" id="btnMani" onclick="switchManiPedi('mani', event)" data-i18n="lbl_manicure">Maniküre</div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_5">Die umfassende Pflege mit Maniküre und Pediküre garantiert perfekt geformte Nägel, mit Feuchtigkeit versorgte Nagelhaut und ein makelloses, elegantes Aussehen für Ihre Hände und Füße.</p>
                 </div>
@@ -800,7 +812,7 @@
                         </div>
                         <div class="ba-badge">
                             <span class="badge-pc" data-i18n="ba_badge_pc">Mit der Maus drüberfahren</span>
-                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Halten für nachher</span>
+                            <span class="badge-mobile" data-i18n="ba_badge_mobile">Toque para o depois</span>
                         </div>
                     </div>
                     <p class="ba-item-desc" data-i18n="ba_desc_6">Die professionelle Gesichtsreinigung entfernt Unreinheiten und befreit die Poren, während sie die Zellregeneration und Kollagenproduktion anregt. Das Ergebnis ist eine unglaublich reine und gesunde Haut.</p>
@@ -1195,7 +1207,7 @@
                 btn_explore_services: "Behandlungen entdecken",
                 about_sub: "Das Studio", about_title: "Exzellenz in Ästhetik und Pflege", about_p1: "Unser Studio wurde mit dem Ziel gegründet, Ihre natürliche Schönheit hervorzuheben, mit fortschrittlichen Techniken und einer Umgebung für Ihren totalen Komfort.", about_p2: "Mit hochqualifizierten Fachleuten und modernster Ausstattung garantieren wir unglaubliche und sichere Ergebnisse bei all unseren Behandlungen.",
                 why_sub: "Vorteile", why_title: "Warum Beauty By Cris?", w1_title: "Absolute Hygiene", w1_desc: "Höchste klinische Standards für Ihre Sicherheit.", w2_title: "Premium Qualität", w2_desc: "Ausschließlich erstklassige Materialien & Geräte.", w3_title: "Persönliche Betreuung", w3_desc: "Maßgeschneiderte Behandlungen nur für Sie.", w4_title: "Entspannendes Ambiente", w4_desc: "Eine Oase der Ruhe für Körper und Geist.",
-                services_sub: "Exklusive Behandlungen", services_title: "Unsere Services & Rituale", lbl_duration: "Dauer:", lbl_benefits: "Vorteile:", lbl_process: "Ablauf:",
+                services_sub: "Exklusive Behandlungen", services_title: "Unsere Services", lbl_duration: "Dauer:", lbl_benefits: "Vorteile:", lbl_process: "Ablauf:",
                 s1_title: "Gesichtsreinigung", s1_desc: "Tiefenreinigung für ein klares Hautbild.", s1_ben: "Porenverfeinerung", s1_abl: "Abreinigung, Dampf, Maske", s1_dur: "60 Min.",
                 s2_title: "Micropigmentierung & Microblading", s2_desc: "Perfekt geformte Augenbrauen.", s2_ben: "Dauerhaft dichte Brauen", s2_abl: "Präzise Pigmentierung", s2_dur: "120 Min.",
                 s3_title: "Lippenpigmentierung", s3_desc: "Formschöne Lippen.", s3_ben: "Frische Lippenfarbe 24/7", s3_abl: "Sanfte Pigmentierung", s3_dur: "90 Min.",
@@ -1209,7 +1221,7 @@
                 s11_title: "Entfernung von Milien", s11_desc: "Entfernung von Hautgrieß.", s11_ben: "Glattes Hautbild", s11_abl: "Präzises Öffnen", s11_dur: "20 Min.",
                 s12_title: "Gesichts-Microneedling", s12_desc: "Anti-Aging zur Hautverjüngung.", s12_ben: "Festere Haut", s12_abl: "Needling mit Serum", s12_dur: "60 Min.",
                 s13_title: "Körper-Microneedling", s13_desc: "Reduzierung von Dehnungsstreifen.", s13_ben: "Gewebestraffung", s13_abl: "Intensives Needling", s13_dur: "60-90 Min.",
-                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge_pc: "Mit der Maus drüberfahren", ba_badge_mobile: "Halten für nachher", lbl_pedicure: "Pediküre", lbl_manicure: "Maniküre",
+                ba_sub: "Echte Ergebnisse", ba_title: "Vorher & Nachher", ba_badge_pc: "Mit der Maus drüberfahren", ba_badge_mobile: "Tippen für nachher", lbl_pedicure: "Pediküre", lbl_manicure: "Maniküre",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading ist eine Härchentechnik, die einen extrem natürlichen Effekt bietet, Lücken korrigiert, die Form der Augenbrauen definiert und den Gesichtsausdruck aufwertet, wodurch Ihr Selbstwertgefühl gestärkt und jederzeit mehr Selbstvertrauen vermittelt wird.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Der Plasma Pen ist ein ästhetisches Treatment, das die natürliche Kollagenproduktion anregt, die Straffheit fördert, Mimikfalten glättet, Erschlaffungen reduziert und die Haut sicher, ohne Operation und mit natürlichen Ergebnissen verjüngt.",
                 ba_title_3: "Lippenpigmentierung", ba_desc_3: "Die Lippen-Mikropigmentierung betont die Lippenkontur, gleicht den Farbton aus und sorgt für einen zarten Lippenstift-Effekt, wodurch die Lippen gesünder, weiblicher, definierter und natürlich schön aussehen.",
@@ -1243,7 +1255,7 @@
                 btn_explore_services: "Explore Treatments",
                 about_sub: "The Studio", about_title: "Excellence in Aesthetics and Care", about_p1: "Our studio was founded to highlight your natural beauty, with advanced techniques and total comfort.", about_p2: "With highly qualified professionals and modern equipment, we guarantee incredible results.",
                 why_sub: "Advantages", why_title: "Why Beauty By Cris?", w1_title: "Absolute Hygiene", w1_desc: "Highest clinical standards.", w2_title: "Premium Quality", w2_desc: "Only first-class materials.", w3_title: "Personalized Care", w3_desc: "Tailored just for you.", w4_title: "Relaxing Environment", w4_desc: "An oasis for body and mind.",
-                services_sub: "Exclusive Treatments", services_title: "Services & Rituals", lbl_duration: "Duration:", lbl_benefits: "Benefits:", lbl_process: "Process:",
+                services_sub: "Exclusive Treatments", services_title: "Our Services", lbl_duration: "Duration:", lbl_benefits: "Benefits:", lbl_process: "Process:",
                 s1_title: "Facial Cleansing", s1_desc: "Deep cleansing for a clear complexion.", s1_ben: "Refines pores", s1_abl: "Cleansing, extraction", s1_dur: "60 min",
                 s2_title: "Micropigmentation", s2_desc: "Perfectly shaped eyebrows.", s2_ben: "Long-lasting fullness", s2_abl: "Precise pigmentation", s2_dur: "120 min",
                 s3_title: "Lip Pigmentation", s3_desc: "Beautifully shaped lips.", s3_ben: "Fresh color 24/7", s3_abl: "Gentle pigmentation", s3_dur: "90 min",
@@ -1257,7 +1269,7 @@
                 s11_title: "Milia Removal", s11_desc: "Gentle extraction of milia.", s11_ben: "Smooth skin", s11_abl: "Precise extraction", s11_dur: "20 min",
                 s12_title: "Facial Microneedling", s12_desc: "Collagen stimulation.", s12_ben: "Firmer skin", s12_abl: "Needling with serum", s12_dur: "60 min",
                 s13_title: "Body Microneedling", s13_desc: "Reduce stretch marks.", s13_ben: "Tissue firming", s13_abl: "Deep needling", s13_dur: "60-90 min",
-                ba_sub: "Real Results", ba_title: "Before & After", ba_badge_pc: "Hover your mouse", ba_badge_mobile: "Hold for after", lbl_pedicure: "Pedicure", lbl_manicure: "Manicure",
+                ba_sub: "Real Results", ba_title: "Before & After", ba_badge_pc: "Hover your mouse", ba_badge_mobile: "Tap for after", lbl_pedicure: "Pedicure", lbl_manicure: "Manicure",
                 ba_title_1: "Microblading", ba_desc_1: "Microblading is a hair-by-hair technique that provides an extremely natural effect, correcting flaws, defining the shape of the eyebrows, and enhancing facial expression.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "The Plasma Pen is an aesthetic treatment that stimulates natural collagen production, promoting firmness, smoothing expression lines, reducing sagging, and safely rejuvenating the skin.",
                 ba_title_3: "Microlabial", ba_desc_3: "Lip Micropigmentation enhances lip contours, evens out the tone, and provides a delicate lipstick effect, leaving your lips looking healthier, more feminine, and naturally beautiful.",
@@ -1291,7 +1303,7 @@
                 btn_explore_services: "Explorar Tratamentos",
                 about_sub: "O Studio", about_title: "Excelência em Estética e Cuidado", about_p1: "Nosso studio foi fundado com o propósito de realçar a beleza natural que existe em você, com técnicas avançadas e ambiente de total conforto.", about_p2: "Com profissionais altamente qualificados e equipamentos modernos, garantimos resultados incríveis e seguros.",
                 why_sub: "Vantagens", why_title: "Por que a Beauty By Cris?", w1_title: "Higiene Absoluta", w1_desc: "Mais altos padrões para sua segurança.", w2_title: "Qualidade Premium", w2_desc: "Apenas os melhores materiais e equipamentos.", w3_title: "Atendimento Personalizado", w3_desc: "Tratamentos sob medida apenas para você.", w4_title: "Ambiente Relaxante", w4_desc: "Um oásis de tranquilidade para corpo e mente.",
-                services_sub: "Tratamentos Exclusivos", services_title: "Nossos Serviços & Rituais", lbl_duration: "Duração:", lbl_benefits: "Benefícios:", lbl_process: "Procedimento:",
+                services_sub: "Tratamentos Exclusivos", services_title: "Nossos Serviços", lbl_duration: "Duração:", lbl_benefits: "Benefícios:", lbl_process: "Procedimento:",
                 s1_title: "Limpeza de Pele", s1_desc: "Limpeza profunda para um aspecto radiante.", s1_ben: "Refina poros", s1_abl: "Higienização, extração", s1_dur: "60 min",
                 s2_title: "Micropigmentação", s2_desc: "Sobrancelhas desenhadas com ultra-realismo.", s2_ben: "Sobrancelhas cheias", s2_abl: "Pigmentação de precisão", s2_dur: "120 min",
                 s3_title: "Pigmentação Labial", s3_desc: "Lábios com cor e efeito de volume.", s3_ben: "Cor 24/7", s3_abl: "Pigmentação suave", s3_dur: "90 min",
@@ -1305,7 +1317,7 @@
                 s11_title: "Remoção de Milium", s11_desc: "Extração higiênica e indolor.", s11_ben: "Pele lisa", s11_abl: "Micro-extração", s11_dur: "20 min",
                 s12_title: "Microagulhamento Facial", s12_desc: "Indução de colágeno.", s12_ben: "Pele firme", s12_abl: "Needling com sérum", s12_dur: "60 min",
                 s13_title: "Microagulhamento Corporal", s13_desc: "Regeneração de estrias.", s13_ben: "Estrias suavizadas", s13_abl: "Needling profundo", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge_pc: "Passe o mouse", ba_badge_mobile: "Segure para depois", lbl_pedicure: "Pedicure", lbl_manicure: "Manicure",
+                ba_sub: "Resultados Reais", ba_title: "Antes & Depois", ba_badge_pc: "Passe o mouse", ba_badge_mobile: "Toque para o depois", lbl_pedicure: "Pedicure", lbl_manicure: "Manicure",
                 ba_title_1: "Microblading", ba_desc_1: "O Microblading é uma técnica fio a fio que proporciona um efeito extremamente natural, corrigindo falhas, definindo o formato das sobrancelhas e valorizando a expressão do rosto.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "A Plasma Pen é um tratamento estético que estimula a produção natural de colágeno, promovendo firmeza, suavizando linhas de expressão, reduzindo a flacidez e rejuvenescendo a pele de forma segura.",
                 ba_title_3: "Microlabial", ba_desc_3: "A Micropigmentação Labial realça o contorno dos lábios, uniformiza a tonalidade e proporciona um delicado efeito de batom, deixando os lábios com aparência mais saudável e feminina.",
@@ -1339,7 +1351,7 @@
                 btn_explore_services: "Explorar Tratamentos",
                 about_sub: "El Studio", about_title: "Excelencia en Estética", about_p1: "Nuestro studio fue fundado para resaltar su belleza natural con total comodidad.", about_p2: "Con profesionales calificados garantizamos resultados increíbles y seguros.",
                 why_sub: "Ventajas", why_title: "¿Por qué Beauty By Cris?", w1_title: "Higiene Absoluta", w1_desc: "Altos estándares para su seguridad.", w2_title: "Calidad Premium", w2_desc: "Los mejores materiales.", w3_title: "Atención Personalizada", w3_desc: "Tratamientos a su medida.", w4_title: "Ambiente Relajante", w4_desc: "Un oasis de tranquilidad.",
-                services_sub: "Tratamientos", services_title: "Servicios & Rituales", lbl_duration: "Duración:", lbl_benefits: "Beneficios:", lbl_process: "Proceso:",
+                services_sub: "Tratamientos", services_title: "Nuestros Servicios", lbl_duration: "Duración:", lbl_benefits: "Beneficios:", lbl_process: "Proceso:",
                 s1_title: "Limpieza Facial", s1_desc: "Limpieza profunda.", s1_ben: "Refina poros", s1_abl: "Limpieza, extracción", s1_dur: "60 min",
                 s2_title: "Micropigmentación", s2_desc: "Cejas ultra-realistas.", s2_ben: "Cejas pobladas", s2_abl: "Pigmentación precisa", s2_dur: "120 min",
                 s3_title: "Pigmentación Labial", s3_desc: "Labios con color 24/7.", s3_ben: "Color 24/7", s3_abl: "Pigmentación suave", s3_dur: "90 min",
@@ -1353,7 +1365,7 @@
                 s11_title: "Eliminación de Millium", s11_desc: "Extracción higiênica.", s11_ben: "Piel lisa", s11_abl: "Micro-extracción", s11_dur: "20 min",
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
-                ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge_pc: "Pase el ratón", ba_badge_mobile: "Mantenga para después", lbl_pedicure: "Pedicura", lbl_manicure: "Manicura",
+                ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge_pc: "Pase el ratón", ba_badge_mobile: "Toque para después", lbl_pedicure: "Pedicura", lbl_manicure: "Manicura",
                 ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuvenescendo la piel de forma segura.",
                 ba_title_3: "Microlabial", ba_desc_3: "La Micropigmentación Labial realza el contorno de los labios, uniformiza el tono y proporciona un delicado efecto de lápiz labial, dejando los labios con una apariencia más saludable y femenina.",
@@ -1401,7 +1413,7 @@
                 s11_title: "Retrait de Milium", s11_desc: "Extraction hygiénique.", s11_ben: "Peau lisse", s11_abl: "Extraction", s11_dur: "20 min",
                 s12_title: "Microneedling Visage", s12_desc: "Stimulation collagène.", s12_ben: "Peau ferme", s12_abl: "Sérum", s12_dur: "60 min",
                 s13_title: "Microneedling Corps", s13_desc: "Réduit vergetures.", s13_ben: "Fermeté", s13_abl: "Needling", s13_dur: "60-90 min",
-                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge_pc: "Survolez avec la souris", ba_badge_mobile: "Maintenez pour l'après", lbl_pedicure: "Pédicure", lbl_manicure: "Manucure",
+                ba_sub: "Résultats", ba_title: "Avant & Après", ba_badge_pc: "Survolez avec la souris", ba_badge_mobile: "Touchez pour l'après", lbl_pedicure: "Pédicure", lbl_manicure: "Manucure",
                 ba_title_1: "Microblading", ba_desc_1: "Le Microblading est une technique poil par poil qui offre un effet extrêmement naturel, corrigeant les défauts, définissant la forme des sourcils et valorisant l'expression du visage.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Le Plasma Pen est un traitement esthétique qui stimule la production naturelle de collagène, favorisant la fermeté, lissant les lignes d'expression, réduisant le relâchement et rajeunissant la peau.",
                 ba_title_3: "Microlabial", ba_desc_3: "La micropigmentation des lèvres sublime le contour des lèvres, uniformise la couleur et offre un effet rouge à lèvres délicat, laissant les lèvres plus saines, féminines et naturellement belles.",
@@ -1449,7 +1461,7 @@
                 s11_title: "Удаление Милиумов", s11_desc: "Гладкая кожа.", s11_ben: "Без следов", s11_abl: "Удаление", s11_dur: "20 мин",
                 s12_title: "Микронидлинг Лица", s12_desc: "Омоложение.", s12_ben: "Упругая кожа", s12_abl: "Сыворотка", s12_dur: "60 мин",
                 s13_title: "Микронидлинг Тела", s13_desc: "Уменьшение растяжек.", s13_ben: "Гладкость", s13_abl: "Уход", s13_dur: "60-90 мин",
-                ba_sub: "Результаты", ba_title: "До & После", ba_badge_pc: "Наведите курсор", ba_badge_mobile: "Удерживайте", lbl_pedicure: "Педикюр", lbl_manicure: "Маникюр",
+                ba_sub: "Результаты", ba_title: "До & После", ba_badge_pc: "Наведите курсор", ba_badge_mobile: "Нажмите для после", lbl_pedicure: "Педикюр", lbl_manicure: "Маникюр",
                 ba_title_1: "Microblading", ba_desc_1: "Микроблейдинг — это волосковая техника, обеспечивающая чрезвычайно естественный эффект, исправляя недостатки, очерчивая форму бровей и подчеркивая выражение лица.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "Plasma Pen — это эстетическая процедура, стимулирующая выработку естественного коллагена, придающая упругость, сглаживающая мимические морщины и безопасно омолаживающая кожу.",
                 ba_title_3: "Microlabial", ba_desc_3: "Микропигментация губ подчеркивает контур, выравнивает тон и создает деликатный эффект помады, делая губы более здоровыми, женственными и естественно красивыми.",
@@ -1675,22 +1687,15 @@
             }
         });
 
-        // Lógica de Toque (Mobile) do Antes/Depois: APERTE E SEGURE
+        // Lógica Mobile do Antes/Depois: AGORA É POR CLIQUE (TAP) -> ZERO TRAVAMENTO NO SCROLL
         document.querySelectorAll('.ba-slider-container').forEach(container => {
-            container.addEventListener('touchstart', (e) => { 
-                container.classList.add('touch-active'); 
-            }, { passive: true });
-            
-            container.addEventListener('touchend', (e) => { 
-                container.classList.remove('touch-active'); 
-            }, { passive: true });
-            
-            container.addEventListener('touchcancel', (e) => { 
-                container.classList.remove('touch-active'); 
-            }, { passive: true });
+            container.addEventListener('click', (e) => { 
+                if(e.target.closest('.ba-toggle-btn')) return; // ignora se clicou nos botões mani/pedi
+                container.classList.toggle('show-after'); 
+            });
         });
 
-        // --- FUNCIONALIDADE BOTÕES MANIKURE/PEDIKURE ---
+        // --- FUNCIONALIDADE BOTÕES MANICURE/PEDICURE ---
         function switchManiPedi(type, event) {
             if(event) {
                 event.stopPropagation(); // Impede de ativar o slider arrastável
@@ -1742,10 +1747,12 @@
                     }
                 }, { threshold: 0 });
                 
-                // Observa as sessões onde o vídeo ainda deve aparecer
+                // Observa as sessões onde o vídeo ainda deve aparecer (INCLUINDO O FOOTER AGORA)
                 videoObserver.observe(document.getElementById('hero'));
                 videoObserver.observe(document.getElementById('about'));
                 videoObserver.observe(document.getElementById('whyUsSection'));
+                videoObserver.observe(document.getElementById('footer-contacts'));
+                videoObserver.observe(document.querySelector('.footer'));
 
             } else {
                 // SOLUÇÃO DESKTOP: Mantido o Scrub perfeito pelo scroll
