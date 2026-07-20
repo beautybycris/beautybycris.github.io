@@ -74,7 +74,7 @@
         .media-placeholder { background: linear-gradient(135deg, #F5ECE3 0%, #EFE3D8 100%); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
         /* --- Vídeo Fixo no Fundo --- */
-        #fixed-bg-wrap { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; transform: translateZ(0); will-change: transform; pointer-events: none;}
+        #fixed-bg-wrap { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; transform: translateZ(0); pointer-events: none;}
         #fixed-bg-wrap video { width: 100%; height: 100%; object-fit: cover; transform: translateZ(0); }
         
         /* Sem blur e bem opaco para destacar o conteúdo acima */
@@ -163,14 +163,22 @@
 
         .glass-section { background-color: rgba(250, 245, 240, 0.97); position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(255,255,255,0.5); }
 
+        /* CARROSSEIS: Scroll nativo e protegido */
+        .services-carousel, .ba-carousel, .reviews-carousel { 
+            display: flex; gap: 20px; 
+            overflow-x: auto; overflow-y: hidden; /* Garante que scroll Y vá para a página */
+            scrollbar-width: none; cursor: grab; 
+            -webkit-overflow-scrolling: touch; 
+            touch-action: pan-x pan-y; /* Permite rolar nos dois eixos nativamente */
+        }
+        .services-carousel::-webkit-scrollbar, .ba-carousel::-webkit-scrollbar, .reviews-carousel::-webkit-scrollbar { display: none; }
+        .services-carousel.active, .ba-carousel.active, .reviews-carousel.active { cursor: grabbing; }
+
         .services { padding: 100px 0; }
         .services-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        /* Rolagem livre nativa no mobile - Removido touch-action que travava o eixo Y */
-        .services-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
-        .services-carousel::-webkit-scrollbar { display: none; }
-        .services-carousel.active { cursor: grabbing; }
+        .services-carousel { padding: 20px calc(50vw - 650px + 40px); }
         
-        .service-card { min-width: 300px; max-width: 300px; background-color: #ffffff; border: 1px solid var(--border-light); padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; will-change: transform;}
+        .service-card { min-width: 300px; max-width: 300px; flex-shrink: 0; background-color: #ffffff; border: 1px solid var(--border-light); padding: 15px; display: flex; flex-direction: column; border-radius: 8px; transition: var(--transition-smooth); user-select: none; cursor: pointer; }
         .service-card:hover { transform: translate3d(0, -3px, 0); }
         .service-card.selected { border-color: var(--accent-rose); box-shadow: 0 0 10px rgba(200, 142, 147, 0.2); }
 
@@ -183,8 +191,8 @@
         .s-row .lbl { font-weight: 600; color: var(--accent-rose); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
         .s-row .val { color: var(--text-dark); text-align: right; max-width: 60%; font-weight: 500;}
         
-        @media (max-width: 1380px) { .services-carousel { padding: 20px 40px; } }
-        @media (max-width: 768px) { .services-carousel { padding: 20px 20px; } .service-card { min-width: 80vw; max-width: 80vw; } }
+        @media (max-width: 1380px) { .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 40px; } }
+        @media (max-width: 768px) { .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 20px; } .service-card { min-width: 80vw; max-width: 80vw; } }
 
         /* Modal de Serviços */
         .service-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(20, 15, 15, 0.9); z-index: 2000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; padding: 20px; }
@@ -208,12 +216,9 @@
         /* --- Antes & Depois Carousel Section --- */
         .before-after { padding: 100px 0; background-color: transparent; position: relative; z-index: 2; border-bottom: 1px solid var(--border-light); }
         .ba-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        /* Rolagem livre nativa no mobile */
-        .ba-carousel { display: flex; gap: 30px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
-        .ba-carousel::-webkit-scrollbar { display: none; }
-        .ba-carousel.active { cursor: grabbing; }
+        .ba-carousel { padding: 20px calc(50vw - 650px + 40px); gap: 30px; }
 
-        .ba-item { min-width: 380px; max-width: 380px; display: flex; flex-direction: column; gap: 15px; user-select: none; will-change: transform;}
+        .ba-item { min-width: 380px; max-width: 380px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; user-select: none; }
         .ba-item-title { font-size: 1.6rem; font-weight: 600; color: var(--accent-rose); font-family: 'Cormorant Garamond', serif; text-align: center; }
         .ba-item-desc { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--text-dark); line-height: 1.4; text-align: center; font-style: italic; }
         
@@ -228,7 +233,7 @@
         .ba-after { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; 
             clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 0% 0, 0% 100%, 0 100%); 
-            will-change: clip-path; transition: clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1), -webkit-clip-path 0.5s cubic-bezier(0.25, 1, 0.2, 1); pointer-events: none;
+            transition: clip-path 0.4s ease, -webkit-clip-path 0.4s ease; pointer-events: none;
         }
         .ba-after img { width: 100%; height: 100%; object-fit: cover; object-position: center; pointer-events: none;}
         
@@ -265,13 +270,12 @@
             .badge-pc { display: none; } .badge-mobile { display: inline; } 
         }
         
-        /* Mobile: Segurar para revelar */
+        /* Mobile: Classe acionada via JS com delay inteligente */
         .ba-slider-container.touch-active .ba-after { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
         .ba-slider-container.touch-active .ba-badge { opacity: 0; }
         
-        @media (max-width: 1380px) { .ba-carousel { padding: 20px 40px; } }
         @media (max-width: 768px) { 
-            .ba-carousel { padding: 20px 20px; gap: 15px;} 
+            .ba-carousel { gap: 15px;} 
             .ba-item { min-width: 75vw; max-width: 75vw; } 
         }
 
@@ -301,13 +305,11 @@
         .btn-google:hover { background-color: var(--accent-rose); color: var(--bg-white); }
         
         .reviews-carousel-wrap { position: relative; width: 100vw; margin-left: calc(-50vw + 50%); }
-        .reviews-carousel { display: flex; gap: 20px; overflow-x: auto; padding: 20px calc(50vw - 650px + 40px); scrollbar-width: none; cursor: grab; -webkit-overflow-scrolling: touch; }
-        .reviews-carousel::-webkit-scrollbar { display: none; }
-        .reviews-carousel.active { cursor: grabbing; }
+        .reviews-carousel { padding: 20px calc(50vw - 650px + 40px); }
         
-        .review-card { min-width: 320px; max-width: 320px; background-color: #ffffff; border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); will-change: transform;}
+        .review-card { min-width: 320px; max-width: 320px; flex-shrink: 0; background-color: #ffffff; border: 1px solid var(--border-light); padding: 25px; border-radius: 8px; box-shadow: var(--shadow-subtle); user-select: none; transition: var(--transition-smooth); }
         .review-card:hover { border-color: var(--accent-rose); transform: translate3d(0, -3px, 0); }
-        @media (max-width: 768px) { .reviews-carousel { padding: 20px 20px; } .review-card { min-width: 80vw; max-width: 80vw; } }
+        @media (max-width: 768px) { .review-card { min-width: 80vw; max-width: 80vw; } }
         .review-user { margin-bottom: 10px; }
         .user-meta h4 { font-size: 1rem; font-family: 'Montserrat', sans-serif; margin-bottom: 2px;}
         .user-meta span { font-size: 0.75rem; color: var(--text-muted); }
@@ -335,13 +337,13 @@
         .info-card .hl { color: var(--accent-rose); font-weight: 600; }
         @media (max-width: 768px) { .clinic-info-grid { grid-template-columns: 1fr; gap: 40px;} }
 
-        /* RODAPÉ ORGANIZADO - Totalmente transparente com padding ampliado */
+        /* RODAPÉ ORGANIZADO - Totalmente transparente */
         .footer { 
             padding: 70px 0 40px 0; 
             text-align: center; 
             font-size: 0.8rem; 
             letter-spacing: 1px; 
-            background-color: transparent; /* Totalmente Transparente */
+            background-color: transparent; 
             position: relative;
             z-index: 2;
         }
@@ -547,7 +549,7 @@
         </div>
         
         <div class="services-carousel-wrap">
-            <div class="services-carousel" id="servicesCarousel">
+            <div class="services-carousel" id="servicesCarousel" data-lenis-prevent="true">
                 
                 <div class="service-card" onclick="openServiceModal(this, 's1')" data-i18n-key="s1">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
@@ -723,7 +725,7 @@
         </div>
         
         <div class="ba-carousel-wrap">
-            <div class="ba-carousel" id="baCarousel">
+            <div class="ba-carousel" id="baCarousel" data-lenis-prevent="true">
                 
                 <div class="ba-item animate-on-scroll">
                     <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
@@ -871,7 +873,7 @@
         </div>
 
         <div class="reviews-carousel-wrap">
-            <div class="reviews-carousel" id="reviewsCarousel">
+            <div class="reviews-carousel" id="reviewsCarousel" data-lenis-prevent="true">
                 
                 <div class="review-card">
                     <div class="review-user">
@@ -1049,7 +1051,7 @@
         </section>
     </div>
 
-    <!-- RODAPÉ FINAL - Totalmente transparente (Mostrando o Vídeo) -->
+    <!-- RODAPÉ FINAL - Totalmente transparente -->
     <footer class="footer">
         <div class="container">
             <div class="footer-buttons">
@@ -1131,7 +1133,7 @@
             hasAttemptedFullscreen = true; 
         }
 
-        document.addEventListener('touchstart', requestFullscreen, { passive: true });
+        // Removido o touchstart daqui para não interferir na rolagem mobile
         document.addEventListener('click', requestFullscreen, { passive: true });
 
         // --- LENIS SCROLL ---
@@ -1301,7 +1303,7 @@
                 nav_about: "Sobre Nós", nav_services: "Serviços", nav_reviews: "Avaliações", nav_contact: "Contato",
                 hero_title: "Sua beleza natural em <span class='text-gradient'>Foco</span>", hero_subtitle: "Experimente tratamentos cosméticos sob medida no mais alto nível. Perfeição, higiene absoluta e bem-estar exclusivo.",
                 btn_explore_services: "Explorar Tratamentos",
-                about_sub: "O Studio", about_title: "Excelência em Estética e Cuidado", about_p1: "Nosso studio foi fundado com o propósito de realçar a beleza natural que existe em você, com técnicas avançadas e ambiente de total conforto.", about_p2: "Com profissionais altamente qualificados e equipamentos modernos, garantimos resultados incrívels e seguros.",
+                about_sub: "O Studio", about_title: "Excelência em Estética e Cuidado", about_p1: "Nosso studio foi fundado com o propósito de realçar a beleza natural que existe em você, com técnicas avançadas e ambiente de total conforto.", about_p2: "Com profissionais altamente qualificados e equipamentos modernos, garantimos resultados incríveis e seguros.",
                 why_sub: "Vantagens", why_title: "Por que a Beauty By Cris?", w1_title: "Higiene Absoluta", w1_desc: "Mais altos padrões para sua segurança.", w2_title: "Qualidade Premium", w2_desc: "Apenas os melhores materiais e equipamentos.", w3_title: "Atendimento Personalizado", w3_desc: "Tratamentos sob medida apenas para você.", w4_title: "Ambiente Relaxante", w4_desc: "Um oásis de tranquilidade para corpo e mente.",
                 services_sub: "Tratamentos Exclusivos", services_title: "Nossos Serviços", lbl_duration: "Duração:", lbl_benefits: "Benefícios:", lbl_process: "Procedimento:",
                 s1_title: "Limpeza de Pele", s1_desc: "Limpeza profunda para um aspecto radiante.", s1_ben: "Refina poros", s1_abl: "Higienização, extração", s1_dur: "60 min",
@@ -1366,7 +1368,7 @@
                 s12_title: "Microneedling Facial", s12_desc: "Inducción de colágeno.", s12_ben: "Piel firme", s12_abl: "Punción con suero", s12_dur: "60 min",
                 s13_title: "Microneedling Corporal", s13_desc: "Reduce estrías.", s13_ben: "Firmeza", s13_abl: "Punción profunda", s13_dur: "60-90 min",
                 ba_sub: "Resultados Reales", ba_title: "Antes & Después", ba_badge_pc: "Pase el ratón", ba_badge_mobile: "Mantén presionado para después", lbl_pedicure: "Pedicura", lbl_manicure: "Manicura",
-                ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigiendo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial.",
+                ba_title_1: "Microblading", ba_desc_1: "El Microblading es una técnica pelo a pelo que proporciona un efecto extremadamente natural, corrigindo imperfecciones, definiendo la forma de las cejas y realzando la expresión facial.",
                 ba_title_2: "Plasma Pen", ba_desc_2: "El Plasma Pen es un tratamiento estético que estimula la producción natural de colágeno, promoviendo firmeza, suavizando líneas de expresión, reduciendo la flacidez y rejuvenescendo la piel de forma segura.",
                 ba_title_3: "Microlabial", ba_desc_3: "La Micropigmentación Labial realza el contorno de los labios, uniformiza el tono y proporciona un delicado efecto de lápiz labial, dejando los labios con una apariencia más saludable y femenina.",
                 ba_title_4: "Extensión de Pestañas", ba_desc_4: "La Extensión de Pestañas realza la belleza natural de su mirada, proporcionando más elegancia, expresión y autoestima. Las pestañas se aplican de forma personalizada para destacar sus rasgos.",
@@ -1625,7 +1627,7 @@
         
         document.querySelectorAll('.animate-on-scroll, .animate-left').forEach(el => observer.observe(el));
 
-        // Carrosseis interativos
+        // Carrosseis interativos - Apenas Mouse (arrastar no PC)
         const carousels = [
             document.getElementById('servicesCarousel'), 
             document.getElementById('reviewsCarousel'),
@@ -1687,18 +1689,34 @@
             }
         });
 
-        // Lógica Mobile do Antes/Depois: SEGURAR PARA VER O DEPOIS (Sem travar o scroll!)
+        // LÓGICA MOBILE ANTES/DEPOIS CORRIGIDA (SEM TRAVAR O SCROLL)
         document.querySelectorAll('.ba-slider-container').forEach(container => {
-            container.addEventListener('touchstart', (e) => { 
-                container.classList.add('touch-active'); 
+            let pressTimer;
+
+            container.addEventListener('touchstart', (e) => {
+                // Ignora se for clique no botão de Manicure/Pedicure
+                if(e.target.closest('.ba-toggle-btn')) return;
+
+                // Atrasa o efeito em 120ms. Se for apenas uma rolagem de tela,
+                // o "touchmove" abaixo cancela o temporizador a tempo.
+                pressTimer = setTimeout(() => {
+                    container.classList.add('touch-active');
+                }, 120);
+            }, { passive: true }); // passive: true garante que NUNCA irá bloquear a rolagem
+            
+            container.addEventListener('touchmove', () => {
+                clearTimeout(pressTimer);
+                container.classList.remove('touch-active');
             }, { passive: true });
             
-            container.addEventListener('touchend', (e) => { 
-                container.classList.remove('touch-active'); 
+            container.addEventListener('touchend', () => {
+                clearTimeout(pressTimer);
+                container.classList.remove('touch-active');
             }, { passive: true });
-            
-            container.addEventListener('touchcancel', (e) => { 
-                container.classList.remove('touch-active'); 
+
+            container.addEventListener('touchcancel', () => {
+                clearTimeout(pressTimer);
+                container.classList.remove('touch-active');
             }, { passive: true });
         });
 
@@ -1713,9 +1731,9 @@
             const btnPedi = document.getElementById('btnPedi');
 
             if (type === 'mani') {
-                beforeImg.src = ''; // Deixado em branco a pedido
+                beforeImg.src = ''; 
                 afterImg.src = '';
-                beforeImg.style.background = '#ddd'; // Fundo cinza para não quebrar o layout
+                beforeImg.style.background = '#ddd'; 
                 btnMani.classList.add('active');
                 btnPedi.classList.remove('active');
             } else {
