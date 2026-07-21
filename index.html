@@ -216,8 +216,8 @@
             .services-carousel::after, .ba-carousel::after, .reviews-carousel::after { width: 40px; }
         }
         @media (max-width: 768px) { 
-            .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 0 20px 35px; } /* Aumentado para desgrudar da parede esquerda */
-            .services-carousel::after, .ba-carousel::after, .reviews-carousel::after { width: 35px; } /* Aumentado para desgrudar da parede direita */
+            .services-carousel, .ba-carousel, .reviews-carousel { padding: 20px 0 20px 35px; }
+            .services-carousel::after, .ba-carousel::after, .reviews-carousel::after { width: 35px; }
             
             .service-card { min-width: 80vw; max-width: 80vw; }
             .review-card { min-width: 80vw; max-width: 80vw; } 
@@ -274,7 +274,6 @@
             transition: opacity 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.1); white-space: nowrap;
         }
 
-        /* Botões Interativos (Manicure/Pedicure) */
         .ba-toggle-btn {
             position: absolute; bottom: 10px; z-index: 10; 
             background: rgba(250, 245, 240, 0.95); color: var(--accent-rose); 
@@ -364,7 +363,7 @@
         .info-card .hl { color: var(--accent-rose); font-weight: 600; }
         @media (max-width: 768px) { .clinic-info-grid { grid-template-columns: 1fr; gap: 40px;} }
 
-        /* RODAPÉ ORGANIZADO - Totalmente transparente */
+        /* RODAPÉ ORGANIZADO */
         .footer { 
             padding: 70px 0 40px 0; 
             text-align: center; 
@@ -580,8 +579,8 @@
         </div>
         
         <div class="services-carousel-wrap">
-            <!-- Nota: O atributo data-lenis-prevent garante que o Lenis não interfira na rolagem deste elemento -->
-            <div class="services-carousel" id="servicesCarousel" data-lenis-prevent>
+            <!-- Removido data-lenis-prevent para permitir scroll vertical no PC (controlado via JS) -->
+            <div class="services-carousel" id="servicesCarousel">
                 
                 <div class="service-card" onclick="openServiceModal(this, 's1')" data-i18n-key="s1">
                     <div class="service-img-wrap"><div class="media-placeholder"><span>[ Bild ]</span></div></div>
@@ -730,6 +729,7 @@
         </div>
     </section>
 
+    <!-- Modal de Serviço Mantém o bloqueio porque nele queremos rolar internamente -->
     <div class="service-modal-overlay" id="serviceModal">
         <div class="service-modal-content">
             <div class="modal-header">
@@ -757,7 +757,8 @@
         </div>
         
         <div class="ba-carousel-wrap">
-            <div class="ba-carousel" id="baCarousel" data-lenis-prevent>
+            <!-- Removido data-lenis-prevent -->
+            <div class="ba-carousel" id="baCarousel">
                 
                 <div class="ba-item animate-on-scroll">
                     <h3 class="ba-item-title" data-i18n="ba_title_1">Microblading</h3>
@@ -903,7 +904,8 @@
         </div>
 
         <div class="reviews-carousel-wrap">
-            <div class="reviews-carousel" id="reviewsCarousel" data-lenis-prevent>
+            <!-- Removido data-lenis-prevent -->
+            <div class="reviews-carousel" id="reviewsCarousel">
                 
                 <div class="review-card">
                     <div class="review-user">
@@ -1052,7 +1054,6 @@
         </div>
     </section>
 
-    <!-- --- Seção de Clínica --- -->
     <div class="clinic-info-wrap">
         <div class="map-section" id="mapSection">
             <iframe class="map-iframe" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d10503.497983552972!2d8.1895567!3d48.7857078!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47971f283898fd5b%3A0x75288260ba16df7f!2sBeauty%20By%20Cris%20Beleza%20Facial!5e0!3m2!1spt-BR!2sbr!4v1719323789012!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -1655,7 +1656,7 @@
         
         document.querySelectorAll('.animate-on-scroll, .animate-left').forEach(el => observer.observe(el));
 
-        // Carrosseis interativos - Script drag habilitado SOMENTE para PC para não quebrar touch nativo
+        // Carrosseis interativos
         const carousels = [
             document.getElementById('servicesCarousel'), 
             document.getElementById('reviewsCarousel'),
@@ -1664,6 +1665,38 @@
         
         carousels.forEach(carousel => {
             if(!carousel) return;
+
+            // --- NOVO: Correção de Scroll Vertical e Horizontal para Lenis ---
+            
+            // Controle para touch: preserva o deslize horizontal e passa o vertical pro Lenis
+            carousel.addEventListener('touchstart', (e) => {
+                carousel.dataset.startX = e.touches[0].clientX;
+                carousel.dataset.startY = e.touches[0].clientY;
+            }, { passive: true });
+
+            carousel.addEventListener('touchmove', (e) => {
+                const startX = parseFloat(carousel.dataset.startX) || 0;
+                const startY = parseFloat(carousel.dataset.startY) || 0;
+                const dx = Math.abs(e.touches[0].clientX - startX);
+                const dy = Math.abs(e.touches[0].clientY - startY);
+                
+                // Se o movimento for primariamente horizontal, impedimos o evento de subir.
+                // Assim o Lenis não intercepta e o carrossel rola nativamente.
+                if (dx > dy) {
+                    e.stopPropagation();
+                }
+            }, { passive: true });
+
+            // Controle para PC: libera a rolagem vertical do mouse permitindo que suba para a página.
+            carousel.addEventListener('wheel', (e) => {
+                // Se for horizontal (ex: scroll em um trackpad), para a propagação.
+                // Se for vertical, a propagação não para e o Lenis recebe o evento, movendo a página pra cima/baixo!
+                if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+                    e.stopPropagation();
+                }
+            }, { passive: true });
+            // -----------------------------------------------------------------
+
             let isDown = false;
             let startX;
             let scrollLeft;
